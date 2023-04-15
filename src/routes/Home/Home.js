@@ -1,9 +1,10 @@
 import React from "react";
-import Header from "../../components/header/Header";
+import Header from "../../components/Header";
 import jumbotron from "../../assets/images/jumbtron.png";
 import { Colors } from "../../utils/colors";
-import { GridItem, PrimaryBtn, StyledInput } from "../../components/styledComponents";
+import { GridItem, PrimaryBtn, StyledInput } from "../../components/styles/styledComponents";
 import { SearchIconSvg } from "../../components/SvgComponents";
+import Footer from "../../components/Footer";
 
 const Home = () => {
   return (
@@ -63,6 +64,7 @@ const Home = () => {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 };

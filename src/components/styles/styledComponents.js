@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Colors } from "../utils/colors";
+import { Colors } from "../../utils/colors";
 
 const DivContainer = styled.div`
   padding: 20px;
@@ -22,7 +22,7 @@ const LgCaCtaBtn = styled.button`
   border: 1px solid ${Colors.neutral_color.color900};
   background-color: ${Colors.white};
   display: flex;
-  gap: 10px;
+  gap: 10px;r
   border-radius: 2px;
   padding: 12px;
   align-items: center;
@@ -69,5 +69,5 @@ export {
   PrimaryBtn,
   StyledLinks,
   StyledInput,
-  GridItem
+  GridItem,
 };

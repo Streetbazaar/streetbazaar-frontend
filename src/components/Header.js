@@ -4,13 +4,13 @@ import {
   LgCaCtaBtn,
   PrimaryBtn,
   StyledLinks,
-} from "../styledComponents";
+} from "./styles/styledComponents";
 import { styled, alpha } from "@mui/material/styles";
-import BrandLogo from "../../assets/images/BrandLogo.png";
+import BrandLogo from "../assets/images/BrandLogo.png";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { Colors } from "../../utils/colors";
+import { Colors } from "../utils/colors";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -98,11 +98,21 @@ export default function Header() {
               MenuListProps={{
                 "aria-labelledby": "basic-button",
               }}
-              
             >
-              <div style={{ display: "flex", flexDirection: "column", gap: 20, padding: 20 }}>
-                <p style={styles.menuItem} onClick={handleClose}>Login</p>
-                <p style={styles.menuItem} onClick={handleClose}>Create Account</p>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 20,
+                  padding: 20,
+                }}
+              >
+                <p style={styles.menuItem} onClick={handleClose}>
+                  Login
+                </p>
+                <p style={styles.menuItem} onClick={handleClose}>
+                  Create Account
+                </p>
               </div>
             </StyledMenu>
             <PrimaryBtn>
@@ -123,5 +133,5 @@ const styles = {
   },
   menuItem: {
     color: Colors.neutral_color.color900,
-  }
+  },
 };

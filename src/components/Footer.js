@@ -81,9 +81,9 @@ export default function Footer() {
           </div>
 
           <div className="footer-items">
-            <div>Terms</div>
-            <div>Privacy</div>
-            <div>Cookies</div>
+            <div className="footer-items-list">Terms</div>
+            <div className="footer-items-list">Privacy</div>
+            <div className="footer-items-list">Cookies</div>
           </div>
           <div className="footer-icons">
             <LinkedInIconSvg />

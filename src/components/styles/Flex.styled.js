@@ -14,6 +14,12 @@ export const Flex = styled.div`
     & > h4 {
       color: ${Colors.white};
       margin-bottom: 30px;
+      width: 150px;
+
+      &:hover {
+        opacity: 0.5;
+        cursor: pointer;
+      }
     }
 
     li {
@@ -24,6 +30,13 @@ export const Flex = styled.div`
       line-height: 17px;
       color: ${Colors.neutral_color.color100};
       opacity: 0.5;
+      min-width: 30px;
+      max-width: 160px;
+
+      &:hover {
+        opacity: 1;
+        cursor: pointer;
+      }
     }
   }
 
@@ -66,7 +79,14 @@ export const Flex2 = styled.div`
  padding-top: 15px;
  font-size: 16px;
  font-weight:600;
- color: ${Colors.neutral_color.color100}
+ color: ${Colors.white};
+
+ .footer-items-list {
+    &:hover{
+         opacity: 0.5;
+         cursor:pointer;
+      }
+    }
 }
 
 .footer-icons {
@@ -77,7 +97,7 @@ export const Flex2 = styled.div`
 }
 
   svg:hover path {
-  fill: black;
+  fill: ${Colors.neutral_color.color100};
 }
 
    @media (max-width: 780px) {

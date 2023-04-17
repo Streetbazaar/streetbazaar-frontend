@@ -45,11 +45,14 @@ export const Colors = {
         color700: "#7D8994",
         color800: "#6D7A86",
         color900: "#5D6B79",
-        
+        color1000: "#F5F5F5",
+
     },
     black: "#000000",
-    white: "#ffffff", 
+    white: "#ffffff",
     lightPeach: "#FFF2EC",
     darkPeach: "#FAECEF",
     skyBlue: "#EEF9FA"
 }
+
+

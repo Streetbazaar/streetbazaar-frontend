@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { CreateAccountContainer, Input, Button, CreateAccountForm, Flex, Flex2, Flex3, Flex4, Flex5, Body, Label } from "../Auth-pages-styles/CreateAccount.styled";
-import { LoginSvg, FacebookSvg, GoogleSvg } from "../../../components/SvgComponents";
+import { ExitSvg, FacebookSvg, GoogleSvg } from "../../SvgComponents";
 // import { useDispatch } from "react-redux";
 
-export default function Login() {
+export default function CreateAccount(props) {
 
     // const dispatch = useDispatch();
     const handleSubmit = (e) => {
@@ -13,12 +13,11 @@ export default function Login() {
     };
 
     return (
-        <Body>
             <CreateAccountContainer>
                 <Flex>
                     <div className="create-account-title">Create Account</div>
-                    <div className="cancel-create-account">
-                        <LoginSvg />
+                <div className="cancel-create-account" onClick={props.onClose}>
+                    <ExitSvg />
                     </div>
                 </Flex>
 
@@ -67,6 +66,5 @@ export default function Login() {
                     </Flex5>
                 </CreateAccountForm>
             </CreateAccountContainer>
-        </Body>
     )
 }

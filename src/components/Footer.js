@@ -1,11 +1,9 @@
 import { Container } from "./styles/Component.styled";
 import { Flex, Flex2 } from "./styles/Flex.styled";
-
-import {
-  FacebookIconSvg,
-  LinkedInIconSvg,
-  TwitterIconSvg,
-} from "./SvgComponents";
+import BrandLogo from "../assets/images/BrandLogo.png"
+import { 
+  FacebookIconSvg, LinkedInIconSvg,
+  TwitterIconSvg, } from "./SvgComponents";
 
 import {
   EmailSubscribe,
@@ -13,7 +11,8 @@ import {
   Form,
   Input,
 } from "./styles/Footer.styled";
-import BrandLogo from "../assets/images/BrandLogo.png";
+
+
 // import SocialIcons from "./SocialIcons.Js";
 
 export default function Footer() {

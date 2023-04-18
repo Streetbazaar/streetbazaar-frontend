@@ -1,32 +1,49 @@
 import styled from "styled-components";
 import { Colors } from "../../../utils/colors";
 
+export const Box = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 70px auto;
+  width: 38%;
+  height: 565px;
+  box-sizing: border-box;
 
-export const Body = styled.div`
-width: 100vw;
-height: 100vh;
-display: flex;
-background-color: ${Colors.neutral_color.color1000}
-`
+   @media ( max-width: 780px) {
+    margin: 0px auto;
+    width: 100%;
+    left: 0;
+    right:0;
+    position: absolute;
+    margin-top: 200px;
+    bottom: 0;
+    height: 600px;
+  }
+
+   @media only screen and (min-width: 780px) and (max-width: 1200px){
+    width: 50%;
+ }
+`;
 
 export const CreateAccountContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 70px auto;
+  margin: 0px auto;
  border-radius: 5px;
-  width: 38%;
-  height: 565px;
+  width: 100%;
+  height: 100%;
   border-radius: 5px;
   box-sizing; border-box;
   
 
    @media ( max-width: 780px) {
-    width: 88%;
+    width: 100%;
   }
 
    @media only screen and (min-width: 780px) and (max-width: 1200px){
-    width: 50%;
+    width: 100%;
  }
 
 `;
@@ -98,7 +115,7 @@ export const Flex = styled.div`
   padding-right: 20px; 
   border-radius: 5px 5px 0px 0px;
 
-  .login-title {
+  .create-account-title {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
@@ -109,7 +126,7 @@ export const Flex = styled.div`
     color: ${Colors.neutral_color.color900};
   }
 
-  .cancel-login {
+  .cancel-create-account {
      font-weight: 500;
      display:flex;
      align-items: center;
@@ -132,7 +149,7 @@ export const Flex2 = styled.div`
   margin-top: 5px;
   
 
-  .login-with-google {
+  .create-account-with-google {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
@@ -161,7 +178,7 @@ export const Flex2 = styled.div`
  }
   }
 
-  .login-with-facebook {
+  .create-account-with-facebook {
      font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
@@ -231,7 +248,7 @@ export const Flex4 = styled.div`
   margin-top: 17px;
  
 
-  .forgot-password{
+  .register-here{
      font-family: 'Inter';
      font-style: normal;
      font-weight: 700;
@@ -256,7 +273,7 @@ export const Flex5 = styled.div`
   margin-top: 22px;
  
 
-  .register{
+  .login{
      font-family: 'Inter';
      font-style: normal;
      font-weight: 700;

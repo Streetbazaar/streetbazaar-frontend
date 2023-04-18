@@ -13,6 +13,7 @@ const HeaderContainer = styled.header`
   box-shadow: 1px 0 5px -2px var(--ash);
   background-color: ${Colors.white};
   z-index: 1;
+   max-width: 1450px
 `;
 
 const LgCaCtaBtn = styled.button`

@@ -11,6 +11,10 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Colors } from "../utils/colors";
+import LoginModal from "./Auth/Auth-pages/LoginModal";
+import CreateAccountModal from "./Auth/Auth-pages/CreateAccountModal";
+
+
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -58,15 +62,34 @@ const StyledMenu = styled((props) => (
 
 export default function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+  const openAnchor = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleCloseAnchor = () => {
     setAnchorEl(null);
   };
+
+  const [openLoginModal, setOpenLoginModal] = React.useState(false);
+  const handleOpenLoginModal = () => setOpenLoginModal(true);
+  const handleCloseLoginModal = () => setOpenLoginModal(false);
+
+  const [openCreateAccountModal, setOpenCreateAccountModal] = React.useState(false);
+  const handleOpenCreateAccountModal = () => setOpenCreateAccountModal(true);
+  const handleCloseCreateAccountModal = () => setOpenCreateAccountModal(false);
+
+  
+
   return (
     <HeaderContainer>
+      <LoginModal
+        handleClose={handleCloseLoginModal}
+        open={openLoginModal}
+      />
+      <CreateAccountModal
+        handleClose={handleCloseCreateAccountModal}
+        open={openCreateAccountModal}
+      />
       <nav style={{ maxWidth: "1440px", display: "flex", margin: "0 auto" }}>
         <a style={{ marginRight: "auto" }} href="/">
           <img
@@ -82,9 +105,9 @@ export default function Header() {
           <div style={{ display: "flex", gap: 20 }}>
             <LgCaCtaBtn
               id="basic-button"
-              aria-controls={open ? "basic-menu" : undefined}
+              aria-controls={openAnchor ? "basic-menu" : undefined}
               aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
+              aria-expanded={openAnchor ? "true" : undefined}
               onClick={handleClick}
             >
               <p>Create Account / Login</p>
@@ -93,8 +116,8 @@ export default function Header() {
             <StyledMenu
               id="basic-menu"
               anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
+              open={openAnchor}
+              onClose={handleCloseAnchor}
               MenuListProps={{
                 "aria-labelledby": "basic-button",
               }}
@@ -107,10 +130,18 @@ export default function Header() {
                   padding: 20,
                 }}
               >
-                <p style={styles.menuItem} onClick={handleClose}>
+                <p style={styles.menuItem} onClick={() => {
+                  handleOpenLoginModal();
+                  handleCloseAnchor();
+                }
+                } >
                   Login
                 </p>
-                <p style={styles.menuItem} onClick={handleClose}>
+                <p style={styles.menuItem} onClick={() => {
+                  handleCloseAnchor();
+                  handleOpenCreateAccountModal();
+                }
+                }>  
                   Create Account
                 </p>
               </div>

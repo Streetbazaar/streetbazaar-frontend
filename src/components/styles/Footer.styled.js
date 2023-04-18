@@ -4,6 +4,8 @@ import { Colors } from "../../utils/colors";
 export const StyleFooter = styled.footer`
   background-color: ${Colors.neutral_color.color900};
   padding: 100px 120px;
+  max-width: 1450px;
+  margin: 0 auto;
 
   ul {
     list-style-type: none;

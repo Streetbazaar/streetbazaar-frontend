@@ -6,11 +6,12 @@ import { GridItem, PrimaryBtn, StyledInput } from "../../components/styles/style
 import { SearchIconSvg } from "../../components/SvgComponents";
 import Footer from "../../components/Footer";
 
+
 const Home = () => {
   return (
     <div>
       <Header />
-      <main style={{ padding: "15px", maxWidth: "1440px", margin: "0 auto",  marginTop: 150,  }}>
+      <main style={{ padding: "15px", maxWidth: "1440px", margin: "0 auto", marginTop: 150, }}>
         <h1
           style={{
             color: Colors.neutral_color.color900,

@@ -114,7 +114,7 @@ const TwitterIconSvg = ({ width = "37", height = "37" }) => {
 };
 export { TwitterIconSvg };
 
-const LoginSvg = () => {
+const ExitSvg = () => {
   return (
     <svg
       width="24"
@@ -140,9 +140,9 @@ const LoginSvg = () => {
     </svg>
   );
 };
-export { LoginSvg };
+export { ExitSvg };
 
-  
+
 const GoogleSvg = () => {
   return (
     <svg

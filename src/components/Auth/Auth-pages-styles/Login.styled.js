@@ -2,23 +2,23 @@ import styled from "styled-components";
 import { Colors } from "../../../utils/colors";
 
 
-export const Body = styled.div`
-width: 100vw;
-height: 100vh;
-display: flex;
-background-color: ${Colors.neutral_color.color1000}
-`
+// export const Body = styled.div`
+// width: 100vw;
+// height: 100vh;
+// display: flex;
+// background-color: ${Colors.neutral_color.color1000}
+// `
 
-export const CreateAccountContainer = styled.div`
+export const LoginContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 70px auto;
+  margin: 0px auto;
  border-radius: 5px;
-  width: 38%;
-  height: 565px;
+  width: 100%;
+  height: 100%;
   border-radius: 5px;
-  box-sizing; border-box;
+  box-sizing: border-box;
   
 
    @media ( max-width: 780px) {
@@ -31,7 +31,7 @@ export const CreateAccountContainer = styled.div`
 
 `;
 
-export const CreateAccountForm = styled.form`
+export const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -98,7 +98,7 @@ export const Flex = styled.div`
   padding-right: 20px; 
   border-radius: 5px 5px 0px 0px;
 
-  .create-account-title {
+  .login-title {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
@@ -109,7 +109,7 @@ export const Flex = styled.div`
     color: ${Colors.neutral_color.color900};
   }
 
-  .cancel-create-account {
+  .cancel-login {
      font-weight: 500;
      display:flex;
      align-items: center;
@@ -132,7 +132,7 @@ export const Flex2 = styled.div`
   margin-top: 5px;
   
 
-  .create-account-with-google {
+  .login-with-google {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
@@ -151,17 +151,9 @@ export const Flex2 = styled.div`
      &:hover {
       background-color: ${Colors.neutral_color.color300};
        }
-
-      @media (max-width: 780px) {
-   font-size: 11px;
   }
 
-    @media only screen and (min-width: 780px) and (max-width: 1200px){
-   font-size: 12.5px;
- }
-  }
-
-  .create-account-with-facebook {
+  .login-with-facebook {
      font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
@@ -180,18 +172,7 @@ export const Flex2 = styled.div`
     &:hover {
       background-color: ${Colors.neutral_color.color300};
        }
-
-  
-      @media (max-width: 780px) {
-   font-size: 11px;
-  }
-
-    @media only screen and (min-width: 780px) and (max-width: 1200px){
-   font-size: 12.5px;
- }
      }
-
-     
 `;
 
 export const Flex3 = styled.div`
@@ -231,19 +212,14 @@ export const Flex4 = styled.div`
   margin-top: 17px;
  
 
-  .register-here{
+  .forgot-password{
      font-family: 'Inter';
      font-style: normal;
-     font-weight: 700;
-     font-size: 11px;
+     font-weight: 500;
+     font-size: 10px;
      line-height: 16px;
-     color: ${Colors.primary_color.color500};
+     color: ${Colors.primary_color.color400};
      opacity: 0.95;
-
-       & > span{
-       color: ${Colors.neutral_color.color500};
-       font-weight: 400;
-     }
   }
   `;
 
@@ -253,16 +229,17 @@ export const Flex5 = styled.div`
   display:flex;
   align-items: center;
   justify-content: center;
-  margin-top: 22px;
+  margin-top: 17px;
+
  
 
-  .login{
+  .register{
      font-family: 'Inter';
      font-style: normal;
      font-weight: 700;
-     font-size: 11px;
+     font-size: 10px;
      line-height: 16px;
-     color: ${Colors.primary_color.color500};
+     color: ${Colors.primary_color.color400};
      opacity: 0.95;
 
      & > span{

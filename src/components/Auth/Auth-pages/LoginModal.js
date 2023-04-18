@@ -1,19 +1,9 @@
 import React from "react";
 import Modal from '@mui/material/Modal';
-import { Box } from "@mui/system";
 import Login from "./Login";
+import { Box } from "../Auth-pages-styles/Login.styled";
 
 export default function LoginModal(props) {
-
-    const style = {
-        width: "38%",
-        height: "565px",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        margin: "70px auto",
-        boxSizing: "border-box",
-    };
     return (
         <Modal
             open={props.open}
@@ -21,7 +11,7 @@ export default function LoginModal(props) {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-            <Box style={style}>
+            <Box>
                 <Login
                     onClose={props.handleClose}
                 />

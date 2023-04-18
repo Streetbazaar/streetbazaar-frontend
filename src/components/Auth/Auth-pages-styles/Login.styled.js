@@ -9,6 +9,31 @@ import { Colors } from "../../../utils/colors";
 // background-color: ${Colors.neutral_color.color1000}
 // `
 
+export const Box = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 70px auto;
+  width: 38%;
+  height: 565px;
+  box-sizing: border-box;
+
+   @media ( max-width: 780px) {
+    margin: 0px auto;
+    width: 100%;
+    left: 0;
+    right:0;
+    position: absolute;
+    margin-top: 200px;
+    bottom: 0;
+    height: 600px;
+  }
+
+   @media only screen and (min-width: 780px) and (max-width: 1200px){
+    width: 50%;
+ }
+`;
+
 export const LoginContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -19,16 +44,6 @@ export const LoginContainer = styled.div`
   height: 100%;
   border-radius: 5px;
   box-sizing: border-box;
-  
-
-   @media ( max-width: 780px) {
-    width: 88%;
-  }
-
-   @media only screen and (min-width: 780px) and (max-width: 1200px){
-    width: 50%;
- }
-
 `;
 
 export const LoginForm = styled.form`

@@ -11,8 +11,8 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Colors } from "../utils/colors";
-import LoginModal from "./Auth/Auth-pages/LoginModal";
-import CreateAccountModal from "./Auth/Auth-pages/CreateAccountModal";
+import LoginModal from "./Auth/AuthComponents/LoginModal";
+import CreateAccountModal from "./Auth/AuthComponents/CreateAccountModal";
 
 
 

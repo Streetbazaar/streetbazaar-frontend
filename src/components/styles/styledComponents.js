@@ -59,10 +59,6 @@ const StyledInput = styled.input`
   width: 40%;
 `;
 
-const GridItem = styled.div`
-  background-color: ${(props) => props.bgColor};
-`;
-
 export {
   DivContainer,
   HeaderContainer,
@@ -70,5 +66,6 @@ export {
   PrimaryBtn,
   StyledLinks,
   StyledInput,
-  GridItem,
 };
+
+

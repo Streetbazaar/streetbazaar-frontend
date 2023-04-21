@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { LoginContainer, Input, Button, LoginForm, Flex, Flex2, Flex3, Flex4, Flex5, Label } from "../Auth-pages-styles/Login.styled";
-import { ExitSvg , FacebookSvg, GoogleSvg } from "../../SvgComponents";
+import { LoginContainer, Input, Button, LoginForm, Flex, Flex2, Flex3, Flex4, Flex5, Label } from "../AuthComponents-styles/Login.styled";
+import { ExitSvg, FacebookSvg, GoogleSvg } from "../../SvgComponents";
 // import { useDispatch } from "react-redux";
 
 export default function Login(props) {

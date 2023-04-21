@@ -2,16 +2,26 @@ import React from "react";
 import Header from "../../components/Header";
 import jumbotron from "../../assets/images/jumbtron.png";
 import { Colors } from "../../utils/colors";
-import { GridItem, PrimaryBtn, StyledInput } from "../../components/styles/styledComponents";
+import {
+  PrimaryBtn,
+  StyledInput,
+} from "../../components/styles/styledComponents";
 import { SearchIconSvg } from "../../components/SvgComponents";
 import Footer from "../../components/Footer";
-
+import Category from "../../components/Category/Category";
 
 const Home = () => {
   return (
     <div>
       <Header />
-      <main style={{ padding: "15px", maxWidth: "1440px", margin: "0 auto", marginTop: 150, }}>
+      <main
+        style={{
+          padding: "15px",
+          maxWidth: "1440px",
+          margin: "0 auto",
+          marginTop: 150,
+        }}
+      >
         <h1
           style={{
             color: Colors.neutral_color.color900,
@@ -41,29 +51,10 @@ const Home = () => {
         </div>
         <img
           src={jumbotron}
-          alt="Showcase Image"
+          alt="ShowcaseImage"
           style={{ width: "100%", aspectRatio: 2 / 1, marginBottom: 20 }}
         />
-        <section>
-          <h2
-            style={{
-              color: Colors.neutral_color.color900,
-              fontSize: 25,
-              marginBottom: 20
-            }}
-          >
-            Categories
-          </h2>
-          <div className="categoriesGridContainer">
-            <GridItem bgColor={Colors.success_color.color100}>1</GridItem>
-            <GridItem bgColor={Colors.primary_color.color100}>2</GridItem>
-            <GridItem bgColor={Colors.lightPeach}>3</GridItem>
-            <GridItem bgColor={Colors.darkPeach}>4</GridItem>
-            <GridItem bgColor={Colors.warning_color.color100}>5</GridItem>
-            <GridItem bgColor={Colors.skyBlue}>6</GridItem>
-            <GridItem bgColor={Colors.warning_color.color90}>7</GridItem>
-          </div>
-        </section>
+        <Category />
       </main>
       <Footer />
     </div>

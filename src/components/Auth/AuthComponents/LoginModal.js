@@ -1,10 +1,9 @@
 import React from "react";
 import Modal from '@mui/material/Modal';
-import { Box } from "../Auth-pages-styles/Login.styled";
-import CreateAccount from "./CreateAccount";
+import Login from "./Login";
+import { Box } from "../AuthComponents-styles/Login.styled";
 
-export default function CreateAccountModal(props) {
-
+export default function LoginModal(props) {
     return (
         <Modal
             open={props.open}
@@ -13,7 +12,7 @@ export default function CreateAccountModal(props) {
             aria-describedby="modal-modal-description"
         >
             <Box>
-                <CreateAccount
+                <Login
                     onClose={props.handleClose}
                 />
             </Box>

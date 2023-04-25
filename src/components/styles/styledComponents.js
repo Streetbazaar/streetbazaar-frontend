@@ -57,7 +57,26 @@ const StyledInput = styled.input`
   border-radius: 2px;
   padding: 10px;
   width: 40%;
+
+    @media (max-width: 768px) {
+              width: 100%;
+            }
 `;
+
+const SearchInput = styled.div`
+            margin-bottom: 25px;
+            position: relative;
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+
+            @media (max-width: 768px) {
+              display: flex;
+              flex-direction: column;
+             
+            }
+          }}
+`
 
 export {
   DivContainer,
@@ -66,6 +85,7 @@ export {
   PrimaryBtn,
   StyledLinks,
   StyledInput,
+  SearchInput
 };
 
 

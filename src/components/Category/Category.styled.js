@@ -18,6 +18,10 @@ export const CategoryItem = styled.div`
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, 1fr);
   }
+   @media screen and (max-width: 550px){  
+    height: 650px;
+   }
+
 `;
 
 export const GridItem1 = styled.div`
@@ -242,6 +246,11 @@ export const Flex2Item = styled.button`
   @media screen and (min-width: 900px){
  width: 90px;
   height: 38px;
+
+    &:hover {
+    background: ${Colors.neutral_color.color400};
+    color: white;
+  }
   }
 
 
@@ -262,25 +271,11 @@ export const Flex2Item2 = styled.button`
   margin-left: 17px;
   margin-bottom: 17px;
 
+
+    &:hover {
+    background: ${Colors.neutral_color.color400};
+    color: white;
+  }
 `;
 
-// export const SubGridItem = styled.div`
-// background-color: ${(props) => props.bgColor};
-//   display: flex;
-//  width: 100%;
-// `
 
-// export const GridItem2 = styled.div`
-//   background-color: ${(props) => props.bgColor};
-//   display: flex;
-//   height: 300px;
-// `;
-
-// export const Flex1Item2 = styled.div`
-// padding :9px 17px;
-// border-radius: 2.5px;
-// font-size: 8px;
-// border: 1px solid ${Colors.neutral_color.color400};
-// background: transparent;
-// color: ${Colors.neutral_color.color900};
-// `

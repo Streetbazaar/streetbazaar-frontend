@@ -55,7 +55,7 @@ export default function Category() {
                     </Flex2>
                 </GridItem1>
 
-                <GridItem2 bgColor={Colors.skyBlue}>
+                <GridItem2 bgColor={Colors.primary_color.color100}>
                     <Flex1>
                         <Flex1Item1>
                             <h4>Automobile</h4>
@@ -72,7 +72,7 @@ export default function Category() {
                     </Flex2>
                 </GridItem2>
 
-                <GridItem3 bgColor={Colors.skyBlue}>
+                <GridItem3 bgColor={Colors.lightPeach}>
                     <Flex1>
                         <Flex1Item1>
                             <h4>Property</h4>
@@ -88,7 +88,7 @@ export default function Category() {
                         </div>
                     </Flex2>
                 </GridItem3>
-                <GridItem4 bgColor={Colors.skyBlue}>
+                <GridItem4 bgColor={Colors.darkPeach}>
                     <Flex1>
                         <Flex1Item1>
                             <h4>Health and Beauty</h4>
@@ -104,7 +104,7 @@ export default function Category() {
                         </div>
                     </Flex2>
                 </GridItem4>
-                <GridItem5 bgColor={Colors.skyBlue}>
+                <GridItem5 bgColor={Colors.warning_color.color100}>
                     <Flex1>
                         <Flex1Item1>
                             <h4>Services</h4>

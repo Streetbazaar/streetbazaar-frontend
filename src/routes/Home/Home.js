@@ -5,10 +5,14 @@ import { Colors } from "../../utils/colors";
 import {
   PrimaryBtn,
   StyledInput,
+  SearchInput
 } from "../../components/styles/styledComponents";
 import { SearchIconSvg } from "../../components/SvgComponents";
 import Footer from "../../components/Footer";
 import Category from "../../components/Category/Category";
+import InvestmentProducts from "../../components/investmentAds/InvestmentAds";
+import TrendingProducts from "../../components/TrendingAds/TrendingAds";
+import Testimonies from "../../components/Testimonies/Testimonies";
 
 const Home = () => {
   return (
@@ -31,15 +35,7 @@ const Home = () => {
         >
           BUY, SELL, RENT AND EXCHANGE IN ONE CLICK
         </h1>
-        <div
-          style={{
-            marginBottom: 20,
-            position: "relative",
-            display: "flex",
-            gap: 10,
-            marginTop: 40,
-          }}
-        >
+        <SearchInput>
           <div style={{ position: "absolute", bottom: 8, left: 20 }}>
             <SearchIconSvg />
           </div>
@@ -48,13 +44,16 @@ const Home = () => {
             placeholder="Search for product"
           />
           <PrimaryBtn style={{ width: "10%" }}>Search</PrimaryBtn>
-        </div>
+        </SearchInput>
         <img
           src={jumbotron}
           alt="ShowcaseImage"
           style={{ width: "100%", aspectRatio: 2 / 1, marginBottom: 20 }}
         />
         <Category />
+        <InvestmentProducts />
+        <TrendingProducts />
+        <Testimonies />
       </main>
       <Footer />
     </div>

@@ -52,7 +52,10 @@ export const Colors = {
     white: "#ffffff",
     lightPeach: "#FFF2EC",
     darkPeach: "#FAECEF",
-    skyBlue: "#EEF9FA"
+    skyBlue: "#EEF9FA",
+    gray: "#F3F5F8",
+    unknown: "#EBDCCC",
+    unknown2: "#FEFCFA"
 }
 
 

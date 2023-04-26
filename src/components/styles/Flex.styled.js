@@ -23,7 +23,6 @@ export const Flex = styled.div`
     }
 
     li {
-      font-family: "Inter";
       font-style: normal;
       font-weight: 300;
       font-size: 16px;

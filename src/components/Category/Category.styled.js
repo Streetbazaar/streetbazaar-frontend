@@ -18,20 +18,18 @@ export const CategoryItem = styled.div`
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, 1fr);
   }
-   @media screen and (max-width: 550px){  
+  @media screen and (max-width: 550px) {
     height: 650px;
-   }
-
+  }
 `;
 
 export const GridItem1 = styled.div`
   background-color: ${(props) => props.bgColor};
   display: flex;
   flex-direction: column;
- border-radius: 2px;
- grid-column: 1 / span 2;
+  border-radius: 2px;
+  grid-column: 1 / span 2;
   grid-row: 1 / span 2;
-
 `;
 
 export const GridItem2 = styled.div`
@@ -126,7 +124,6 @@ export const Flex1 = styled.div`
   height: 100%;
   width: 100%;
   padding: 13px 17px;
-   
 `;
 
 export const Flex1Item1 = styled.div`
@@ -135,7 +132,6 @@ export const Flex1Item1 = styled.div`
   height: 100%;
 
   h4 {
-    font-family: "Inter";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
@@ -174,10 +170,10 @@ export const Flex2 = styled.div`
 
 
      img {
-    width: 100%;
-  height: 100%;
- object-fit:cover
-  }
+      width: 100%;
+      height: 100%;
+      object-fit:cover
+    }
   }
 
   @media screen and (max-width: 1230px){
@@ -191,10 +187,10 @@ export const Flex2 = styled.div`
 
 
      img {
-     width: 100%;
-  height: 100%;
- object-fit:cover
-  }
+      width: 100%;
+      height: 100%;
+      object-fit:cover
+    }
   }
 
    @media screen and (max-width: 840px){
@@ -243,16 +239,15 @@ export const Flex2Item = styled.button`
   margin-left: 17px;
   margin-bottom: 17px;
 
-  @media screen and (min-width: 900px){
- width: 90px;
-  height: 38px;
+  @media screen and (min-width: 900px) {
+    width: 90px;
+    height: 38px;
 
     &:hover {
-    background: ${Colors.neutral_color.color400};
-    color: white;
+      background: ${Colors.neutral_color.color400};
+      color: white;
+    }
   }
-  }
-
 
   &:hover {
     background: ${Colors.neutral_color.color400};
@@ -271,11 +266,8 @@ export const Flex2Item2 = styled.button`
   margin-left: 17px;
   margin-bottom: 17px;
 
-
-    &:hover {
+  &:hover {
     background: ${Colors.neutral_color.color400};
     color: white;
   }
 `;
-
-

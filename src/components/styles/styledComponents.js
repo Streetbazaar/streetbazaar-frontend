@@ -13,8 +13,14 @@ const HeaderContainer = styled.header`
   box-shadow: 1px 0 5px -2px var(--ash);
   background-color: ${Colors.white};
   z-index: 1;
-   max-width: 1450px
 `;
+
+const MainText = styled.h1`
+  color: ${Colors.neutral_color.color900};
+  width: 50%;
+  font-size: 35px;
+  font-family: 'Poppins', sans-serif;
+`
 
 const LgCaCtaBtn = styled.button`
   outline: none;
@@ -85,7 +91,8 @@ export {
   PrimaryBtn,
   StyledLinks,
   StyledInput,
-  SearchInput
+  SearchInput,
+  MainText
 };
 
 

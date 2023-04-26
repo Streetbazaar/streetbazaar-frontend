@@ -23,6 +23,7 @@ import image4 from "./Category-images/Shopaholics Medium Shot.png";
 import image5 from "./Category-images/Beep Beep Boxes.png";
 import image6 from "./Category-images/Beep Beep Papers.png";
 import image7 from "./Category-images/The Little Things Business Planning.png";
+import "../../App.css"
 
 export default function Category() {
     return (

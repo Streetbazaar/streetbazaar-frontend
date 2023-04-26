@@ -38,7 +38,6 @@ export const TestimoniesContainer1 = styled.div`
   
 
   p {
-    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -98,7 +97,6 @@ export const TestimoniesContainer1 = styled.div`
       }
 
       .testimonies4 {
-        font-family: "Inter";
         font-style: normal;
         font-weight: 600;
         font-size: 15px;
@@ -119,7 +117,6 @@ export const TestimoniesContainer1 = styled.div`
         margin-top: 12px;
 
         p {
-          font-family: "Inter";
           font-style: normal;
           font-weight: 400;
           font-size: 14px;

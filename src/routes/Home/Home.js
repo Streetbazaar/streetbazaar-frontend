@@ -5,7 +5,8 @@ import { Colors } from "../../utils/colors";
 import {
   PrimaryBtn,
   StyledInput,
-  SearchInput
+  SearchInput,
+  MainText,
 } from "../../components/styles/styledComponents";
 import { SearchIconSvg } from "../../components/SvgComponents";
 import Footer from "../../components/Footer";
@@ -26,15 +27,9 @@ const Home = () => {
           marginTop: 150,
         }}
       >
-        <h1
-          style={{
-            color: Colors.neutral_color.color900,
-            width: "50%",
-            fontSize: 35,
-          }}
-        >
+        <MainText>
           BUY, SELL, RENT AND EXCHANGE IN ONE CLICK
-        </h1>
+        </MainText>
         <SearchInput>
           <div style={{ position: "absolute", bottom: 8, left: 20 }}>
             <SearchIconSvg />

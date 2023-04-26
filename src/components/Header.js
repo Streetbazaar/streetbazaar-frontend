@@ -146,7 +146,7 @@ export default function Header() {
                 </p>
               </div>
             </StyledMenu>
-            <PrimaryBtn>
+            <PrimaryBtn width={37}>
               <p>Sell your product</p>
             </PrimaryBtn>
           </div>

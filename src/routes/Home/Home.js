@@ -27,9 +27,7 @@ const Home = () => {
           marginTop: 150,
         }}
       >
-        <MainText>
-          BUY, SELL, RENT AND EXCHANGE IN ONE CLICK
-        </MainText>
+        <MainText>BUY, SELL, RENT AND EXCHANGE IN ONE CLICK</MainText>
         <SearchInput>
           <div style={{ position: "absolute", bottom: 8, left: 20 }}>
             <SearchIconSvg />
@@ -38,7 +36,7 @@ const Home = () => {
             style={{ paddingLeft: 50, height: 50 }}
             placeholder="Search for product"
           />
-          <PrimaryBtn style={{ width: "10%" }}>Search</PrimaryBtn>
+          <PrimaryBtn width={10}>Search</PrimaryBtn>
         </SearchInput>
         <img
           src={jumbotron}

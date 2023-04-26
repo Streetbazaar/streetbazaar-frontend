@@ -19,8 +19,11 @@ const MainText = styled.h1`
   color: ${Colors.neutral_color.color900};
   width: 50%;
   font-size: 35px;
-  font-family: 'Poppins', sans-serif;
-`
+  font-family: "Poppins", sans-serif;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
 
 const LgCaCtaBtn = styled.button`
   outline: none;
@@ -48,6 +51,10 @@ const PrimaryBtn = styled.button`
   align-items: center;
   color: ${Colors.white};
   justify-content: center;
+  width: ${(props) => (props.width ? props.width : 10)}%;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const StyledLinks = styled.a`
@@ -64,9 +71,9 @@ const StyledInput = styled.input`
   padding: 10px;
   width: 40%;
 
-    @media (max-width: 768px) {
-              width: 100%;
-            }
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const SearchInput = styled.div`
@@ -77,12 +84,12 @@ const SearchInput = styled.div`
             margin-top: 30px;
 
             @media (max-width: 768px) {
-              display: flex;
+              
               flex-direction: column;
              
             }
           }}
-`
+`;
 
 export {
   DivContainer,
@@ -92,7 +99,5 @@ export {
   StyledLinks,
   StyledInput,
   SearchInput,
-  MainText
+  MainText,
 };
-
-

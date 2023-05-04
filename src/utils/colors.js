@@ -55,7 +55,8 @@ export const Colors = {
     skyBlue: "#EEF9FA",
     gray: "#F3F5F8",
     unknown: "#EBDCCC",
-    unknown2: "#FEFCFA"
+    unknown2: "#FEFCFA",
+
 }
 
 

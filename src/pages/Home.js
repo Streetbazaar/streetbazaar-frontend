@@ -1,24 +1,27 @@
 import React from "react";
-import Header from "../../components/Header";
-import jumbotron from "../../assets/images/jumbtron.png";
-import { Colors } from "../../utils/colors";
+import Header from "../components/Header";
+import jumbotron from "../assets/images/jumbtron.png";
+import { Colors } from "../utils/colors";
 import {
   PrimaryBtn,
   StyledInput,
   SearchInput,
   MainText,
-} from "../../components/styles/styledComponents";
-import { SearchIconSvg } from "../../components/SvgComponents";
-import Footer from "../../components/Footer";
-import Category from "../../components/Category/Category";
-import InvestmentProducts from "../../components/investmentAds/InvestmentAds";
-import TrendingProducts from "../../components/TrendingAds/TrendingAds";
-import Testimonies from "../../components/Testimonies/Testimonies";
+} from "../components/styles/styledComponents";
+import { SearchIconSvg } from "../components/SvgComponents";
+import Footer from "../components/Footer";
+import Category from "../components/Category/Category";
+import InvestmentProducts from "../components/investmentAds/InvestmentAds";
+import TrendingProducts from "../components/TrendingAds/TrendingAds";
+import Testimonies from "../components/Testimonies/Testimonies";
+// import Notification from "../components/Notification";
+import { useSelector } from "react-redux";
 
 const Home = () => {
+
   return (
     <div>
-      <Header />
+      {/* <Notification /> */}
       <main
         style={{
           padding: "15px",
@@ -48,7 +51,7 @@ const Home = () => {
         <TrendingProducts />
         <Testimonies />
       </main>
-      <Footer />
+   
     </div>
   );
 };

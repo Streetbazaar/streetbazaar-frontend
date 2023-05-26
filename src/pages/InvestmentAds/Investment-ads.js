@@ -60,7 +60,7 @@ const InvestmentProduct = ({ name, id, imgURL, price }) => {
         </div>
       </div>
       <div className="product-list2">
-        <p> {price}</p>
+        <p>{price}</p>
       </div>
       <button>Show Contact</button>
     </div>

@@ -1,7 +1,5 @@
 import React from "react";
-import Header from "../components/Header";
 import jumbotron from "../assets/images/jumbtron.png";
-import { Colors } from "../utils/colors";
 import {
   PrimaryBtn,
   StyledInput,
@@ -11,13 +9,10 @@ import {
   MainContainer,
 } from "../components/styles/styledComponents";
 import { SearchIconSvg } from "../components/SvgComponents";
-import Footer from "../components/Footer";
 import Category from "../components/Category/Category";
-import InvestmentProducts from "./InvestmentAds/InvestmentAds";
 import TrendingProducts from "../components/TrendingAds/TrendingAds";
 import Testimonies from "../components/Testimonies/Testimonies";
-// import Notification from "../components/Notification";
-import { useSelector } from "react-redux";
+import InvestmentAds from "./InvestmentAds/InvestmentAds";
 
 const Home = () => {
   return (
@@ -39,7 +34,7 @@ const Home = () => {
         style={{ width: "100%", aspectRatio: 2 / 1, marginBottom: 20 }}
       />
       <Category />
-      <InvestmentProducts />
+      <InvestmentAds />
       <TrendingProducts />
       <Testimonies />
     </MainContainer>

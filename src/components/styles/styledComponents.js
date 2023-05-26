@@ -90,7 +90,6 @@ const HeaderContainer = styled.header`
   background-color: ${Colors.white};
   z-index: 1;
   height: 100px;
-  position: relative;
   ${HamburgerContainer} {
     display: none;
   }
@@ -126,6 +125,13 @@ const MainText = styled.h1`
   @media (max-width: 768px) {
     width: 100%;
   }
+`;
+
+const MainContainer = styled.main`
+  padding: 15px;
+  max-width: 1440px;
+  margin: 0 auto;
+  margin-top: 120px;
 `;
 
 const LgCaCtaBtn = styled.button`
@@ -222,5 +228,6 @@ export {
   closeAnimation,
   MenuListContainer,
   MenuListItem,
-  SearchIconDiv
+  SearchIconDiv,
+  MainContainer
 };

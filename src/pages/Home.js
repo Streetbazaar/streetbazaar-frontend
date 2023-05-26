@@ -8,11 +8,12 @@ import {
   SearchInput,
   MainText,
   SearchIconDiv,
+  MainContainer,
 } from "../components/styles/styledComponents";
 import { SearchIconSvg } from "../components/SvgComponents";
 import Footer from "../components/Footer";
 import Category from "../components/Category/Category";
-import InvestmentProducts from "../components/InvestmentAds/InvestmentAds";
+import InvestmentProducts from "./InvestmentAds/InvestmentAds";
 import TrendingProducts from "../components/TrendingAds/TrendingAds";
 import Testimonies from "../components/Testimonies/Testimonies";
 // import Notification from "../components/Notification";
@@ -20,14 +21,7 @@ import { useSelector } from "react-redux";
 
 const Home = () => {
   return (
-    <main
-      style={{
-        padding: "15px",
-        maxWidth: "1440px",
-        margin: "0 auto",
-        
-      }}
-    >
+    <MainContainer>
       <MainText>BUY, SELL, RENT AND EXCHANGE IN ONE CLICK</MainText>
       <SearchInput>
         <SearchIconDiv>
@@ -48,7 +42,7 @@ const Home = () => {
       <InvestmentProducts />
       <TrendingProducts />
       <Testimonies />
-    </main>
+    </MainContainer>
   );
 };
 

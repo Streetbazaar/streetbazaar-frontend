@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import {
+  DeskNavDiv,
+  HamburgerBar,
+  HamburgerContainer,
   HeaderContainer,
   LgCaCtaBtn,
+  MenuListContainer,
+  MenuListItem,
+  NavContainer,
   PrimaryBtn,
   StyledLinks,
+  closeAnimation,
+  openAnimation,
 } from "./styles/styledComponents";
 import { styled, alpha } from "@mui/material/styles";
 import BrandLogo from "../assets/images/BrandLogo.png";
@@ -13,8 +21,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Colors } from "../utils/colors";
 import LoginModal from "./Auth/AuthComponents/LoginModal";
 import CreateAccountModal from "./Auth/AuthComponents/CreateAccountModal";
-
-
+import { css } from "styled-components";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -70,27 +77,29 @@ export default function Header() {
     setAnchorEl(null);
   };
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
   const [openLoginModal, setOpenLoginModal] = React.useState(false);
   const handleOpenLoginModal = () => setOpenLoginModal(true);
   const handleCloseLoginModal = () => setOpenLoginModal(false);
 
-  const [openCreateAccountModal, setOpenCreateAccountModal] = React.useState(false);
+  const [openCreateAccountModal, setOpenCreateAccountModal] =
+    React.useState(false);
   const handleOpenCreateAccountModal = () => setOpenCreateAccountModal(true);
   const handleCloseCreateAccountModal = () => setOpenCreateAccountModal(false);
 
-  
-
   return (
     <HeaderContainer>
-      <LoginModal
-        handleClose={handleCloseLoginModal}
-        open={openLoginModal}
-      />
+      <LoginModal handleClose={handleCloseLoginModal} open={openLoginModal} />
       <CreateAccountModal
         handleClose={handleCloseCreateAccountModal}
         open={openCreateAccountModal}
       />
-      <nav style={{ maxWidth: "1440px", display: "flex", margin: "0 auto" }}>
+      <NavContainer>
         <a style={{ marginRight: "auto" }} href="/">
           <img
             aria-label="Street bazaar brand logo"
@@ -99,7 +108,7 @@ export default function Header() {
             alt="Street bazaar brand logo"
           />
         </a>
-        <div style={styles.deskNav}>
+        <DeskNavDiv>
           <StyledLinks href="#">About</StyledLinks>
           <StyledLinks href="#">Blog</StyledLinks>
           <div style={{ display: "flex", gap: 20 }}>
@@ -130,18 +139,22 @@ export default function Header() {
                   padding: 20,
                 }}
               >
-                <p style={styles.menuItem} onClick={() => {
-                  handleOpenLoginModal();
-                  handleCloseAnchor();
-                }
-                } >
+                <p
+                  style={styles.menuItem}
+                  onClick={() => {
+                    handleOpenLoginModal();
+                    handleCloseAnchor();
+                  }}
+                >
                   Login
                 </p>
-                <p style={styles.menuItem} onClick={() => {
-                  handleCloseAnchor();
-                  handleOpenCreateAccountModal();
-                }
-                }>  
+                <p
+                  style={styles.menuItem}
+                  onClick={() => {
+                    handleCloseAnchor();
+                    handleOpenCreateAccountModal();
+                  }}
+                >
                   Create Account
                 </p>
               </div>
@@ -150,18 +163,76 @@ export default function Header() {
               <p>Sell your product</p>
             </PrimaryBtn>
           </div>
-        </div>
-      </nav>
+        </DeskNavDiv>
+        <HamburgerContainer onClick={handleToggle}>
+          <HamburgerBar
+            style={{
+              transform: isOpen
+                ? "rotate(-45deg) translate(-6px, 6px)"
+                : "none",
+              animation: isOpen
+                ? css`
+                    ${closeAnimation} 0.3s forwards
+                  `
+                : "none",
+            }}
+          />
+          <HamburgerBar
+            style={{
+              opacity: isOpen ? 0 : 1,
+              animation: isOpen
+                ? css`
+                    ${closeAnimation} 0.3s forwards
+                  `
+                : css`
+                    ${openAnimation} 0.3s reverse forwards
+                  `,
+            }}
+          />
+          <HamburgerBar
+            style={{
+              transform: isOpen
+                ? "rotate(45deg) translate(-6px, -6px)"
+                : "none",
+              animation: isOpen
+                ? css`
+                    ${closeAnimation} 0.3s forwards
+                  `
+                : "none",
+            }}
+          />
+        </HamburgerContainer>
+        <MenuListContainer isOpen={isOpen}>
+          <MenuListItem>
+            <StyledLinks style={{color: Colors.white}} href="#">About</StyledLinks>
+          </MenuListItem>
+          <MenuListItem>
+            {" "}
+            <StyledLinks style={{color: Colors.white}} href="#">Blog</StyledLinks>
+          </MenuListItem>
+          <MenuListItem
+            onClick={() => {
+              handleOpenLoginModal();
+              handleCloseAnchor();
+            }}
+          >
+            Login
+          </MenuListItem>
+          <MenuListItem
+            onClick={() => {
+              handleCloseAnchor();
+              handleOpenCreateAccountModal();
+            }}
+          >
+            Create Account
+          </MenuListItem>
+        </MenuListContainer>
+      </NavContainer>
     </HeaderContainer>
   );
 }
 
 const styles = {
-  deskNav: {
-    display: "flex",
-    gap: 100,
-    alignItems: "center",
-  },
   menuItem: {
     color: Colors.neutral_color.color900,
   },

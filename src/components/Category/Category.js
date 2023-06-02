@@ -24,6 +24,8 @@ import image5 from "./Category-images/Beep Beep Boxes.png";
 import image6 from "./Category-images/Beep Beep Papers.png";
 import image7 from "./Category-images/The Little Things Business Planning.png";
 import "../../App.css";
+import { Link } from "react-router-dom";
+
 
 export default function Category() {
   return (
@@ -38,6 +40,7 @@ export default function Category() {
       >
         Categories
       </h2>
+  
       <CategoryItem>
         <GridItem1 bgColor={Colors.success_color.color100}>
           <Flex1>
@@ -48,7 +51,9 @@ export default function Category() {
           </Flex1>
           <Flex2>
             <div>
-              <Flex2Item>Buy Now</Flex2Item>
+              <Link to="category-detail/Phones, Tablets, and Smart Watches 📲/1">
+                <Flex2Item>Buy Now</Flex2Item>
+              </Link>
             </div>
             <div>
               <img src={image1} alt="" />
@@ -65,7 +70,9 @@ export default function Category() {
           </Flex1>
           <Flex2>
             <div>
-              <Flex2Item2>Buy Now</Flex2Item2>
+              <Link to="category-detail/Automobile 🚗/2">
+                <Flex2Item2>Buy Now</Flex2Item2>
+              </Link>
             </div>
             <div>
               <img src={image2} alt="" />
@@ -82,7 +89,9 @@ export default function Category() {
           </Flex1>
           <Flex2>
             <div>
-              <Flex2Item2>Buy Now</Flex2Item2>
+              <Link to="category-detail/Property 🏔/3">
+                <Flex2Item2>Buy Now</Flex2Item2>
+              </Link>
             </div>
             <div>
               <img src={image3} alt="" />
@@ -98,7 +107,9 @@ export default function Category() {
           </Flex1>
           <Flex2>
             <div>
-              <Flex2Item2>Buy Now</Flex2Item2>
+              <Link to="category-detail/Health and Beauty 🩺💋/4">
+                <Flex2Item2>Buy Now</Flex2Item2>
+              </Link>
             </div>
             <div>
               <img src={image4} alt="" />
@@ -114,7 +125,9 @@ export default function Category() {
           </Flex1>
           <Flex2>
             <div>
-              <Flex2Item2>Buy Now</Flex2Item2>
+              <Link to="category-detail/Services 👨‍🔧/6">
+                <Flex2Item2>Buy Now</Flex2Item2>
+              </Link>
             </div>
             <div>
               <img src={image5} alt="" />
@@ -131,7 +144,9 @@ export default function Category() {
           </Flex1>
           <Flex2>
             <div>
-              <Flex2Item>Buy Now</Flex2Item>
+              <Link to="category-detail/Others 🌄/7">
+                <Flex2Item>Buy Now</Flex2Item>
+              </Link>
             </div>
             <div>
               <img src={image6} alt="" />
@@ -147,7 +162,9 @@ export default function Category() {
           </Flex1>
           <Flex2>
             <div>
-              <Flex2Item>Buy Now</Flex2Item>
+              <Link to="category-detail/Business and Industry 🗄/8">
+                <Flex2Item>Buy Now</Flex2Item>
+              </Link>
             </div>
             <div>
               <img src={image7} alt="" />

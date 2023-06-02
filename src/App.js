@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import ProductDetails from './pages/ProductDetails';
+import CategoryDetail from './pages/CategoryDetail/CategoryDetail';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path='product-detail'  element={<ProductDetails />} />
           <Route path='about' element={<About />} />
           <Route path='contact' element={<Contact />} />
+          <Route path='category-detail/:categoryName/:categoryId' element={<CategoryDetail />} />
         </Route>
       </Routes>
     </BrowserRouter>

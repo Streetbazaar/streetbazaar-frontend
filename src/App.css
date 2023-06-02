@@ -17,4 +17,5 @@ body {
   display: grid;
   grid-template-columns: 50% 50%;
   gap: 10px 10px;
+  
 }

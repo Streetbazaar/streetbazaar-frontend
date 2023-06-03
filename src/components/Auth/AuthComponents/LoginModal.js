@@ -14,6 +14,7 @@ export default function LoginModal(props) {
             <Box>
                 <Login
                     onClose={props.handleClose}
+                    openRegister={props.openRegister}
                 />
             </Box>
         </Modal>

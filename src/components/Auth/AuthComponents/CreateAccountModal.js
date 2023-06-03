@@ -15,6 +15,7 @@ export default function CreateAccountModal(props) {
             <Box>
                 <CreateAccount
                     onClose={props.handleClose}
+                    openLogin={props.openLogin}
                 />
             </Box>
         </Modal>

@@ -254,7 +254,6 @@ export default function CategoryDetail() {
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
               open={open}
-             
               closeAfterTransition
             >
               <FilterModalBox>

@@ -1,24 +1,33 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   token: "",
   isLoggedIn: false,
-}
+  userProfile: {},
+};
 
 export const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
   reducers: {
-    addToken: (state, action) => {
-      state.token = action.payload
+    updateToken: (state, action) => {
+      state.token = action.payload;
     },
-    toggleIsLoggedIn: (state, action) => {
-      state.isLoggedIn = action.payload
+    updateIsLoggedIn: (state, action) => {
+      state.isLoggedIn = action.payload;
     },
+    updateUserProfile: (state, action) => {
+      state.userProfile = action.payload;
+    },
+    logoutUser: (state) => {
+      state.userProfile = {}
+      state.isLoggedIn = false
+      state.token = ""
+    }
   },
-})
+});
 
 // Action creators are generated for each case reducer function
-export const { addToken, toggleIsLoggedIn } = userSlice.actions
+export const { updateToken, updateIsLoggedIn,  updateUserProfile, logoutUser} = userSlice.actions;
 
-export default userSlice.reducer
+export default userSlice.reducer;

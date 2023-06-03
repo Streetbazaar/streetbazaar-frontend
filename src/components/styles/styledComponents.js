@@ -115,6 +115,104 @@ const NavContainer = styled.nav`
   display: flex;
   margin: 0 auto;
   align-items: center;
+
+  .loggedInUser {
+    display: flex;
+    gap: 20px;
+
+    .notificationIcon {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: ${Colors.neutral_color.color200};
+      color: ${Colors.neutral_color.color900};
+      border-radius: 50px;
+    }
+    .messageIcon {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50px;
+      background-color: ${Colors.neutral_color.color200};
+      color: ${Colors.neutral_color.color900};
+    }
+
+    .profileButton {
+      border: none;
+      background: none;
+      outline: none;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50px;
+      cursor: pointer;
+
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50px;
+      }
+    }
+  }
+
+  .loggedInUserMobile {
+    display: none;
+  }
+
+  @media(max-width: 780px) {
+
+    .loggedInUserMobile {
+      display: flex;
+      gap: 20px;
+  
+      .notificationIcon {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: ${Colors.neutral_color.color200};
+        color: ${Colors.neutral_color.color900};
+        border-radius: 40px;
+      }
+      .messageIcon {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 40px;
+        background-color: ${Colors.neutral_color.color200};
+        color: ${Colors.neutral_color.color900};
+      }
+  
+      .profileButton {
+        border: none;
+        background: none;
+        outline: none;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 40px;
+        cursor: pointer;
+  
+        img {
+          width: 40px;
+          height: 40px;
+          border-radius: 40px;
+        }
+      }
+    }
+  }
+
 `;
 
 const MainText = styled.h1`
@@ -141,11 +239,12 @@ const LgCaCtaBtn = styled.button`
   border: 1px solid ${Colors.neutral_color.color900};
   background-color: ${Colors.white};
   display: flex;
-  gap: 10px;r
+  gap: 10px;
   border-radius: 2px;
   padding: 12px;
   align-items: center;
   color: ${Colors.neutral_color.color900};
+  width: 200%;
 `;
 
 const PrimaryBtn = styled.button`
@@ -160,7 +259,7 @@ const PrimaryBtn = styled.button`
   align-items: center;
   color: ${Colors.white};
   justify-content: center;
-  width: ${(props) => (props.width ? props.width : 10)}%;
+  width: ${(props) => (props.width ? props.width : 150)}%;
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -229,5 +328,5 @@ export {
   MenuListContainer,
   MenuListItem,
   SearchIconDiv,
-  MainContainer
+  MainContainer,
 };

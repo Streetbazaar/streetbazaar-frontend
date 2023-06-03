@@ -22,6 +22,11 @@ import { Colors } from "../utils/colors";
 import LoginModal from "./Auth/AuthComponents/LoginModal";
 import CreateAccountModal from "./Auth/AuthComponents/CreateAccountModal";
 import { css } from "styled-components";
+import { Link } from "react-router-dom";
+import NotificationsSharpIcon from "@mui/icons-material/NotificationsSharp";
+import MailOutlineSharpIcon from "@mui/icons-material/MailOutlineSharp";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutUser } from "../features/userSlice";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -91,11 +96,19 @@ export default function Header() {
     React.useState(false);
   const handleOpenCreateAccountModal = () => setOpenCreateAccountModal(true);
   const handleCloseCreateAccountModal = () => setOpenCreateAccountModal(false);
+  const dispatch = useDispatch()
+
+  const { token, isLoggedIn, userProfile } = useSelector((state) => state.user);
 
   return (
     <HeaderContainer>
-      <LoginModal handleClose={handleCloseLoginModal} open={openLoginModal} />
+      <LoginModal
+        openRegister={handleOpenCreateAccountModal}
+        handleClose={handleCloseLoginModal}
+        open={openLoginModal}
+      />
       <CreateAccountModal
+        openLogin={handleOpenLoginModal}
         handleClose={handleCloseCreateAccountModal}
         open={openCreateAccountModal}
       />
@@ -112,103 +125,149 @@ export default function Header() {
           <StyledLinks href="#">About</StyledLinks>
           <StyledLinks href="#">Blog</StyledLinks>
           <div style={{ display: "flex", gap: 20 }}>
-            <LgCaCtaBtn
-              id="basic-button"
-              aria-controls={openAnchor ? "basic-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={openAnchor ? "true" : undefined}
-              onClick={handleClick}
-            >
-              <p>Create Account / Login</p>
-              <KeyboardArrowDownIcon color={Colors.neutral_color.color200} />
-            </LgCaCtaBtn>
-            <StyledMenu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={openAnchor}
-              onClose={handleCloseAnchor}
-              MenuListProps={{
-                "aria-labelledby": "basic-button",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 20,
-                  padding: 20,
-                }}
-              >
-                <p
-                  style={styles.menuItem}
-                  onClick={() => {
-                    handleOpenLoginModal();
-                    handleCloseAnchor();
+            {token === "" ? (
+              <>
+                <LgCaCtaBtn
+                  id="basic-button"
+                  aria-controls={openAnchor ? "basic-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={openAnchor ? "true" : undefined}
+                  onClick={handleClick}
+                >
+                  <p>Create Account / Login</p>
+                  <KeyboardArrowDownIcon
+                    color={Colors.neutral_color.color200}
+                  />
+                </LgCaCtaBtn>
+                <StyledMenu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={openAnchor}
+                  onClose={handleCloseAnchor}
+                  MenuListProps={{
+                    "aria-labelledby": "basic-button",
                   }}
                 >
-                  Login
-                </p>
-                <p
-                  style={styles.menuItem}
-                  onClick={() => {
-                    handleCloseAnchor();
-                    handleOpenCreateAccountModal();
-                  }}
-                >
-                  Create Account
-                </p>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 20,
+                      padding: 20,
+                    }}
+                  >
+                    <p
+                      style={styles.menuItem}
+                      onClick={() => {
+                        handleOpenLoginModal();
+                        handleCloseAnchor();
+                      }}
+                    >
+                      Login
+                    </p>
+                    <p
+                      style={styles.menuItem}
+                      onClick={() => {
+                        handleCloseAnchor();
+                        handleOpenCreateAccountModal();
+                      }}
+                    >
+                      Create Account
+                    </p>
+                  </div>
+                </StyledMenu>
+              </>
+            ) : (
+              <div className="loggedInUser">
+                <Link className="notificationIcon">
+                  <NotificationsSharpIcon />
+                </Link>
+                <Link className="messageIcon">
+                  <MailOutlineSharpIcon />
+                </Link>
+                <button onClick={()=> dispatch(logoutUser())} className="profileButton">
+                  <img
+                    src={
+                      userProfile?.profile_image_url
+                        ? userProfile?.profile_image_url
+                        : "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+                    }
+                    alt="profile"
+                  />
+                </button>
               </div>
-            </StyledMenu>
-            <PrimaryBtn width={37}>
+            )}
+            <PrimaryBtn>
               <p>Sell your product</p>
             </PrimaryBtn>
           </div>
         </DeskNavDiv>
-        <HamburgerContainer onClick={handleToggle}>
-          <HamburgerBar
-            style={{
-              transform: isOpen
-                ? "rotate(-45deg) translate(-6px, 6px)"
-                : "none",
-              animation: isOpen
-                ? css`
-                    ${closeAnimation} 0.3s forwards
-                  `
-                : "none",
-            }}
-          />
-          <HamburgerBar
-            style={{
-              opacity: isOpen ? 0 : 1,
-              animation: isOpen
-                ? css`
-                    ${closeAnimation} 0.3s forwards
-                  `
-                : css`
-                    ${openAnimation} 0.3s reverse forwards
-                  `,
-            }}
-          />
-          <HamburgerBar
-            style={{
-              transform: isOpen
-                ? "rotate(45deg) translate(-6px, -6px)"
-                : "none",
-              animation: isOpen
-                ? css`
-                    ${closeAnimation} 0.3s forwards
-                  `
-                : "none",
-            }}
-          />
-        </HamburgerContainer>
+        {token === "" ? (
+          <HamburgerContainer onClick={handleToggle}>
+            <HamburgerBar
+              style={{
+                transform: isOpen
+                  ? "rotate(-45deg) translate(-6px, 6px)"
+                  : "none",
+                animation: isOpen
+                  ? css`
+                      ${closeAnimation} 0.3s forwards
+                    `
+                  : "none",
+              }}
+            />
+            <HamburgerBar
+              style={{
+                opacity: isOpen ? 0 : 1,
+                animation: isOpen
+                  ? css`
+                      ${closeAnimation} 0.3s forwards
+                    `
+                  : css`
+                      ${openAnimation} 0.3s reverse forwards
+                    `,
+              }}
+            />
+            <HamburgerBar
+              style={{
+                transform: isOpen
+                  ? "rotate(45deg) translate(-6px, -6px)"
+                  : "none",
+                animation: isOpen
+                  ? css`
+                      ${closeAnimation} 0.3s forwards
+                    `
+                  : "none",
+              }}
+            />
+          </HamburgerContainer>
+        ) : (
+          <div className="loggedInUserMobile">
+            <Link className="notificationIcon">
+              <NotificationsSharpIcon />
+            </Link>
+            <Link className="messageIcon">
+              <MailOutlineSharpIcon />
+            </Link>
+            <button className="profileButton">
+              <img
+                src="https://plus.unsplash.com/premium_photo-1677373563309-c01155c13f8d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80"
+                alt="profile"
+              />
+            </button>
+          </div>
+        )}
         <MenuListContainer isOpen={isOpen}>
           <MenuListItem>
-            <StyledLinks style={{color: Colors.white}} href="#">About</StyledLinks>
+            <StyledLinks style={{ color: Colors.white }} href="#">
+              About
+            </StyledLinks>
           </MenuListItem>
           <MenuListItem>
             {" "}
-            <StyledLinks style={{color: Colors.white}} href="#">Blog</StyledLinks>
+            <StyledLinks style={{ color: Colors.white }} href="#">
+              Blog
+            </StyledLinks>
           </MenuListItem>
           <MenuListItem
             onClick={() => {

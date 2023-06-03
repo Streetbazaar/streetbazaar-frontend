@@ -45,7 +45,7 @@ export const LoginContainer = styled.div`
   box-sizing: border-box;
 `;
 
-export const LoginForm = styled.form`
+export const LoginForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -66,8 +66,6 @@ export const Input = styled.input`
   border: 1px solid ${Colors.neutral_color.color600};
 
   &::placeholder {
-    font-family: "Inter";
-    font-style: normal;
     font-weight: 400;
     font-size: 11px;
     line-height: 16px;
@@ -83,7 +81,7 @@ export const Button = styled.button`
   gap: 8px;
   width: 100%;
   height: 50px;
-  background-color: ${Colors.primary_color.color500};
+  background-color: ${({disabled})=>disabled ? Colors.primary_color.color300 : Colors.primary_color.color500};
   color: ${Colors.neutral_color.color100};
   border: none;
   border-radius: 4px;
@@ -93,9 +91,7 @@ export const Button = styled.button`
   line-height: 24px;
   margin-top: 9px;
 
-  &:hover {
-    background-color: ${Colors.primary_color.color400};
-  }
+  
 `;
 
 export const Flex = styled.div`
@@ -243,6 +239,7 @@ export const Flex5 = styled.div`
     line-height: 16px;
     color: ${Colors.primary_color.color400};
     opacity: 0.95;
+    cursor: pointer;
 
     & > span {
       color: ${Colors.neutral_color.color500};

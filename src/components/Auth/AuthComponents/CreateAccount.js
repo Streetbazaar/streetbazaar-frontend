@@ -47,10 +47,13 @@ export default function CreateAccount(props) {
         setLoading(false);
         dispatch(updateUserProfile(data?.user));
         dispatch(updateToken(data?.access_token));
-        props.onClose()
+        props.onClose();
+        toast("Account created successfully", {
+          type: "success",
+        });
       }
     } catch (err) {
-        console.log(err)
+      console.log(err);
       if (err.response.data.email[0]) {
         toast(err.response.data.email[0], {
           type: "error",
@@ -122,7 +125,11 @@ export default function CreateAccount(props) {
               id="password"
               required
             />
-            <Button disabled={loading} type="submit" onClick={formikProps.handleSubmit}>
+            <Button
+              disabled={loading}
+              type="submit"
+              onClick={formikProps.handleSubmit}
+            >
               {loading ? "Creating your account..." : "Register"}
             </Button>
 

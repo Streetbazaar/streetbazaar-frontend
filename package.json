@@ -11,6 +11,7 @@
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.12.1",
     "@mui/styled-engine-sc": "^5.12.0",
+    "@react-oauth/google": "^0.11.0",
     "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -60,6 +61,7 @@
     "styled-components": "^5"
   },
   "devDependencies": {
+    "@iconify/react": "^4.1.1",
     "babel-plugin-named-exports-order": "^0.0.2",
     "cypress": "^12.7.0",
     "prop-types": "^15.8.1",

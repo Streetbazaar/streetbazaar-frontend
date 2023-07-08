@@ -8,8 +8,10 @@ import {
   MenuListContainer,
   MenuListItem,
   NavContainer,
+  Overlay,
   PrimaryBtn,
   StyledLinks,
+  UserActionModal,
   closeAnimation,
   openAnimation,
 } from "./styles/styledComponents";
@@ -27,6 +29,7 @@ import NotificationsSharpIcon from "@mui/icons-material/NotificationsSharp";
 import MailOutlineSharpIcon from "@mui/icons-material/MailOutlineSharp";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../features/userSlice";
+import { InlineIcon } from "@iconify/react";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -80,6 +83,12 @@ export default function Header() {
   };
   const handleCloseAnchor = () => {
     setAnchorEl(null);
+  };
+
+  const [showUserActionModal, setShowUserActionModal] = useState(false);
+
+  const handleShowUserActionModal = () => {
+    setShowUserActionModal(!showUserActionModal);
   };
 
   const [isOpen, setIsOpen] = useState(false);
@@ -186,7 +195,7 @@ export default function Header() {
                   <MailOutlineSharpIcon />
                 </Link>
                 <button
-                  onClick={() => dispatch(logoutUser())}
+                  onClick={handleShowUserActionModal}
                   className="profileButton"
                 >
                   <img
@@ -197,6 +206,40 @@ export default function Header() {
                     }
                     alt="profile"
                   />
+
+                  <UserActionModal showUserActionModal={showUserActionModal}>
+                    <Link className="sellCTA" to="#">
+                      <p>Sell Product</p>
+                    </Link>
+                    <Link to="#">
+                      <InlineIcon icon="ic:list" />
+                      <p>My Adverts</p>
+                    </Link>
+                    <Link to="#">
+                      <InlineIcon icon="ic:credit-card" />
+                      <p>Account Balance</p>
+                    </Link>
+                    <Link to="#">
+                      <InlineIcon icon="bi:activity" />
+                      <p>Performance</p>
+                    </Link>
+                    <Link to="#">
+                      <InlineIcon icon="lucide:message-circle" />
+                      <p>Feedback</p>
+                    </Link>
+                    <Link to="#">
+                      <InlineIcon icon="lucide:save" />
+                      <p>Saved</p>
+                    </Link>
+                    <Link to="#">
+                      <InlineIcon icon="mi:settings" />
+                      <p>Settings</p>
+                    </Link>
+                    <button onClick={() => dispatch(logoutUser())}>
+                      <InlineIcon icon="mdi:log-out" />
+                      <p>Log Out</p>
+                    </button>
+                  </UserActionModal>
                 </button>
               </div>
             )}
@@ -253,7 +296,7 @@ export default function Header() {
               <MailOutlineSharpIcon />
             </Link>
             <button
-              onClick={() => dispatch(logoutUser())}
+              onClick={handleShowUserActionModal}
               className="profileButton"
             >
               <img
@@ -264,6 +307,40 @@ export default function Header() {
                 }
                 alt="profile"
               />
+              <UserActionModal showUserActionModal={showUserActionModal}>
+                <Overlay onClick={() => setShowUserActionModal(false)} />
+                <Link className="sellCTA" to="#">
+                  <p>Sell Product</p>
+                </Link>
+                <Link to="#">
+                  <InlineIcon icon="ic:list" />
+                  <p>My Adverts</p>
+                </Link>
+                <Link to="#">
+                  <InlineIcon icon="ic:credit-card" />
+                  <p>Account Balance</p>
+                </Link>
+                <Link to="#">
+                  <InlineIcon icon="bi:activity" />
+                  <p>Performance</p>
+                </Link>
+                <Link to="#">
+                  <InlineIcon icon="lucide:message-circle" />
+                  <p>Feedback</p>
+                </Link>
+                <Link to="#">
+                  <InlineIcon icon="lucide:save" />
+                  <p>Saved</p>
+                </Link>
+                <Link to="#">
+                  <InlineIcon icon="mi:settings" />
+                  <p>Settings</p>
+                </Link>
+                <button onClick={() => dispatch(logoutUser())}>
+                  <InlineIcon icon="mdi:log-out" />
+                  <p>Log Out</p>
+                </button>
+              </UserActionModal>
             </button>
           </div>
         )}

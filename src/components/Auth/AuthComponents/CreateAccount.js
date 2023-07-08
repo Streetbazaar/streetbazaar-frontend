@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   CreateAccountContainer,
   Input,
@@ -25,6 +25,7 @@ import {
   updateUserProfile,
   updateIsLoggedIn,
 } from "../../../features/userSlice";
+import { useGoogleLogin } from "@react-oauth/google";
 
 const loginSchema = yup.object().shape({
   email: yup.string().required().label("Email").email(),
@@ -70,6 +71,31 @@ export default function CreateAccount(props) {
     }
   };
 
+  const signUp = useGoogleLogin({
+
+    flow: "auth-code",
+    ux_mode: "redirect",
+    redirect_uri: "http://localhost:3000",
+    onLoginSuccess: (response) => {
+      // Handle successful login
+      console.log(response);
+      alert("hi")
+    },
+    onLoginFailure: (error) => {
+      // Handle failed login
+      console.error(error);
+    },
+    
+  });
+
+  const handleCreateAccountWithGoogle = () => {
+    // Perform any additional custom actions before initiating login
+    console.log('Custom button clicked');
+    signUp(); // Initiate Google login
+  };
+
+
+
   return (
     <CreateAccountContainer>
       <Flex>
@@ -91,7 +117,7 @@ export default function CreateAccount(props) {
         {(formikProps) => (
           <CreateAccountForm>
             <Flex2>
-              <div className="create-account-with-google">
+              <div onClick={handleCreateAccountWithGoogle} className="create-account-with-google">
                 Create Account with &nbsp; <GoogleSvg />
               </div>
               <div className="create-account-with-facebook">

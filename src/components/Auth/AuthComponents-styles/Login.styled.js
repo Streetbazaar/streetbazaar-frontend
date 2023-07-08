@@ -152,6 +152,7 @@ export const Flex2 = styled.div`
     border-radius: 5px;
     flex-grow: 1;
     color: ${Colors.neutral_color.color900};
+    cursor: pointer;
 
     &:hover {
       background-color: ${Colors.neutral_color.color300};

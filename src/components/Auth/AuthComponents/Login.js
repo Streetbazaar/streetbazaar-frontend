@@ -25,6 +25,8 @@ import {
   updateUserProfile,
   updateIsLoggedIn,
 } from "../../../features/userSlice";
+import { useGoogleLogin } from "@react-oauth/google";
+
 
 const loginSchema = yup.object().shape({
   email: yup.string().required().label("Email").email(),
@@ -75,6 +77,24 @@ export default function Login(props) {
     }
   };
 
+  const signIn = useGoogleLogin({
+
+    onLoginSuccess: (response) => {
+      // Handle successful login
+      console.log(response);
+    },
+    onLoginFailure: (error) => {
+      // Handle failed login
+      console.error(error);
+    }
+  });
+
+  const handleLoginWithGoogle = () => {
+    // Perform any additional custom actions before initiating login
+    console.log('Custom button clicked');
+    signIn(); // Initiate Google login
+  };
+
   return (
     <LoginContainer>
       <Flex>
@@ -98,7 +118,7 @@ export default function Login(props) {
         {(formikProps) => (
           <LoginForm>
             <Flex2>
-              <div className="login-with-google">
+              <div onClick={handleLoginWithGoogle} className="login-with-google">
                 Login with &nbsp; <GoogleSvg />
               </div>
               <div className="login-with-facebook">

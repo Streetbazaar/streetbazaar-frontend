@@ -110,6 +110,86 @@ const HeaderContainer = styled.header`
   }
 `;
 
+const Overlay = styled.div`
+  position: absolute;
+  bottom: 400px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  z-index: 10;
+`;
+
+const UserActionModal = styled.div`
+  display: ${({ showUserActionModal }) =>
+    showUserActionModal ? "flex" : "none"};
+  position: absolute;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  top: 80px;
+  background-color: ${Colors.white};
+  border: 1px solid ${Colors.neutral_color.color400};
+  padding: 20px;
+  border-radius: 8px;
+  transition: transform 0.3s ease-in-out;
+  width: 170px;
+  z-index: 11;
+
+  a {
+    text-decoration: none;
+    color: ${Colors.neutral_color.color400};
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    &:hover {
+      color: ${Colors.neutral_color.color600};
+    }
+    
+  }
+  a.sellCTA {
+    display: none;
+  }
+  button {
+    outline: none;
+    border: none;
+    background: none;
+    display: flex;
+    flex-direction: row;
+    color: red;
+    gap: 10px;
+  }
+
+  @media (max-width: 780px) {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 400px;
+    margin-top: auto;
+    border-radius: 0px;
+    gap: 30px;
+
+    a.sellCTA {
+      background-color: ${Colors.primary_color.color500};
+      width: 100%;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      p {
+        color: ${Colors.white};
+      }
+    }
+  }
+`;
+
 const NavContainer = styled.nav`
   max-width: 1440px;
   display: flex;
@@ -119,7 +199,6 @@ const NavContainer = styled.nav`
   .loggedInUser {
     display: flex;
     gap: 20px;
-
     .notificationIcon {
       width: 50px;
       height: 50px;
@@ -165,12 +244,11 @@ const NavContainer = styled.nav`
     display: none;
   }
 
-  @media(max-width: 780px) {
-
+  @media (max-width: 780px) {
     .loggedInUserMobile {
       display: flex;
       gap: 20px;
-  
+
       .notificationIcon {
         width: 40px;
         height: 40px;
@@ -191,7 +269,7 @@ const NavContainer = styled.nav`
         background-color: ${Colors.neutral_color.color200};
         color: ${Colors.neutral_color.color900};
       }
-  
+
       .profileButton {
         border: none;
         background: none;
@@ -203,7 +281,7 @@ const NavContainer = styled.nav`
         justify-content: center;
         border-radius: 40px;
         cursor: pointer;
-  
+
         img {
           width: 40px;
           height: 40px;
@@ -212,7 +290,6 @@ const NavContainer = styled.nav`
       }
     }
   }
-
 `;
 
 const MainText = styled.h1`
@@ -329,4 +406,6 @@ export {
   MenuListItem,
   SearchIconDiv,
   MainContainer,
+  UserActionModal,
+  Overlay,
 };

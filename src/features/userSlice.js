@@ -23,7 +23,8 @@ export const userSlice = createSlice({
       state.userProfile = {}
       state.isLoggedIn = false
       state.token = ""
-    }
+    },
+    
   },
 });
 

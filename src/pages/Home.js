@@ -14,18 +14,9 @@ import TrendingProducts from "../components/TrendingAds/TrendingAds";
 import Testimonies from "../components/Testimonies/Testimonies";
 import InvestmentAds from "./InvestmentAds/InvestmentAds";
 
+
 const Home = () => {
-
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-    
-    if (code) {
-    
-      console.log(code);
-
-    }
-  }, []);
+ 
   return (
     <MainContainer>
       <MainText>BUY, SELL, RENT AND EXCHANGE IN ONE CLICK</MainText>

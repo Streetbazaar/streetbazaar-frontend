@@ -26,6 +26,7 @@ import {
   updateIsLoggedIn,
 } from "../../../features/userSlice";
 import { useGoogleLogin } from "@react-oauth/google";
+import { baseUrl } from "../../utils";
 
 
 const loginSchema = yup.object().shape({
@@ -79,6 +80,9 @@ export default function Login(props) {
 
   const signIn = useGoogleLogin({
 
+    flow: "auth-code",
+    ux_mode: "redirect",
+    redirect_uri: `${baseUrl}/fetchuserprofile`,
     onLoginSuccess: (response) => {
       // Handle successful login
       console.log(response);
@@ -86,12 +90,12 @@ export default function Login(props) {
     onLoginFailure: (error) => {
       // Handle failed login
       console.error(error);
-    }
+    },
+    
   });
 
   const handleLoginWithGoogle = () => {
     // Perform any additional custom actions before initiating login
-    console.log('Custom button clicked');
     signIn(); // Initiate Google login
   };
 

@@ -211,30 +211,30 @@ export default function Header() {
                     <Link className="sellCTA" to="#">
                       <p>Sell Product</p>
                     </Link>
-                    <Link to="#">
+                    <a href="/profile/adverts">
                       <InlineIcon icon="ic:list" />
                       <p>My Adverts</p>
-                    </Link>
-                    <Link to="#">
+                    </a>
+                    <a href="/profile/account-balance">
                       <InlineIcon icon="ic:credit-card" />
                       <p>Account Balance</p>
-                    </Link>
-                    <Link to="#">
+                    </a>
+                    <a href="/profile/performance">
                       <InlineIcon icon="bi:activity" />
                       <p>Performance</p>
-                    </Link>
-                    <Link to="#">
+                    </a>
+                    <a href="/profile/feedback">
                       <InlineIcon icon="lucide:message-circle" />
                       <p>Feedback</p>
-                    </Link>
-                    <Link to="#">
+                    </a>
+                    <a href="/profile/saved">
                       <InlineIcon icon="lucide:save" />
                       <p>Saved</p>
-                    </Link>
-                    <Link to="#">
+                    </a>
+                    <a href="/profile/settings">
                       <InlineIcon icon="mi:settings" />
                       <p>Settings</p>
-                    </Link>
+                    </a>
                     <button onClick={() => dispatch(logoutUser())}>
                       <InlineIcon icon="mdi:log-out" />
                       <p>Log Out</p>
@@ -312,30 +312,30 @@ export default function Header() {
                 <Link className="sellCTA" to="#">
                   <p>Sell Product</p>
                 </Link>
-                <Link to="#">
+                <a href="/profile/adverts">
                   <InlineIcon icon="ic:list" />
                   <p>My Adverts</p>
-                </Link>
-                <Link to="#">
+                </a>
+                <a href="/profile/account-balance">
                   <InlineIcon icon="ic:credit-card" />
                   <p>Account Balance</p>
-                </Link>
-                <Link to="#">
+                </a>
+                <a href="/profile/performance">
                   <InlineIcon icon="bi:activity" />
                   <p>Performance</p>
-                </Link>
-                <Link to="#">
+                </a>
+                <a href="/profile/feedback">
                   <InlineIcon icon="lucide:message-circle" />
                   <p>Feedback</p>
-                </Link>
-                <Link to="#">
+                </a>
+                <a href="/profile/saved">
                   <InlineIcon icon="lucide:save" />
                   <p>Saved</p>
-                </Link>
-                <Link to="#">
+                </a>
+                <a href="/profile/settings">
                   <InlineIcon icon="mi:settings" />
                   <p>Settings</p>
-                </Link>
+                </a>
                 <button onClick={() => dispatch(logoutUser())}>
                   <InlineIcon icon="mdi:log-out" />
                   <p>Log Out</p>

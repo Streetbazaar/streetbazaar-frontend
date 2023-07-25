@@ -1,53 +1,62 @@
-import React from "react";
-import { SideBarContainer } from "./sidebar.styled";
-import { Link } from "react-router-dom";
 import { InlineIcon } from "@iconify/react";
-import { logoutUser } from "../../features/userSlice";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../../features/userSlice";
+import { SideBarContainer, SideBarListItem } from "./sidebar.styled";
+
 
 export default function SideBar() {
   const dispatch = useDispatch();
   const { userProfile } = useSelector((state) => state.user);
-  console.log(userProfile)
+  const [activeIndex, setActiveIndex] = useState(0); // Defaulting to the first item
+
+  const handleItemClick = (index) => {
+    setActiveIndex(index);
+  };
+
+  const listItemData = [
+    { icon: "ic:list", label: "My Adverts", href: "/profile/adverts" },
+    {
+      icon: "ic:credit-card",
+      label: "Account Balance",
+      href: "/profile/account-balance",
+    },
+    { icon: "bi:activity", label: "Performance", href: "/profile/performance" },
+    {
+      icon: "lucide:message-circle",
+      label: "Feedback",
+      href: "/profile/feedback",
+    },
+    { icon: "lucide:save", label: "Saved", href: "/profile/saved" },
+    { icon: "mi:settings", label: "Settings", href: "/profile/settings" },
+  ];
   return (
     <SideBarContainer>
       <div className="userProfile">
-        <img
-          src={
-            userProfile?.profile_image_url
-              ? userProfile?.profile_image_url
-              : "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
-          }
-          alt="profile photo"
-        />
+        <div className="imageWrapper">
+          <img
+            src={
+              userProfile?.profile_image_url
+                ? userProfile?.profile_image_url
+                : "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+            }
+            alt="profile photo"
+          />
+        </div>
         <h3>{`${userProfile?.first_name} ${userProfile?.last_name}`}</h3>
       </div>
       <div className="listItems">
-       
-        <a href="/profile/adverts">
-          <InlineIcon icon="ic:list" />
-          <p>My Adverts</p>
-        </a>
-        <a href="/profile/account-balance">
-          <InlineIcon icon="ic:credit-card" />
-          <p>Account Balance</p>
-        </a>
-        <a href="/profile/performance">
-          <InlineIcon icon="bi:activity" />
-          <p>Performance</p>
-        </a>
-        <a href="/profile/feedback">
-          <InlineIcon icon="lucide:message-circle" />
-          <p>Feedback</p>
-        </a>
-        <a href="/profile/saved">
-          <InlineIcon icon="lucide:save" />
-          <p>Saved</p>
-        </a>
-        <a href="/profile/settings">
-          <InlineIcon icon="mi:settings" />
-          <p>Settings</p>
-        </a>
+        {listItemData.map((item, index) => (
+          <SideBarListItem
+            key={index}
+            isActive={index === activeIndex}
+            onClick={() => handleItemClick(index)}
+            href={item.href}
+          >
+            <p>{item.label}</p>
+            <InlineIcon icon={item.icon} />
+          </SideBarListItem>
+        ))}
         <button onClick={() => dispatch(logoutUser())}>
           <InlineIcon icon="mdi:log-out" />
           <p>Log Out</p>

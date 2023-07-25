@@ -9,7 +9,9 @@ export default function ProfileLayout() {
       <Header />
       <div style={{display: "flex"}}>
         <SideBar />
-        <Outlet />
+        <div style={{ flex: 1 }}>
+          <Outlet />
+        </div>
       </div>
     </>
   );

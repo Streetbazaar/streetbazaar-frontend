@@ -115,7 +115,7 @@ const Overlay = styled.div`
   bottom: 400px;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background: rgba(255, 255, 255, 0.07);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
@@ -137,19 +137,19 @@ const UserActionModal = styled.div`
   padding: 20px;
   border-radius: 8px;
   transition: transform 0.3s ease-in-out;
-  width: 170px;
-  z-index: 11;
+  width: 190px;
+  z-index: 12;
 
   a {
     text-decoration: none;
     color: ${Colors.neutral_color.color400};
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 10px;
     &:hover {
       color: ${Colors.neutral_color.color600};
     }
-    
   }
   a.sellCTA {
     display: none;
@@ -172,13 +172,14 @@ const UserActionModal = styled.div`
     bottom: 0;
     height: 400px;
     margin-top: auto;
-    border-radius: 0px;
+    border-radius: 15px 15px 0px 0px;
     gap: 30px;
+    z-index: 23;
 
     a.sellCTA {
       background-color: ${Colors.primary_color.color500};
       width: 100%;
-      height: 40px;
+      height: 400px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -221,9 +222,7 @@ const NavContainer = styled.nav`
     }
 
     .profileButton {
-      border: none;
-      background: none;
-      outline: none;
+      
       width: 50px;
       height: 50px;
       display: flex;
@@ -232,10 +231,20 @@ const NavContainer = styled.nav`
       border-radius: 50px;
       cursor: pointer;
 
-      img {
-        width: 50px;
+      div.imageWrapper {
         height: 50px;
-        border-radius: 50px;
+        width: 50px;
+        border-radius: 60px;
+        border: 2px solid ${Colors.primary_color.color100};
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          height: 40px;
+          width: 40px;
+          border-radius: 50px;
+        }
       }
     }
   }
@@ -248,6 +257,22 @@ const NavContainer = styled.nav`
     .loggedInUserMobile {
       display: flex;
       gap: 20px;
+
+      div.imageWrapper {
+        height: 40px;
+        width: 40px;
+        border-radius: 60px;
+        border: 2px solid ${Colors.primary_color.color100};
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          height: 35px;
+          width: 35px;
+          border-radius: 50px;
+        }
+      }
 
       .notificationIcon {
         width: 40px;
@@ -271,9 +296,7 @@ const NavContainer = styled.nav`
       }
 
       .profileButton {
-        border: none;
-        background: none;
-        outline: none;
+        
         width: 40px;
         height: 40px;
         display: flex;
@@ -281,12 +304,6 @@ const NavContainer = styled.nav`
         justify-content: center;
         border-radius: 40px;
         cursor: pointer;
-
-        img {
-          width: 40px;
-          height: 40px;
-          border-radius: 40px;
-        }
       }
     }
   }
@@ -388,24 +405,24 @@ const SearchIconDiv = styled.div`
 `;
 
 export {
-  DivContainer,
-  HeaderContainer,
-  LgCaCtaBtn,
-  PrimaryBtn,
-  StyledLinks,
-  StyledInput,
-  SearchInput,
-  MainText,
-  NavContainer,
   DeskNavDiv,
+  DivContainer,
   HamburgerBar,
   HamburgerContainer,
-  openAnimation,
-  closeAnimation,
+  HeaderContainer,
+  LgCaCtaBtn,
+  MainContainer,
+  MainText,
   MenuListContainer,
   MenuListItem,
-  SearchIconDiv,
-  MainContainer,
-  UserActionModal,
+  NavContainer,
   Overlay,
+  PrimaryBtn,
+  SearchIconDiv,
+  SearchInput,
+  StyledInput,
+  StyledLinks,
+  UserActionModal,
+  closeAnimation,
+  openAnimation,
 };

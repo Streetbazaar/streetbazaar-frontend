@@ -1,4 +1,18 @@
+import { InlineIcon } from "@iconify/react";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import MailOutlineSharpIcon from "@mui/icons-material/MailOutlineSharp";
+import NotificationsSharpIcon from "@mui/icons-material/NotificationsSharp";
+import Menu from "@mui/material/Menu";
+import { alpha, styled } from "@mui/material/styles";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { css } from "styled-components";
+import BrandLogo from "../assets/images/BrandLogo.png";
+import { logoutUser } from "../features/userSlice";
+import { Colors } from "../utils/colors";
+import CreateAccountModal from "./Auth/AuthComponents/CreateAccountModal";
+import LoginModal from "./Auth/AuthComponents/LoginModal";
 import {
   DeskNavDiv,
   HamburgerBar,
@@ -15,21 +29,6 @@ import {
   closeAnimation,
   openAnimation,
 } from "./styles/styledComponents";
-import { styled, alpha } from "@mui/material/styles";
-import BrandLogo from "../assets/images/BrandLogo.png";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { Colors } from "../utils/colors";
-import LoginModal from "./Auth/AuthComponents/LoginModal";
-import CreateAccountModal from "./Auth/AuthComponents/CreateAccountModal";
-import { css } from "styled-components";
-import { Link } from "react-router-dom";
-import NotificationsSharpIcon from "@mui/icons-material/NotificationsSharp";
-import MailOutlineSharpIcon from "@mui/icons-material/MailOutlineSharp";
-import { useSelector, useDispatch } from "react-redux";
-import { logoutUser } from "../features/userSlice";
-import { InlineIcon } from "@iconify/react";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -194,18 +193,20 @@ export default function Header() {
                 <Link className="messageIcon">
                   <MailOutlineSharpIcon />
                 </Link>
-                <button
+                <div
                   onClick={handleShowUserActionModal}
                   className="profileButton"
                 >
-                  <img
-                    src={
-                      userProfile?.profile_image_url
-                        ? userProfile?.profile_image_url
-                        : "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
-                    }
-                    alt="profile"
-                  />
+                  <div className="imageWrapper">
+                    <img
+                      src={
+                        userProfile?.profile_image_url
+                          ? userProfile?.profile_image_url
+                          : "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+                      }
+                      alt="profile"
+                    />
+                  </div>
 
                   <UserActionModal showUserActionModal={showUserActionModal}>
                     <Link className="sellCTA" to="#">
@@ -240,7 +241,7 @@ export default function Header() {
                       <p>Log Out</p>
                     </button>
                   </UserActionModal>
-                </button>
+                </div>
               </div>
             )}
             <PrimaryBtn>
@@ -295,18 +296,17 @@ export default function Header() {
             <Link className="messageIcon">
               <MailOutlineSharpIcon />
             </Link>
-            <button
-              onClick={handleShowUserActionModal}
-              className="profileButton"
-            >
-              <img
-                src={
-                  userProfile?.profile_image_url
-                    ? userProfile?.profile_image_url
-                    : "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
-                }
-                alt="profile"
-              />
+            <div onClick={handleShowUserActionModal} className="profileButton">
+              <div className="imageWrapper">
+                <img
+                  src={
+                    userProfile?.profile_image_url
+                      ? userProfile?.profile_image_url
+                      : "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+                  }
+                  alt="profile"
+                />
+              </div>
               <UserActionModal showUserActionModal={showUserActionModal}>
                 <Overlay onClick={() => setShowUserActionModal(false)} />
                 <Link className="sellCTA" to="#">
@@ -341,7 +341,7 @@ export default function Header() {
                   <p>Log Out</p>
                 </button>
               </UserActionModal>
-            </button>
+            </div>
           </div>
         )}
         <MenuListContainer isOpen={isOpen}>

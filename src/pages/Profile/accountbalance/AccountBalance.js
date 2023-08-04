@@ -1,8 +1,10 @@
 import { InlineIcon } from "@iconify/react";
 import React from "react";
 import { AccountBalanceContainer } from "./accountbalance.styled";
+import { useSelector } from "react-redux";
 
 export default function AccountBalance() {
+  const {userProfile} = useSelector(state=>state.user)
   return (
     <AccountBalanceContainer>
       <h3 className="accountBalanceHeading">My Account Balance</h3>
@@ -12,7 +14,7 @@ export default function AccountBalance() {
             <InlineIcon icon="icon-park:trending-up" />
           </div>
           <h4 className="actionTitle">Available Balance</h4>
-          <h3 className="balanceField">₦ 600,000</h3>
+          <h3 className="balanceField">₦ {userProfile?.wallet?.balance}</h3>
           <a href="">View transaction history</a>
         </div>
         <div className="actionBox">

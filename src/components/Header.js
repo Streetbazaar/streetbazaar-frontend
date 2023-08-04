@@ -216,6 +216,10 @@ export default function Header() {
                       <InlineIcon icon="ic:list" />
                       <p>My Adverts</p>
                     </a>
+                    <a href="/profile/investments">
+                      <InlineIcon icon="ic:list" />
+                      <p>My Investments</p>
+                    </a>
                     <a href="/profile/account-balance">
                       <InlineIcon icon="ic:credit-card" />
                       <p>Account Balance</p>
@@ -315,6 +319,10 @@ export default function Header() {
                 <a href="/profile/adverts">
                   <InlineIcon icon="ic:list" />
                   <p>My Adverts</p>
+                </a>
+                <a href="/profile/investments">
+                  <InlineIcon icon="ic:list" />
+                  <p>My Investments</p>
                 </a>
                 <a href="/profile/account-balance">
                   <InlineIcon icon="ic:credit-card" />

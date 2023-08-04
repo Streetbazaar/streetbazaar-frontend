@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../features/userSlice";
 import { SideBarContainer, SideBarListItem } from "./sidebar.styled";
 
-
 export default function SideBar() {
   const dispatch = useDispatch();
   const { userProfile } = useSelector((state) => state.user);
@@ -16,6 +15,7 @@ export default function SideBar() {
 
   const listItemData = [
     { icon: "ic:list", label: "My Adverts", href: "/profile/adverts" },
+    { icon: "ic:list", label: "My Investments", href: "/profile/investments" },
     {
       icon: "ic:credit-card",
       label: "Account Balance",
@@ -53,8 +53,8 @@ export default function SideBar() {
             onClick={() => handleItemClick(index)}
             href={item.href}
           >
-            <p>{item.label}</p>
             <InlineIcon icon={item.icon} />
+            <p>{item.label}</p>
           </SideBarListItem>
         ))}
         <button onClick={() => dispatch(logoutUser())}>

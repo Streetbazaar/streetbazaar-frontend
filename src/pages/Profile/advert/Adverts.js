@@ -1,6 +1,7 @@
 import { InlineIcon } from "@iconify/react";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import AdvertItem from "./AdvertItem";
 import { AdvertContainer, AdvertSelect, ButtonFilter } from "./advert.styled";
 
 export default function Adverts() {
@@ -19,7 +20,7 @@ export default function Adverts() {
   ];
   return (
     <AdvertContainer>
-      <h3 className="advertMainHeading">My adverts</h3>
+      <h3 className="advertMainHeading">My Adverts</h3>
 
       <div className="deskFilters">
         <div className="searchBar">
@@ -39,7 +40,6 @@ export default function Adverts() {
       </div>
 
       <div className="contentContainer">
-        
         <div className="userProfile">
           <div className="imageWrapper">
             <img
@@ -81,6 +81,14 @@ export default function Adverts() {
               <option value="Popularity">Oldest</option>
             </AdvertSelect>
           </div>
+        </div>
+
+        <div className="advertsList">
+          {Array(5)
+            .fill()
+            .map((_, index) => {
+              return <AdvertItem key={index} />;
+            })}
         </div>
       </div>
     </AdvertContainer>

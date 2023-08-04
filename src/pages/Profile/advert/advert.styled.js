@@ -62,6 +62,9 @@ const AdvertContainer = styled.div`
 
   div.contentContainer {
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     div.userProfile {
       display: none;
       margin-top: 20px;
@@ -95,11 +98,16 @@ const AdvertContainer = styled.div`
     div.mobileFilters {
       display: none;
     }
+
     div.buttonFilterList {
-        display: flex;
-        gap: 15px;
-        
-       
+      display: flex;
+      gap: 15px;
+    }
+
+    div.advertsList {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
     }
   }
 
@@ -110,7 +118,6 @@ const AdvertContainer = styled.div`
       display: none;
     }
     div.contentContainer {
-      height: 100%;
       background-color: ${Colors.neutral_color.color100};
       gap: 10px;
       display: flex;
@@ -122,14 +129,14 @@ const AdvertContainer = styled.div`
       div.mobileFilters {
         display: flex;
         align-items: center;
-     
+
         width: 100%;
-    
+
         div.searchBar {
           position: relative;
           color: ${Colors.neutral_color.color400};
           flex: 1;
-    
+
           input {
             height: 50px;
             padding-left: 35px;
@@ -140,14 +147,14 @@ const AdvertContainer = styled.div`
             border-radius: 6px;
             width: 80%;
           }
-    
+
           div.searchIcon {
             position: absolute;
             top: 15px;
             left: 10px;
           }
         }
-    
+
         div.selectBar {
           display: flex;
           align-items: center;
@@ -167,18 +174,115 @@ const ButtonFilter = styled.button`
   justify-content: center;
   gap: 8px;
   font-size: 15px;
-  color: ${({isActive})=> isActive ? Colors.primary_color.color400 : Colors.neutral_color.color400};
-  background-color: ${({isActive})=> isActive ? Colors.primary_color.color100 : "none"};
+  color: ${({ isActive }) =>
+    isActive ? Colors.primary_color.color400 : Colors.neutral_color.color400};
+  background-color: ${({ isActive }) =>
+    isActive ? Colors.primary_color.color100 : "none"};
   padding: 10px;
-  border: ${({isActive})=> isActive ? `1px solid ${Colors.primary_color.color400}` : "none"};
+  border: ${({ isActive }) =>
+    isActive ? `1px solid ${Colors.primary_color.color400}` : "none"};
   border-radius: 6px;
 
-
-  @media(max-width: 780px) {
+  @media (max-width: 780px) {
     gap: 5px;
     font-size: 10px;
     padding: 10px;
   }
-`
+`;
 
-export { AdvertContainer, AdvertSelect, ButtonFilter };
+const AdvertItemWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: ${Colors.white};
+  border-radius: 8px;
+  width: 320px;
+  height: 400px;
+  padding: 20px;
+  gap: 15px;
+  border: 1px solid ${Colors.neutral_color.color200};
+
+  img {
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+  }
+
+  div.adCaptions {
+    display: flex;
+    align-items: center;
+    h4 {
+      color: ${Colors.neutral_color.color600};
+      flex: 1;
+      font-size: 20px;
+    }
+    div.statusIndicator {
+      background-color: ${Colors.success_color.color100};
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 20px;
+      border-radius: 10px;
+
+      p {
+        color: ${Colors.success_color.color400};
+        font-size: 10px;
+      }
+    }
+  }
+
+  div.adStatistics {
+    display: flex;
+    gap: 15px;
+
+    div.statContainer {
+      background-color: ${Colors.neutral_color.color100};
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 30px;
+      border-radius: 8px;
+      border: 1px solid ${Colors.neutral_color.color200};
+      width: 30%;
+
+      p {
+        color: ${Colors.neutral_color.color800};
+        font-size: 10px;
+      }
+    }
+  }
+
+  h3.adPrice {
+    color: ${Colors.success_color.color500};
+    font-size: 20px;
+    border-bottom: 1px solid ${Colors.neutral_color.color200};
+    padding-bottom: 15px;
+  }
+
+  div.adActions {
+    display: flex;
+    gap: 15px;
+
+    button {
+      background: none;
+      border: none;
+      outline: none;
+      color: ${Colors.neutral_color.color500};
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      height: 30px;
+      border-radius: 5px;
+      border: 1px solid ${Colors.neutral_color.color200};
+      width: 30%;
+    }
+  }
+
+  @media (max-width: 780px) {
+    width: 100%;
+    height: 400px;
+  }
+`;
+
+export { AdvertContainer, AdvertItemWrapper, AdvertSelect, ButtonFilter };

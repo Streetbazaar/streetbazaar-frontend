@@ -111,17 +111,18 @@ const HeaderContainer = styled.header`
 `;
 
 const Overlay = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 400px;
+  top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 49vh;
   background: rgba(255, 255, 255, 0.07);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  z-index: 10;
+  z-index: 2;
 `;
 
 const UserActionModal = styled.div`
@@ -138,7 +139,7 @@ const UserActionModal = styled.div`
   border-radius: 8px;
   transition: transform 0.3s ease-in-out;
   width: 190px;
-  z-index: 12;
+  z-index: 20;
 
   a {
     text-decoration: none;
@@ -170,7 +171,7 @@ const UserActionModal = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    height: 400px;
+    height: 470px;
     margin-top: auto;
     border-radius: 15px 15px 0px 0px;
     gap: 30px;
@@ -179,7 +180,7 @@ const UserActionModal = styled.div`
     a.sellCTA {
       background-color: ${Colors.primary_color.color500};
       width: 100%;
-      height: 400px;
+      height: 200px;
       display: flex;
       align-items: center;
       justify-content: center;

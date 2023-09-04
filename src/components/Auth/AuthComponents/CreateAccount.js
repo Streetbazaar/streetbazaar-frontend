@@ -45,7 +45,7 @@ export default function CreateAccount(props) {
     try {
       const data = await REGISTER_USER(email, password);
       if (data) {
-        console.log(data);
+        // console.log(data);
         setLoading(false);
         dispatch(updateUserProfile(data?.user));
         dispatch(updateToken(data?.access_token));
@@ -61,13 +61,13 @@ export default function CreateAccount(props) {
           type: "error",
         });
         setLoading(false);
-        console.log(err.response.data.detail[0]);
+        // console.log(err.response.data.detail[0]);
       } else {
         toast(err.message, {
           type: "error",
         });
         setLoading(false);
-        console.log(err.message);
+        // console.log(err.message);
       }
     }
   };
@@ -78,14 +78,14 @@ export default function CreateAccount(props) {
     flow: "auth-code",
     ux_mode: "redirect",
     redirect_uri: `${baseUrl}/fetchuserprofile`,
-    onLoginSuccess: (response) => {
-      // Handle successful login
-      console.log(response);
-    },
-    onLoginFailure: (error) => {
-      // Handle failed login
-      console.error(error);
-    },
+    // onLoginSuccess: (response) => {
+    //   // Handle successful login
+    //   // console.log(response);
+    // },
+    // onLoginFailure: (error) => {
+    //   // Handle failed login
+    //   console.error(error);
+    // },
     
   });
 

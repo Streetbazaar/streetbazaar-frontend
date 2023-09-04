@@ -19,21 +19,21 @@ export default function FetchGoogleUser() {
     try {
       const data = await LOGIN_GOOGLE_USER(code);
       if (data) {
-        console.log(data);
+        // console.log(data);
         setLoading(false);
         dispatch(updateUserProfile(data?.user));
         dispatch(updateToken(data?.access_token));
         navigate("/");
       }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       setLoading(false);
-      console.log(err.message);
+      // console.log(err.message);
     }
   };
   useEffect(() => {
     handleLoginGoogleUser(location.search);
-    console.log(location.search)
+    // console.log(location.search)
   }, []);
   return (
     <div

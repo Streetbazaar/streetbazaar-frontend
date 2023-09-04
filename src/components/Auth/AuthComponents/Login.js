@@ -69,7 +69,7 @@ export default function Login(props) {
         toast(err.message, {
           type: "error",
         });
-        console.log(err.message);
+        // console.log(err.message);
       }
     
       toast(err.message, {
@@ -83,14 +83,14 @@ export default function Login(props) {
     flow: "auth-code",
     ux_mode: "redirect",
     redirect_uri: `${baseUrl}/fetchuserprofile`,
-    onLoginSuccess: (response) => {
-      // Handle successful login
-      console.log(response);
-    },
-    onLoginFailure: (error) => {
-      // Handle failed login
-      console.error(error);
-    },
+    // onLoginSuccess: (response) => {
+    //   // Handle successful login
+    //   console.log(response);
+    // },
+    // onLoginFailure: (error) => {
+    //   // Handle failed login
+    //   console.error(error);
+    // },
     
   });
 

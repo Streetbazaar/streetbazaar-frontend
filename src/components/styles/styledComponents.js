@@ -116,13 +116,13 @@ const Overlay = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 49vh;
+  height: 100vh;
   background: rgba(255, 255, 255, 0.07);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  z-index: 2;
+  z-index: -2;
 `;
 
 const UserActionModal = styled.div`
@@ -171,7 +171,7 @@ const UserActionModal = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    height: 470px;
+    height: 480px;
     margin-top: auto;
     border-radius: 15px 15px 0px 0px;
     gap: 30px;

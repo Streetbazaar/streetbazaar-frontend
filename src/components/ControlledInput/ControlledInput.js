@@ -16,6 +16,7 @@ const ControlledInput = ({ label, formikProps, formikKey, onChangeText, ...rest 
         onBlur={formikProps.handleBlur(formikKey)}
         style={inputStyles}
         {...rest}
+        
       />
     </FieldWrapper>
   );

@@ -134,7 +134,7 @@ export default function Login(props) {
             </Flex3>
 
             <ControlledInput
-              label="Email Adderess"
+              label="Email Address"
               formikProps={formikProps}
               formikKey="email"
               value={formikProps.values.email}

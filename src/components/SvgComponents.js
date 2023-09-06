@@ -26,7 +26,7 @@ const SearchIconSvg = ({ width = "26", height = "26" }) => {
     </svg>
   );
 };
-export { SearchIconSvg };
+
 
 const LinkedInIconSvg = ({ width = "37", height = "37" }) => {
   return (
@@ -60,7 +60,7 @@ const LinkedInIconSvg = ({ width = "37", height = "37" }) => {
     </svg>
   );
 };
-export { LinkedInIconSvg };
+
 
 const FacebookIconSvg = ({ width = "37", height = "37" }) => {
   return (
@@ -86,7 +86,7 @@ const FacebookIconSvg = ({ width = "37", height = "37" }) => {
     </svg>
   );
 };
-export { FacebookIconSvg };
+
 
 const TwitterIconSvg = ({ width = "37", height = "37" }) => {
   return (
@@ -112,7 +112,7 @@ const TwitterIconSvg = ({ width = "37", height = "37" }) => {
     </svg>
   );
 };
-export { TwitterIconSvg };
+
 
 const ExitSvg = () => {
   return (
@@ -140,7 +140,6 @@ const ExitSvg = () => {
     </svg>
   );
 };
-export { ExitSvg };
 
 
 const GoogleSvg = () => {
@@ -171,7 +170,7 @@ const GoogleSvg = () => {
     </svg>
   );
 };
-export { GoogleSvg };
+
 
 const FacebookSvg = () => {
   return (
@@ -193,4 +192,21 @@ const FacebookSvg = () => {
     </svg>
   );
 };
-export { FacebookSvg };
+
+const StarSvg = ({ width = "31", height = "31", fill }) => {
+  return (
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 29 29"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M15.3352 0.680356L19.0936 8.4845C19.3024 8.70128 19.5112 8.91807 19.9288 9.13485L28.072 10.4355C28.9072 10.6523 29.3248 11.7362 28.6984 12.3866L22.852 18.4565C22.6432 18.6732 22.4344 19.1068 22.6432 19.3236L24.1048 27.7781C24.3136 28.6452 23.2696 29.2956 22.6432 28.862L15.3352 24.9599C15.1264 24.7431 14.7088 24.7431 14.2912 24.9599L6.9832 28.862C6.148 29.2956 5.3128 28.6452 5.5216 27.7781L6.9832 19.3236C6.9832 18.89 6.9832 18.6732 6.7744 18.4565L0.3016 11.953C-0.3248 11.3027 0.0928 10.2188 0.928 10.2188L9.0712 8.91807C9.4888 8.91807 9.6976 8.70128 9.9064 8.26772L13.6648 0.463575C13.8736 -0.186771 15.1264 -0.186771 15.3352 0.680356Z"
+        fill={fill}
+      />
+    </svg>
+  );
+};
+export { FacebookSvg, StarSvg, ExitSvg, FacebookIconSvg, GoogleSvg, LinkedInIconSvg, SearchIconSvg, TwitterIconSvg};

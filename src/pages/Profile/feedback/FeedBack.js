@@ -1,22 +1,22 @@
 import { InlineIcon } from "@iconify/react";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { ButtonFilter } from "../advert/advert.styled";
-import { FeedBackContainer, FeedBackItem } from "./feedback.styled";
 import { StarSvg } from "../../../components/SvgComponents";
 import { Colors } from "../../../utils/colors";
+import { ButtonFilter } from "../advert/advert.styled";
+import { FeedBackContainer, FeedBackItem } from "./feedback.styled";
 
 export default function FeedBack() {
   const { userProfile } = useSelector((state) => state.user);
   const [activeIndex, setActiveIndex] = useState(0); // Defaulting to the first button
-  const [maxRating, setMaxRating] = useState([1, 2, 3, 4, 5]);
+  const maxRating = [1, 2, 3, 4, 5];
 
   const handleButtonClick = (index) => {
     setActiveIndex(index);
   };
   const buttonData = [
-    { icon: "octicon:clock-24", label: "Reviews" },
-    { icon: "prime:check-circle", label: "Sent" },
+    { icon: "lucide:message-circle", label: "Reviews" },
+    { icon: "iconamoon:edit-duotone", label: "Sent" },
   ];
 
   const feedbacks = [
@@ -105,7 +105,7 @@ export default function FeedBack() {
                   ? userProfile?.profile_image_url
                   : "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
               }
-              alt="profile photo"
+              alt="profile"
             />
           </div>
           <h3>{`${userProfile?.first_name} ${userProfile?.last_name}`}</h3>
@@ -129,7 +129,7 @@ export default function FeedBack() {
               <img
                 className="userPhoto"
                 src={feedback.userPhoto}
-                alt="user profile photo"
+                alt="user profile"
               />
 
               <h4 className="userName">{feedback.userName}</h4>
@@ -147,9 +147,9 @@ export default function FeedBack() {
               <div className="productImagesWrapper">
                 {feedback.images.map((image, i) => (
                   <img
-                  key={i}
+                    key={i}
                     src={image}
-                    alt="product images"
+                    alt="product"
                     className="productImage"
                   />
                 ))}
@@ -160,17 +160,19 @@ export default function FeedBack() {
                   {maxRating.map((item, i) => {
                     return (
                       <StarSvg
-                      key={i}
+                        key={i}
                         height="10"
                         width="10"
                         fill={
-                          item <= parseInt(feedback.rating) ? Colors.gold : Colors.neutral_color.color300
+                          item <= parseInt(feedback.rating)
+                            ? Colors.gold
+                            : Colors.neutral_color.color300
                         }
                       />
                     );
                   })}
                 </div>
-                <p className="ratingText">{feedback.rating} rating</p>
+                <p className="ratingText">{feedback.rating} Rating</p>
               </div>
             </FeedBackItem>
           ))}

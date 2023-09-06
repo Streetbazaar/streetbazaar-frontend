@@ -75,7 +75,7 @@ const FeedBackItem = styled.div`
   padding: 10px;
   border: 1px solid ${Colors.neutral_color.color200};
   width: 350px;
-  height: 350px;
+  height: auto;
   border-radius: 8px;
   justify-content: center;
 
@@ -136,7 +136,7 @@ const FeedBackItem = styled.div`
   }
 
   @media(max-width: 780px) {
-    width: 46%;
+    width: 47%;
     height: auto;
     background-color: ${Colors.white};
 

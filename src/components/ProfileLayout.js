@@ -2,6 +2,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import SideBar from "./sidebar/SideBar";
+import { ProfileOutletDiv } from "./styles/styledComponents";
 
 export default function ProfileLayout() {
   return (
@@ -9,9 +10,9 @@ export default function ProfileLayout() {
       <Header />
       <div style={{display: "flex"}}>
         <SideBar />
-        <div style={{ flex: 1 }}>
+        <ProfileOutletDiv>
           <Outlet />
-        </div>
+        </ProfileOutletDiv>
       </div>
     </>
   );

@@ -118,7 +118,7 @@ export default function PersonalDetails() {
             <div className="itemContainer">
               <h4 className="headingText">Phone Number</h4>
               <div className="inputContainer">
-              <ControlledInput
+                <ControlledInput
                   label="Phone Number"
                   formikProps={formikProps}
                   formikKey="phone"
@@ -134,7 +134,49 @@ export default function PersonalDetails() {
 
             <div className="itemContainer">
               <h4 className="headingText">Location</h4>
-              <div className="inputContainer"></div>
+              <div className="inputContainer">
+                <div className="stateCityContainer">
+                  <div className="locationContainer">
+                    <label htmlFor="State">State</label>
+                    <select name="state" id="stateSelect">
+                      <option value="">Select State</option>
+                      <option value="Rivers State">Rivers State</option>
+                      <option value="Lagos State">Lagos State</option>
+                    </select>
+                  </div>
+
+                  <div className="locationContainer">
+                    <label htmlFor="City">City</label>
+                    <select name="city" id="citySelect">
+                      <option value="">Select City</option>
+                      <option value="Rivers State">Port Harcourt</option>
+                      <option value="Lagos State">Ikeja</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="locationContainer">
+                  <label htmlFor="Address">Address</label>
+                  <input
+                    className="textField"
+                    type="text"
+                    placeholder="Enter your store address"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="formActionButtons">
+              <button type="button" className="cancelChanges">
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={formikProps.handleSubmit}
+                className="saveChanges"
+              >
+                Save Changes
+              </button>
             </div>
           </>
         )}

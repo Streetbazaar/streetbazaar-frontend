@@ -7,11 +7,12 @@ const SideBarContainer = styled.div`
   width: 300px;
   padding: 50px;
   padding-top: 150px;
-  height: 100%;
-
+  position: fixed;
+  margin-right: 2000px;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 20px;
+  overflow-y: auto;
 
   div.userProfile {
     display: flex;
@@ -79,6 +80,7 @@ const SideBarListItem = styled.a`
   color: ${({isActive})=> isActive ? Colors.primary_color.color400 : Colors.neutral_color.color400};
   background-color: ${({isActive})=> isActive ? Colors.primary_color.color100 : "none"};
   padding: 15px;
+  cursor: pointer;
 `;
 
 export { SideBarContainer, SideBarListItem };

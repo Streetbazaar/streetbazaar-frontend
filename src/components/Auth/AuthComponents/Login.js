@@ -14,8 +14,6 @@ import {
 } from "../AuthComponents-styles/Login.styled";
 
 import { ExitSvg, FacebookSvg, GoogleSvg } from "../../SvgComponents";
-import { Formik } from "formik";
-import * as yup from "yup";
 import { useDispatch } from "react-redux";
 import ControlledInput from "../../ControlledInput/ControlledInput";
 import { LOGIN_USER } from "../../api";
@@ -27,6 +25,8 @@ import {
 } from "../../../features/userSlice";
 import { useGoogleLogin } from "@react-oauth/google";
 import { baseUrl } from "../../utils";
+import { Formik } from "formik";
+import * as yup from "yup";
 
 
 const loginSchema = yup.object().shape({

@@ -1,6 +1,7 @@
 import { InlineIcon } from "@iconify/react";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../../features/userSlice";
 import { SideBarContainer, SideBarListItem } from "./sidebar.styled";
 
@@ -8,6 +9,7 @@ export default function SideBar() {
   const dispatch = useDispatch();
   const { userProfile } = useSelector((state) => state.user);
   const [activeIndex, setActiveIndex] = useState(0); // Defaulting to the first item
+  const navigate = useNavigate();
 
   const handleItemClick = (index) => {
     setActiveIndex(index);
@@ -50,8 +52,10 @@ export default function SideBar() {
           <SideBarListItem
             key={index}
             isActive={index === activeIndex}
-            onClick={() => handleItemClick(index)}
-            href={item.href}
+            onClick={() => {
+              handleItemClick(index);
+              navigate(item.href);
+            }}
           >
             <InlineIcon icon={item.icon} />
             <p>{item.label}</p>

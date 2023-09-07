@@ -405,6 +405,17 @@ const SearchIconDiv = styled.div`
   }
 `;
 
+const ProfileOutletDiv = styled.div`
+  margin-left: 300px;
+  flex: 1;
+  max-width: 1440px;
+ 
+
+  @media(max-width: 780px) {
+    margin-left: 0;
+  }
+`
+
 export {
   DeskNavDiv,
   DivContainer,
@@ -426,4 +437,5 @@ export {
   UserActionModal,
   closeAnimation,
   openAnimation,
+  ProfileOutletDiv
 };

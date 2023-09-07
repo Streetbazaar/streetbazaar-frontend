@@ -16,7 +16,7 @@ export default function Settings() {
   const settingsList = ["Personal Details", "Business Information", "Security"];
   return (
     <SettingsContainer>
-      <h3 className="settingsMainHeading">Saved Ads</h3>
+      <h3 className="settingsMainHeading">Settings</h3>
       <div className="contentContainer">
         <div className="userProfile">
           <div className="imageWrapper">

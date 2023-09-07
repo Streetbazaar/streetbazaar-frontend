@@ -6,7 +6,7 @@ import Menu from "@mui/material/Menu";
 import { alpha, styled } from "@mui/material/styles";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { css } from "styled-components";
 import BrandLogo from "../assets/images/BrandLogo.png";
 import { logoutUser } from "../features/userSlice";
@@ -77,6 +77,7 @@ const StyledMenu = styled((props) => (
 export default function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
   const openAnchor = Boolean(anchorEl);
+  const navigate = useNavigate();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -313,38 +314,43 @@ export default function Header() {
               </div>
               <UserActionModal showUserActionModal={showUserActionModal}>
                 <Overlay onClick={() => setShowUserActionModal(false)} />
-                <Link className="sellCTA" to="#">
+                <Link onClick={() => navigate()} className="sellCTA" to="#">
                   <p>Sell Product</p>
                 </Link>
-                <a href="/profile/adverts">
+                <a onClick={() => navigate("/profile/adverts")}>
                   <InlineIcon icon="ic:list" />
                   <p>My Adverts</p>
                 </a>
-                <a href="/profile/investments">
+                <a onClick={() => navigate("/profile/investments")}>
                   <InlineIcon icon="ic:list" />
                   <p>My Investments</p>
                 </a>
-                <a href="/profile/account-balance">
+                <a onClick={() => navigate("/profile/account-balance")}>
                   <InlineIcon icon="ic:credit-card" />
                   <p>Account Balance</p>
                 </a>
-                <a href="/profile/performance">
+                <a onClick={() => navigate("/profile/performance")}>
                   <InlineIcon icon="bi:activity" />
                   <p>Performance</p>
                 </a>
-                <a href="/profile/feedback">
+                <a onClick={() => navigate("/profile/feedback")}>
                   <InlineIcon icon="lucide:message-circle" />
                   <p>Feedback</p>
                 </a>
-                <a href="/profile/saved">
+                <a onClick={() => navigate("/profile/saved")}>
                   <InlineIcon icon="lucide:save" />
                   <p>Saved</p>
                 </a>
-                <a href="/profile/settings">
+                <a onClick={() => navigate()} href="/profile/settings">
                   <InlineIcon icon="mi:settings" />
                   <p>Settings</p>
                 </a>
-                <button onClick={() => dispatch(logoutUser())}>
+                <button
+                  onClick={() => {
+                    dispatch(logoutUser());
+                    navigate("/");
+                  }}
+                >
                   <InlineIcon icon="mdi:log-out" />
                   <p>Log Out</p>
                 </button>

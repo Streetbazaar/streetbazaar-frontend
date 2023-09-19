@@ -2,7 +2,9 @@ import { configureStore } from '@reduxjs/toolkit'
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import userReducer from '../features/userSlice'
+import chatReducer from '../features/chatSlice'
 import thunk from 'redux-thunk';
+
 
 const persistConfig = {
   key: 'root',
@@ -14,9 +16,9 @@ const persistedReducer = persistReducer(persistConfig, userReducer)
 export const store = configureStore({
   reducer: {
     user: persistedReducer,
-   
+    chat: chatReducer
   },
   middleware: [thunk]
 })
 
-export const persistor = persistStore(store)
+export const persistor = persistStore(store);

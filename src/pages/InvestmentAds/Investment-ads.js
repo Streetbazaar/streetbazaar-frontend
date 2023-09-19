@@ -62,7 +62,7 @@ const InvestmentProduct = ({ name, id, imgURL, price }) => {
       <div className="product-list2">
         <p>{price}</p>
       </div>
-      <button>Show Contact</button>
+      <button>Buy to resell</button>
     </div>
   );
 };

@@ -16,8 +16,6 @@ line-height: 30px;
 color: ${Colors.neutral_color.color900};
 }
 
-
-
 }
 `;
 

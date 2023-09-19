@@ -1,28 +1,32 @@
 import React from "react";
-import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./components/Layout";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import ProductDetails from "./pages/ProductDetails";
-import CategoryDetail from "./pages/CategoryDetail/CategoryDetail";
+import { useSelector } from "react-redux";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { setCookie } from "./setCookie";
-import FetchGoogleUser from "./components/googleAuth/FetchGoogleUser";
-import ErrorPage from "./pages/ErrorPage";
+import "./App.css";
+import Layout from "./components/Layout";
 import ProfileLayout from "./components/ProfileLayout";
+import FetchGoogleUser from "./components/googleAuth/FetchGoogleUser";
+import About from "./pages/About";
+import CategoryDetail from "./pages/CategoryDetail/CategoryDetail";
+import ChatsWrapper from "./pages/Chats/ChatsWrapper";
+import Contact from "./pages/Contact";
+import ErrorPage from "./pages/ErrorPage";
+import Home from "./pages/Home";
+import ProductDetails from "./pages/ProductDetails";
 import AccountBalance from "./pages/Profile/accountbalance/AccountBalance";
 import Adverts from "./pages/Profile/advert/Adverts";
 import FeedBack from "./pages/Profile/feedback/FeedBack";
 import Investments from "./pages/Profile/investment/Investments";
-import Saved from "./pages/Profile/saved/Saved";
 import Performance from "./pages/Profile/performance/Performance";
+import Saved from "./pages/Profile/saved/Saved";
 import Settings from "./pages/Profile/site_settings/Settings";
+import { setCookie } from "./setCookie";
+import ChatLayout from "./components/ChatLayout";
 
 function App() {
   setCookie("cookieName", "cookieValue", 7, "None");
+  const { token } = useSelector((state) => state.user);
   return (
     <BrowserRouter>
       <ToastContainer
@@ -62,6 +66,9 @@ function App() {
           <Route path="settings" element={<Settings />} />
         </Route>
         <Route path="fetchuserprofile" element={<FetchGoogleUser />} />
+      <Route errorElement={<ErrorPage />} path="/messages" element={<ChatLayout />}>
+        <Route path=":chatId" element={<ChatLayout />} />
+      </Route>
       </Routes>
     </BrowserRouter>
   );

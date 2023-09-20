@@ -68,6 +68,9 @@ export default function ChatDetail() {
           <h3 className="userName">
             {userFName || userLName ? `${userFName} ${userLName}` : "user"}
           </h3>
+          <button className="moreIcon">
+            <InlineIcon icon="mingcute:more-1-line" />
+          </button>
         </div>
       )}
 

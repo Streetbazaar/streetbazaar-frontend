@@ -188,9 +188,9 @@ export default function Header() {
               </>
             ) : (
               <div className="loggedInUser">
-                <Link className="notificationIcon">
+                <a href="/profile/notifications" className="notificationIcon">
                   <NotificationsSharpIcon />
-                </Link>
+                </a>
                 <a href="/messages" className="messageIcon">
                   <MailOutlineSharpIcon />
                 </a>
@@ -295,9 +295,9 @@ export default function Header() {
           </HamburgerContainer>
         ) : (
           <div className="loggedInUserMobile">
-            <Link className="notificationIcon">
+            <a href="/profile/notifications" className="notificationIcon">
               <NotificationsSharpIcon />
-            </Link>
+            </a>
             <a href="/messages" className="messageIcon">
               <MailOutlineSharpIcon />
             </a>

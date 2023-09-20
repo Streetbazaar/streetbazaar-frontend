@@ -1,4 +1,5 @@
 import React from "react";
+import { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -13,6 +14,7 @@ import CategoryDetail from "./pages/CategoryDetail/CategoryDetail";
 import Contact from "./pages/Contact";
 import ErrorPage from "./pages/ErrorPage";
 import Home from "./pages/Home";
+import Notifications from "./pages/Notifications/Notifications";
 import ProductDetails from "./pages/ProductDetails";
 import AccountBalance from "./pages/Profile/accountbalance/AccountBalance";
 import Adverts from "./pages/Profile/advert/Adverts";
@@ -40,6 +42,31 @@ function App() {
         pauseOnHover
         theme="light"
       />
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        gutter={8}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          // Define default options
+          className: "",
+          duration: 5000,
+          style: {
+            background: "#363636",
+            color: "#fff",
+          },
+
+          // Default options for specific types
+          success: {
+            duration: 3000,
+            theme: {
+              primary: "green",
+              secondary: "black",
+            },
+          },
+        }}
+      />
       <Routes>
         <Route errorElement={<ErrorPage />} path="/" element={<Layout />}>
           <Route index element={<Home />} />
@@ -63,6 +90,7 @@ function App() {
           <Route path="performance" element={<Performance />} />
           <Route path="saved" element={<Saved />} />
           <Route path="settings" element={<Settings />} />
+          <Route path="notifications" element={<Notifications />} />
         </Route>
         <Route path="fetchuserprofile" element={<FetchGoogleUser />} />
         <Route

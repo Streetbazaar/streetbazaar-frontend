@@ -195,6 +195,16 @@ const ChatDetailContainer = styled.div`
       font-size: 20px;
       text-transform: capitalize;
     }
+
+    button.moreIcon {
+      margin-left: auto;
+      outline: none;
+      border: none;
+      background: none;
+      color: ${Colors.neutral_color.color700};
+      font-size: 25px;
+      cursor: pointer;
+    }
   }
 
   div.chatContentWrapper {

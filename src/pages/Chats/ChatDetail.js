@@ -11,7 +11,7 @@ export default function ChatDetail() {
   const [chats, setChats] = useState([]);
   const location = useLocation();
   const { chatId, userFName, userLName, userEmail, userPhoto, messages } =
-    location.state;
+    location?.state;
   const dispatch = useDispatch();
   const { isOpen } = useSelector((state) => state.chat);
   const { userProfile } = useSelector((state) => state.user);

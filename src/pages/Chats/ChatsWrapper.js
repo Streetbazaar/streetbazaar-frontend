@@ -2,8 +2,10 @@ import React from "react";
 import ChatDetail from "./ChatDetail";
 import { ChatsContainer } from "./Chats.styled";
 import ChatsList from "./ChatsList";
+import { useLocation } from "react-router-dom";
 
 export default function ChatsWrapper() {
+  const location = useLocation()
   return (
     <ChatsContainer>
       <div className="captionContainer">
@@ -14,7 +16,10 @@ export default function ChatsWrapper() {
       </div>
       <div className="chatsWrapper">
         <ChatsList />
-        <ChatDetail />
+        {location.state !== null && (
+          <ChatDetail />
+
+        )}
       </div>
     </ChatsContainer>
   );

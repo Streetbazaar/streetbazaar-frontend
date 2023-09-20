@@ -119,6 +119,7 @@ export default function ChatDetail() {
               placeholder="Type a message"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
+              onKeyDown={handleKeyPress}
             />
             <button className="addAttachment">
               <InlineIcon icon="tabler:file-plus" />

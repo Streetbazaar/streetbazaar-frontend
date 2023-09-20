@@ -1,10 +1,10 @@
 import { InlineIcon } from "@iconify/react";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { updateIsOpen } from "../../features/chatSlice";
 import { getTimeAgo } from "../../fuctions";
 import { ChatListItem, ChatsListContainer } from "./Chats.styled";
-import { updateIsOpen } from "../../features/chatSlice";
 
 const chats = [
   {
@@ -400,6 +400,20 @@ export default function ChatsList() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isOpen } = useSelector((state) => state.chat);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Create a filteredChats array based on the search query
+  const filteredChats = chats.filter((chat) => {
+    const fullName = `${chat.first_name} ${chat.last_name}`.toLowerCase();
+    const email = chat.email.toLowerCase();
+    const query = searchQuery.toLowerCase();
+    return fullName.includes(query) || email.includes(query);
+  });
+
+  const handleSearchInputChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
   return (
     <ChatsListContainer isOpen={isOpen}>
       <div className="messagesHeaderContainer">
@@ -410,19 +424,19 @@ export default function ChatsList() {
           </button>
         </div>
         <div className="searchMessages">
-          <input className="searchMessages" placeholder="Search" />
+          <input value={searchQuery}
+          onChange={handleSearchInputChange} className="searchMessages" placeholder="Search" />
           <InlineIcon icon="iconamoon:search-light" />
         </div>
       </div>
 
       <div className="chatsContainer">
-        {chats.map((chat) => {
+        {filteredChats.map((chat) => {
           const lastObject = chat.messages[chat.messages.length - 1];
           return (
             <ChatListItem
-             
-              onClick={() =>{
-                dispatch(updateIsOpen(false))
+              onClick={() => {
+                dispatch(updateIsOpen(false));
                 navigate("/messages", {
                   state: {
                     chatId: chat.id,
@@ -432,8 +446,8 @@ export default function ChatsList() {
                     userPhoto: chat.userPhoto,
                     messages: chat.messages,
                   },
-                })}
-              }
+                });
+              }}
               key={chat.id}
             >
               <img width={50} height={50} src={chat.userPhoto} alt="user" />

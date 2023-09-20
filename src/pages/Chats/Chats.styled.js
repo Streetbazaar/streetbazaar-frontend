@@ -222,6 +222,7 @@ const ChatDetailContainer = styled.div`
           display: flex;
           flex-direction: column;
           gap: 8px;
+
           p.userName {
             color: ${Colors.neutral_color.color900};
             font-size: 17px;
@@ -236,6 +237,7 @@ const ChatDetailContainer = styled.div`
             max-width: 250px;
             color: ${Colors.neutral_color.color900};
             font-size: 15px;
+            word-wrap: break-word;
           }
 
           p.chatTime {
@@ -268,6 +270,7 @@ const ChatDetailContainer = styled.div`
         width: 90%;
         font-size: 18px;
         background-color: ${Colors.neutral_color.color100};
+        border-radius: 8px;
       }
 
       button {
@@ -309,6 +312,18 @@ const ChatDetailContainer = styled.div`
 
     div.chatContentWrapper {
       height: 78%;
+      div.chatInputContainer {
+        input.chatInput {
+          padding: 15px;
+          font-size: 15px;
+        }
+
+        button {
+          font-size: 25px;
+          height: 40px;
+          width: 55px;
+        }
+      }
     }
   }
 `;

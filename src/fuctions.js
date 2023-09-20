@@ -76,3 +76,31 @@ export function getTimeAgo(dateString) {
       .padStart(2, "0")}/${year}`;
   }
 }
+
+// Function to generate a random ID
+function generateRandomId(length) {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let id = '';
+
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    id += characters.charAt(randomIndex);
+  }
+
+  return id;
+}
+
+// Set to store generated IDs for uniqueness checking
+const generatedIds = new Set();
+const idLength = 10; // Adjust the length of the ID as needed
+
+// Generate a unique random ID
+export function generateUniqueRandomId() {
+  let id;
+  do {
+    id = generateRandomId(idLength);
+  } while (generatedIds.has(id));
+
+  generatedIds.add(id);
+  return id;
+}

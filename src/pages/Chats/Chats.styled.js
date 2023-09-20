@@ -9,7 +9,6 @@ const ChatsContainer = styled.div`
   padding: 20px;
   flex-direction: column;
   gap: 20px;
- 
 
   div.captionContainer {
     display: flex;
@@ -34,6 +33,12 @@ const ChatsContainer = styled.div`
     height: 32em;
     position: relative;
     overflow-x: hidden;
+  }
+
+  @media(max-width: 768px) {
+    div.chatsWrapper {
+      height: 38em;
+    }
   }
 `;
 
@@ -157,7 +162,137 @@ const ChatDetailContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 20px;
+  width: 100%;
+  position: relative;
+  height: 100%;
+
+  div.userProfile {
+    display: flex;
+    gap: 10px;
+    padding: 20px;
+    border-bottom: 1px solid ${Colors.neutral_color.color400};
+    align-items: center;
+    background-color: ${Colors.white};
+
+    button.backIcon {
+      outline: none;
+      background: none;
+      border: none;
+      width: 30px;
+      font-size: 25px;
+      color: ${Colors.neutral_color.color800};
+      display: none;
+    }
+
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50px;
+    }
+
+    h3.userName {
+      color: ${Colors.neutral_color.color800};
+      font-size: 20px;
+      text-transform: capitalize;
+    }
+  }
+
+  div.chatContentWrapper {
+    display: flex;
+    flex-direction: column;
+    height: 73%;
+
+    div.chatsContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px;
+      overflow-y: auto;
+
+      div.chatBox {
+        display: flex;
+        gap: 10px;
+        img {
+          width: 40px;
+          height: 40px;
+          border-radius: 40px;
+        }
+
+        div.chatBody {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          p.userName {
+            color: ${Colors.neutral_color.color900};
+            font-size: 17px;
+            font-weight: bold;
+            text-transform: capitalize;
+          }
+
+          p.messageBody {
+            border: 1px solid ${Colors.neutral_color.color500};
+            padding: 10px;
+            border-radius: 7px;
+            max-width: 250px;
+            color: ${Colors.neutral_color.color900};
+            font-size: 15px;
+          }
+
+          p.chatTime {
+            color: ${Colors.neutral_color.color900};
+            font-size: 13px;
+          }
+        }
+      }
+    }
+
+    
+    div.chatInputContainer {
+      border-top: 1px solid ${Colors.neutral_color.color700};
+      height: 50px;
+      justify-self: flex-end;
+      padding: 20px;
+      padding-top: 50px;
+      width: 100%;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      margin-top: auto;
+
+      input.chatInput {
+        outline: none;
+        border: none;
+        background: none;
+        color: ${Colors.neutral_color.color900};
+        padding: 20px;
+        width: 90%;
+        font-size: 18px;
+        background-color: ${Colors.neutral_color.color100};
+      }
+
+      button {
+        outline: none;
+        border: none;
+        background: none;
+        width: 60px;
+        height: 60px;
+        font-size: 30px;
+      }
+
+      button.addAttachment {
+        background-color: ${Colors.white};
+        border: 1px solid ${Colors.neutral_color.color500};
+        border-radius: 6px;
+        color: ${Colors.neutral_color.color600};
+      }
+
+      button.sendMessage {
+        background-color: ${Colors.primary_color.color100};
+        border-radius: 6px;
+        color: ${Colors.primary_color.color500};
+      }
+    }
+  }
 
   @media (max-width: 780px) {
     position: absolute;
@@ -165,6 +300,16 @@ const ChatDetailContainer = styled.div`
     transform: ${({ isOpen }) =>
       isOpen ? "translateX(-100%)" : "translateX(0%)"};
     transition: transform 0.5s ease;
+
+    div.userProfile {
+      button.backIcon {
+        display: flex;
+      }
+    }
+
+    div.chatContentWrapper {
+      height: 78%;
+    }
   }
 `;
 

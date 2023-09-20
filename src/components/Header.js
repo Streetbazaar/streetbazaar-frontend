@@ -191,9 +191,9 @@ export default function Header() {
                 <Link className="notificationIcon">
                   <NotificationsSharpIcon />
                 </Link>
-                <Link className="messageIcon">
+                <a href="/messages" className="messageIcon">
                   <MailOutlineSharpIcon />
-                </Link>
+                </a>
                 <div
                   onClick={handleShowUserActionModal}
                   className="profileButton"

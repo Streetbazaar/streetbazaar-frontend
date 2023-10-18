@@ -8,6 +8,7 @@ import "./App.css";
 import ChatLayout from "./components/ChatLayout";
 import Layout from "./components/Layout";
 import ProfileLayout from "./components/ProfileLayout";
+import SellProductLayout from "./components/SellProductLayout";
 import FetchGoogleUser from "./components/googleAuth/FetchGoogleUser";
 import About from "./pages/About";
 import CategoryDetail from "./pages/CategoryDetail/CategoryDetail";
@@ -15,6 +16,7 @@ import Contact from "./pages/Contact";
 import ErrorPage from "./pages/ErrorPage";
 import Home from "./pages/Home";
 import Notifications from "./pages/Notifications/Notifications";
+import PlaceAd from "./pages/PlaceAd/PlaceAd";
 import ProductDetails from "./pages/ProductDetails";
 import AccountBalance from "./pages/Profile/accountbalance/AccountBalance";
 import Adverts from "./pages/Profile/advert/Adverts";
@@ -98,6 +100,14 @@ function App() {
           path="/messages"
           element={<ChatLayout />}
         />
+
+        <Route
+          errorElement={<ErrorPage />}
+          path="/sell-your-product"
+          element={<SellProductLayout />}
+        >
+          <Route path="post-advert" element={<PlaceAd />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

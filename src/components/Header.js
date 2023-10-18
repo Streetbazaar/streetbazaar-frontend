@@ -210,9 +210,9 @@ export default function Header() {
                   </div>
 
                   <UserActionModal showUserActionModal={showUserActionModal}>
-                    <Link className="sellCTA" to="#">
+                    <a className="sellCTA" href="/sell-your-product/post-advert">
                       <p>Sell Product</p>
-                    </Link>
+                    </a>
                     <a href="/profile/adverts">
                       <InlineIcon icon="ic:list" />
                       <p>My Adverts</p>
@@ -249,7 +249,7 @@ export default function Header() {
                 </div>
               </div>
             )}
-            <PrimaryBtn>
+            <PrimaryBtn href="/sell-your-product/post-advert">
               <p>Sell your product</p>
             </PrimaryBtn>
           </div>
@@ -314,9 +314,9 @@ export default function Header() {
               </div>
               <UserActionModal showUserActionModal={showUserActionModal}>
                 <Overlay onClick={() => setShowUserActionModal(false)} />
-                <Link onClick={() => navigate()} className="sellCTA" to="#">
+                <a href="/sell-your-product/post-advert" className="sellCTA">
                   <p>Sell Product</p>
-                </Link>
+                </a>
                 <a onClick={() => navigate("/profile/adverts")}>
                   <InlineIcon icon="ic:list" />
                   <p>My Adverts</p>

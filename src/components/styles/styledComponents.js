@@ -342,10 +342,11 @@ const LgCaCtaBtn = styled.button`
   width: 200%;
 `;
 
-const PrimaryBtn = styled.button`
+const PrimaryBtn = styled.a`
   outline: none;
   border: none;
   background: none;
+  text-decoration: none;
   background-color: ${Colors.primary_color.color500};
   display: flex;
   gap: 10px;
@@ -355,6 +356,7 @@ const PrimaryBtn = styled.button`
   color: ${Colors.white};
   justify-content: center;
   width: ${(props) => (props.width ? props.width : 150)}%;
+  cursor: pointer;
   @media (max-width: 768px) {
     width: 100%;
   }

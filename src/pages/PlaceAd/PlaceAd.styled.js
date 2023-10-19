@@ -103,11 +103,10 @@ const AdContainer = styled.div`
       font-weight: bold;
       font-size: 13px;
 
-
       span.subText {
         color: ${Colors.neutral_color.color600};
-      font-weight: 400;
-      font-size: 10px;
+        font-weight: 400;
+        font-size: 10px;
       }
     }
 
@@ -140,6 +139,110 @@ const AdContainer = styled.div`
       border: 1px solid ${Colors.neutral_color.color700};
       border-radius: 7px;
     }
+    p.picturesCaption {
+      color: ${Colors.neutral_color.color900};
+      font-size: 13px;
+    }
+
+    div.imageInputWrapper {
+      background-color: ${Colors.white};
+      border: 1px dashed ${Colors.neutral_color.color700};
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      border-radius: 7px;
+      flex-direction: column;
+      gap: 20px;
+
+      svg {
+        font-size: 60px;
+        color: ${Colors.neutral_color.color600};
+      }
+      p.inputDragCaption {
+        font-size: 13px;
+        color: ${Colors.neutral_color.color900};
+        label {
+          color: ${Colors.primary_color.color500};
+        }
+      }
+      input {
+        display: none;
+      }
+      
+      ul {
+        background-color: ${Colors.neutral_color.color100};
+        padding: 30px;
+        border-radius: 7px;
+        color: ${Colors.neutral_color.color700};
+        font-size: 12px;
+
+      }
+    }
+  }
+
+  div.selectedImagesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    div.captionContainer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background-color: ${Colors.primary_color.color100};
+      padding: 15px;
+      color: ${Colors.primary_color.color500};
+      border-radius: 7px;
+
+      svg {
+        font-size: 30px;
+      }
+      p {
+        font-size: 13px;
+      }
+
+    }
+
+    div.imageContainer {
+      width: 100%;
+      padding: 10px;
+      background-color: ${Colors.white};
+      display: flex;
+      justify-content: space-between;
+      border-radius: 7px;
+
+      div.imageWrapper {
+        position: relative;
+        img {
+          height: 50px;
+          width: 50px;
+          border-radius: 7px;
+        }
+        p.numberCaption {
+          position: absolute;
+          top: -7px;
+          right: -7px;
+          background-color: ${Colors.primary_color.color100};
+          color: ${Colors.primary_color.color500};
+          font-size: 12px;
+          height: 20px;
+          width: 20px;
+          border-radius: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+
+      button {
+        outline: none;
+        border: none;
+        background: none;
+        font-size: 20px;
+        color: ${Colors.neutral_color.color600}
+      }
+    }
   }
   div.radioWrapper {
     display: flex;
@@ -153,17 +256,16 @@ const AdContainer = styled.div`
     }
 
     div.radioGroup {
+      display: flex;
+      gap: 10px;
+      span.radioContainer {
         display: flex;
         gap: 10px;
-        span.radioContainer {
-            display: flex;
-            gap: 10px;
-            label {
-                font-weight: 400;
-            }
+        label {
+          font-weight: 400;
         }
+      }
     }
-
   }
   div.locationWrapper {
     display: flex;
@@ -173,6 +275,18 @@ const AdContainer = styled.div`
     div.inputContainer {
       width: 100%;
     }
+  }
+
+  button.nextButton {
+    outline: none;
+    border: none;
+    background: none;
+    background-color: ${Colors.primary_color.color500};
+    color: ${Colors.white};
+    border-radius: 7px;
+    padding: 20px;
+    width: 200px;
+    align-self: flex-end;
   }
 
   @media (max-width: 780px) {

@@ -52,6 +52,7 @@ export default function AdPageTwo({ onNextPage }) {
         </label>
         <input className="descriptionInput" placeholder="Detailed description of your product or service" type="text" />
       </div>
+      <button className="nextButton" onClick={onNextPage}>Next Step</button>
     </AdContainer>
   );
 }

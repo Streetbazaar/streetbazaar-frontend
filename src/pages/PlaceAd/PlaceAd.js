@@ -80,19 +80,7 @@ export default function PlaceAd() {
           })}
         </StepsContainer>
 
-        {/* <Stepper variant="outlined" activeStep={currentPage - 1}>
-        {steps.map((label, index) => {
-          const stepProps = {};
-          const labelProps = {};
-          
-          return (
-            <Step key={label} {...stepProps}>
-              <StepLabel {...labelProps}>{label}</StepLabel>
-              <div className="lineStep" /> hi
-            </Step>
-          );
-        })}
-      </Stepper> */}
+        
         {currentPage === 1 && <AdPageOne onNextPage={navigateToNextPage} />}
         {currentPage === 2 && <AdPageTwo onNextPage={navigateToNextPage} />}
         {currentPage === 3 && <AdPageThree />}

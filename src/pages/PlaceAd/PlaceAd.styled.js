@@ -169,14 +169,13 @@ const AdContainer = styled.div`
       input {
         display: none;
       }
-      
+
       ul {
         background-color: ${Colors.neutral_color.color100};
         padding: 30px;
         border-radius: 7px;
         color: ${Colors.neutral_color.color700};
         font-size: 12px;
-
       }
     }
   }
@@ -201,7 +200,6 @@ const AdContainer = styled.div`
       p {
         font-size: 13px;
       }
-
     }
 
     div.imageContainer {
@@ -211,6 +209,12 @@ const AdContainer = styled.div`
       display: flex;
       justify-content: space-between;
       border-radius: 7px;
+
+      &:hover {
+        background-color: #f7f7f7;
+        transform: scale(1.05);
+        transition: all 0.5s ease;
+      }
 
       div.imageWrapper {
         position: relative;
@@ -240,7 +244,7 @@ const AdContainer = styled.div`
         border: none;
         background: none;
         font-size: 20px;
-        color: ${Colors.neutral_color.color600}
+        color: ${Colors.neutral_color.color600};
       }
     }
   }
@@ -293,8 +297,145 @@ const AdContainer = styled.div`
     width: 100%;
   }
 `;
+
+const AdPricesContainer = styled.div`
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+
+  @media (max-width: 780px) {
+    flex-direction: column;
+    width: 100%;
+  }
+`;
+
+const AdItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 520px;
+  width: 350px;
+  padding: 20px;
+  gap: 20px;
+  border: ${({ isActive }) =>
+    isActive ? "none" : `1px solid ${Colors.neutral_color.color200}`};
+  background-color: ${({ isActive }) =>
+    isActive ? `${Colors.primary_color.color600}` : "none"};
+  border-radius: 8px;
+
+  p.recommendedItem {
+    background-color: ${Colors.primary_color.color500};
+    padding: 10px;
+    border-radius: 20px;
+    color: ${Colors.white};
+    font-size: 10px;
+    margin-left: auto;
+  }
+
+  h3.adTitle {
+    font-size: 17px;
+    color: ${({ isActive }) =>
+      isActive
+        ? `${Colors.primary_color.color500}`
+        : `${Colors.neutral_color.color800}`};
+  }
+
+  div.priceContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-bottom: 1px solid ${Colors.neutral_color.color100};
+    padding-bottom: 20px;
+
+    h2.priceTitle {
+      font-size: 26px;
+      color: ${({ isActive }) =>
+        isActive
+          ? `${Colors.primary_color.color100}`
+          : `${Colors.neutral_color.color800}`};
+    }
+  }
+
+  div.priceSelectors {
+    display: flex;
+    gap: 10px;
+  }
+
+  div.featuresContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    h3.featuresHeading {
+      color: ${({ isActive }) =>
+        isActive
+          ? `${Colors.primary_color.color100}`
+          : `${Colors.neutral_color.color800}`};
+      font-size: 15px;
+    }
+
+    p.featuresSubCaption {
+      color: ${({ isActive }) =>
+        isActive
+          ? `${Colors.primary_color.color100}`
+          : `${Colors.neutral_color.color800}`};
+      font-size: 12px;
+    }
+
+    div.descriptionText {
+      color: ${({ isActive }) =>
+        isActive
+          ? `${Colors.primary_color.color100}`
+          : `${Colors.neutral_color.color800}`};
+      font-size: 10px;
+      display: flex;
+      gap: 10px;
+    }
+  }
+
+  button.paymentButton {
+    margin-top: auto;
+    border: none;
+    background: none;
+    outline: none;
+    color: ${({ isActive }) =>
+      isActive
+        ? `${Colors.primary_color.color100}`
+        : `${Colors.neutral_color.color800}`};
+    border: ${({ isActive }) =>
+      isActive ? "none" : `1px solid ${Colors.neutral_color.color200}`};
+    background-color: ${({ isActive }) =>
+      isActive ? `${Colors.primary_color.color500}` : "none"};
+      padding: 15px;
+      border-radius: 7px;
+  }
+
+  @media (max-width: 780px) {
+    width: 100%;
+  }
+`;
+
+const AdItemCustomPriceButton = styled.button`
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 20px;
+  background-color: ${({ isSelected }) =>
+    isSelected
+      ? `${Colors.primary_color.color500}`
+      : `${Colors.primary_color.color100}`};
+  color: ${({ isSelected }) =>
+    isSelected ? `${Colors.white}` : `${Colors.neutral_color.color800}`};
+  border: ${({ isSelected }) =>
+    isSelected ? "none" : `1px solid ${Colors.neutral_color.color200}`};
+  font-size: 10px;
+`;
 export {
   AdContainer,
+  AdItem,
+  AdItemCustomPriceButton,
+  AdPricesContainer,
   PlaceAdContainer,
   PlaceAdWrapper,
   StepItem,

@@ -5,6 +5,7 @@ export const Colors = {
     color300: "#48A0F7",
     color400: "#208bf6",
     color500: "#096BCB",
+    color600: "#012343"
   },
   secondary_color: {
     color100: "#FDF4EB",

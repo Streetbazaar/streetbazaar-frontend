@@ -5,6 +5,8 @@ import { AdContainer } from "./PlaceAd.styled";
 export default function AdPageOne({ onNextPage }) {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [imageURLs, setImageURLs] = useState([]);
+  const [draggedIndex, setDraggedIndex] = useState(null);
+  const [dragOffsetX, setDragOffsetX] = useState(null);
 
   const handleFileChange = (e) => {
     const files = e.target.files;
@@ -43,6 +45,42 @@ export default function AdPageOne({ onNextPage }) {
     setSelectedFiles(updatedFiles);
     setImageURLs(updatedURLs);
   };
+
+  const handleTouchStart = (e, index) => {
+    const touch = e.touches[0];
+    // e.preventDefault();
+    setDraggedIndex(index);
+    setDragOffsetX(touch.clientX - e.target.getBoundingClientRect().left);
+  };
+
+  const handleTouchMove = (e, index) => {
+    if (draggedIndex !== null && draggedIndex !== index) {
+      // e.preventDefault();
+      const touch = e.touches[0];
+      const containerLeft = e.currentTarget.getBoundingClientRect().left;
+      const position = touch.clientX - containerLeft - dragOffsetX;
+      // Calculate new position and update the UI accordingly.
+    }
+  };
+
+ const handleTouchEnd = (index) => {
+  if (draggedIndex !== null && draggedIndex !== index) {
+    const updatedFiles = [...selectedFiles];
+    const updatedURLs = [...imageURLs];
+
+    const [draggedFile] = updatedFiles.splice(draggedIndex, 1);
+    updatedFiles.splice(index, 0, draggedFile);
+
+    const [draggedURL] = updatedURLs.splice(draggedIndex, 1);
+    updatedURLs.splice(index, 0, draggedURL);
+
+    setSelectedFiles(updatedFiles);
+    setImageURLs(updatedURLs);
+  }
+
+  setDraggedIndex(null);
+};
+
 
   const removeImage = (index) => {
     const updatedFiles = [...selectedFiles];
@@ -145,6 +183,9 @@ export default function AdPageOne({ onNextPage }) {
               onDragStart={(e) => handleDragStart(e, index)}
               onDragOver={(e) => e.preventDefault()}
               onDrop={(e) => handleDrop(e, index)}
+              onTouchStart={(e) => handleTouchStart(e, index)}
+              onTouchMove={(e) => handleTouchMove(e, index)}
+              onTouchEnd={(e) => handleTouchEnd(e, index)}
               draggable
               key={index}
               className="imageContainer"
@@ -165,7 +206,9 @@ export default function AdPageOne({ onNextPage }) {
           ))}
         </div>
       )}
-      <button className="nextButton" onClick={onNextPage}>Next Step</button>
+      <button className="nextButton" onClick={onNextPage}>
+        Next Step
+      </button>
     </AdContainer>
   );
 }

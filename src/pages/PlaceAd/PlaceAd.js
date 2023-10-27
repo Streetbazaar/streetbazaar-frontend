@@ -16,7 +16,7 @@ import {
 const steps = [
   { id: 1, label: "About Ad" },
   { id: 2, label: "Product Information" },
-  { id: 3, label: "Product Features" },
+  { id: 3, label: "Pricing" },
 ];
 
 export default function PlaceAd() {
@@ -64,23 +64,19 @@ export default function PlaceAd() {
         </div>
 
         <StepsContainer>
-          {steps.map(({label, id}) => {
+          {steps.map(({ label, id }) => {
             const isActive = currentPage === id;
-            const showLine = isActive && currentPage !== 3
+            const showLine = isActive && currentPage !== 3;
             return (
               <StepItem key={id}>
                 <StepNumber isActive={isActive}>{id}</StepNumber>
                 <StepLabel isActive={isActive}>{label}</StepLabel>
-                {showLine && (
-
-                <StepLine />
-                )}
+                {showLine && <StepLine />}
               </StepItem>
             );
           })}
         </StepsContainer>
 
-        
         {currentPage === 1 && <AdPageOne onNextPage={navigateToNextPage} />}
         {currentPage === 2 && <AdPageTwo onNextPage={navigateToNextPage} />}
         {currentPage === 3 && <AdPageThree />}

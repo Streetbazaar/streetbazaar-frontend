@@ -1,12 +1,91 @@
 import { InlineIcon } from "@iconify/react";
 import React, { useState } from "react";
+import nigerianStates from "../../components/nigerian-states.json";
 import { AdContainer } from "./PlaceAd.styled";
+
+const categories = [
+  {
+    id: 1,
+    title: "Phone, Tablets and Smart  Watches",
+    subcategories: [
+      {
+        id: 1,
+        title: "Phone",
+      },
+      {
+        id: 2,
+        title: "Tablets",
+      },
+      {
+        id: 3,
+        title: "Smart Watches",
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "Auto Mobiles",
+    subcategories: [
+      {
+        id: 4,
+        title: "Electric Vehicles and Sustainable Mobility",
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "Property",
+    subcategories: [
+      {
+        id: 5,
+        title: "Rental Properties",
+      },
+    ],
+  },
+  {
+    id: 4,
+    title: "Health and Beauty",
+
+    subcategories: [
+      {
+        id: 6,
+        title: "Beauty Tools and Accessories",
+      },
+    ],
+  },
+  {
+    id: 5,
+    title: "Services",
+    subcategories: [
+      {
+        id: 7,
+        title: "Digital Marketing",
+      },
+    ],
+  },
+  {
+    id: 6,
+    title: "Business and Industry",
+    subcategories: [
+      {
+        id: 8,
+        title: "Business",
+      },
+      {
+        id: 9,
+        title: "Industry",
+      },
+    ],
+  },
+];
 
 export default function AdPageOne({ onNextPage }) {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [imageURLs, setImageURLs] = useState([]);
   const [draggedIndex, setDraggedIndex] = useState(null);
   const [dragOffsetX, setDragOffsetX] = useState(null);
+  const [cities, setCities] = useState([]);
+  const [subcategories, setSubCategories] = useState([]);
 
   const handleFileChange = (e) => {
     const files = e.target.files;
@@ -63,24 +142,23 @@ export default function AdPageOne({ onNextPage }) {
     }
   };
 
- const handleTouchEnd = (index) => {
-  if (draggedIndex !== null && draggedIndex !== index) {
-    const updatedFiles = [...selectedFiles];
-    const updatedURLs = [...imageURLs];
+  const handleTouchEnd = (index) => {
+    if (draggedIndex !== null && draggedIndex !== index) {
+      const updatedFiles = [...selectedFiles];
+      const updatedURLs = [...imageURLs];
 
-    const [draggedFile] = updatedFiles.splice(draggedIndex, 1);
-    updatedFiles.splice(index, 0, draggedFile);
+      const [draggedFile] = updatedFiles.splice(draggedIndex, 1);
+      updatedFiles.splice(index, 0, draggedFile);
 
-    const [draggedURL] = updatedURLs.splice(draggedIndex, 1);
-    updatedURLs.splice(index, 0, draggedURL);
+      const [draggedURL] = updatedURLs.splice(draggedIndex, 1);
+      updatedURLs.splice(index, 0, draggedURL);
 
-    setSelectedFiles(updatedFiles);
-    setImageURLs(updatedURLs);
-  }
+      setSelectedFiles(updatedFiles);
+      setImageURLs(updatedURLs);
+    }
 
-  setDraggedIndex(null);
-};
-
+    setDraggedIndex(null);
+  };
 
   const removeImage = (index) => {
     const updatedFiles = [...selectedFiles];
@@ -91,6 +169,18 @@ export default function AdPageOne({ onNextPage }) {
 
     setSelectedFiles(updatedFiles);
     setImageURLs(updatedURLs);
+  };
+
+  const handleSelectState = (e) => {
+    setCities(
+      nigerianStates.find((state) => state.state === e.target.value).lgas
+    );
+  };
+
+  const handleSelectCategories = (e) => {
+    setSubCategories(
+      categories.find((cat) => cat.title === e.target.value).subcategories
+    );
   };
   return (
     <AdContainer>
@@ -104,8 +194,13 @@ export default function AdPageOne({ onNextPage }) {
       </div>
       <div className="inputContainer">
         <label htmlFor="category">Category</label>
-        <select name="Category" id="category">
+        <select onChange={handleSelectCategories} name="Category" id="category">
           <option value="">Select Category</option>
+          {categories.map((cat, i) => (
+            <option key={i} value={cat.title}>
+              {cat.title}
+            </option>
+          ))}
         </select>
       </div>
 
@@ -113,20 +208,39 @@ export default function AdPageOne({ onNextPage }) {
         <label htmlFor="sub-Category">Sub-Category</label>
         <select name="Sub-Category" id="sub-Category">
           <option value="">Select Sub-Category</option>
+          {subcategories.map((subCat, i) => (
+            <option key={i} value={subCat.title}>
+              {subCat.title}
+            </option>
+          ))}
         </select>
       </div>
 
       <div className="locationWrapper">
         <div className="inputContainer">
           <label htmlFor="state">State</label>
-          <select name="State" id="state">
+          <select onChange={handleSelectState} name="State" id="state">
             <option value="">Select State</option>
+            {nigerianStates.map((state, i) => {
+              return (
+                <option key={i} value={state.state}>
+                  {state.state}
+                </option>
+              );
+            })}
           </select>
         </div>
         <div className="inputContainer">
           <label htmlFor="city">City</label>
           <select name="City" id="city">
             <option value="">Select City</option>
+            {cities.map((lga, i) => {
+              return (
+                <option key={i} value={lga}>
+                  {lga}
+                </option>
+              );
+            })}
           </select>
         </div>
       </div>

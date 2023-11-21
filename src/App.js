@@ -13,7 +13,7 @@ import FetchGoogleUser from "./components/googleAuth/FetchGoogleUser";
 import About from "./pages/About";
 import CategoryDetail from "./pages/CategoryDetail/CategoryDetail";
 import Contact from "./pages/Contact";
-import ErrorPage from "./pages/ErrorPage";
+import ErrorPage from "./pages/Error/ErrorPage";
 import Home from "./pages/Home";
 import Notifications from "./pages/Notifications/Notifications";
 import PlaceAd from "./pages/PlaceAd/PlaceAd";
@@ -26,6 +26,7 @@ import Performance from "./pages/Profile/performance/Performance";
 import Saved from "./pages/Profile/saved/Saved";
 import Settings from "./pages/Profile/site_settings/Settings";
 import { setCookie } from "./setCookie";
+import MyCatalogue from "./pages/mycatalogue/MyCatalogue";
 
 function App() {
   setCookie("cookieName", "cookieValue", 7, "None");
@@ -79,6 +80,7 @@ function App() {
             path="category-detail/:categoryName/:categoryId"
             element={<CategoryDetail />}
           />
+          <Route element={<MyCatalogue />} path="catalogue/:id" />
         </Route>
         <Route
           errorElement={<ErrorPage />}
@@ -102,12 +104,14 @@ function App() {
         />
 
         <Route
+        ErrorBoundary={<ErrorPage />}
           errorElement={<ErrorPage />}
           path="/sell-your-product"
           element={<SellProductLayout />}
         >
           <Route path="post-advert" element={<PlaceAd />} />
         </Route>
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
   );

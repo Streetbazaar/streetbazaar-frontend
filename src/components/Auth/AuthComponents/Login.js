@@ -58,8 +58,8 @@ export default function Login(props) {
     } catch (err) {
       console.log(err);
       setLoading(false);
-      if (err.response.data.detail[0]) {
-        toast(err.response.data.detail[0], {
+      if (err.response.data.detail) {
+        toast(err.response.data.detail, {
           type: "error",
         });
         setLoading(false);
@@ -135,8 +135,8 @@ export default function Login(props) {
 
             <ControlledInput
               label="Email Address"
-              formikProps={formikProps}
               formikKey="email"
+              formikProps={formikProps}
               value={formikProps.values.email}
               type="email"
               placeholder="Enter your email address"

@@ -214,12 +214,16 @@ export default function Header() {
                       <p>Sell Product</p>
                     </a>
                     <a href="/profile/adverts">
-                      <InlineIcon icon="ic:list" />
+                      <InlineIcon icon="icons8:advertising" />
                       <p>My Adverts</p>
                     </a>
                     <a href="/profile/investments">
                       <InlineIcon icon="ic:list" />
                       <p>My Investments</p>
+                    </a>
+                    <a href={`/catalogue/${userProfile.id}`}>
+                      <InlineIcon icon="arcticons:bookcatalogue" />
+                      <p>My Catalogue</p>
                     </a>
                     <a href="/profile/account-balance">
                       <InlineIcon icon="ic:credit-card" />
@@ -318,12 +322,16 @@ export default function Header() {
                   <p>Sell Product</p>
                 </a>
                 <a onClick={() => navigate("/profile/adverts")}>
-                  <InlineIcon icon="ic:list" />
+                  <InlineIcon icon="icons8:advertising" />
                   <p>My Adverts</p>
                 </a>
                 <a onClick={() => navigate("/profile/investments")}>
                   <InlineIcon icon="ic:list" />
                   <p>My Investments</p>
+                </a>
+                <a onClick={() => navigate(`/catalogue/${userProfile.id}`)}>
+                  <InlineIcon icon="arcticons:bookcatalogue" />
+                  <p>My Catalogue</p>
                 </a>
                 <a onClick={() => navigate("/profile/account-balance")}>
                   <InlineIcon icon="ic:credit-card" />

@@ -4,18 +4,20 @@ import { Colors } from "../../utils/colors";
 const ProductCard = styled.div`
   background-color: #f3f5f8;
   border-radius: 10px;
-  height: 400px;
-  width: 31.8%;
+  height: 300px;
+  width: 300px;
   padding: 10px;
   gap: 20px;
   display: flex;
   flex-direction: column;
+  background-color: ${Colors.white};
 
   img {
     width: 100%;
     align-self: center;
     justify-self: center;
     text-align: center;
+    height: 150px;
   }
 
   .groupContainer {
@@ -49,7 +51,7 @@ const ProductCard = styled.div`
 
   @media (max-width: 760px) {
     height: 250px;
-    width: 45%;
+    width: 30%;
     .productName {
       font-size: 14px;
     }

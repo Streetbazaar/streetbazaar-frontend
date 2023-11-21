@@ -171,7 +171,7 @@ const UserActionModal = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    height: 480px;
+    height: 550px;
     margin-top: auto;
     border-radius: 15px 15px 0px 0px;
     gap: 30px;

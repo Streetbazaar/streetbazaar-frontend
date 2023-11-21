@@ -1,0 +1,60 @@
+:root {
+    --primary-color100: #ebf4fe;
+    --primary-color200: #c2dffc;
+    --primary-color300: #48A0F7;
+    --primary-color400: #208bf6;
+    --primary-color500: #096BCB;
+    --primary-color600: #012343;
+    --neutral-color100: #EFF0F2;
+    --neutral-color200: #DFE1E4;
+    --neutral-color300: #CED3D7;
+    --neutral-color400: #AEB5BC;
+    --neutral-color500: #9EA6AF;
+    --neutral-color600: #8E97A1;
+    --neutral-color700: #7D8994;
+    --neutral-color800: #6D7A86;
+    --neutral-color900: #5D6B79;
+    --neutral-color1000: #F5F5F5;
+}
+
+.errorPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: aliceblue;
+    height: 100vh;
+    gap: 20px;
+}
+
+.errorPage h1 {
+    color: var(--neutral-color800)
+}
+
+.errorPage p {
+    color: var(--neutral-color600);
+    font-size: 15px;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 20px;
+}
+
+.buttonGroup button {
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 17px;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.buttonGroup :nth-child(1) {
+    background-color: var(--primary-color500);
+    color: white;
+}
+.buttonGroup :nth-child(2) {
+   border: 1px solid var(--neutral-color500);
+    color: var(--neutral-color700);
+}

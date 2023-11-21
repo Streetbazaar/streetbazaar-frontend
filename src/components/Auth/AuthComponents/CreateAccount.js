@@ -42,6 +42,7 @@ export default function CreateAccount(props) {
   const [loading, setLoading] = useState(false);
   const handleRegister = async (email, password) => {
     setLoading(true);
+
     try {
       const data = await REGISTER_USER(email, password);
       if (data) {
@@ -54,8 +55,9 @@ export default function CreateAccount(props) {
           type: "success",
         });
       }
+
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       if (err.response.data.email[0]) {
         toast(err.response.data.email[0], {
           type: "error",

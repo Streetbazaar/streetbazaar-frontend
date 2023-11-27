@@ -14,6 +14,7 @@ const MyCatalogueContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: fit-content;
     
 
     div.profileWrapper {
@@ -43,8 +44,11 @@ const MyCatalogueContainer = styled.div`
       }
 
       h1.ownerName {
+        display: flex;
         font-size: 30px;
         color: ${Colors.neutral_color.color700};
+        text-align: center;
+        flex-shrink: 1;
       }
     }
 
@@ -54,6 +58,7 @@ const MyCatalogueContainer = styled.div`
       background-color: ${Colors.white};
       display: flex;
       align-items: center;
+      width: 100%;
 
       button {
         outline: none;
@@ -90,7 +95,7 @@ const MyCatalogueContainer = styled.div`
     justify-content: space-evenly;
     
 
-    @media (max-width: 800px) {
+    @media (max-width: 900px) {
       width: 100%;
       flex-wrap: wrap;
     }

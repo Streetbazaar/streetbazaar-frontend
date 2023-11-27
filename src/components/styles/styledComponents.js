@@ -148,6 +148,7 @@ const UserActionModal = styled.div`
     flex-direction: row;
     align-items: center;
     gap: 10px;
+    
     &:hover {
       color: ${Colors.neutral_color.color600};
     }
@@ -355,7 +356,7 @@ const PrimaryBtn = styled.a`
   align-items: center;
   color: ${Colors.white};
   justify-content: center;
-  width: ${(props) => (props.width ? props.width : 150)}%;
+  width: ${(props) => (props.width ? props.width : 200)}%;
   cursor: pointer;
   @media (max-width: 768px) {
     width: 100%;

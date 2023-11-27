@@ -146,6 +146,13 @@ const PersonalDetailsContainer = styled.div`
         color: ${Colors.neutral_color.color900};
         padding: 10px;
       }
+      textArea.textField {
+        height: 100px;
+        border: 1px solid ${Colors.neutral_color.color500};
+        border-radius: 6px;
+        color: ${Colors.neutral_color.color900};
+        padding: 10px;
+      }
     }
 
     div.profileWrapper {
@@ -270,6 +277,14 @@ const BusinessInfoContainer = styled.div`
       gap: 20px;
 
       input.textField {
+        height: 100px;
+        border: 1px solid ${Colors.neutral_color.color500};
+        border-radius: 6px;
+        color: ${Colors.neutral_color.color900};
+        padding: 10px;
+      }
+
+      textarea.textField {
         height: 100px;
         border: 1px solid ${Colors.neutral_color.color500};
         border-radius: 6px;

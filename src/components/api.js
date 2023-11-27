@@ -37,4 +37,12 @@ export const REGISTER_USER = async (email, password) => {
   }
 };
 
+export const FETCH_CATALOGUE = async (business_id) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/api/business/details/?business_id=${business_id}`)
+    return response.data
+  } catch (error) {
+    throw error
+  }
+}
 

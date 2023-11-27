@@ -23,7 +23,8 @@ export default function BusinessInfo() {
         <h4 className="headingText">About business</h4>
         <div className="inputContainer">
           <label htmlFor="About your business">About your business</label>
-          <input
+          <textarea
+            
             className="aboutBusiness textField"
             type="text"
             placeholder="Enter information about your business"
@@ -61,7 +62,7 @@ export default function BusinessInfo() {
 
           <div className="locationContainer">
             <label htmlFor="Address">Address</label>
-            <input
+            <textarea
               className="textField"
               type="text"
               placeholder="Enter your store address"

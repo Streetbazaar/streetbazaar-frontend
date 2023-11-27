@@ -157,7 +157,7 @@ export default function PersonalDetails() {
 
                 <div className="locationContainer">
                   <label htmlFor="Address">Address</label>
-                  <input
+                  <textarea
                     className="textField"
                     type="text"
                     placeholder="Enter your store address"

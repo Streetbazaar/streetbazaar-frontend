@@ -80,7 +80,7 @@ function App() {
             path="category-detail/:categoryName/:categoryId"
             element={<CategoryDetail />}
           />
-          <Route element={<MyCatalogue />} path="catalogue/:id" />
+          <Route element={<MyCatalogue />} path="catalogue/:business_id" />
         </Route>
         <Route
           errorElement={<ErrorPage />}

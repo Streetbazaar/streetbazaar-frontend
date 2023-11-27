@@ -221,7 +221,7 @@ export default function Header() {
                       <InlineIcon icon="ic:list" />
                       <p>My Investments</p>
                     </a>
-                    <a href={`/catalogue/${userProfile.id}`}>
+                    <a href={`/catalogue/${userProfile?.business_info?.business_id ? userProfile?.business_info?.business_id : ""}`}>
                       <InlineIcon icon="arcticons:bookcatalogue" />
                       <p>My Catalogue</p>
                     </a>
@@ -329,7 +329,7 @@ export default function Header() {
                   <InlineIcon icon="ic:list" />
                   <p>My Investments</p>
                 </a>
-                <a onClick={() => navigate(`/catalogue/${userProfile.id}`)}>
+                <a onClick={() => navigate(`/catalogue/${userProfile?.business_info?.business_id ? userProfile?.business_info?.business_id : ""}`)}>
                   <InlineIcon icon="arcticons:bookcatalogue" />
                   <p>My Catalogue</p>
                 </a>

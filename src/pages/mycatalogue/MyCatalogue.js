@@ -1,78 +1,79 @@
 import { Skeleton } from "@mui/material";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import Product from "../../components/Product/Product";
+import TrashImg from "../../assets/images/CharcoDeleteTrash.png";
 import { useCatalogue } from "../../hooks/useCatalogue";
+import CatItem from "./CatalogueItem/CatItem";
 import { MyCatalogueContainer } from "./MyCatalogue.styled";
 
 const products = [
   {
     id: 1,
-    productName: "Iphone 11 pro max",
-    image:
+    title: "Iphone 11 pro max",
+    image_url:
       "https://plus.unsplash.com/premium_photo-1681313824743-7b5a2a635938?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aXBob25lfGVufDB8fDB8fHww",
     amount: "500,000",
   },
   {
     id: 2,
-    productName: "Iphone 11 pro max",
-    image:
+    title: "Iphone 11 pro max",
+    image_url:
       "https://plus.unsplash.com/premium_photo-1681313824743-7b5a2a635938?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aXBob25lfGVufDB8fDB8fHww",
     amount: "500,000",
   },
   {
     id: 3,
-    productName: "Iphone 11 pro max",
-    image:
+    title: "Iphone 11 pro max",
+    image_url:
       "https://plus.unsplash.com/premium_photo-1681313824743-7b5a2a635938?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aXBob25lfGVufDB8fDB8fHww",
     amount: "500,000",
   },
   {
     id: 4,
-    productName: "Iphone 11 pro max",
-    image:
+    title: "Iphone 11 pro max",
+    image_url:
       "https://plus.unsplash.com/premium_photo-1681313824743-7b5a2a635938?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aXBob25lfGVufDB8fDB8fHww",
     amount: "500,000",
   },
   {
     id: 5,
-    productName: "Iphone 11 pro max",
-    image:
+    title: "Iphone 11 pro max",
+    image_url:
       "https://plus.unsplash.com/premium_photo-1681313824743-7b5a2a635938?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aXBob25lfGVufDB8fDB8fHww",
     amount: "500,000",
   },
   {
     id: 6,
-    productName: "Iphone 11 pro max",
-    image:
+    title: "Iphone 11 pro max",
+    image_url:
       "https://plus.unsplash.com/premium_photo-1681313824743-7b5a2a635938?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aXBob25lfGVufDB8fDB8fHww",
     amount: "500,000",
   },
   {
     id: 7,
-    productName: "Iphone 11 pro max",
-    image:
+    title: "Iphone 11 pro max",
+    image_url:
       "https://plus.unsplash.com/premium_photo-1681313824743-7b5a2a635938?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aXBob25lfGVufDB8fDB8fHww",
     amount: "500,000",
   },
   {
     id: 8,
-    productName: "Iphone 11 pro max",
-    image:
+    title: "Iphone 11 pro max",
+    image_url:
       "https://plus.unsplash.com/premium_photo-1681313824743-7b5a2a635938?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aXBob25lfGVufDB8fDB8fHww",
     amount: "500,000",
   },
   {
     id: 9,
-    productName: "Iphone 11 pro max",
-    image:
+    title: "Iphone 11 pro max",
+    image_url:
       "https://plus.unsplash.com/premium_photo-1681313824743-7b5a2a635938?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aXBob25lfGVufDB8fDB8fHww",
     amount: "500,000",
   },
   {
     id: 10,
-    productName: "Iphone 11 pro max",
-    image:
+    title: "Iphone 11 pro max",
+    image_url:
       "https://plus.unsplash.com/premium_photo-1681313824743-7b5a2a635938?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aXBob25lfGVufDB8fDB8fHww",
     amount: "500,000",
   },
@@ -83,6 +84,9 @@ export default function MyCatalogue() {
   const [showContact, setShowContact] = useState(false);
   const { catalogueDetails, loading } = useCatalogue(business_id);
   const fullName = `${catalogueDetails?.owner_data?.first_name} ${catalogueDetails?.owner_data?.last_name}`;
+  const profilePhoto = catalogueDetails?.owner_data?.profile_image_url
+    ? catalogueDetails?.owner_data?.profile_image_url
+    : "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png";
 
   // useEffect(()=>{
   //   console.log(catalogueDetails, catalogueDetails?.owner_data?.email, loading, fullName, "Hi from my hook")
@@ -96,44 +100,56 @@ export default function MyCatalogue() {
             {loading ? (
               <Skeleton variant="circular" width={50} height={50} />
             ) : (
-              <img
-                src="https://images.unsplash.com/photo-1687360440648-ec9708d52086?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2776&q=80"
-                alt="Owner"
-              />
+              <img src={profilePhoto} alt="Owner" />
             )}
           </div>
 
-          {loading ? <Skeleton variant="rounded" width={"100%"} height={20} /> :<h1 className="ownerName">
-            {catalogueDetails.name
-              ? catalogueDetails.name
-              : catalogueDetails?.owner_data?.first_name
-              ? `${catalogueDetails?.owner_data?.first_name} ${catalogueDetails?.owner_data?.last_name}`
-              : catalogueDetails?.owner_data?.email}
-          </h1>}
+          {loading ? (
+            <Skeleton variant="rounded" width={"100%"} height={20} />
+          ) : (
+            <h1 className="ownerName">
+              {catalogueDetails.name
+                ? catalogueDetails.name
+                : catalogueDetails?.owner_data?.first_name
+                ? `${catalogueDetails?.owner_data?.first_name} ${catalogueDetails?.owner_data?.last_name}`
+                : "--------------"}
+            </h1>
+          )}
         </div>
 
-        <div className="contactDetail">
-          {
-            loading ? <Skeleton variant="rounded" width={"100%"} height={50} /> : 
-          <button onClick={() => setShowContact(!showContact)}>
-            {showContact ? (
-              <a href="tel:+23481612345678">+23481612345678</a>
-            ) : (
-              <p>Show Contact</p>
-            )}
-          </button>
-          }
-        </div>
+        {loading && <Skeleton variant="rounded" width={"100%"} height={50} />}
+        {Object.keys(catalogueDetails).length === 0 &&
+        catalogueDetails?.owner_data?.phone_number ? (
+          <div className="contactDetail">
+            <button onClick={() => setShowContact(!showContact)}>
+              {showContact ? (
+                <a href={`tel:${catalogueDetails?.owner_data?.phone_number}`}>
+                  {catalogueDetails?.owner_data?.phone_number}
+                </a>
+              ) : (
+                <p>Show Contact</p>
+              )}
+            </button>
+          </div>
+        ) : null}
       </div>
       <div className="adContent">
-        {products.map((item) => (
-          <Product
-            key={item.id}
-            image={item.image}
-            productName={item.productName}
-            amount={item.amount}
-          />
+        {loading &&
+          Array(8)
+            .fill()
+            .map((_item, i) => (
+              <Skeleton key={i} variant="rounded" width={"30%"} height={200} />
+            ))}
+        {catalogueDetails?.adverts?.map((item) => (
+          <CatItem catItem={item} />
         ))}
+        {!loading && catalogueDetails?.adverts?.length === 0 ? (
+          <div className="emptyAd">
+            <img src={TrashImg} alt="error" />
+            <h1>Oops!</h1>
+            <p>There are no adverts here</p>
+          </div>
+        ) : null}
       </div>
     </MyCatalogueContainer>
   );

@@ -5,6 +5,7 @@ export const StyleFooter = styled.footer`
   background-color: ${Colors.neutral_color.color900};
   padding: 100px 120px;
  
+  margin-top: auto;
   margin: 0 auto;
 
   ul {

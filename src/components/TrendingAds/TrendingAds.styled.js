@@ -22,16 +22,33 @@ span {
 `;
 
 export const ProductContainer = styled.div`
-  display: grid;
-  grid-template-columns: auto auto auto auto;
+  display: flex;
+  flex: 1 1 1 1;
   gap: 10px;
   width: 100%;
+  flex-wrap: wrap;
+
+  div.emptyAd {
+    display: flex;
+    width: 100%;
+    flex: 1;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    color: ${Colors.neutral_color.color700};
+
+    img {
+      width: 80px;
+      height: 80px;
+    }
+  }
 
   @media screen and (max-width: 900px) {
-    grid-template-columns: auto auto auto;
+    flex: 1 1 1;
   }
   @media screen and (max-width: 640px) {
-    grid-template-columns: auto auto;
+    flex: 1 1 1;
   }
 `;
 

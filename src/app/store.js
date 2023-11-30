@@ -5,6 +5,7 @@ import thunk from "redux-thunk";
 import chatReducer from "../features/chatSlice";
 import inputReducer from "../features/inputSlice";
 import userReducer from "../features/userSlice";
+import advertReducer from "../features/advertSlice"
 
 const persistConfig = {
   key: "root",
@@ -18,6 +19,7 @@ export const store = configureStore({
     user: persistedReducer,
     chat: chatReducer,
     input: inputReducer,
+    adverts: advertReducer
   },
   middleware: [thunk],
 });

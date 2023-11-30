@@ -8,6 +8,8 @@ const MyCatalogueContainer = styled.div`
   background-color: ${Colors.neutral_color.color100};
   gap: 20px;
   width: 100%;
+  justify-content: center;
+  
   
 
   div.ownerProfileDetail {
@@ -45,7 +47,7 @@ const MyCatalogueContainer = styled.div`
 
       h1.ownerName {
         display: flex;
-        font-size: 30px;
+        font-size: 20px;
         color: ${Colors.neutral_color.color700};
         text-align: center;
         flex-shrink: 1;
@@ -93,6 +95,19 @@ const MyCatalogueContainer = styled.div`
     width: 70%;
     flex-flow: row wrap;
     justify-content: space-evenly;
+
+    div.emptyAd {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+      color: ${Colors.neutral_color.color700};
+
+      img {
+        width: 80px;
+        height: 80px;
+      }
+    }
     
 
     @media (max-width: 900px) {

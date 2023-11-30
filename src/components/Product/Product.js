@@ -1,9 +1,9 @@
 import React from "react";
 import { ProductCard } from "./Product.styled";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Colors } from "../../utils/colors";
 import { useState } from "react";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 
 export default function Product({ image, productName, amount }) {
   const [isFavourite, setIsFavourite] = useState(false);

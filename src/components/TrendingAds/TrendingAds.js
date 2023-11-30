@@ -1,61 +1,70 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Product from "./Trending-Ads";
 import image1 from "./TrendingAds-images/image1.png";
 import image2 from "./TrendingAds-images/image2.png";
 import image3 from "./TrendingAds-images/image3.png";
 import { ProductItem, ProductContainer, Div } from "./TrendingAds.styled";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAdverts } from "../../features/advertSlice";
+import { Skeleton } from "@mui/material";
+import TrashImg from "../../assets/images/CharcoDeleteTrash.png";
 
 const DUMMY_PRODUCTS = [
   {
     id: 1,
-    name: "Hp Laptop",
-    imgURL: image1,
-    price: "N500,000",
+    title: "Hp Laptop",
+    image_url: image1,
+    amount: "N500,000",
   },
   {
     id: 2,
-    name: "Dell Laptop",
-    imgURL: image2,
-    price: "N600,000",
+    title: "Dell Laptop",
+    image_url: image2,
+    amount: "N600,000",
   },
   {
     id: 3,
-    name: "Mac",
-    imgURL: image1,
-    price: "N546,777",
+    title: "Mac",
+    image_url: image1,
+    amount: "N546,777",
   },
   {
     id: 4,
-    name: "Iphone 11",
-    imgURL: image3,
-    price: "Price",
+    title: "Iphone 11",
+    image_url: image3,
+    amount: "amount",
   },
   {
     id: 5,
-    name: "Hp Laptop",
-    imgURL: image1,
-    price: "N500,000",
+    title: "Hp Laptop",
+    image_url: image1,
+    amount: "N500,000",
   },
   {
     id: 6,
-    name: "Dell Laptop",
-    imgURL: image2,
-    price: "N600,000",
+    title: "Dell Laptop",
+    image_url: image2,
+    amount: "N600,000",
   },
   {
     id: 7,
-    name: "Mac",
-    imgURL: image1,
-    price: "N546,777",
+    title: "Mac",
+    image_url: image1,
+    amount: "N546,777",
   },
   {
     id: 8,
     name: "Iphone 11",
-    imgURL: image3,
-    price: "Price",
+    image_url: image3,
+    amount: "N4048",
   },
 ];
 const TrendingProducts = () => {
+  const dispatch = useDispatch();
+  const { advertsList, advertStatus } = useSelector((state) => state.adverts);
+  useEffect(() => {
+    dispatch(fetchAdverts());
+  }, []);
   return (
     <>
       {" "}
@@ -85,16 +94,36 @@ const TrendingProducts = () => {
         </svg>
       </Div>
       <ProductContainer>
-        {DUMMY_PRODUCTS.map((product, index) => (
+        {advertStatus === "loading" &&
+          Array(8)
+            .fill()
+            .map((_item, i) => (
+              <ProductItem key={i}>
+                <Skeleton
+                  key={i}
+                  variant="rounded"
+                  width={"100%"}
+                  height={200}
+                />
+              </ProductItem>
+            ))}
+        {advertsList?.slice(0, 20)?.map((product, index) => (
           <ProductItem key={index}>
             <Product
               id={product.id}
-              name={product.name}
-              imgURL={product.imgURL}
-              price={product.price}
+              name={product.title}
+              imgURL={product.image_url}
+              price={product.amount}
             />
           </ProductItem>
         ))}
+        {advertStatus !== "loading" && advertsList.length === 0 ? (
+          <div className="emptyAd">
+            <img src={TrashImg} alt="error" />
+            <h1>Oops!</h1>
+            <p>There are no adverts here</p>
+          </div>
+        ) : null}
       </ProductContainer>
     </>
   );

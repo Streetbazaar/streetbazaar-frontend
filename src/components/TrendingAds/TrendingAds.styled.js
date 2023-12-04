@@ -56,6 +56,10 @@ export const ProductItem = styled.div`
   padding: 11px;
   background: ${Colors.gray};
   border-radius: 2px;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
   & > div {
     display: flex;
@@ -115,7 +119,7 @@ export const ProductItem = styled.div`
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 46px;
+    padding: 15px;
     opacity: 0.45;
     border: 1px solid ${Colors.neutral_color.color900};
     border-radius: 4px;
@@ -124,5 +128,9 @@ export const ProductItem = styled.div`
     font-size: 14px;
     line-height: 24px;
     margin-top: 15px;
+  }
+
+  @media(max-width: 768px) {
+    width: 45%;
   }
 `;

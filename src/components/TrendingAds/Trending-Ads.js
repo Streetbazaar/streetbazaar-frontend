@@ -1,4 +1,5 @@
 import React from "react";
+import { addCommas } from "../../fuctions";
 // import { useDispatch } from "react-redux";
 // import { cartActions } from "../store/cart-slice";
 
@@ -60,7 +61,7 @@ const Product = ({ name, id, imgURL, price }) => {
         </div>
       </div>
       <div className="product-list2">
-        <p> {price}</p>
+        <p> {addCommas(price)}</p>
       </div>
       <button>Show Contact</button>
     </div>

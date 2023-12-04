@@ -105,15 +105,33 @@ const TrendingProducts = () => {
                   width={"100%"}
                   height={200}
                 />
+                <Skeleton
+                  key={i}
+                  variant="rounded"
+                  width={"40%"}
+                  height={10}
+                />
+                <Skeleton
+                  key={i}
+                  variant="rounded"
+                  width={"20%"}
+                  height={10}
+                />
+                <Skeleton
+                  key={i}
+                  variant="rounded"
+                  width={"100%"}
+                  height={46}
+                />
               </ProductItem>
             ))}
         {advertsList?.slice(0, 20)?.map((product, index) => (
           <ProductItem key={index}>
             <Product
-              id={product.id}
-              name={product.title}
-              imgURL={product.image_url}
-              price={product.amount}
+              id={product?.id}
+              name={product?.title}
+              imgURL={product?.pictures[0]?.image_url}
+              price={product?.price}
             />
           </ProductItem>
         ))}

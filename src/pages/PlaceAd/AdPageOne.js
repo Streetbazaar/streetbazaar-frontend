@@ -2,6 +2,9 @@ import { InlineIcon } from "@iconify/react";
 import React, { useState } from "react";
 import nigerianStates from "../../components/nigerian-states.json";
 import { AdContainer } from "./PlaceAd.styled";
+import axios from "axios";
+import toast from "react-hot-toast";
+
 
 const categories = [
   {
@@ -86,6 +89,36 @@ export default function AdPageOne({ onNextPage }) {
   const [dragOffsetX, setDragOffsetX] = useState(null);
   const [cities, setCities] = useState([]);
   const [subcategories, setSubCategories] = useState([]);
+  const [fetchingImage, setFetchingImage] = useState(false)
+
+  const cloudinaryUpload = async (photo) => {
+    try {
+      const data = new FormData();
+      data.append("file", photo);
+      data.append("upload_preset", "adphotos");
+      data.append("cloud_name", process.env.REACT_APP_CLOUDINARY_CLOUD_NAME);
+      data.append("api_key", process.env.REACT_APP_API_KEY);
+
+      const response = await axios.post(
+        `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "X-Requested-With": "XMLHttpRequest",
+          },
+        }
+      );
+      if (response.status === 200) {
+        console.log(response.data);
+        setFetchingImage(false);
+        setImageURLs((prevURLs) => [...prevURLs, response.data?.secure_url]);
+      }
+    } catch (err) {
+      setFetchingImage(false);
+      toast.error(err.message);
+    }
+  };
 
   const handleFileChange = (e) => {
     const files = e.target.files;
@@ -99,7 +132,7 @@ export default function AdPageOne({ onNextPage }) {
       reader.onload = (event) => {
         imageUrls.push(event.target.result);
         if (imageUrls.length === files.length) {
-          setImageURLs(imageUrls);
+         cloudinaryUpload(event.target.result)
         }
       };
       reader.readAsDataURL(file);

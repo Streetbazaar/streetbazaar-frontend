@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { updateIsOpen } from "../../features/chatSlice";
-import { getTimeAgo } from "../../fuctions";
+import { getTimeAgo } from "../../functions";
 import { ChatListItem, ChatsListContainer } from "./Chats.styled";
 
 const chats = [

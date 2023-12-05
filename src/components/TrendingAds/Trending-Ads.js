@@ -1,5 +1,5 @@
 import React from "react";
-import { addCommas } from "../../fuctions";
+import { addCommas } from "../../functions";
 // import { useDispatch } from "react-redux";
 // import { cartActions } from "../store/cart-slice";
 

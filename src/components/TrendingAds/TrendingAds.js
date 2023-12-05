@@ -64,7 +64,7 @@ const TrendingProducts = () => {
   const { advertsList, advertStatus } = useSelector((state) => state.adverts);
   useEffect(() => {
     dispatch(fetchAdverts());
-  }, []);
+  }, [dispatch]);
   return (
     <>
       {" "}
@@ -94,10 +94,18 @@ const TrendingProducts = () => {
         </svg>
       </Div>
       <ProductContainer>
+      {advertsList?.slice(0, 20)?.map((product, index) => (
+          <ProductItem key={index}>
+            <Product
+              id={product?.id}
+              name={product?.title}
+              imgURL={product?.pictures[0]?.image_url}
+              price={product?.price}
+            />
+          </ProductItem>
+        ))}
         {advertStatus === "loading" &&
-          Array(8)
-            .fill()
-            .map((_item, i) => (
+          DUMMY_PRODUCTS.map((_item, i) => (
               <ProductItem key={i}>
                 <Skeleton
                   key={i}
@@ -125,16 +133,7 @@ const TrendingProducts = () => {
                 />
               </ProductItem>
             ))}
-        {advertsList?.slice(0, 20)?.map((product, index) => (
-          <ProductItem key={index}>
-            <Product
-              id={product?.id}
-              name={product?.title}
-              imgURL={product?.pictures[0]?.image_url}
-              price={product?.price}
-            />
-          </ProductItem>
-        ))}
+       
         {advertStatus !== "loading" && advertsList.length === 0 ? (
           <div className="emptyAd">
             <img src={TrashImg} alt="error" />

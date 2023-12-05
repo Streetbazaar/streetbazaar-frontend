@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { updateIsOpen } from "../../features/chatSlice";
-import { formatTimeString, generateUniqueRandomId } from "../../fuctions";
+import { formatTimeString, generateUniqueRandomId } from "../../functions";
 import { Colors } from "../../utils/colors";
 import { ChatDetailContainer } from "./Chats.styled";
 

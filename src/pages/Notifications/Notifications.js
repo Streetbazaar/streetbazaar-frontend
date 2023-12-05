@@ -1,6 +1,6 @@
 import { InlineIcon } from "@iconify/react";
 import React from "react";
-import { formatDateString, formatTimeString } from "../../fuctions";
+import { formatDateString, formatTimeString } from "../../functions";
 import {
   NotificationItem,
   NotificationsContainer,

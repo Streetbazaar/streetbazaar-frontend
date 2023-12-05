@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
@@ -7,20 +7,23 @@ import inputReducer from "../features/inputSlice";
 import userReducer from "../features/userSlice";
 import advertReducer from "../features/advertSlice"
 
+
 const persistConfig = {
   key: "root",
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, userReducer);
+const rootReducer = combineReducers({
+  user: userReducer,
+  chat: chatReducer,
+  input: inputReducer,
+  adverts: advertReducer
+});
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: {
-    user: persistedReducer,
-    chat: chatReducer,
-    input: inputReducer,
-    adverts: advertReducer
-  },
+  reducer: persistedReducer,
   middleware: [thunk],
 });
 

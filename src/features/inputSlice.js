@@ -11,17 +11,23 @@ const inputSlice = createSlice({
     city: '',
     address: '',
     priceType: '',
-    price: '',
+    price: 0,
     condition: '',
     description: '',
-    images: [], // Initialize the images array
+    imageURLs: [], // Initialize the images array
   },
   reducers: {
     updateInput: (state, action) => {
       return { ...state, ...action.payload };
     },
+    appendImages: (state, action) => {
+      state.imageURLs.push(action.payload);
+    },
+    updateImages: (state, action) => {
+      state.imageURLs = [...action.payload]
+    },
   },
 });
 
-export const { updateInput } = inputSlice.actions;
+export const { updateInput, appendImages, updateImages } = inputSlice.actions;
 export default inputSlice.reducer;

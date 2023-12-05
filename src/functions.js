@@ -5,19 +5,18 @@ export function addCommas(number) {
   const numberStr = number.toString();
 
   // Split the number into integer and decimal parts
-  const parts = numberStr.split('.');
+  const parts = numberStr.split(".");
 
   // Format the integer part with commas
-  const integerPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const integerPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
   // If there is a decimal part, rejoin it with the integer part
   if (parts.length > 1) {
-    return integerPart + '.' + parts[1];
+    return integerPart + "." + parts[1];
   } else {
     return integerPart;
   }
 }
-
 
 export function roundToNearestWholeNumber(decimal) {
   return Math.round(decimal);
@@ -89,8 +88,9 @@ export function getTimeAgo(dateString) {
 
 // Function to generate a random ID
 function generateRandomId(length) {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let id = '';
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let id = "";
 
   for (let i = 0; i < length; i++) {
     const randomIndex = Math.floor(Math.random() * characters.length);

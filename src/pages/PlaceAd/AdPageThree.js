@@ -1,6 +1,6 @@
 import { InlineIcon } from "@iconify/react";
 import React, { useState } from "react";
-import { addCommas } from "../../fuctions";
+import { addCommas } from "../../functions";
 import {
   AdItem,
   AdItemCustomPriceButton,

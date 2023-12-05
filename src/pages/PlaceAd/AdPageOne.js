@@ -1,10 +1,33 @@
 import { InlineIcon } from "@iconify/react";
-import React, { useState } from "react";
-import nigerianStates from "../../components/nigerian-states.json";
-import { AdContainer } from "./PlaceAd.styled";
+import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
+import Typography from "@mui/material/Typography";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import nigerianStates from "../../components/nigerian-states.json";
+import {
+  appendImages,
+  updateImages,
+  updateInput,
+} from "../../features/inputSlice";
+import { AdContainer } from "./PlaceAd.styled";
 
+function LinearProgressWithLabel(props) {
+  return (
+    <Box sx={{ display: "flex", alignItems: "center" }}>
+      <Box sx={{ width: "100%", mr: 1 }}>
+        <LinearProgress variant="determinate" {...props} />
+      </Box>
+      <Box sx={{ minWidth: 35 }}>
+        <Typography variant="body2" color="text.secondary">{`${Math.round(
+          props.value
+        )}%`}</Typography>
+      </Box>
+    </Box>
+  );
+}
 
 const categories = [
   {
@@ -84,18 +107,23 @@ const categories = [
 
 export default function AdPageOne({ onNextPage }) {
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const [imageURLs, setImageURLs] = useState([]);
+  // const [imageURLs, setImageURLs] = useState([]);
   const [draggedIndex, setDraggedIndex] = useState(null);
   const [dragOffsetX, setDragOffsetX] = useState(null);
   const [cities, setCities] = useState([]);
   const [subcategories, setSubCategories] = useState([]);
-  const [fetchingImage, setFetchingImage] = useState(false)
+  const [progress, setProgress] = useState(0);
+  const [fetchingImage, setFetchingImage] = useState(false);
+  const { imageURLs, title, address, state, city, category, subCategory } = useSelector((state) => state.input);
+
+  const dispatch = useDispatch();
 
   const cloudinaryUpload = async (photo) => {
+    setFetchingImage(true);
     try {
       const data = new FormData();
       data.append("file", photo);
-      data.append("upload_preset", "adphotos");
+      data.append("upload_preset", "ad_photos_preset");
       data.append("cloud_name", process.env.REACT_APP_CLOUDINARY_CLOUD_NAME);
       data.append("api_key", process.env.REACT_APP_API_KEY);
 
@@ -107,12 +135,21 @@ export default function AdPageOne({ onNextPage }) {
             "Content-Type": "multipart/form-data",
             "X-Requested-With": "XMLHttpRequest",
           },
+          onUploadProgress: (progressEvent) => {
+            const progress = Math.round(
+              (progressEvent.loaded / progressEvent.total) * 100
+            );
+            setProgress(progress);
+            console.log(`Upload Progress: ${progress}%`);
+            // You can use the progress value to update a progress bar or display the progress in some way.
+          },
         }
       );
       if (response.status === 200) {
         console.log(response.data);
         setFetchingImage(false);
-        setImageURLs((prevURLs) => [...prevURLs, response.data?.secure_url]);
+        dispatch(appendImages(response.data?.url));
+        // console.log(response.data);
       }
     } catch (err) {
       setFetchingImage(false);
@@ -132,7 +169,7 @@ export default function AdPageOne({ onNextPage }) {
       reader.onload = (event) => {
         imageUrls.push(event.target.result);
         if (imageUrls.length === files.length) {
-         cloudinaryUpload(event.target.result)
+          Array.from(files).forEach((file) => cloudinaryUpload(file));
         }
       };
       reader.readAsDataURL(file);
@@ -155,7 +192,8 @@ export default function AdPageOne({ onNextPage }) {
     updatedURLs.splice(index, 0, draggedURL);
 
     setSelectedFiles(updatedFiles);
-    setImageURLs(updatedURLs);
+    dispatch(updateImages(updatedURLs));
+    // setImageURLs(updatedURLs);
   };
 
   const handleTouchStart = (e, index) => {
@@ -187,7 +225,8 @@ export default function AdPageOne({ onNextPage }) {
       updatedURLs.splice(index, 0, draggedURL);
 
       setSelectedFiles(updatedFiles);
-      setImageURLs(updatedURLs);
+      // setImageURLs(updatedURLs);
+      dispatch(updateImages(updatedURLs));
     }
 
     setDraggedIndex(null);
@@ -201,33 +240,59 @@ export default function AdPageOne({ onNextPage }) {
     updatedURLs.splice(index, 1);
 
     setSelectedFiles(updatedFiles);
-    setImageURLs(updatedURLs);
+    // setImageURLs(updatedURLs);
+    dispatch(updateImages(updatedURLs));
+  };
+
+  const handleInputChange = (e) => {
+    dispatch(updateInput({ [e.target.name]: e.target.value }));
   };
 
   const handleSelectState = (e) => {
+    handleInputChange(e);
     setCities(
       nigerianStates.find((state) => state.state === e.target.value).lgas
     );
   };
 
   const handleSelectCategories = (e) => {
+    handleInputChange(e);
     setSubCategories(
       categories.find((cat) => cat.title === e.target.value).subcategories
     );
   };
+
+  useEffect(()=> {
+    setCities(
+      nigerianStates.find((s) => s.state === state).lgas
+    );
+    setSubCategories(
+      categories.find((cat) => cat.title === category).subcategories
+    );
+  }, [state, category])
   return (
     <AdContainer>
       <div className="inputContainer">
         <label htmlFor="title">Title</label>
         <input
+          name="title"
           id="title"
           placeholder="Enter the title of the product or service"
           type="text"
+          value={title}
+          onChange={(e) => handleInputChange(e)}
+          required
         />
       </div>
       <div className="inputContainer">
         <label htmlFor="category">Category</label>
-        <select onChange={handleSelectCategories} name="Category" id="category">
+        <select
+          onChange={handleSelectCategories}
+          required
+          name="category"
+          id="category"
+          value={category}
+        >
           <option value="">Select Category</option>
           {categories.map((cat, i) => (
             <option key={i} value={cat.title}>
@@ -239,7 +304,13 @@ export default function AdPageOne({ onNextPage }) {
 
       <div className="inputContainer">
         <label htmlFor="sub-Category">Sub-Category</label>
-        <select name="Sub-Category" id="sub-Category">
+        <select
+          onChange={(e) => handleInputChange(e)}
+          required
+          name="subCategory"
+          id="sub-Category"
+          value={subCategory}
+        >
           <option value="">Select Sub-Category</option>
           {subcategories.map((subCat, i) => (
             <option key={i} value={subCat.title}>
@@ -252,7 +323,7 @@ export default function AdPageOne({ onNextPage }) {
       <div className="locationWrapper">
         <div className="inputContainer">
           <label htmlFor="state">State</label>
-          <select onChange={handleSelectState} name="State" id="state">
+          <select value={state} onChange={handleSelectState} required name="state" id="state">
             <option value="">Select State</option>
             {nigerianStates.map((state, i) => {
               return (
@@ -265,7 +336,7 @@ export default function AdPageOne({ onNextPage }) {
         </div>
         <div className="inputContainer">
           <label htmlFor="city">City</label>
-          <select name="City" id="city">
+          <select value={city} onChange={handleSelectState} required name="city" id="city">
             <option value="">Select City</option>
             {cities.map((lga, i) => {
               return (
@@ -279,11 +350,14 @@ export default function AdPageOne({ onNextPage }) {
       </div>
       <div className="inputContainer">
         <label htmlFor="address">Address</label>
-        <input
+        <textarea
+          onChange={handleInputChange}
+          name="address"
           id="address"
           className="addressInput"
           placeholder="Enter your store address"
           type="text"
+          value={address}
         />
       </div>
       <div className="inputContainer">
@@ -306,6 +380,7 @@ export default function AdPageOne({ onNextPage }) {
             accept="image/png, image/jpeg"
             multiple
             onChange={handleFileChange}
+            required
           />
           <ul>
             <li>Recommeded picture size is (870 x 493)px</li>
@@ -316,7 +391,7 @@ export default function AdPageOne({ onNextPage }) {
         </div>
       </div>
 
-      {imageURLs.length > 0 && (
+      {imageURLs?.length > 0 && (
         <div className="selectedImagesContainer">
           <div className="captionContainer">
             <InlineIcon icon="charm:info" />
@@ -325,7 +400,7 @@ export default function AdPageOne({ onNextPage }) {
               the order of your pictures by grabbing and dragging
             </p>
           </div>
-          {imageURLs.map((url, index) => (
+          {imageURLs?.map((url, index) => (
             <div
               onDragStart={(e) => handleDragStart(e, index)}
               onDragOver={(e) => e.preventDefault()}
@@ -353,6 +428,7 @@ export default function AdPageOne({ onNextPage }) {
           ))}
         </div>
       )}
+      {fetchingImage && <LinearProgressWithLabel value={progress} />}
       <button className="nextButton" onClick={onNextPage}>
         Next Step
       </button>

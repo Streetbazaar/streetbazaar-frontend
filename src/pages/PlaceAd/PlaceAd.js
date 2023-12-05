@@ -1,5 +1,6 @@
 import { InlineIcon } from "@iconify/react";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import AdPageOne from "./AdPageOne";
 import AdPageThree from "./AdPageThree";
 import AdPageTwo from "./AdPageTwo";
@@ -21,6 +22,7 @@ const steps = [
 
 export default function PlaceAd() {
   const [currentPage, setCurrentPage] = useState(1);
+  const { userProfile } = useSelector((state) => state.user);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
@@ -34,6 +36,7 @@ export default function PlaceAd() {
       const searchParams = new URLSearchParams(window.location.search);
       searchParams.set("page", (currentPage + 1).toString());
       window.history.pushState({}, "", `?${searchParams.toString()}`);
+      if(userProfile?.is_staff) return
       setCurrentPage(currentPage + 1);
     }
   };
@@ -66,20 +69,25 @@ export default function PlaceAd() {
         <StepsContainer>
           {steps.map(({ label, id }) => {
             const isActive = currentPage === id;
-            const showLine = isActive && currentPage !== 3;
+            const isStaff = userProfile.is_staff;
+            const showLine = isActive && !isStaff && currentPage !== 3;
             return (
-              <StepItem key={id}>
-                <StepNumber isActive={isActive}>{id}</StepNumber>
-                <StepLabel isActive={isActive}>{label}</StepLabel>
-                {showLine && <StepLine />}
-              </StepItem>
+              <>
+                {isStaff && id ===3? null : (
+                  <StepItem key={id}>
+                    <StepNumber isActive={isActive}>{id}</StepNumber>
+                    <StepLabel isActive={isActive}>{label}</StepLabel>
+                    {showLine && <StepLine />}
+                  </StepItem>
+                )}
+              </>
             );
           })}
         </StepsContainer>
 
         {currentPage === 1 && <AdPageOne onNextPage={navigateToNextPage} />}
         {currentPage === 2 && <AdPageTwo onNextPage={navigateToNextPage} />}
-        {currentPage === 3 && <AdPageThree />}
+        {currentPage === 3 && !userProfile.is_staff && <AdPageThree />}
       </PlaceAdWrapper>
     </PlaceAdContainer>
   );

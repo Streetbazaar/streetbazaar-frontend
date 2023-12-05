@@ -121,6 +121,17 @@ const AdContainer = styled.div`
       border: 1px solid ${Colors.neutral_color.color700};
       border-radius: 7px;
     }
+    textarea {
+      outline: none;
+      border: none;
+      background: none;
+      background-color: ${Colors.white};
+      padding: 20px;
+      color: ${Colors.neutral_color.color900};
+      width: 100%;
+      border: 1px solid ${Colors.neutral_color.color700};
+      border-radius: 7px;
+    }
 
     input.addressInput {
       padding-bottom: 50px;

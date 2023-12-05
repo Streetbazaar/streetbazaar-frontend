@@ -6,9 +6,10 @@ import Menu from "@mui/material/Menu";
 import { alpha, styled } from "@mui/material/styles";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { css } from "styled-components";
 import BrandLogo from "../assets/images/BrandLogo.png";
+import { clearFields } from "../features/inputSlice";
 import { logoutUser } from "../features/userSlice";
 import { Colors } from "../utils/colors";
 import CreateAccountModal from "./Auth/AuthComponents/CreateAccountModal";
@@ -210,7 +211,10 @@ export default function Header() {
                   </div>
 
                   <UserActionModal showUserActionModal={showUserActionModal}>
-                    <a className="sellCTA" href="/sell-your-product/post-advert">
+                    <a
+                      className="sellCTA"
+                      href="/sell-your-product/post-advert"
+                    >
                       <p>Sell Product</p>
                     </a>
                     <a href="/profile/adverts">
@@ -221,7 +225,13 @@ export default function Header() {
                       <InlineIcon icon="ic:list" />
                       <p>My Investments</p>
                     </a>
-                    <a href={`/catalogue/${userProfile?.business_info?.business_id ? userProfile?.business_info?.business_id : ""}`}>
+                    <a
+                      href={`/catalogue/${
+                        userProfile?.business_info?.business_id
+                          ? userProfile?.business_info?.business_id
+                          : ""
+                      }`}
+                    >
                       <InlineIcon icon="arcticons:bookcatalogue" />
                       <p>My Catalogue</p>
                     </a>
@@ -245,7 +255,13 @@ export default function Header() {
                       <InlineIcon icon="mi:settings" />
                       <p>Settings</p>
                     </a>
-                    <button onClick={() => dispatch(logoutUser())}>
+                    <button
+                      onClick={() => {
+                        dispatch(logoutUser());
+                        dispatch(clearFields());
+                        navigate("/");
+                      }}
+                    >
                       <InlineIcon icon="mdi:log-out" />
                       <p>Log Out</p>
                     </button>
@@ -329,7 +345,17 @@ export default function Header() {
                   <InlineIcon icon="ic:list" />
                   <p>My Investments</p>
                 </a>
-                <a onClick={() => navigate(`/catalogue/${userProfile?.business_info?.business_id ? userProfile?.business_info?.business_id : ""}`)}>
+                <a
+                  onClick={() =>
+                    navigate(
+                      `/catalogue/${
+                        userProfile?.business_info?.business_id
+                          ? userProfile?.business_info?.business_id
+                          : ""
+                      }`
+                    )
+                  }
+                >
                   <InlineIcon icon="arcticons:bookcatalogue" />
                   <p>My Catalogue</p>
                 </a>
@@ -356,6 +382,7 @@ export default function Header() {
                 <button
                   onClick={() => {
                     dispatch(logoutUser());
+                    dispatch(clearFields());
                     navigate("/");
                   }}
                 >

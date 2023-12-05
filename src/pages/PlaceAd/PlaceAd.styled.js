@@ -24,6 +24,7 @@ const PlaceAdWrapper = styled.div`
   padding: 20px;
   align-items: center;
   width: 100%;
+ 
 
   div.headingContainer {
     text-align: center;
@@ -44,17 +45,21 @@ const StepsContainer = styled.div`
   display: flex;
   gap: 10px;
   align-items: center;
+  margin: 0px auto;
+  justify-content: space-between;
 `;
 
 const StepItem = styled.div`
   display: flex;
   gap: 10px;
   align-items: center;
+  width: 100%;
+  justify-self: center;
 `;
 
 const StepNumber = styled.div`
-  height: 40px;
-  width: 40px;
+  height: 35px;
+  width: 35px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -65,6 +70,7 @@ const StepNumber = styled.div`
     isActive ? Colors.primary_color.color500 : Colors.neutral_color.color900};
   font-weight: bold;
   transition: all ease 1s;
+  font-size: 12px;
 `;
 
 const StepLabel = styled.div`
@@ -72,11 +78,12 @@ const StepLabel = styled.div`
     isActive ? Colors.primary_color.color500 : Colors.neutral_color.color900};
   font-weight: bold;
   transition: all ease 1s;
-  font-size: 12px;
+  font-size: 8px;
+  text-align: center;
 `;
 
 const StepLine = styled.div`
-  width: 25%;
+  width: 20%;
   height: 4px;
   border-radius: 10px;
   background-color: ${Colors.primary_color.color500};

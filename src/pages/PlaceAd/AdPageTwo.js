@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateInput } from "../../features/inputSlice";
 
 export default function AdPageTwo({ onNextPage }) {
-  const { imageURLs, title, address, state, city, category, subCategory, priceType, price, description, condition } = useSelector((state) => state.input);
+  const { imageURLs, title, address, state, city, category, subCategory, priceType, price, description, condition, adId } = useSelector((state) => state.input);
   const dispatch = useDispatch()
   const handleInputChange = (e) => {
     dispatch(updateInput({ [e.target.name]: e.target.value }));

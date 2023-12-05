@@ -114,7 +114,8 @@ export default function AdPageOne({ onNextPage }) {
   const [subcategories, setSubCategories] = useState([]);
   const [progress, setProgress] = useState(0);
   const [fetchingImage, setFetchingImage] = useState(false);
-  const { imageURLs, title, address, state, city, category, subCategory } = useSelector((state) => state.input);
+  const { imageURLs, title, address, state, city, category, subCategory } =
+    useSelector((state) => state.input);
 
   const dispatch = useDispatch();
 
@@ -262,14 +263,17 @@ export default function AdPageOne({ onNextPage }) {
     );
   };
 
-  useEffect(()=> {
-    setCities(
-      nigerianStates.find((s) => s.state === state).lgas
-    );
-    setSubCategories(
-      categories.find((cat) => cat.title === category).subcategories
-    );
-  }, [state, category])
+  useEffect(() => {
+    if (state) {
+      setCities(nigerianStates?.find((s) => s.state === state).lgas);
+    }
+    if (category) {
+      setSubCategories(
+        categories?.find((cat) => cat.title === category).subcategories
+      );
+    }
+    
+  }, [state, category]);
   return (
     <AdContainer>
       <div className="inputContainer">
@@ -323,7 +327,13 @@ export default function AdPageOne({ onNextPage }) {
       <div className="locationWrapper">
         <div className="inputContainer">
           <label htmlFor="state">State</label>
-          <select value={state} onChange={handleSelectState} required name="state" id="state">
+          <select
+            value={state}
+            onChange={handleSelectState}
+            required
+            name="state"
+            id="state"
+          >
             <option value="">Select State</option>
             {nigerianStates.map((state, i) => {
               return (
@@ -336,7 +346,13 @@ export default function AdPageOne({ onNextPage }) {
         </div>
         <div className="inputContainer">
           <label htmlFor="city">City</label>
-          <select value={city} onChange={handleSelectState} required name="city" id="city">
+          <select
+            value={city}
+            onChange={handleSelectState}
+            required
+            name="city"
+            id="city"
+          >
             <option value="">Select City</option>
             {cities.map((lga, i) => {
               return (

@@ -25,8 +25,8 @@ import Investments from "./pages/Profile/investment/Investments";
 import Performance from "./pages/Profile/performance/Performance";
 import Saved from "./pages/Profile/saved/Saved";
 import Settings from "./pages/Profile/site_settings/Settings";
-import { setCookie } from "./setCookie";
 import MyCatalogue from "./pages/mycatalogue/MyCatalogue";
+import { setCookie } from "./setCookie";
 
 function App() {
   setCookie("cookieName", "cookieValue", 7, "None");
@@ -82,35 +82,37 @@ function App() {
           />
           <Route element={<MyCatalogue />} path="catalogue/:business_id" />
         </Route>
-        <Route
-          errorElement={<ErrorPage />}
-          path="/profile"
-          element={<ProfileLayout />}
-        >
-          <Route path="account-balance" element={<AccountBalance />} />
-          <Route path="adverts" element={<Adverts />} />
-          <Route path="feedback" element={<FeedBack />} />
-          <Route path="investments" element={<Investments />} />
-          <Route path="performance" element={<Performance />} />
-          <Route path="saved" element={<Saved />} />
-          <Route path="settings" element={<Settings />} />
-          <Route path="notifications" element={<Notifications />} />
-        </Route>
+        {token && (
+          <Route
+            errorElement={<ErrorPage />}
+            path="/profile"
+            element={<ProfileLayout />}
+          >
+            <Route path="account-balance" element={<AccountBalance />} />
+            <Route path="adverts" element={<Adverts />} />
+            <Route path="feedback" element={<FeedBack />} />
+            <Route path="investments" element={<Investments />} />
+            <Route path="performance" element={<Performance />} />
+            <Route path="saved" element={<Saved />} />
+            <Route path="settings" element={<Settings />} />
+            <Route path="notifications" element={<Notifications />} />
+          </Route>
+        )}
         <Route path="fetchuserprofile" element={<FetchGoogleUser />} />
-        <Route
+        {token && <Route
           errorElement={<ErrorPage />}
           path="/messages"
           element={<ChatLayout />}
-        />
+        />}
 
-        <Route
-        ErrorBoundary={<ErrorPage />}
+        {token && <Route
+          ErrorBoundary={<ErrorPage />}
           errorElement={<ErrorPage />}
           path="/sell-your-product"
           element={<SellProductLayout />}
         >
           <Route path="post-advert" element={<PlaceAd />} />
-        </Route>
+        </Route>}
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>

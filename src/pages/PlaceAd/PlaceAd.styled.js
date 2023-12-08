@@ -24,7 +24,6 @@ const PlaceAdWrapper = styled.div`
   padding: 20px;
   align-items: center;
   width: 100%;
- 
 
   div.headingContainer {
     text-align: center;
@@ -99,6 +98,12 @@ const AdContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 
   div.inputContainer {
     display: flex;
@@ -423,8 +428,8 @@ const AdItem = styled.div`
       isActive ? "none" : `1px solid ${Colors.neutral_color.color200}`};
     background-color: ${({ isActive }) =>
       isActive ? `${Colors.primary_color.color500}` : "none"};
-      padding: 15px;
-      border-radius: 7px;
+    padding: 15px;
+    border-radius: 7px;
   }
 
   @media (max-width: 780px) {

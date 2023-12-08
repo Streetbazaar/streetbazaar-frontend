@@ -11,18 +11,15 @@ const phoneRegExp =
 const profileSchema = yup.object().shape({
   firstName: yup
     .string()
-    .required("Please enter your First Name")
     .label("First Name"),
   lastName: yup
     .string()
-    .required("Please enter your Last Name")
     .label("Last Name"),
-  email: yup.string().required().label("Email").email(),
+  email: yup.string().label("Email").email(),
   phone: yup
     .string()
     .matches(phoneRegExp, "Phone number is not valid")
     .label("Phone number")
-    .required("Please enter Phone Number"),
 });
 
 export default function PersonalDetails() {

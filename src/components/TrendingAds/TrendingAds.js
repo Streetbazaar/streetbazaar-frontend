@@ -1,13 +1,13 @@
+import { Skeleton } from "@mui/material";
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import TrashImg from "../../assets/images/CharcoDeleteTrash.png";
+import { fetchAdverts } from "../../features/advertSlice";
 import Product from "./Trending-Ads";
 import image1 from "./TrendingAds-images/image1.png";
 import image2 from "./TrendingAds-images/image2.png";
 import image3 from "./TrendingAds-images/image3.png";
-import { ProductItem, ProductContainer, Div } from "./TrendingAds.styled";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchAdverts } from "../../features/advertSlice";
-import { Skeleton } from "@mui/material";
-import TrashImg from "../../assets/images/CharcoDeleteTrash.png";
+import { Div, ProductContainer, ProductItem } from "./TrendingAds.styled";
 
 const DUMMY_PRODUCTS = [
   {
@@ -94,7 +94,7 @@ const TrendingProducts = () => {
         </svg>
       </Div>
       <ProductContainer>
-      {advertsList?.slice(0, 20)?.map((product, index) => (
+        {advertsList?.slice(0, 20)?.map((product, index) => (
           <ProductItem key={index}>
             <Product
               id={product?.id}
@@ -106,34 +106,14 @@ const TrendingProducts = () => {
         ))}
         {advertStatus === "loading" &&
           DUMMY_PRODUCTS.map((_item, i) => (
-              <ProductItem key={i}>
-                <Skeleton
-                  key={i}
-                  variant="rounded"
-                  width={"100%"}
-                  height={200}
-                />
-                <Skeleton
-                  key={i}
-                  variant="rounded"
-                  width={"40%"}
-                  height={10}
-                />
-                <Skeleton
-                  key={i}
-                  variant="rounded"
-                  width={"20%"}
-                  height={10}
-                />
-                <Skeleton
-                  key={i}
-                  variant="rounded"
-                  width={"100%"}
-                  height={46}
-                />
-              </ProductItem>
-            ))}
-       
+            <ProductItem key={i}>
+              <Skeleton key={i} variant="rounded" width={"100%"} height={200} />
+              <Skeleton key={i} variant="rounded" width={"40%"} height={10} />
+              <Skeleton key={i} variant="rounded" width={"20%"} height={10} />
+              <Skeleton key={i} variant="rounded" width={"100%"} height={46} />
+            </ProductItem>
+          ))}
+
         {advertStatus !== "loading" && advertsList.length === 0 ? (
           <div className="emptyAd">
             <img src={TrashImg} alt="error" />

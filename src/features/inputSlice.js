@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const inputSlice = createSlice({
   name: "input",
   initialState: {
+    isLoading: false,
     adId: "",
     title: "",
     category: "",
@@ -12,10 +13,13 @@ const inputSlice = createSlice({
     city: "",
     address: "",
     priceType: "",
-    price: 0,
+    price: null,
     condition: "",
     description: "",
+    categoryId: null,
+    subCategoryId: null,
     imageURLs: [], // Initialize the images array
+    quantity: null
   },
   reducers: {
     updateInput: (state, action) => {
@@ -30,6 +34,12 @@ const inputSlice = createSlice({
     updateAdId: (state, action) => {
       state.adId = action.payload
     },
+    updateCategoryId: (state, action) => {
+      state.categoryId = action.payload
+    },
+    updateSubCategoryId: (state, action) => {
+      state.subCategoryId = action.payload
+    },
     clearFields: (state) => {
       state.adId = "";
       state.title = "";
@@ -39,13 +49,16 @@ const inputSlice = createSlice({
       state.city = "";
       state.address = "";
       state.priceType = "";
-      state.price = 0;
+      state.price = null;
       state.condition = "";
       state.description = "";
       state.imageURLs = [];
+      state.subCategoryId = null;
+      state.categoryId = null;
+      state.quantity = null
     },
   },
 });
 
-export const { updateInput, appendImages, updateImages, clearFields, updateAdId } = inputSlice.actions;
+export const { updateInput, appendImages, updateImages, clearFields, updateAdId, updateCategoryId, updateSubCategoryId } = inputSlice.actions;
 export default inputSlice.reducer;

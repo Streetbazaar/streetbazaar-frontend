@@ -61,7 +61,7 @@ const Product = ({ name, id, imgURL, price }) => {
         </div>
       </div>
       <div className="product-list2">
-        <p> {addCommas(price)}</p>
+        <p>₦ {addCommas(price)}</p>
       </div>
       <button>Show Contact</button>
     </div>

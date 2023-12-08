@@ -23,10 +23,9 @@ span {
 
 export const ProductContainer = styled.div`
   display: flex;
-  flex: 1 1 1 1;
+  flex: 1;
   gap: 10px;
   width: 100%;
-  flex-wrap: wrap;
 
   div.emptyAd {
     display: flex;
@@ -45,10 +44,11 @@ export const ProductContainer = styled.div`
   }
 
   @media screen and (max-width: 900px) {
-    flex: 1 1 1;
+    flex: 1;
   }
   @media screen and (max-width: 640px) {
-    flex: 1 1 1;
+    flex: 1;
+    flex-wrap: wrap;
   }
 `;
 
@@ -56,23 +56,22 @@ export const ProductItem = styled.div`
   padding: 11px;
   background: ${Colors.gray};
   border-radius: 2px;
-  width: 20%;
+  flex-basis: 20%;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  height: fit-content;
 
   & > div {
     display: flex;
     flex-direction: column;
 
     & > div {
-      height: 70%;
-      width: 100%;
-      object-fit: contain;
-
       & > img {
         width: 100%;
-        height: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 3px;
       }
     }
   }
@@ -102,7 +101,7 @@ export const ProductItem = styled.div`
   }
 
   .product-list2 {
-    margin-top: 5px;
+    
 
     p {
       font-style: normal;
@@ -114,7 +113,9 @@ export const ProductItem = styled.div`
   }
 
   button {
-    box-sizing: border-box;
+    background: none;
+    border: none;
+    outline: none;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -130,7 +131,36 @@ export const ProductItem = styled.div`
     margin-top: 15px;
   }
 
-  @media(max-width: 768px) {
-    width: 45%;
+  @media (max-width: 768px) {
+    flex-basis: calc(100% / 2.1);
+    height: fit-content;
+
+    & > div {
+      display: flex;
+      flex-direction: column;
+
+      & > div {
+        & > img {
+          width: 100%;
+          height: 80px;
+          object-fit: cover;
+          border-radius: 3px;
+        }
+      }
+    }
+
+    button {
+      display: flex;
+      
+      padding: 10px;
+      
+      border: 1px solid ${Colors.neutral_color.color900};
+      border-radius: 4px;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 24px;
+      margin-top: 15px;
+    }
   }
 `;

@@ -72,7 +72,6 @@ export default function AdPageTwo({ onNextPage }) {
           toast.success("Advert submitted for review");
           navigate("/");
         } else {
-          toast.success("Advert submitted for review");
           onNextPage();
         }
       }

@@ -1,9 +1,12 @@
 import { InlineIcon } from "@iconify/react";
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
+import toast from "react-hot-toast";
 import { usePaystackPayment } from "react-paystack";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPackages } from "../../features/inputSlice";
+import { PAY_FOR_ADVERT } from "../../components/api";
+import Spinner from "../../components/spinner/Spiner";
+import { clearFields, fetchPackages } from "../../features/inputSlice";
 import { addCommas } from "../../functions";
 import {
   AdItem,
@@ -12,7 +15,7 @@ import {
   ModalContent,
   ModalOverlay,
 } from "./PlaceAd.styled";
-import Spinner from "../../components/spinner/Spiner";
+import { useNavigate } from "react-router-dom";
 
 // you can call this function anything
 
@@ -38,9 +41,31 @@ export default function AdPageThree() {
   const { packages, packageStatus, adId } = useSelector((state) => state.input);
   const { token, userProfile } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const [amountVal, setAmountVal] = useState(0)
-  const [selectedPackage, setSelectedPackage] = useState("")
-  const [selectedPackageId, setSelectedPackageId] = useState("")
+  const [amountVal, setAmountVal] = useState(0);
+  const [selectedPackage, setSelectedPackage] = useState("");
+  const [selectedPackageId, setSelectedPackageId] = useState("");
+  const navigate = useNavigate()
+
+  const payForAd = async (adId, packageId, packageType, reference, token) => {
+    try {
+      const response = await PAY_FOR_ADVERT(
+        adId,
+        packageId,
+        packageType,
+        reference,
+        token
+      );
+      if (response.status === "success") {
+        toast.success("Advert submitted for review");
+        closeModal()
+        dispatch(clearFields())
+        navigate("/")
+      }
+    } catch (err) {
+      toast.error(err.message);
+      closeModal()
+    }
+  };
 
   const config = {
     reference: new Date().getTime().toString(),
@@ -59,8 +84,14 @@ export default function AdPageThree() {
   const onSuccess = (reference) => {
     // Implementation for whatever you want to do with reference and after success call.
 
-    console.log(reference?.reference, selectedPackage, selectedPackageId, amountVal);
-    openModal()
+    console.log(
+      reference?.reference,
+      selectedPackage,
+      selectedPackageId,
+      amountVal
+    );
+    payForAd(adId, selectedPackageId, selectedPackage, reference?.reference, token)
+    openModal();
   };
 
   // you can call this function anything
@@ -86,10 +117,15 @@ export default function AdPageThree() {
   return (
     <AdPricesContainer>
       {packageStatus === "loading" ? (
-      <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-
-        <Spinner />
-      </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Spinner />
+        </div>
       ) : (
         <>
           {packages?.map((item, i) => {
@@ -144,10 +180,10 @@ export default function AdPageThree() {
                 <button
                   className="paymentButton"
                   onClick={() => {
-                    setAmountVal(price)
+                    setAmountVal(price);
                     setSelectedPackage(currentPriceType);
-                    setSelectedPackageId(item.id)
-                    
+                    setSelectedPackageId(item.id);
+
                     // console.log(currentPriceType, item.id, price);
                   }}
                 >

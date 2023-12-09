@@ -94,6 +94,7 @@ export const PAY_FOR_ADVERT = async (
   adId,
   packageId,
   packageType,
+  reference,
   token
 ) => {
   try {
@@ -102,7 +103,8 @@ export const PAY_FOR_ADVERT = async (
       {
         advert_id: adId,
         package_id: packageId,
-        package_type: packageType
+        package_type: packageType,
+        reference
       },
       {
         headers: {

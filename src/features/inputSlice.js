@@ -1,5 +1,20 @@
 // inputSlice.js
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+import { API_ENDPOINT } from "../components/api";
+
+
+export const fetchPackages = createAsyncThunk(
+  "fetchPackages",
+  async (token) => {
+    const response = await axios.get(`${API_ENDPOINT}/api/packages/`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    return response.data
+  }
+)
 
 const inputSlice = createSlice({
   name: "input",
@@ -19,7 +34,9 @@ const inputSlice = createSlice({
     categoryId: null,
     subCategoryId: null,
     imageURLs: [], // Initialize the images array
-    quantity: null
+    quantity: null,
+    packages: [],
+    packageStatus: "idle"
   },
   reducers: {
     updateInput: (state, action) => {
@@ -58,6 +75,19 @@ const inputSlice = createSlice({
       state.quantity = null
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(fetchPackages.pending, (state)=> {
+      state.packageStatus = "loading"
+    });
+    builder.addCase(fetchPackages.fulfilled, (state, action)=> {
+      state.packageStatus = "success";
+      state.packages = action.payload;
+      
+    });
+    builder.addCase(fetchPackages.rejected, (state, action)=> {
+      state.packageStatus = "rejected";
+    });
+  }
 });
 
 export const { updateInput, appendImages, updateImages, clearFields, updateAdId, updateCategoryId, updateSubCategoryId } = inputSlice.actions;

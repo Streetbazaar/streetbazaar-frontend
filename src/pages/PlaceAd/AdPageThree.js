@@ -1,43 +1,80 @@
 import { InlineIcon } from "@iconify/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
+import { usePaystackPayment } from "react-paystack";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPackages } from "../../features/inputSlice";
 import { addCommas } from "../../functions";
 import {
   AdItem,
   AdItemCustomPriceButton,
   AdPricesContainer,
+  ModalContent,
+  ModalOverlay,
 } from "./PlaceAd.styled";
+import Spinner from "../../components/spinner/Spiner";
 
-const prices = [
-  {
-    id: 1,
-    title: "Basic Plan",
-    weekly_amount: "2000.00",
-    monthly_amount: "10000.00",
-    description: "Ads are pushed to the top",
-    show: true,
-  },
-  {
-    id: 2,
-    title: "Standard Plan",
-    weekly_amount: "4000.00",
-    monthly_amount: "20000.00",
-    description:
-      "Ads are pushed to the top \r\nAds are advertised on our social media platforms",
-    show: true,
-  },
-  {
-    id: 3,
-    title: "Premium Plan",
-    weekly_amount: "75000.00",
-    monthly_amount: "40000.00",
-    description:
-      "Ads are pushed to the top \r\nAds are pushed on our social media platforms \r\nAds are advertised on our blog section \r\nAds are pushed on google",
-    show: true,
-  },
-];
+// you can call this function anything
+
+const Modal = ({ isOpen, onClose, url }) => {
+  if (!isOpen) return null;
+
+  return ReactDOM.createPortal(
+    <>
+      <ModalOverlay onClick={onClose}></ModalOverlay>
+      <ModalContent>
+        <button className="closeButton" onClick={onClose}>
+          X
+        </button>
+        <p>Please wait while we verify your transaction....</p>
+      </ModalContent>
+    </>,
+    document.body
+  );
+};
 
 export default function AdPageThree() {
   const [priceType, setPriceType] = useState({});
+  const { packages, packageStatus, adId } = useSelector((state) => state.input);
+  const { token, userProfile } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const [amountVal, setAmountVal] = useState(0)
+  const [selectedPackage, setSelectedPackage] = useState("")
+  const [selectedPackageId, setSelectedPackageId] = useState("")
+
+  const config = {
+    reference: new Date().getTime().toString(),
+    email: userProfile?.email,
+    amount: amountVal * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
+    publicKey: process.env.REACT_APP_PAYSTACK_TEST_KEY,
+  };
+  const initializePayment = usePaystackPayment(config);
+
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [externalUrl, setExternalUrl] = ""; // Replace with your URL
+
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
+
+  const onSuccess = (reference) => {
+    // Implementation for whatever you want to do with reference and after success call.
+
+    console.log(reference?.reference, selectedPackage, selectedPackageId, amountVal);
+    openModal()
+  };
+
+  // you can call this function anything
+  const onClose = (reference) => {
+    // implementation for  whatever you want to do when the Paystack dialog closed.
+    console.log("closed", reference);
+  };
+
+  useEffect(() => {
+    dispatch(fetchPackages(token));
+  }, []);
+  useEffect(() => {
+    initializePayment(onSuccess, onClose);
+  }, [amountVal, selectedPackage]);
 
   const togglePriceType = (itemId, type) => {
     setPriceType((prevState) => ({
@@ -45,58 +82,83 @@ export default function AdPageThree() {
       [itemId]: type,
     }));
   };
+
   return (
     <AdPricesContainer>
-      {prices.map((item, i) => {
-        const isActive = item.title === "Standard Plan";
-        const currentPriceType = priceType[item.id] || "weekly"; // Default to weekly if not set
-        const price =
-          currentPriceType === "weekly"
-            ? item.weekly_amount
-            : item.monthly_amount;
-        const descriptionArray = item.description.split("\n");
+      {packageStatus === "loading" ? (
+      <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
 
-        return (
-          <AdItem isActive={isActive} key={item.id}>
-            {isActive && <p className="recommendedItem">Recommended</p>}
-            <h3 className="adTitle">{item.title}</h3>
-            <div className="priceContainer">
-              <h2 className="priceTitle">₦ {addCommas(price)}</h2>
-              <div className="priceSelectors">
-                <AdItemCustomPriceButton
-                  isActive={isActive}
-                  isSelected={currentPriceType === "weekly"}
-                  onClick={() => togglePriceType(item.id, "weekly")}
-                  className="priceSelector"
-                >
-                  Weekly
-                </AdItemCustomPriceButton>
-                <AdItemCustomPriceButton
-                  isActive={isActive}
-                  isSelected={currentPriceType === "monthly"}
-                  onClick={() => togglePriceType(item.id, "monthly")}
-                  className="priceSelector"
-                >
-                  Monthly
-                </AdItemCustomPriceButton>
-              </div>
-            </div>
-            <div className="featuresContainer">
-              <h3 className="featuresHeading">Features</h3>
-              <p className="featuresSubCaption">Everything in our basic our basic plan plus</p>
-              {descriptionArray.map((description, i) => (
-                <div key={i} className="descriptionText">
-                  <InlineIcon icon="lucide:check-circle" />
-                  <p>{description}</p>
+        <Spinner />
+      </div>
+      ) : (
+        <>
+          {packages?.map((item, i) => {
+            const isActive = item.title === "Standard Plan";
+            const currentPriceType = priceType[item.id] || "weekly"; // Default to weekly if not set
+            // Debugging: Log the raw content of item.description
+            // console.log("Raw item.description:", item.description);
+            const price =
+              currentPriceType === "weekly"
+                ? item.weekly_amount
+                : item.monthly_amount;
+            const descriptionArray = item.description.split("/\r?\n/");
+            // console.log(descriptionArray)
+
+            return (
+              <AdItem isActive={isActive} key={item.id}>
+                {isActive && <p className="recommendedItem">Recommended</p>}
+                <h3 className="adTitle">{item.title}</h3>
+                <div className="priceContainer">
+                  <h2 className="priceTitle">₦ {addCommas(price)}</h2>
+                  <div className="priceSelectors">
+                    <AdItemCustomPriceButton
+                      isActive={isActive}
+                      isSelected={currentPriceType === "weekly"}
+                      onClick={() => togglePriceType(item.id, "weekly")}
+                      className="priceSelector"
+                    >
+                      Weekly
+                    </AdItemCustomPriceButton>
+                    <AdItemCustomPriceButton
+                      isActive={isActive}
+                      isSelected={currentPriceType === "monthly"}
+                      onClick={() => togglePriceType(item.id, "monthly")}
+                      className="priceSelector"
+                    >
+                      Monthly
+                    </AdItemCustomPriceButton>
+                  </div>
                 </div>
-              ))}
-            </div>
-            <button className="paymentButton" onClick={() => console.log(currentPriceType)}>
-              Proceed to payment
-            </button>
-          </AdItem>
-        );
-      })}
+                <div className="featuresContainer">
+                  <h3 className="featuresHeading">Features</h3>
+                  <p className="featuresSubCaption">
+                    Everything in our basic plan plus
+                  </p>
+                  {descriptionArray.map((description, i) => (
+                    <div key={i} className="descriptionText">
+                      <InlineIcon icon="lucide:check-circle" />
+                      <p>{description}</p>
+                    </div>
+                  ))}
+                </div>
+                <button
+                  className="paymentButton"
+                  onClick={() => {
+                    setAmountVal(price)
+                    setSelectedPackage(currentPriceType);
+                    setSelectedPackageId(item.id)
+                    
+                    // console.log(currentPriceType, item.id, price);
+                  }}
+                >
+                  Proceed to payment
+                </button>
+              </AdItem>
+            );
+          })}
+        </>
+      )}
+      <Modal isOpen={isModalOpen} onClose={closeModal} url={externalUrl} />
     </AdPricesContainer>
   );
 }

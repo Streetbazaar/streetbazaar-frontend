@@ -89,3 +89,29 @@ export const POST_ADVERT = async (
     throw error;
   }
 };
+
+export const PAY_FOR_ADVERT = async (
+  adId,
+  packageId,
+  packageType,
+  token
+) => {
+  try {
+    const response = await axios.post(
+      `${API_ENDPOINT}/api/advert-payment/`,
+      {
+        advert_id: adId,
+        package_id: packageId,
+        package_type: packageType
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

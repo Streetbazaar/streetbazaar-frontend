@@ -94,7 +94,7 @@ const TrendingProducts = () => {
         </svg>
       </Div>
       <ProductContainer>
-        {advertsList?.slice(0, 20)?.filter(product=>product.status === "approved")?.map((product, index) => (
+        {advertsList?.slice(0, 20)?.filter(product=>product.status === "active")?.map((product, index) => (
           <ProductItem key={index}>
             <Product
               id={product?.id}
@@ -121,7 +121,7 @@ const TrendingProducts = () => {
             <p>There are no adverts here</p>
           </div>
         ) : null}
-        {advertStatus !== "loading" && advertsList.length != 0 && advertsList.filter(product=>product.status === "approved").length === 0 ? (
+        {advertStatus !== "loading" && advertsList.length != 0 && advertsList.filter(product=>product.status === "active").length === 0 ? (
           <div className="emptyAd">
             <img src={TrashImg} alt="error" />
             <h1>Oops!</h1>

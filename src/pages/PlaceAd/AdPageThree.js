@@ -55,7 +55,7 @@ export default function AdPageThree() {
         reference,
         token
       );
-      if (response.status === "success") {
+      if (response.status === "successful") {
         toast.success("Advert submitted for review");
         closeModal()
         dispatch(clearFields())

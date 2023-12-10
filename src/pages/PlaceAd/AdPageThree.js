@@ -60,6 +60,14 @@ export default function AdPageThree() {
         closeModal()
         dispatch(clearFields())
         navigate("/")
+      } else if(response.status === "pending") {
+        toast.success("Your transaction is pending")
+        closeModal()
+        dispatch(clearFields())
+        navigate("/")
+      } else {
+        toast.error(`Your transaction ${response.status}`)
+        closeModal()
       }
     } catch (err) {
       toast.error(err.message);

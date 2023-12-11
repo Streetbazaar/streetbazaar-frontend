@@ -28,13 +28,13 @@ const inputSlice = createSlice({
     city: "",
     address: "",
     priceType: "",
-    price: null,
+    price: "",
     condition: "",
     description: "",
-    categoryId: null,
-    subCategoryId: null,
+    categoryId: "",
+    subCategoryId: "",
     imageURLs: [], // Initialize the images array
-    quantity: null,
+    quantity: "",
     packages: [],
     packageStatus: "idle"
   },
@@ -66,13 +66,13 @@ const inputSlice = createSlice({
       state.city = "";
       state.address = "";
       state.priceType = "";
-      state.price = null;
+      state.price = "";
       state.condition = "";
       state.description = "";
       state.imageURLs = [];
-      state.subCategoryId = null;
-      state.categoryId = null;
-      state.quantity = null
+      state.subCategoryId = "";
+      state.categoryId = "";
+      state.quantity = ""
     },
   },
   extraReducers: (builder) => {

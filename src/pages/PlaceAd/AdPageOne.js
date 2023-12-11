@@ -281,16 +281,12 @@ export default function AdPageOne({ onNextPage }) {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-         
 
           // Check if imageUrls is empty
           if (imageURLs.length === 0) {
-           
-
             // Display a toast or handle the error in your preferred way
             toast.error("Please select at least 1 image");
           } else {
-      
             onNextPage();
           }
         }}

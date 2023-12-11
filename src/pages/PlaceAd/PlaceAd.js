@@ -36,8 +36,8 @@ export default function PlaceAd() {
       const searchParams = new URLSearchParams(window.location.search);
       searchParams.set("page", (currentPage + 1).toString());
       window.history.pushState({}, "", `?${searchParams.toString()}`);
-      if(userProfile?.is_staff) return
       setCurrentPage(currentPage + 1);
+      if(userProfile?.is_staff) return
     }
   };
 

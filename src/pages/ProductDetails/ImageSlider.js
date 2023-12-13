@@ -7,9 +7,10 @@ import {
   MainImage,
   SingleImage,
 } from "./ProductDetails.styled";
+import { useSelector } from "react-redux";
 
 export default function ImageSlider({product}) {
-
+  const {token} = useSelector(state=>state.user)
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [translateSign, setTranslateSign] = useState(1); // Default to positive sign
   const [isSwiping, setIsSwiping] = useState(false);
@@ -122,8 +123,8 @@ export default function ImageSlider({product}) {
         </div>
 
         <div className="buttonsGroup">
-          <button  className="showContactBtn">Show contact</button>
-          <button className="startChatBtn">Start Chat</button>
+          <button disabled={token? false : true} className="showContactBtn">Show contact</button>
+          <button disabled={token? false : true}  className="startChatBtn">Start Chat</button>
         </div>
       </div>
     </ImageSliderContainer>

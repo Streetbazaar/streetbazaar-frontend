@@ -17,7 +17,7 @@ import ErrorPage from "./pages/Error/ErrorPage";
 import Home from "./pages/Home";
 import Notifications from "./pages/Notifications/Notifications";
 import PlaceAd from "./pages/PlaceAd/PlaceAd";
-import ProductDetails from "./pages/ProductDetails";
+import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import AccountBalance from "./pages/Profile/accountbalance/AccountBalance";
 import Adverts from "./pages/Profile/advert/Adverts";
 import FeedBack from "./pages/Profile/feedback/FeedBack";
@@ -27,11 +27,13 @@ import Saved from "./pages/Profile/saved/Saved";
 import Settings from "./pages/Profile/site_settings/Settings";
 import MyCatalogue from "./pages/mycatalogue/MyCatalogue";
 import { setCookie } from "./setCookie";
+import { HelmetProvider } from "react-helmet-async";
 
 function App() {
   setCookie("cookieName", "cookieValue", 7, "None");
   const { token } = useSelector((state) => state.user);
   return (
+    <HelmetProvider>
     <BrowserRouter>
       <ToastContainer
         position="top-center"
@@ -73,7 +75,7 @@ function App() {
       <Routes>
         <Route errorElement={<ErrorPage />} path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="product-detail" element={<ProductDetails />} />
+          <Route path="product-detail/*" element={<ProductDetails />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
           <Route
@@ -116,6 +118,7 @@ function App() {
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
+    </HelmetProvider>
   );
 }
 

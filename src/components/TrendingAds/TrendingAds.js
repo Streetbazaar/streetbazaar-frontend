@@ -101,16 +101,18 @@ const TrendingProducts = () => {
               name={product?.title}
               imgURL={product?.pictures[0]?.image_url}
               price={product?.price}
+              product={product}
+              index={index}
             />
           </ProductItem>
         ))}
         {advertStatus === "loading" &&
           DUMMY_PRODUCTS.map((_item, i) => (
             <ProductItem key={i}>
-              <Skeleton key={i} variant="rounded" width={"100%"} height={200} />
-              <Skeleton key={i} variant="rounded" width={"40%"} height={10} />
-              <Skeleton key={i} variant="rounded" width={"20%"} height={10} />
-              <Skeleton key={i} variant="rounded" width={"100%"} height={46} />
+              <Skeleton variant="rounded" width={"100%"} height={200} />
+              <Skeleton  variant="rounded" width={"40%"} height={10} />
+              <Skeleton  variant="rounded" width={"20%"} height={10} />
+              <Skeleton variant="rounded" width={"100%"} height={46} />
             </ProductItem>
           ))}
 

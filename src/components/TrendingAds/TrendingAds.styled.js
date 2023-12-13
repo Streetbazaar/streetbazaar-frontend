@@ -26,6 +26,7 @@ export const ProductContainer = styled.div`
   flex: 1;
   gap: 10px;
   width: 100%;
+  flex-wrap: wrap;
 
   div.emptyAd {
     display: flex;
@@ -56,11 +57,12 @@ export const ProductItem = styled.div`
   padding: 11px;
   background: ${Colors.gray};
   border-radius: 2px;
-  flex-basis: 20%;
+  
   display: flex;
   flex-direction: column;
   gap: 10px;
   height: fit-content;
+  flex-basis: calc(50% / 2.1);
 
   & > div {
     display: flex;

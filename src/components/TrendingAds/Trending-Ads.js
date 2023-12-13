@@ -1,9 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { addCommas } from "../../functions";
 // import { useDispatch } from "react-redux";
 // import { cartActions } from "../store/cart-slice";
 
-const Product = ({ name, id, imgURL, price }) => {
+const Product = ({ name, id, imgURL, price, product }) => {
   // const dispatch = useDispatch();
   // const addToCart = () => {
   //     dispatch(
@@ -15,8 +16,16 @@ const Product = ({ name, id, imgURL, price }) => {
   //     );
   // };
 
+  const navigate = useNavigate();
+
   return (
-    <div>
+    <div
+      onClick={() =>
+        navigate(`/product-detail/${name}?id=${id}`, {
+          state: {product}
+        })
+      }
+    >
       <div>
         <img src={imgURL} alt={name} />
       </div>

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { POST_ADVERT } from "../../components/api";
 import { updateAdId, updateInput } from "../../features/inputSlice";
 import { AdContainer } from "./PlaceAd.styled";
+import { motion } from "framer-motion";
 
 export default function AdPageTwo({ onNextPage }) {
   const {
@@ -81,6 +82,13 @@ export default function AdPageTwo({ onNextPage }) {
     }
   };
   return (
+    <motion.main
+    className="main__container"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1, width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}
+    exit={{ x: "100%", opacity: 0 }}
+    transition={{ duration: 10, type: "spring", stiffness: 100 }}
+    >
     <AdContainer>
       <form
         onSubmit={(e) => {
@@ -223,5 +231,6 @@ export default function AdPageTwo({ onNextPage }) {
         </button>
       </form>
     </AdContainer>
+    </motion.main>
   );
 }

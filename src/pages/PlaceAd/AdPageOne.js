@@ -15,6 +15,7 @@ import {
   updateSubCategoryId,
 } from "../../features/inputSlice";
 import { AdContainer } from "./PlaceAd.styled";
+import { motion } from "framer-motion";
 
 function LinearProgressWithLabel(props) {
   return (
@@ -277,6 +278,13 @@ export default function AdPageOne({ onNextPage }) {
     }
   }, [state, category]);
   return (
+    <motion.main
+      className="main__container"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1, width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}
+      exit={{ x: "100%", opacity: 0 }}
+      transition={{ duration: 10, type: "spring", stiffness: 100 }}
+    >
     <AdContainer>
       <form
         onSubmit={(e) => {
@@ -477,5 +485,6 @@ export default function AdPageOne({ onNextPage }) {
         </button>
       </form>
     </AdContainer>
+    </motion.main>
   );
 }

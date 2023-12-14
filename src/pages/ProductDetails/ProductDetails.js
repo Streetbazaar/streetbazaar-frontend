@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import SEO from "../../components/seo/SEO";
@@ -9,7 +10,7 @@ export default function ProductDetails() {
 
   const searchParam = new URLSearchParams(window.location.search);
   const id = searchParam.get("id");
-  const selectedProduct = advertsList.find((ad)=>ad.id === Number(id));
+  const selectedProduct = advertsList.find((ad) => ad.id === Number(id));
   console.log(id, selectedProduct);
   useEffect(() => {
     document.title = `Streetbazaar | Product Details`;
@@ -18,16 +19,23 @@ export default function ProductDetails() {
     });
   }, []);
   return (
-    <ProductDetailsContainer>
-      <SEO
-        title={selectedProduct?.title}
-        description={selectedProduct?.description}
-        name="Streetbazaar"
-        type="product detail"
-        ogImage={selectedProduct?.pictures[0].image_url}
-      />
+    <motion.main
+      className="main__container"
+      initial={{ y: -20, opacity: 0 }}
+animate={{ y: 0, opacity: 1 }}
+transition={{duration: 0.7,ease: [0.6, -0.05, 0.01, 0.99]}}
+    >
+      <ProductDetailsContainer>
+        <SEO
+          title={selectedProduct?.title}
+          description={selectedProduct?.description}
+          name="Streetbazaar"
+          type="product detail"
+          ogImage={selectedProduct?.pictures[0].image_url}
+        />
 
-      <ImageSlider product={selectedProduct} />
-    </ProductDetailsContainer>
+        <ImageSlider product={selectedProduct} />
+      </ProductDetailsContainer>
+    </motion.main>
   );
 }

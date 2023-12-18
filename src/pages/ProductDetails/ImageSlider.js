@@ -20,14 +20,14 @@ export default function ImageSlider({product}) {
 
   const nextImage = () => {
     setActiveImageIndex(
-      (prevIndex) => (prevIndex + 1) % product.pictures.length
+      (prevIndex) => (prevIndex + 1) % product?.pictures?.length
     );
   };
 
   const prevImage = () => {
     setActiveImageIndex(
       (prevIndex) =>
-        (prevIndex - 1 + product.pictures.length) % product.pictures.length
+        (prevIndex - 1 + product?.pictures?.length) % product?.pictures?.length
     );
   };
 
@@ -81,7 +81,7 @@ export default function ImageSlider({product}) {
             <SingleImage
               key={i}
               onClick={() => setActiveImageIndex(i)}
-              src={image.image_url}
+              src={image?.image_url}
             />
           ))}
         </div>

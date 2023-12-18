@@ -5,7 +5,7 @@ const CatItemCard = styled.div`
   background-color: #f3f5f8;
   border-radius: 10px;
   height: fit-content;
-  width: 300px;
+  flex-basis: calc(50% / 2.1);
   padding: 10px;
   gap: 20px;
   display: flex;
@@ -18,6 +18,8 @@ const CatItemCard = styled.div`
     justify-self: center;
     text-align: center;
     height: 150px;
+    object-fit: cover;
+    border-radius: 3px;
   }
 
   .groupContainer {
@@ -50,8 +52,8 @@ const CatItemCard = styled.div`
   }
 
   @media (max-width: 760px) {
-    height: 250px;
-    width: 30%;
+    flex-basis: calc(100% / 2.1);
+    height: fit-content;
     .productName {
       font-size: 14px;
     }

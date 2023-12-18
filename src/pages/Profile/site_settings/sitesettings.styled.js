@@ -180,8 +180,12 @@ const PersonalDetailsContainer = styled.div`
         button.removePhotoAction {
           color: ${Colors.error_color.color500};
         }
-        button.changePhotoAction {
+        label.changePhotoAction {
+          font-size: 13px;
           color: ${Colors.neutral_color.color600};
+        }
+        input.imageInput {
+          display: none;
         }
       }
     }

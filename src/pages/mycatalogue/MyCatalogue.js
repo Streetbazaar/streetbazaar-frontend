@@ -6,78 +6,7 @@ import { useCatalogue } from "../../hooks/useCatalogue";
 import CatItem from "./CatalogueItem/CatItem";
 import { MyCatalogueContainer } from "./MyCatalogue.styled";
 
-const products = [
-  {
-    id: 1,
-    title: "Iphone 11 pro max",
-    image_url:
-      "https://plus.unsplash.com/premium_photo-1681313824743-7b5a2a635938?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aXBob25lfGVufDB8fDB8fHww",
-    amount: "500,000",
-  },
-  {
-    id: 2,
-    title: "Iphone 11 pro max",
-    image_url:
-      "https://plus.unsplash.com/premium_photo-1681313824743-7b5a2a635938?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aXBob25lfGVufDB8fDB8fHww",
-    amount: "500,000",
-  },
-  {
-    id: 3,
-    title: "Iphone 11 pro max",
-    image_url:
-      "https://plus.unsplash.com/premium_photo-1681313824743-7b5a2a635938?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aXBob25lfGVufDB8fDB8fHww",
-    amount: "500,000",
-  },
-  {
-    id: 4,
-    title: "Iphone 11 pro max",
-    image_url:
-      "https://plus.unsplash.com/premium_photo-1681313824743-7b5a2a635938?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aXBob25lfGVufDB8fDB8fHww",
-    amount: "500,000",
-  },
-  {
-    id: 5,
-    title: "Iphone 11 pro max",
-    image_url:
-      "https://plus.unsplash.com/premium_photo-1681313824743-7b5a2a635938?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aXBob25lfGVufDB8fDB8fHww",
-    amount: "500,000",
-  },
-  {
-    id: 6,
-    title: "Iphone 11 pro max",
-    image_url:
-      "https://plus.unsplash.com/premium_photo-1681313824743-7b5a2a635938?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aXBob25lfGVufDB8fDB8fHww",
-    amount: "500,000",
-  },
-  {
-    id: 7,
-    title: "Iphone 11 pro max",
-    image_url:
-      "https://plus.unsplash.com/premium_photo-1681313824743-7b5a2a635938?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aXBob25lfGVufDB8fDB8fHww",
-    amount: "500,000",
-  },
-  {
-    id: 8,
-    title: "Iphone 11 pro max",
-    image_url:
-      "https://plus.unsplash.com/premium_photo-1681313824743-7b5a2a635938?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aXBob25lfGVufDB8fDB8fHww",
-    amount: "500,000",
-  },
-  {
-    id: 9,
-    title: "Iphone 11 pro max",
-    image_url:
-      "https://plus.unsplash.com/premium_photo-1681313824743-7b5a2a635938?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aXBob25lfGVufDB8fDB8fHww",
-    amount: "500,000",
-  },
-  {
-    id: 10,
-    title: "Iphone 11 pro max",
-    image_url:
-      "https://plus.unsplash.com/premium_photo-1681313824743-7b5a2a635938?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aXBob25lfGVufDB8fDB8fHww",
-    amount: "500,000",
-  },
-];
+
 
 export default function MyCatalogue() {
   const { business_id } = useParams();
@@ -140,10 +69,10 @@ export default function MyCatalogue() {
             .map((_item, i) => (
               <Skeleton key={i} variant="rounded" width={"30%"} height={200} />
             ))}
-        {catalogueDetails?.adverts?.map((item) => (
+        {catalogueDetails?.adverts?.filter(item=>item.status === "active").map((item) => (
           <CatItem catItem={item} />
         ))}
-        {!loading && catalogueDetails?.adverts?.length === 0 ? (
+        {!loading && catalogueDetails?.adverts?.length === 0 && catalogueDetails?.adverts?.filter(product=>product.status === "active").length === 0 ? (
           <div className="emptyAd">
             <img src={TrashImg} alt="error" />
             <h1>Oops!</h1>

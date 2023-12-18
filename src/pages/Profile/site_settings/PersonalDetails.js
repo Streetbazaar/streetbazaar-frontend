@@ -28,6 +28,29 @@ export default function PersonalDetails() {
     ? userProfile?.profile_image_url
     : "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png";
   const [currentImage, setCurrentImage] = useState(profilePhoto);
+  const [selectedFile, setSelectedFile] = useState("")
+
+  const handleFileChange = (e) => {
+    const files = e.target.files;
+    console.log(files[0])
+    
+    // setSelectedFile(Array.from(files));
+
+    // Use FileReader to read and store data URLs for images
+    const imageUrls = [];
+    
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        imageUrls.push(event.target.result);
+      
+        setCurrentImage(event.target.result)
+        if (imageUrls.length === files.length) {
+          // Array.from(files).forEach((file) => cloudinaryUpload(file));
+        }
+      };
+      reader.readAsDataURL(files[0]);
+    
+  };
 
   return (
     <PersonalDetailsContainer>
@@ -47,7 +70,15 @@ export default function PersonalDetails() {
             >
               Remove Photo
             </button>
-            <button className="changePhotoAction">Change Photo</button>
+            <label htmlFor="fileInput" className="changePhotoAction">Change Photo</label>
+            <input
+              id="fileInput"
+              className="imageInput"
+              type="file"
+              accept="image/png, image/jpeg"
+              onChange={handleFileChange}
+              name="images"
+            />
           </div>
         </div>
       </div>
@@ -108,6 +139,7 @@ export default function PersonalDetails() {
                   name="email"
                   id="email"
                   required
+                  readOnly={true}
                 />
               </div>
             </div>

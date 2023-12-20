@@ -48,9 +48,7 @@ export const FETCH_CATALOGUE = async (business_id) => {
 
 export const FETCH_AD_DETAILS = async (id) => {
   try {
-    const response = await axios.get(
-      `${API_ENDPOINT}/api/adverts/${id}/`
-    );
+    const response = await axios.get(`${API_ENDPOINT}/api/adverts/${id}/`);
     return response.data;
   } catch (error) {
     throw error;
@@ -87,7 +85,7 @@ export const POST_ADVERT = async (
         condition,
         description,
         img_urls: imageURLs,
-        quantity
+        quantity,
       },
       {
         headers: {
@@ -115,11 +113,53 @@ export const PAY_FOR_ADVERT = async (
         advert_id: adId,
         package_id: packageId,
         package_type: packageType,
-        reference
+        reference,
       },
       {
         headers: {
           Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const UPDATE_PERSONAL_DETAILS = async (
+  firstName,
+  lastName,
+  phoneNumber,
+  city,
+  state,
+  address,
+  profileImageFile,
+  token
+) => {
+  try {
+    const formData = new FormData();
+    formData.append("first_name", firstName);
+    formData.append("last_name", lastName);
+    formData.append("phone_number", phoneNumber);
+    formData.append("city", city);
+    formData.append("state", state);
+    formData.append("address", address);
+     // Conditionally append profile_image if profileImageFile is a file
+     if (profileImageFile instanceof File) {
+      console.log("i be file oo")
+      formData.append('profile_image', profileImageFile);
+    }
+
+    console.log(formData)
+
+    const response = await axios.put(
+      `${API_ENDPOINT}/api/auth/user/`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data", // Important for handling files
         },
       }
     );

@@ -6,8 +6,6 @@ import { useCatalogue } from "../../hooks/useCatalogue";
 import CatItem from "./CatalogueItem/CatItem";
 import { MyCatalogueContainer } from "./MyCatalogue.styled";
 
-
-
 export default function MyCatalogue() {
   const { business_id } = useParams();
   const [showContact, setShowContact] = useState(false);
@@ -69,10 +67,16 @@ export default function MyCatalogue() {
             .map((_item, i) => (
               <Skeleton key={i} variant="rounded" width={"30%"} height={200} />
             ))}
-        {catalogueDetails?.adverts?.filter(item=>item.status === "active").map((item) => (
-          <CatItem catItem={item} />
-        ))}
-        {!loading && catalogueDetails?.adverts?.length === 0 && catalogueDetails?.adverts?.filter(product=>product.status === "active").length === 0 ? (
+        {catalogueDetails?.adverts
+          ?.filter((item) => item.status === "active")
+          .map((item) => (
+            <CatItem catItem={item} />
+          ))}
+        {!loading &&
+        catalogueDetails?.adverts?.length === 0 &&
+        catalogueDetails?.adverts?.filter(
+          (product) => product.status === "active"
+        ).length === 0 ? (
           <div className="emptyAd">
             <img src={TrashImg} alt="error" />
             <h1>Oops!</h1>

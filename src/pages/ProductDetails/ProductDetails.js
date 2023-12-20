@@ -20,7 +20,7 @@ export default function ProductDetails() {
       top: 0,
     });
   }, []);
-  console.log(adDetails, Object.keys(adDetails).length);
+  
   return (
     <motion.main
       className="main__container"

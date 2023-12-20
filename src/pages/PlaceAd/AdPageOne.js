@@ -255,6 +255,11 @@ export default function AdPageOne({ onNextPage }) {
     );
   };
 
+  const handleSelectCity = (e) => {
+    handleInputChange(e);
+    
+  };
+
   const handleSelectCategories = (e) => {
     handleInputChange(e);
     const selectedCategoryTitle = e.target.value;
@@ -382,7 +387,7 @@ export default function AdPageOne({ onNextPage }) {
             <select
               aria-required
               value={city}
-              onChange={handleSelectState}
+              onChange={handleSelectCity}
               required
               name="city"
               id="city"

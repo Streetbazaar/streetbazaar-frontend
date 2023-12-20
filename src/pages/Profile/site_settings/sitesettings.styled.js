@@ -207,6 +207,14 @@ const PersonalDetailsContainer = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
+
+      &:disabled {
+        opacity: 0.7;
+      }
+
+      &:hover {
+        opacity: 0.7;
+      }
     }
 
     button.cancelChanges {

@@ -94,7 +94,7 @@ const MyCatalogueContainer = styled.div`
     gap: 10px;
     width: 70%;
     flex-flow: row wrap;
-    justify-content: space-evenly;
+    
 
     div.emptyAd {
       display: flex;

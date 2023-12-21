@@ -139,7 +139,7 @@ const UserActionModal = styled.div`
   border-radius: 8px;
   transition: transform 0.3s ease-in-out;
   width: 190px;
-  z-index: 20;
+  z-index: 23;
 
   a {
     text-decoration: none;

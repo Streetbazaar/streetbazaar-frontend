@@ -48,7 +48,7 @@ export default function PersonalDetails() {
     token
   ) => {
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await UPDATE_PERSONAL_DETAILS(
         firstName,
         lastName,
@@ -62,12 +62,17 @@ export default function PersonalDetails() {
       if (response) {
         console.log(response);
         dispatch(fetchUser(token));
-        toast.success("Profile updated successfully")
+        toast.success("Profile updated successfully 🎉");
         setLoading(false);
       }
     } catch (err) {
       setLoading(false);
-      toast.error(err.message);
+      if (err.response.data.address) {
+        toast.error(`Address: ${err.response.data.address}`);
+      } else {
+
+        toast.error(err.message);
+      }
     }
   };
 
@@ -106,7 +111,6 @@ export default function PersonalDetails() {
     if (state) {
       setCities(nigerianStates?.find((s) => s.state === state).lgas);
     }
-  
   }, [state]);
 
   return (
@@ -150,16 +154,7 @@ export default function PersonalDetails() {
           phone: userProfile.phone_number ? userProfile.phone_number : "",
         }}
         onSubmit={(values, actions) => {
-          // console.log(
-          //   values.email,
-          //   values.firstName,
-          //   values.lastName,
-          //   values.phone,
-          //   state,
-          //   city,
-          //   address,
-          //   currentImage
-          // );
+         
           updatePersonalDetails(
             values.firstName,
             values.lastName,
@@ -287,10 +282,9 @@ export default function PersonalDetails() {
                   <textarea
                     className="textField"
                     value={address}
-                    onChange={(e)=>setAddress(e.target.value)}
+                    onChange={(e) => setAddress(e.target.value)}
                     type="text"
                     placeholder="Enter your store address"
-                    maxLength={29}
                   />
                 </div>
               </div>

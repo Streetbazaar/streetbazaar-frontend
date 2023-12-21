@@ -145,13 +145,13 @@ export const UPDATE_PERSONAL_DETAILS = async (
     formData.append("city", city);
     formData.append("state", state);
     formData.append("address", address);
-     // Conditionally append profile_image if profileImageFile is a file
-     if (profileImageFile instanceof File) {
-      console.log("i be file oo")
-      formData.append('profile_image', profileImageFile);
+    // Conditionally append profile_image if profileImageFile is a file
+    if (profileImageFile instanceof File) {
+      console.log("i be file oo");
+      formData.append("profile_image", profileImageFile);
     }
 
-    console.log(formData)
+    console.log(formData);
 
     const response = await axios.put(
       `${API_ENDPOINT}/api/auth/user/`,
@@ -160,6 +160,38 @@ export const UPDATE_PERSONAL_DETAILS = async (
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data", // Important for handling files
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const UPDATE_BUSINESS_DETAILS = async (
+  id,
+  name,
+  about,
+  city,
+  state,
+  address,
+  token
+) => {
+  try {
+    const response = await axios.put(
+      `${API_ENDPOINT}/api/business/${id}/`,
+      {
+        name,
+        about,
+        city,
+        state,
+        address,
+        token,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
       }
     );

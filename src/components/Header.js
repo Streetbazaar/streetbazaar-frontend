@@ -192,9 +192,9 @@ export default function Header() {
                 <a href="/profile/notifications" className="notificationIcon">
                   <NotificationsSharpIcon />
                 </a>
-                <a href="/messages" className="messageIcon">
+                {/* <a href="/messages" className="messageIcon">
                   <MailOutlineSharpIcon />
-                </a>
+                </a> */}
                 <div
                   onClick={handleShowUserActionModal}
                   className="profileButton"
@@ -210,6 +210,7 @@ export default function Header() {
                     />
                   </div>
 
+                    {showUserActionModal && <Overlay onClick={() => setShowUserActionModal(false)} />}
                   <UserActionModal showUserActionModal={showUserActionModal}>
                     <a
                       className="sellCTA"
@@ -332,8 +333,8 @@ export default function Header() {
                   alt="profile"
                 />
               </div>
+               {showUserActionModal && <Overlay onClick={() => setShowUserActionModal(false)} />}
               <UserActionModal showUserActionModal={showUserActionModal}>
-                <Overlay onClick={() => setShowUserActionModal(false)} />
                 <a href="/sell-your-product/post-advert" className="sellCTA">
                   <p>Sell Product</p>
                 </a>

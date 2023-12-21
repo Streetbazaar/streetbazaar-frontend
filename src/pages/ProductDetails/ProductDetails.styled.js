@@ -31,7 +31,7 @@ const ImageSliderContainer = styled.div`
       background-color: ${Colors.neutral_color.color100};
       padding: 20px;
       border-radius: 3px;
-      height: 100%;
+      height: fit-content;
       width: 100%;
       padding: 20px;
   
@@ -190,8 +190,9 @@ const ImageSliderContainer = styled.div`
 
 const MainImage = styled.img`
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 3px;
+  height: 300px;
   // transform: translateX(
   //   ${(props) => props.translateSign * 100 * props.activeIndex}%
   // );

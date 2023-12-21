@@ -242,7 +242,7 @@ const PersonalDetailsContainer = styled.div`
   }
 `;
 
-const BusinessInfoContainer = styled.div`
+const BusinessInfoContainer = styled.form`
   display: flex;
   flex-direction: column;
 
@@ -345,6 +345,14 @@ const BusinessInfoContainer = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
+
+      &:disabled {
+        opacity: 0.7;
+      }
+
+      &:hover {
+        opacity: 0.7;
+      }
     }
 
     button.cancelChanges {

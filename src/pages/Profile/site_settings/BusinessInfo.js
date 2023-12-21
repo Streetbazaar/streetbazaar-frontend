@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { BusinessInfoContainer } from "./sitesettings.styled";
 
 export default function BusinessInfo() {
-  const { userProfile } = useSelector((state) => state.user);
+  const { userProfile, token } = useSelector((state) => state.user);
   return (
     <BusinessInfoContainer>
       <div className="itemContainer">
@@ -66,6 +66,7 @@ export default function BusinessInfo() {
               className="textField"
               type="text"
               placeholder="Enter your store address"
+              maxLength={29}
             />
           </div>
         </div>

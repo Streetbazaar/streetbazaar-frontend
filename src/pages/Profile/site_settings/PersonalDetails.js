@@ -1,5 +1,5 @@
 import { Formik } from "formik";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
@@ -101,6 +101,13 @@ export default function PersonalDetails() {
   const handleSelectCity = (e) => {
     setCity(e.target.value);
   };
+
+  useEffect(() => {
+    if (state) {
+      setCities(nigerianStates?.find((s) => s.state === state).lgas);
+    }
+  
+  }, [state]);
 
   return (
     <PersonalDetailsContainer>
@@ -283,6 +290,7 @@ export default function PersonalDetails() {
                     onChange={(e)=>setAddress(e.target.value)}
                     type="text"
                     placeholder="Enter your store address"
+                    maxLength={29}
                   />
                 </div>
               </div>

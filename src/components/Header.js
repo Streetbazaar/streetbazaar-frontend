@@ -30,6 +30,7 @@ import {
   closeAnimation,
   openAnimation,
 } from "./styles/styledComponents";
+import toast from "react-hot-toast";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -109,6 +110,15 @@ export default function Header() {
   const dispatch = useDispatch();
 
   const { token, isLoggedIn, userProfile } = useSelector((state) => state.user);
+
+  const checkUserProfile = () => {
+    if(userProfile.first_name === "" || userProfile.phone_number === "") {
+      toast.error("Please complete your profile to sell your product 🥲")
+      navigate("/profile/settings")
+    } else {
+      navigate("/sell-your-product/post-advert")
+    }
+  }
 
   return (
     <HeaderContainer>
@@ -214,7 +224,8 @@ export default function Header() {
                   <UserActionModal showUserActionModal={showUserActionModal}>
                     <a
                       className="sellCTA"
-                      href="/sell-your-product/post-advert"
+                      onClick={checkUserProfile}
+                      
                     >
                       <p>Sell Product</p>
                     </a>
@@ -270,7 +281,7 @@ export default function Header() {
                 </div>
               </div>
             )}
-            <PrimaryBtn href="/sell-your-product/post-advert">
+            <PrimaryBtn onClick={checkUserProfile}>
               <p>Sell your product</p>
             </PrimaryBtn>
           </div>
@@ -335,7 +346,7 @@ export default function Header() {
               </div>
                {showUserActionModal && <Overlay onClick={() => setShowUserActionModal(false)} />}
               <UserActionModal showUserActionModal={showUserActionModal}>
-                <a href="/sell-your-product/post-advert" className="sellCTA">
+                <a onClick={checkUserProfile}  className="sellCTA">
                   <p>Sell Product</p>
                 </a>
                 <a onClick={() => navigate("/profile/adverts")}>

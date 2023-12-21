@@ -175,7 +175,6 @@ export default function BusinessInfo() {
               className="textField"
               type="text"
               placeholder="Enter your store address"
-              maxLength={29}
             />
           </div>
         </div>

@@ -60,7 +60,6 @@ export default function PersonalDetails() {
         token
       );
       if (response) {
-        console.log(response);
         dispatch(fetchUser(token));
         toast.success("Profile updated successfully 🎉");
         setLoading(false);
@@ -70,7 +69,6 @@ export default function PersonalDetails() {
       if (err.response.data.address) {
         toast.error(`Address: ${err.response.data.address}`);
       } else {
-
         toast.error(err.message);
       }
     }

@@ -1,22 +1,27 @@
 import { InlineIcon } from "@iconify/react";
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { addCommas, formatDateString } from "../../functions";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {
+  addCommas,
+  formatDateString,
+  formatRelativeTime,
+} from "../../functions";
 import {
   ImageSliderContainer,
   MainImage,
   SingleImage,
 } from "./ProductDetails.styled";
-import { useSelector } from "react-redux";
 
-export default function ImageSlider({product}) {
-  const {token} = useSelector(state=>state.user)
+export default function ImageSlider({ product }) {
+  const { token } = useSelector((state) => state.user);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [translateSign, setTranslateSign] = useState(1); // Default to positive sign
   const [isSwiping, setIsSwiping] = useState(false);
+  const [showContact, setShowContact] = useState(false);
   const SWIPE_THRESHOLD = 10; // Adjust as needed
   let touchStartX = null;
-  
+  const navigate = useNavigate();
 
   const nextImage = () => {
     setActiveImageIndex(
@@ -58,7 +63,6 @@ export default function ImageSlider({product}) {
     touchStartX = null;
     setIsSwiping(false);
   };
-
 
   return (
     <ImageSliderContainer>
@@ -110,21 +114,48 @@ export default function ImageSlider({product}) {
         <div className="ownerDetails">
           <div className="ownerGroup">
             <h5>Store Name</h5>
-            <p>Happiness Computers</p>
+            <p
+              className="storeName"
+              onClick={() =>
+                navigate(`/catalogue/${product.business_info.business_id}`)
+              }
+            >
+              {product.business_info.name
+                ? product.business_info.name
+                : product?.owner_data?.first_name
+                ? `${product?.owner_data?.first_name} ${product?.owner_data?.last_name}`
+                : "--------------"}
+            </p>
           </div>
           <div className="ownerGroup">
             <h5>Store Address</h5>
-            <p>Mayfair garden, Awoyaya Ikeja, Lagos</p>
+            <p>{product.address}</p>
           </div>
           <div className="ownerGroup">
             <h5>Time on Street Bazaar</h5>
-            <p>3years</p>
+            <p>{formatRelativeTime(product.owner_data.created_at)}</p>
           </div>
         </div>
 
         <div className="buttonsGroup">
-          <button disabled={token? false : true} className="showContactBtn">Show contact</button>
-          <button disabled={token? false : true}  className="startChatBtn">Start Chat</button>
+          <button
+            onClick={() => setShowContact(!showContact)}
+            disabled={token ? false : true}
+            className="showContactBtn"
+          >
+            {showContact ? (
+              <a href={`tel:${product?.owner_data?.phone_number}`}>
+                {product?.owner_data?.phone_number}
+              </a>
+            ) : (
+              <p>Show Contact</p>
+            )}
+          </button>
+          <button disabled={token ? false : true} className="startChatBtn">
+            <a href={`https://wa.me/${product?.owner_data?.phone_number}`}>
+              Start Chat
+            </a>
+          </button>
         </div>
       </div>
     </ImageSliderContainer>

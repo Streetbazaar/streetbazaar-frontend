@@ -114,3 +114,30 @@ export function generateUniqueRandomId() {
   generatedIds.add(id);
   return id;
 }
+
+export function formatRelativeTime(dateString) {
+  const currentDate = new Date();
+  const targetDate = new Date(dateString);
+
+  const timeDifference = currentDate - targetDate;
+  const seconds = Math.floor(timeDifference / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  const months = Math.floor(days / 30.44); // Average number of days in a month
+  const years = Math.floor(days / 365);
+
+  if (seconds < 60) {
+    return 'few seconds';
+  } else if (minutes < 60) {
+    return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'}`;
+  } else if (hours < 24) {
+    return `${hours} ${hours === 1 ? 'hour' : 'hours'}`;
+  } else if (days < 30) {
+    return `${days} ${days === 1 ? 'day' : 'days'}`;
+  } else if (months < 12) {
+    return `${months} ${months === 1 ? 'month' : 'months'}`;
+  } else {
+    return `${years} ${years === 1 ? 'year' : 'years'}`;
+  }
+}

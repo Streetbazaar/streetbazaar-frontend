@@ -45,7 +45,7 @@ export default function MyCatalogue() {
         </div>
 
         {loading && <Skeleton variant="rounded" width={"100%"} height={50} />}
-        {Object.keys(catalogueDetails).length === 0 &&
+        {Object.keys(catalogueDetails).length > 1 &&
         catalogueDetails?.owner_data?.phone_number ? (
           <div className="contactDetail">
             <button onClick={() => setShowContact(!showContact)}>

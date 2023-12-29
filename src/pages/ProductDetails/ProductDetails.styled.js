@@ -34,7 +34,7 @@ const ImageSliderContainer = styled.div`
       height: fit-content;
       width: 100%;
       padding: 20px;
-  
+
       overflow: hidden;
     }
 
@@ -106,7 +106,6 @@ const ImageSliderContainer = styled.div`
         text-transform: capitalize;
       }
     }
-
   }
 
   div.ownerDetails {
@@ -123,15 +122,20 @@ const ImageSliderContainer = styled.div`
         font-size: 15px;
         text-transform: capitalize;
       }
-      
+
       p {
         color: ${Colors.neutral_color.color900};
         font-size: 15px;
         text-transform: capitalize;
       }
+      p.storeName {
+        cursor: pointer;
+        &:hover {
+          text-decoration: underline;
+          color: ${Colors.primary_color.color300};
+        }
+      }
     }
-
-    
   }
 
   div.buttonsGroup {
@@ -152,6 +156,12 @@ const ImageSliderContainer = styled.div`
       font-size: 15px;
       border-radius: 6px;
 
+      a {
+        text-decoration: none;
+        color: ${Colors.white};
+        font-size: 15px;
+      }
+
       &:hover {
         background-color: ${Colors.primary_color.color300};
       }
@@ -167,10 +177,16 @@ const ImageSliderContainer = styled.div`
       border-radius: 6px;
       border: 2px solid ${Colors.neutral_color.color900};
 
+      a {
+        text-decoration: none;
+        color: ${Colors.neutral_color.color900};
+        font-size: 15px;
+      }
+
       &:hover {
         background-color: ${Colors.neutral_color.color100};
       }
-  
+
       &:disabled {
         border-color: ${Colors.neutral_color.color300};
         color: ${Colors.neutral_color.color300};
@@ -204,7 +220,7 @@ const SingleImage = styled.img`
   object-fit: cover;
   border-radius: 3px;
 
-  @media(max-width: 768px) {
+  @media (max-width: 768px) {
     width: 50px;
     height: 50px;
   }

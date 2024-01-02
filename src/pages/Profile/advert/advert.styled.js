@@ -18,6 +18,7 @@ const AdvertContainer = styled.div`
   flex-direction: column;
   max-width: 1440px;
   margin-top: 120px;
+
   h3.advertMainHeading {
     padding: 20px;
     color: ${Colors.neutral_color.color900};
@@ -111,9 +112,25 @@ const AdvertContainer = styled.div`
     }
   }
 
+  div.emptyAd {
+    display: flex;
+    width: 100%;
+    flex: 1;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    color: ${Colors.neutral_color.color700};
+
+    img {
+      width: 80px;
+      height: 80px;
+    }
+  }
+
   @media (max-width: 780px) {
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
     div.deskFilters {
       display: none;
     }
@@ -174,6 +191,7 @@ const ButtonFilter = styled.button`
   justify-content: center;
   gap: 8px;
   font-size: 15px;
+  text-transform: capitalize;
   color: ${({ isActive }) =>
     isActive ? Colors.primary_color.color400 : Colors.neutral_color.color400};
   background-color: ${({ isActive }) =>

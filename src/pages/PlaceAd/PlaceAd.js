@@ -21,8 +21,8 @@ const steps = [
 ];
 
 export default function PlaceAd() {
-  const [currentPage, setCurrentPage] = useState(1);
   const { userProfile } = useSelector((state) => state.user);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);

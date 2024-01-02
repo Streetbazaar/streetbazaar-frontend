@@ -14,8 +14,20 @@ export const fetchRenewalPackages = createAsyncThunk(
   }
 );
 
-const profileSlice = createSlice({
-  name: "profile",
+export const fetchUserAdverts = createAsyncThunk(
+  "adverts/fetchUserAdverts",
+  async (token) => {
+    const response = await axios.get(`${API_ENDPOINT}/api/user-adverts/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  }
+);
+
+const userAdvertSlice = createSlice({
+  name: "userAdverts",
   initialState: {
     isLoading: false,
     adId: "",
@@ -35,6 +47,9 @@ const profileSlice = createSlice({
     quantity: "",
     renewalPackages: [],
     renewalPackageStatus: "idle",
+    advertStatus: "idle",
+    myAdvertsList: [],
+    advertsError: "",
   },
   reducers: {
     editAdvertItem: (state, action) => {
@@ -84,9 +99,26 @@ const profileSlice = createSlice({
     builder.addCase(fetchRenewalPackages.rejected, (state, action) => {
       state.renewalPackageStatus = "rejected";
     });
+    builder.addCase(fetchUserAdverts.pending, (state, action) => {
+      state.advertStatus = "loading";
+    });
+    builder.addCase(fetchUserAdverts.fulfilled, (state, action) => {
+      state.advertStatus = "success";
+      state.myAdvertsList = action.payload;
+    });
+    builder.addCase(fetchUserAdverts.rejected, (state, action) => {
+      state.advertStatus = "rejected";
+    });
   },
 });
 
-
-export const { editAdvertItem, appendAdImages, updateAdImages, editAdId, editCategoryId, editSubCategoryId, clearFields } = profileSlice.actions;
-export default profileSlice.reducer;
+export const {
+  editAdvertItem,
+  appendAdImages,
+  updateAdImages,
+  editAdId,
+  editCategoryId,
+  editSubCategoryId,
+  clearFields,
+} = userAdvertSlice.actions;
+export default userAdvertSlice.reducer;

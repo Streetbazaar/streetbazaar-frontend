@@ -34,7 +34,6 @@ export const advertSlice = createSlice({
         });
         builder.addCase(fetchAdverts.rejected, (state, action)=> {
             state.advertStatus = "rejected"
-            
         });
     }
 })

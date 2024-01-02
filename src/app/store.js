@@ -6,6 +6,7 @@ import chatReducer from "../features/chatSlice";
 import inputReducer from "../features/inputSlice";
 import userReducer from "../features/userSlice";
 import advertReducer from "../features/advertSlice"
+import userAdvertReducer from "../features/userAdvertSlice";
 
 
 const persistConfig = {
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   user: userReducer,
   chat: chatReducer,
   input: inputReducer,
-  adverts: advertReducer
+  adverts: advertReducer,
+  userAdverts: userAdvertReducer 
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

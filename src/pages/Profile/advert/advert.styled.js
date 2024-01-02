@@ -196,7 +196,7 @@ const AdvertItemWrapper = styled.div`
   background-color: ${Colors.white};
   border-radius: 8px;
   width: 320px;
-  height: 400px;
+  height: fit-content;
   padding: 20px;
   gap: 15px;
   border: 1px solid ${Colors.neutral_color.color200};
@@ -205,6 +205,7 @@ const AdvertItemWrapper = styled.div`
     width: 100%;
     height: 200px;
     border-radius: 8px;
+    object-fit: cover;
   }
 
   div.adCaptions {
@@ -220,13 +221,15 @@ const AdvertItemWrapper = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 40px;
+      width: fit-content;
+      padding: 10px;
       height: 20px;
       border-radius: 10px;
 
       p {
         color: ${Colors.success_color.color400};
         font-size: 10px;
+        text-transform: capitalize;
       }
     }
   }
@@ -276,12 +279,13 @@ const AdvertItemWrapper = styled.div`
       border-radius: 5px;
       border: 1px solid ${Colors.neutral_color.color200};
       width: 30%;
+      cursor: pointer;
     }
   }
 
   @media (max-width: 780px) {
     width: 100%;
-    height: 400px;
+    height: fit-content;
   }
 `;
 

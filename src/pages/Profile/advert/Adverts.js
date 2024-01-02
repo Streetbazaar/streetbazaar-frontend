@@ -1,11 +1,15 @@
 import { InlineIcon } from "@iconify/react";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import AdvertItem from "./AdvertItem";
 import { AdvertContainer, AdvertSelect, ButtonFilter } from "./advert.styled";
+import { fetchUserAdverts } from "../../../features/userAdvertSlice";
+import Spinner from "../../../components/spinner/Spiner";
 
 export default function Adverts() {
-  const { userProfile } = useSelector((state) => state.user);
+  const { userProfile, token } = useSelector((state) => state.user);
+  const {advertStatus, myAdvertsList} = useSelector(state=>state.userAdverts)
+  const dispatch = useDispatch()
 
   const [activeIndex, setActiveIndex] = useState(0); // Defaulting to the first button
 
@@ -18,6 +22,10 @@ export default function Adverts() {
     { icon: "mdi:alert-circle-outline", label: "Declined" },
     { icon: "basil:edit-outline", label: "Drafts" },
   ];
+
+  useEffect(()=>{
+    dispatch(fetchUserAdverts(token))
+  }, [])
   return (
     <AdvertContainer>
       <h3 className="advertMainHeading">My Adverts</h3>
@@ -84,12 +92,23 @@ export default function Adverts() {
         </div>
 
         <div className="advertsList">
-          {Array(5)
-            .fill()
-            .map((_, index) => {
-              return <AdvertItem key={index} />;
+          {myAdvertsList
+            .map((advert, index) => {
+              return <AdvertItem item={advert} key={index} />;
             })}
         </div>
+
+        {advertStatus === "loading" && (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Spinner />
+          </div>)
+          }
       </div>
     </AdvertContainer>
   );

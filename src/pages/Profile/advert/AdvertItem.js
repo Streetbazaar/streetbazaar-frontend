@@ -1,41 +1,62 @@
 import { InlineIcon } from "@iconify/react";
-import React from "react";
-import {  AdvertItemWrapper } from "./advert.styled";
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import { addCommas } from "../../../functions";
+import { ModalContent, ModalOverlay } from "../../PlaceAd/PlaceAd.styled";
+import { AdvertItemWrapper } from "./advert.styled";
 
-export default function AdvertItem() {
+const Modal = ({ isOpen, onClose, url }) => {
+  if (!isOpen) return null;
+
+  return ReactDOM.createPortal(
+    <>
+      <ModalOverlay onClick={onClose}></ModalOverlay>
+      <ModalContent>
+        <button className="closeButton" onClick={onClose}>
+          X
+        </button>
+        <p>Are you sure you want to close this advert?</p>
+
+        <div>
+          <button className="deleteBtn">Yes</button>
+          <button onClick={onClose} className="exitBtn">No</button>
+        </div>
+      </ModalContent>
+    </>,
+    document.body
+  );
+};
+
+export default function AdvertItem({ item }) {
+  const [isOpen, setIsOpen] = useState(false)
   return (
     <AdvertItemWrapper>
-      <img
-        src="https://res.cloudinary.com/dyhcmaqzz/image/upload/v1691074620/Rectangle_43_dxxpay.png"
-        alt="advert"
-      />
+      <img src={item.pictures[0].image_url} alt="advert" />
 
       <div className="adCaptions">
-        <h4>Title of the Ad</h4>
+        <h4>{item.title}</h4>
         <div className="statusIndicator">
-          <p>Active</p>
+          <p>{item.status}</p>
         </div>
       </div>
 
       <div className="adStatistics">
         <div className="statContainer">
-            <p>
-            5 impressions
-            </p>
-           </div>
+          <p>{item.impressions ? item.impressions : 0} impressions</p>
+        </div>
         <div className="statContainer">
-            <p>2 visitors</p>
+          <p>{item.visitors ? item.visitors : 0} visitors</p>
         </div>
       </div>
 
-      <h3 className="adPrice">₦ 500,000</h3>
+      <h3 className="adPrice">₦ {addCommas(item.price)}</h3>
 
       <div className="adActions">
         <button>
           <InlineIcon icon="basil:edit-outline" />
           Edit Ad
         </button>
-        <button>
+        <button onClick={()=>setIsOpen(true)}>
           <InlineIcon icon="ph:x-bold" />
           Close Ad
         </button>
@@ -44,6 +65,8 @@ export default function AdvertItem() {
           Renew
         </button>
       </div>
+
+      <Modal isOpen={isOpen} onClose={()=>setIsOpen(false)} />
     </AdvertItemWrapper>
   );
 }

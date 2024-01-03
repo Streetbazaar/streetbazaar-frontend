@@ -124,7 +124,7 @@ export default function Adverts() {
         </div>
 
         <div className="advertsList">
-          {myAdvertsList.filter((advert)=> advert.status === adFilters.adStatus).map((advert, index) => {
+          {advertStatus !== "loading" && myAdvertsList.filter((advert)=> advert.status === adFilters.adStatus).map((advert, index) => {
             return <AdvertItem item={advert} key={index} />;
           })}
           {advertStatus !== "loading" && myAdvertsList.length != 0 && myAdvertsList.filter((advert)=> advert.status === adFilters.adStatus).length === 0 ? (

@@ -187,7 +187,6 @@ export const UPDATE_BUSINESS_DETAILS = async (
         city,
         state,
         address,
-        token,
       },
       {
         headers: {
@@ -200,3 +199,17 @@ export const UPDATE_BUSINESS_DETAILS = async (
     throw error;
   }
 };
+
+export const DELETE_ADVERT = async (id, token) => {
+  try {
+    const response = await axios.delete(`${API_ENDPOINT}/api/adverts/${id}/`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return response.status
+  } catch(error) {
+    throw error
+  }
+}

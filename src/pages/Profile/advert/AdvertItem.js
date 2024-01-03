@@ -1,11 +1,35 @@
 import { InlineIcon } from "@iconify/react";
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { addCommas } from "../../../functions";
 import { ModalContent, ModalOverlay } from "../../PlaceAd/PlaceAd.styled";
 import { AdvertItemWrapper } from "./advert.styled";
 
-const Modal = ({ isOpen, onClose, url }) => {
+import toast from "react-hot-toast";
+import { DELETE_ADVERT } from "../../../components/api";
+import { fetchUserAdverts } from "../../../features/userAdvertSlice";
+
+const Modal = ({ isOpen, onClose, id }) => {
+  const { token } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const deleteAd = async (id, token) => {
+    try {
+      setLoading(true);
+      const res = await DELETE_ADVERT(id, token);
+
+      if (res === 204) {
+        setLoading(false);
+        toast.success("Advert closed successfully");
+        dispatch(fetchUserAdverts(token));
+        onClose();
+      }
+    } catch (err) {
+      setLoading(false);
+      toast.error(err.message);
+    }
+  };
   if (!isOpen) return null;
 
   return ReactDOM.createPortal(
@@ -18,8 +42,16 @@ const Modal = ({ isOpen, onClose, url }) => {
         <p>Are you sure you want to close this advert?</p>
 
         <div>
-          <button className="deleteBtn">Yes</button>
-          <button onClick={onClose} className="exitBtn">No</button>
+          <button
+            disabled={loading}
+            onClick={() => deleteAd(id, token)}
+            className="deleteBtn"
+          >
+            {loading ? "Closing..." : "Yes"}
+          </button>
+          <button onClick={onClose} className="exitBtn">
+            No
+          </button>
         </div>
       </ModalContent>
     </>,
@@ -28,7 +60,7 @@ const Modal = ({ isOpen, onClose, url }) => {
 };
 
 export default function AdvertItem({ item }) {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <AdvertItemWrapper>
       <img src={item.pictures[0].image_url} alt="advert" />
@@ -56,7 +88,7 @@ export default function AdvertItem({ item }) {
           <InlineIcon icon="basil:edit-outline" />
           Edit Ad
         </button>
-        <button onClick={()=>setIsOpen(true)}>
+        <button onClick={() => setIsOpen(true)}>
           <InlineIcon icon="ph:x-bold" />
           Close Ad
         </button>
@@ -66,7 +98,7 @@ export default function AdvertItem({ item }) {
         </button>
       </div>
 
-      <Modal isOpen={isOpen} onClose={()=>setIsOpen(false)} />
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} id={item.id} />
     </AdvertItemWrapper>
   );
 }

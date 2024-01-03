@@ -152,8 +152,8 @@ export default function ImageSlider({ product }) {
             )}
           </button>
           <button disabled={token ? false : true} className="startChatBtn">
-            <a href={`https://wa.me/${product?.owner_data?.phone_number}`}>
-              Start Chat
+            <a href={`https://wa.me/${product?.owner_data?.phone_number}?text=Hello, i saw your product on streetbazaar and would love to discuss futher.`} target="_blank" referrerPolicy="no-referrer">
+              Start Chat (Whatsapp)
             </a>
           </button>
         </div>

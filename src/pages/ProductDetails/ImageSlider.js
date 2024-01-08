@@ -152,7 +152,18 @@ export default function ImageSlider({ product }) {
             )}
           </button>
           <button disabled={token ? false : true} className="startChatBtn">
-            <a href={`https://wa.me/${product?.owner_data?.phone_number}?text=Hello, i saw your product on streetbazaar and would love to discuss futher.`} target="_blank" referrerPolicy="no-referrer">
+            <a
+              href={`https://wa.me/${product?.owner_data?.phone_number}?text=Hello, i saw your product on streetbazaar and would love to discuss futher.`}
+              target="_blank"
+              className={token ? "" : "disabled-link"}
+              referrerPolicy="no-referrer"
+              onClick={(e) => {
+                // Prevent the link from being clicked when disabled
+                if (!token) {
+                  e.preventDefault();
+                }
+              }}
+            >
               Start Chat (Whatsapp)
             </a>
           </button>

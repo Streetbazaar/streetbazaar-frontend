@@ -149,6 +149,14 @@ const ImageSliderContainer = styled.div`
       background: none;
     }
 
+    .disabled-link {
+       
+      pointer-events: none;
+      color: gray;
+      text-decoration: none; 
+      cursor: not-allowed;
+    }
+
     button:nth-child(1) {
       color: ${Colors.white};
       background-color: ${Colors.primary_color.color500};
@@ -160,6 +168,8 @@ const ImageSliderContainer = styled.div`
         text-decoration: none;
         color: ${Colors.white};
         font-size: 15px;
+
+        
       }
 
       &:hover {
@@ -169,6 +179,8 @@ const ImageSliderContainer = styled.div`
       &:disabled {
         background-color: ${Colors.primary_color.color200};
       }
+
+      
     }
     button:nth-child(2) {
       color: ${Colors.neutral_color.color900};

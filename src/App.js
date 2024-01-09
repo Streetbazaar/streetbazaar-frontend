@@ -29,6 +29,7 @@ import Saved from "./pages/Profile/saved/Saved";
 import Settings from "./pages/Profile/site_settings/Settings";
 import MyCatalogue from "./pages/mycatalogue/MyCatalogue";
 import { setCookie } from "./setCookie";
+import EditAd from "./pages/Profile/advert/editAd/EditAd";
 
 function App() {
   setCookie("cookieName", "cookieValue", 7, "None");
@@ -100,6 +101,16 @@ function App() {
                 <Route path="saved" element={<Saved />} />
                 <Route path="settings" element={<Settings />} />
                 <Route path="notifications" element={<Notifications />} />
+              </Route>
+            )}
+            {token && (
+              <Route
+                ErrorBoundary={<ErrorPage />}
+                errorElement={<ErrorPage />}
+                path="/edit-ad"
+                element={<SellProductLayout />}
+              >
+                <Route path="*" element={<EditAd />} />
               </Route>
             )}
             <Route path="fetchuserprofile" element={<FetchGoogleUser />} />

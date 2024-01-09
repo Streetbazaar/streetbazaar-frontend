@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { API_ENDPOINT } from "../components/api";
+import { API_ENDPOINT, FETCH_AD_DETAILS } from "../components/api";
 
 export const fetchRenewalPackages = createAsyncThunk(
   "fetchRenewalPackages",
@@ -26,6 +26,14 @@ export const fetchUserAdverts = createAsyncThunk(
   }
 );
 
+export const fetchSingleAdvert = createAsyncThunk(
+  "adverts/fetchSingleAdvert",
+  async (id) => {
+    const response = await FETCH_AD_DETAILS(id)
+    return response
+  }
+)
+
 const userAdvertSlice = createSlice({
   name: "userAdverts",
   initialState: {
@@ -50,6 +58,9 @@ const userAdvertSlice = createSlice({
     advertStatus: "idle",
     myAdvertsList: [],
     advertsError: "",
+    singleAdvertDetail: {},
+    singleAdvertStatus: "idle",
+    singleAdvertError: ""
   },
   reducers: {
     editAdvertItem: (state, action) => {
@@ -109,6 +120,28 @@ const userAdvertSlice = createSlice({
     builder.addCase(fetchUserAdverts.rejected, (state, action) => {
       state.advertStatus = "rejected";
     });
+    builder.addCase(fetchSingleAdvert.pending, (state)=> {
+      state.singleAdvertStatus = "loading"
+    })
+    builder.addCase(fetchSingleAdvert.fulfilled, (state, action)=> {
+      console.log(action.payload, "from redux")
+      state.adId = action.payload.id
+      state.address = action.payload.address
+      state.title = action.payload.title
+      state.state = action.payload.state
+      state.city = action.payload.city
+      state.category = action.payload.category_data.title
+      // state.subCategory = action.payload.c
+      state.categoryId = action.payload.category
+      state.subCategoryId = action.payload.sub_category
+      const imageUrls = action.payload.pictures.map(picture => picture.image_url);
+      state.imageURLs = imageUrls
+      state.priceType = action.payload.price_type
+      state.price = action.payload.price
+      state.quantity = action.payload.quantity
+      state.condition = action.payload.condition
+      state.description = action.payload.description
+    })
   },
 });
 

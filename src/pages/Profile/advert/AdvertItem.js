@@ -7,6 +7,7 @@ import { ModalContent, ModalOverlay } from "../../PlaceAd/PlaceAd.styled";
 import { AdvertItemWrapper } from "./advert.styled";
 
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { DELETE_ADVERT } from "../../../components/api";
 import { fetchUserAdverts } from "../../../features/userAdvertSlice";
 
@@ -61,6 +62,7 @@ const Modal = ({ isOpen, onClose, id }) => {
 
 export default function AdvertItem({ item }) {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
   return (
     <AdvertItemWrapper>
       <img src={item.pictures[0].image_url} alt="advert" />
@@ -84,7 +86,7 @@ export default function AdvertItem({ item }) {
       <h3 className="adPrice">₦ {addCommas(item.price)}</h3>
 
       <div className="adActions">
-        <button>
+        <button onClick={() => navigate(`/edit-ad/${item.title}?id=${item.id}`)}>
           <InlineIcon icon="basil:edit-outline" />
           Edit Ad
         </button>
@@ -92,10 +94,12 @@ export default function AdvertItem({ item }) {
           <InlineIcon icon="ph:x-bold" />
           Close Ad
         </button>
-        <button>
-          <InlineIcon icon="lucide:rotate-cw" />
-          Renew
-        </button>
+        {item.status === "active" && (
+          <button>
+            <InlineIcon icon="lucide:rotate-cw" />
+            Renew
+          </button>
+        )}
       </div>
 
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} id={item.id} />

@@ -98,6 +98,50 @@ export const POST_ADVERT = async (
     throw error;
   }
 };
+export const UPDATE_ADVERT = async (
+  id,
+  title,
+  categoryId,
+  subCategoryId,
+  state,
+  city,
+  address,
+  priceType,
+  price,
+  condition,
+  description,
+  imageURLs,
+  quantity,
+  token,
+) => {
+  try {
+    const response = await axios.put(
+      `${API_ENDPOINT}/api/adverts/${id}/`,
+      {
+        title,
+        category: categoryId,
+        sub_category: subCategoryId,
+        state,
+        city,
+        address,
+        price_type: priceType,
+        price,
+        condition,
+        description,
+        img_urls: imageURLs,
+        quantity,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const PAY_FOR_ADVERT = async (
   adId,

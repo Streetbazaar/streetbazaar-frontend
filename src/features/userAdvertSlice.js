@@ -124,6 +124,7 @@ const userAdvertSlice = createSlice({
       state.singleAdvertStatus = "loading"
     })
     builder.addCase(fetchSingleAdvert.fulfilled, (state, action)=> {
+      state.singleAdvertStatus = "success"
       console.log(action.payload, "from redux")
       state.adId = action.payload.id
       state.address = action.payload.address
@@ -131,7 +132,7 @@ const userAdvertSlice = createSlice({
       state.state = action.payload.state
       state.city = action.payload.city
       state.category = action.payload.category_data.title
-      // state.subCategory = action.payload.c
+      state.subCategory = action.payload.sub_category_data.title
       state.categoryId = action.payload.category
       state.subCategoryId = action.payload.sub_category
       const imageUrls = action.payload.pictures.map(picture => picture.image_url);
@@ -141,6 +142,10 @@ const userAdvertSlice = createSlice({
       state.quantity = action.payload.quantity
       state.condition = action.payload.condition
       state.description = action.payload.description
+    })
+    builder.addCase(fetchSingleAdvert.rejected, (state)=> {
+      state.singleAdvertStatus = "rejected"
+      state.singleAdvertError = "Oops there's an error please refresh the page!"
     })
   },
 });

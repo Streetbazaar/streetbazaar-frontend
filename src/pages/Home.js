@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useEffect } from "react";
 import jumbotron from "../assets/images/jumbtron.png";
 import Category from "../components/Category/Category";
 import { SearchIconSvg } from "../components/SvgComponents";
@@ -14,8 +14,15 @@ import {
   StyledInput,
 } from "../components/styles/styledComponents";
 import InvestmentAds from "./InvestmentAds/InvestmentAds";
+import { useDispatch } from "react-redux";
+import { fetchCategories } from "../features/advertSlice";
 
 const Home = () => {
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    dispatch(fetchCategories())
+  }, [])
   return (
     <motion.main
       className="main__container"

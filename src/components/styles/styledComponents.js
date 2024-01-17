@@ -90,6 +90,9 @@ const HeaderContainer = styled.header`
   background-color: ${Colors.white};
   z-index: 1;
   height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   ${HamburgerContainer} {
     display: none;
   }
@@ -195,6 +198,7 @@ const UserActionModal = styled.div`
 
 const NavContainer = styled.nav`
   max-width: 1440px;
+  width: 100%;
   display: flex;
   margin: 0 auto;
   align-items: center;

@@ -9,7 +9,7 @@ import AdPageTwo from '../../../PlaceAd/AdPageTwo';
 import EditAdPageOne from './EditAdPageOne';
 import EditAdPageTwo from './EditAdPageTwo';
 import { editAdvertItem, fetchSingleAdvert } from '../../../../features/userAdvertSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const steps = [
     { id: 1, label: "About Ad" },
@@ -19,9 +19,13 @@ const steps = [
 export default function EditAd() {
     const searchParam = new URLSearchParams(window.location.search);
     const id = searchParam.get("id");
-    const { adDetails, loading } = useGetAdDetails(id);
+    // const { adDetails, loading } = useGetAdDetails(id);
     const [currentPage, setCurrentPage] = useState(1);
     const dispatch = useDispatch()
+    const {
+      singleAdvertStatus,
+    singleAdvertError
+    } = useSelector((state) => state.userAdverts);
 
     useEffect(() => {
       const searchParams = new URLSearchParams(window.location.search);
@@ -59,7 +63,7 @@ export default function EditAd() {
           Back to previous page
         </button>
       )}
-        {loading ? (
+        {singleAdvertStatus === "loading" ? (
           <div
             style={{
               display: "flex",
@@ -95,8 +99,8 @@ export default function EditAd() {
           })}
         </StepsContainer>
 
-        {currentPage === 1 && <EditAdPageOne adDetails={adDetails} onNextPage={navigateToNextPage} />}
-        {currentPage === 2 && <EditAdPageTwo adDetails={adDetails} onNextPage={navigateToNextPage} />}
+        {currentPage === 1 && <EditAdPageOne  onNextPage={navigateToNextPage} />}
+        {currentPage === 2 && <EditAdPageTwo  onNextPage={navigateToNextPage} />}
       </PlaceAdWrapper>}
     </PlaceAdContainer>
   )

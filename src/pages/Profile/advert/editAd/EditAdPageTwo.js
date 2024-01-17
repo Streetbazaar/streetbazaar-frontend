@@ -1,13 +1,17 @@
+import { motion } from "framer-motion";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { UPDATE_ADVERT } from "../../../../components/api"; 
-import { editAdId, editAdvertItem } from "../../../../features/userAdvertSlice";
-import { AdContainer } from "../../../PlaceAd/PlaceAd.styled"; 
-import { motion } from "framer-motion";
+import { UPDATE_ADVERT } from "../../../../components/api";
+import {
+  clearFields,
+  editAdId,
+  editAdvertItem,
+} from "../../../../features/userAdvertSlice";
+import { AdContainer } from "../../../PlaceAd/PlaceAd.styled";
 
-export default function EditAdPageTwo({ adDetails, onNextPage }) {
+export default function EditAdPageTwo() {
   const {
     imageURLs,
     title,
@@ -23,7 +27,7 @@ export default function EditAdPageTwo({ adDetails, onNextPage }) {
     adId,
     categoryId,
     subCategoryId,
-    quantity
+    quantity,
   } = useSelector((state) => state.userAdverts);
   const { userProfile, token } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -31,7 +35,7 @@ export default function EditAdPageTwo({ adDetails, onNextPage }) {
     dispatch(editAdvertItem({ [e.target.name]: e.target.value }));
   };
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (
     title,
@@ -49,9 +53,9 @@ export default function EditAdPageTwo({ adDetails, onNextPage }) {
     token
   ) => {
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await UPDATE_ADVERT(
-        adDetails.id,
+        adId,
         title,
         categoryId,
         subCategoryId,
@@ -67,169 +71,173 @@ export default function EditAdPageTwo({ adDetails, onNextPage }) {
         token
       );
       if (response) {
-        setLoading(false)
+        setLoading(false);
         console.log(response);
-        dispatch(editAdId(response?.id));
-        
-          toast.success("Advert updated successfully 🎉");
-          navigate("/profile/adverts");
-        
+        toast.success("Advert updated successfully 🎉");
+        navigate("/profile/adverts");
+        dispatch(clearFields());
       }
     } catch (err) {
-      setLoading(false)
+      setLoading(false);
       toast.error(err.message);
     }
   };
   return (
     <motion.main
-    className="main__container"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1, width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}
-    exit={{ x: "100%", opacity: 0 }}
-    transition={{ duration: 10, type: "spring", stiffness: 100 }}
+      className="main__container"
+      initial={{ opacity: 0 }}
+      animate={{
+        opacity: 1,
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+      exit={{ x: "100%", opacity: 0 }}
+      transition={{ duration: 10, type: "spring", stiffness: 100 }}
     >
-    <AdContainer>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault()
-          handleSubmit(
-            title,
-            categoryId,
-            subCategoryId,
-            state,
-            city,
-            address,
-            priceType,
-            price,
-            condition,
-            description,
-            imageURLs,
-            quantity,
-            token
-          );
-        }}
-      >
-        <div className="radioWrapper">
-          <label htmlFor="Title">Price Type</label>
-          <div className="radioGroup">
-            <span className="radioContainer">
-              <input
-                onChange={handleInputChange}
-                value="fixed"
-                name="priceType"
-                type="radio"
-                checked={priceType === "fixed"}
-                required
-              />
-              <label htmlFor="fixed">Fixed</label>
-            </span>
-            <span className="radioContainer">
-              <input
-                onChange={handleInputChange}
-                value="negotiable"
-                name="priceType"
-                type="radio"
-                checked={priceType === "negotiable"}
-                required
-              />
-              <label htmlFor="negotiable">Negotiable</label>
-            </span>
-            <span className="radioContainer">
-              <input
-                onChange={handleInputChange}
-                value="on-call"
-                name="priceType"
-                type="radio"
-                checked={priceType === "on-call"}
-                required
-              />
-              <label htmlFor="on-call">On-call</label>
-            </span>
+      <AdContainer>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit(
+              title,
+              categoryId,
+              subCategoryId,
+              state,
+              city,
+              address,
+              priceType,
+              price,
+              condition,
+              description,
+              imageURLs,
+              quantity,
+              token
+            );
+          }}
+        >
+          <div className="radioWrapper">
+            <label htmlFor="Title">Price Type</label>
+            <div className="radioGroup">
+              <span className="radioContainer">
+                <input
+                  onChange={handleInputChange}
+                  value="fixed"
+                  name="priceType"
+                  type="radio"
+                  checked={priceType === "fixed"}
+                  required
+                />
+                <label htmlFor="fixed">Fixed</label>
+              </span>
+              <span className="radioContainer">
+                <input
+                  onChange={handleInputChange}
+                  value="negotiable"
+                  name="priceType"
+                  type="radio"
+                  checked={priceType === "negotiable"}
+                  required
+                />
+                <label htmlFor="negotiable">Negotiable</label>
+              </span>
+              <span className="radioContainer">
+                <input
+                  onChange={handleInputChange}
+                  value="on-call"
+                  name="priceType"
+                  type="radio"
+                  checked={priceType === "on-call"}
+                  required
+                />
+                <label htmlFor="on-call">On-call</label>
+              </span>
+            </div>
           </div>
-        </div>
-        <div className="inputContainer">
-          <label htmlFor="Price">
-            Price <span className="subText">(Naira)</span>{" "}
-          </label>
-          <input
-            onChange={handleInputChange}
-            name="price"
-            placeholder="Enter your price"
-            type="number"
-            value={price}
-            required
-          />
-        </div>
-        <div className="inputContainer">
-          <label htmlFor="Price">
-            Quantity <span className="subText">(pcs)</span>{" "}
-          </label>
-          <input
-            onChange={handleInputChange}
-            name="quantity"
-            placeholder="Enter the quantity of your product"
-            type="number"
-            value={quantity}
-            required
-          />
-        </div>
-
-        <div className="radioWrapper">
-          <label htmlFor="condition">Condition</label>
-          <div className="radioGroup">
-            <span className="radioContainer">
-              <input
-                onChange={handleInputChange}
-                value="new"
-                name="condition"
-                type="radio"
-                checked={condition === "new"}
-                required
-              />
-              <label htmlFor="new">New</label>
-            </span>
-            <span className="radioContainer">
-              <input
-                onChange={handleInputChange}
-                value="old"
-                name="condition"
-                type="radio"
-                checked={condition === "old"}
-                required
-              />
-              <label htmlFor="old">Old</label>
-            </span>
-            <span className="radioContainer">
-              <input
-                onChange={handleInputChange}
-                value="foreign-used"
-                name="condition"
-                type="radio"
-                checked={condition === "foreign-used"}
-                required
-              />
-              <label htmlFor="foreign-used">Foreign Used</label>
-            </span>
+          <div className="inputContainer">
+            <label htmlFor="Price">
+              Price <span className="subText">(Naira)</span>{" "}
+            </label>
+            <input
+              onChange={handleInputChange}
+              name="price"
+              placeholder="Enter your price"
+              type="number"
+              value={price}
+              required
+            />
           </div>
-        </div>
+          <div className="inputContainer">
+            <label htmlFor="Price">
+              Quantity <span className="subText">(pcs)</span>{" "}
+            </label>
+            <input
+              onChange={handleInputChange}
+              name="quantity"
+              placeholder="Enter the quantity of your product"
+              type="number"
+              value={quantity}
+              required
+            />
+          </div>
 
-        <div className="inputContainer">
-          <label htmlFor="description">Description</label>
-          <textarea
-            required
-            onChange={handleInputChange}
-            value={description}
-            name="description"
-            className="descriptionInput"
-            placeholder="Detailed description of your product or service"
-            type="text"
-          />
-        </div>
-        <button disabled={loading} className="nextButton" type="submit">
-          {loading ? "Loading..." : "Next Step"}
-        </button>
-      </form>
-    </AdContainer>
+          <div className="radioWrapper">
+            <label htmlFor="condition">Condition</label>
+            <div className="radioGroup">
+              <span className="radioContainer">
+                <input
+                  onChange={handleInputChange}
+                  value="new"
+                  name="condition"
+                  type="radio"
+                  checked={condition === "new"}
+                  required
+                />
+                <label htmlFor="new">New</label>
+              </span>
+              <span className="radioContainer">
+                <input
+                  onChange={handleInputChange}
+                  value="old"
+                  name="condition"
+                  type="radio"
+                  checked={condition === "old"}
+                  required
+                />
+                <label htmlFor="old">Old</label>
+              </span>
+              <span className="radioContainer">
+                <input
+                  onChange={handleInputChange}
+                  value="foreign-used"
+                  name="condition"
+                  type="radio"
+                  checked={condition === "foreign-used"}
+                  required
+                />
+                <label htmlFor="foreign-used">Foreign Used</label>
+              </span>
+            </div>
+          </div>
+
+          <div className="inputContainer">
+            <label htmlFor="description">Description</label>
+            <textarea
+              required
+              onChange={handleInputChange}
+              value={description}
+              name="description"
+              className="descriptionInput"
+              placeholder="Detailed description of your product or service"
+              type="text"
+            />
+          </div>
+          <button disabled={loading} className="nextButton" type="submit">
+            {loading ? "Loading..." : "Next Step"}
+          </button>
+        </form>
+      </AdContainer>
     </motion.main>
   );
 }

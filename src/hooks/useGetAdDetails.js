@@ -6,28 +6,39 @@ export const useGetAdDetails = (id) => {
   const [adDetails, setAdDetails] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const getAdDetails = async (id) => {
+  const getAdDetails = async (id, signal) => {
     setLoading(true);
     try {
-      const response = await FETCH_AD_DETAILS(id);
-      
+      const response = await FETCH_AD_DETAILS(id, { signal });
 
       if (response) {
         setLoading(false);
-        
+
         setAdDetails(response);
-        console.log(response);
+        // console.log(response);
       }
     } catch (err) {
-      setLoading(false);
-      toast(err.message, {
-        type: "error",
-      });
+      
+      if (err.name !== "AbortError" && err.name !== "CanceledError") {
+        // Only show the error toast if it's not an abort error
+        setLoading(false);
+        toast(err.message, {
+          type: "error",
+        });
+      }
     }
   };
 
   useEffect(() => {
-    getAdDetails(id);
+    const abortController = new AbortController();
+    const { signal } = abortController;
+
+    getAdDetails(id, signal);
+
+    return () => {
+      // Abort the fetch request when the component unmounts
+      abortController.abort();
+    };
   }, []);
 
   return { adDetails, loading };

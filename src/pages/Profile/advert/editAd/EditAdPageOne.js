@@ -480,7 +480,10 @@ export default function EditAdPageOne({ onNextPage }) {
                   />
                   <p className="numberCaption">{index + 1}</p>
                 </div>
-                <button onClick={() => removeImage(index)}>
+                <button onClick={(e) =>{ 
+                  e.preventDefault()
+                  removeImage(index)
+                  }}>
                   <InlineIcon icon="ph:x-bold" />
                 </button>
               </div>

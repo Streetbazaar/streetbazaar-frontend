@@ -45,7 +45,6 @@ export default function AdPageOne({ onNextPage }) {
   const { imageURLs, title, address, state, city, category, subCategory } =
     useSelector((state) => state.input);
     const {categoriesList} = useSelector((state)=>state.adverts)
-    console.log(categoriesList, "Hi from line 119")
 
   const dispatch = useDispatch();
 

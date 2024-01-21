@@ -46,6 +46,17 @@ export const FETCH_CATALOGUE = async (business_id) => {
   }
 };
 
+export const FETCH_CATEGORY = async (id) => {
+  try {
+    const response = await axios.get(
+      `${API_ENDPOINT}/api/categories/${id}`
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const FETCH_AD_DETAILS = async (id,  options = {}) => {
   try {
     const response = await axios.get(`${API_ENDPOINT}/api/adverts/${id}/`, {

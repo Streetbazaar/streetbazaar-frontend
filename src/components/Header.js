@@ -5,6 +5,7 @@ import NotificationsSharpIcon from "@mui/icons-material/NotificationsSharp";
 import Menu from "@mui/material/Menu";
 import { alpha, styled } from "@mui/material/styles";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { css } from "styled-components";
@@ -30,7 +31,6 @@ import {
   closeAnimation,
   openAnimation,
 } from "./styles/styledComponents";
-import toast from "react-hot-toast";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -112,13 +112,13 @@ export default function Header() {
   const { token, isLoggedIn, userProfile } = useSelector((state) => state.user);
 
   const checkUserProfile = () => {
-    if(userProfile.first_name === "" || userProfile.phone_number === "") {
-      toast.error("Please complete your profile to sell your product 🥲")
-      navigate("/profile/settings")
+    if (userProfile.first_name === "" || userProfile.phone_number === "") {
+      toast.error("Please complete your profile to sell your product 🥲");
+      navigate("/profile/settings");
     } else {
-      navigate("/sell-your-product/post-advert")
+      navigate("/sell-your-product/post-advert");
     }
-  }
+  };
 
   return (
     <HeaderContainer>
@@ -220,13 +220,11 @@ export default function Header() {
                     />
                   </div>
 
-                    {showUserActionModal && <Overlay onClick={() => setShowUserActionModal(false)} />}
+                  {showUserActionModal && (
+                    <Overlay onClick={() => setShowUserActionModal(false)} />
+                  )}
                   <UserActionModal showUserActionModal={showUserActionModal}>
-                    <a
-                      className="sellCTA"
-                      onClick={checkUserProfile}
-                      
-                    >
+                    <a className="sellCTA" onClick={checkUserProfile}>
                       <p>Sell Product</p>
                     </a>
                     <a href="/profile/adverts">
@@ -344,9 +342,11 @@ export default function Header() {
                   alt="profile"
                 />
               </div>
-               {showUserActionModal && <Overlay onClick={() => setShowUserActionModal(false)} />}
+              {showUserActionModal && (
+                <Overlay onClick={() => setShowUserActionModal(false)} />
+              )}
               <UserActionModal showUserActionModal={showUserActionModal}>
-                <a onClick={checkUserProfile}  className="sellCTA">
+                <a onClick={checkUserProfile} className="sellCTA">
                   <p>Sell Product</p>
                 </a>
                 <a onClick={() => navigate("/profile/adverts")}>

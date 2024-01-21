@@ -35,6 +35,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import CloseSharpIcon from "@mui/icons-material/CloseSharp";
 import Slide from "@mui/material/Slide";
 import filterIcon from "../../assets/images/filterIcon.png";
+import { useGetCategoryDetail } from "../../hooks/useGetCategoryDetail";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -108,6 +109,7 @@ export default function CategoryDetail() {
   const [showCategories, setShowCategories] = useState(false);
   const [showPrice, setShowPrice] = useState(false);
   const [selectedValue, setSelectedValue] = useState("option1");
+  const {categoryDetails, loading} = useGetCategoryDetail(categoryId)
 
   const handleRadioChange = (event) => {
     setSelectedValue(event.target.value);

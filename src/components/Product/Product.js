@@ -7,6 +7,7 @@ import { useState } from "react";
 
 export default function Product({ image, productName, amount }) {
   const [isFavourite, setIsFavourite] = useState(false);
+  console.log(productName)
   return (
     <ProductCard>
       <img src={image} alt="product image" />

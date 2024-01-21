@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   MainContainer,
   SearchIconDiv,
@@ -16,7 +16,7 @@ import {
   ProductFlexGroup,
 } from "./CategoryDetail.styled";
 import laptopImg from "../../assets/images/laptop.png";
-import Product from "../../components/Product/Product";
+import Product from "../../components/TrendingAds/Trending-Ads";
 import { SearchIconSvg } from "../../components/SvgComponents";
 import { Colors } from "../../utils/colors";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -36,6 +36,12 @@ import CloseSharpIcon from "@mui/icons-material/CloseSharp";
 import Slide from "@mui/material/Slide";
 import filterIcon from "../../assets/images/filterIcon.png";
 import { useGetCategoryDetail } from "../../hooks/useGetCategoryDetail";
+import { useDispatch, useSelector } from "react-redux";
+import { ProductItem } from "../../components/TrendingAds/TrendingAds.styled";
+import { Skeleton } from "@mui/material";
+import TrashImg from "../../assets/images/CharcoDeleteTrash.png"
+import Spinner from "../../components/spinner/Spiner";
+import { fetchAdverts } from "../../features/advertSlice";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -109,8 +115,12 @@ export default function CategoryDetail() {
   const [showCategories, setShowCategories] = useState(false);
   const [showPrice, setShowPrice] = useState(false);
   const [selectedValue, setSelectedValue] = useState("option1");
-  const {categoryDetails, loading} = useGetCategoryDetail(categoryId)
+  // const {categoryDetails, loading} = useGetCategoryDetail(categoryId)
+  const {advertsList, advertStatus} = useSelector(state=> state.adverts);
+  const dispatch = useDispatch()
 
+  const catDetail = advertsList.filter(ad=> ad.category === parseInt(categoryId))
+console.log(catDetail)
   const handleRadioChange = (event) => {
     setSelectedValue(event.target.value);
   };
@@ -124,6 +134,10 @@ export default function CategoryDetail() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  useEffect(()=> {
+    dispatch(fetchAdverts())
+  },[])
 
   return (
     <CategoryDetailContainer>
@@ -397,14 +411,61 @@ export default function CategoryDetail() {
             </div>
           </div>
           <ProductContainer>
-            {products.map((item) => (
-              <Product
-                key={item.id}
-                image={item.image}
-                productName={item.productName}
-                amount={item.amount}
-              />
-            ))}
+            {catDetail
+              ?.filter((product) => product.status === "active")
+              ?.map((product, index) => { 
+                console.log(product)
+                return(
+                  <ProductItem>
+
+                    <Product
+                      id={product?.id}
+                      name={product?.title}
+                      imgURL={product?.pictures[0]?.image_url}
+                      price={product?.price}
+                      product={product}
+                      index={index}
+                    />
+                  </ProductItem>
+              )})}
+            {advertStatus === "loading" && (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  
+                }}
+              >
+                <Spinner />
+              </div>
+            )}
+
+            {advertStatus !== "loading" && catDetail.length === 0 ? (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column"
+                }}
+                className="emptyAd"
+              >
+                <img src={TrashImg} alt="error" />
+                <h1>Oops!</h1>
+                <p>There are no adverts here</p>
+              </div>
+            ) : null}
+            {advertStatus !== "loading" &&
+            catDetail.length != 0 &&
+            catDetail.filter((product) => product.status === "active")
+              .length === 0 ? (
+              <div className="emptyAd">
+                <img src={TrashImg} alt="error" />
+                <h1>Oops!</h1>
+                <p>There are no adverts here</p>
+              </div>
+            ) : null}
           </ProductContainer>
         </ProductFlexGroup>
       </FlexGroupContainer>

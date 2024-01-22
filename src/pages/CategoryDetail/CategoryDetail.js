@@ -47,80 +47,18 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const products = [
-  {
-    id: 1,
-    productName: "Iphone 11 pro max",
-    image: laptopImg,
-    amount: "500,000",
-  },
-  {
-    id: 2,
-    productName: "Iphone 11 pro max",
-    image: laptopImg,
-    amount: "500,000",
-  },
-  {
-    id: 3,
-    productName: "Iphone 11 pro max",
-    image: laptopImg,
-    amount: "500,000",
-  },
-  {
-    id: 4,
-    productName: "Iphone 11 pro max",
-    image: laptopImg,
-    amount: "500,000",
-  },
-  {
-    id: 5,
-    productName: "Iphone 11 pro max",
-    image: laptopImg,
-    amount: "500,000",
-  },
-  {
-    id: 6,
-    productName: "Iphone 11 pro max",
-    image: laptopImg,
-    amount: "500,000",
-  },
-  {
-    id: 7,
-    productName: "Iphone 11 pro max",
-    image: laptopImg,
-    amount: "500,000",
-  },
-  {
-    id: 8,
-    productName: "Iphone 11 pro max",
-    image: laptopImg,
-    amount: "500,000",
-  },
-  {
-    id: 9,
-    productName: "Iphone 11 pro max",
-    image: laptopImg,
-    amount: "500,000",
-  },
-  {
-    id: 10,
-    productName: "Iphone 11 pro max",
-    image: laptopImg,
-    amount: "500,000",
-  },
-];
+
 
 export default function CategoryDetail() {
   const { categoryName, categoryId } = useParams();
   const [showCategories, setShowCategories] = useState(false);
   const [showPrice, setShowPrice] = useState(false);
   const [selectedValue, setSelectedValue] = useState("option1");
-  // const {categoryDetails, loading} = useGetCategoryDetail(categoryId)
   const {advertsList, advertStatus} = useSelector(state=> state.adverts);
   const dispatch = useDispatch()
 
   const catDetail = advertsList.filter(ad=> ad.category === parseInt(categoryId))
-console.log(catDetail)
+
   const handleRadioChange = (event) => {
     setSelectedValue(event.target.value);
   };
@@ -410,7 +348,7 @@ console.log(catDetail)
               </CustomSelect>
             </div>
           </div>
-          <ProductContainer>
+          <ProductContainer style={{width: "100%"}}>
             {catDetail
               ?.filter((product) => product.status === "active")
               ?.map((product, index) => { 

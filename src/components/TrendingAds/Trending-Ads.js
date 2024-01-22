@@ -5,16 +5,8 @@ import { addCommas } from "../../functions";
 // import { cartActions } from "../store/cart-slice";
 
 const Product = ({ name, id, imgURL, price, product }) => {
-  // const dispatch = useDispatch();
-  // const addToCart = () => {
-  //     dispatch(
-  //         cartActions.addToCart({
-  //             name,
-  //             id,
-  //             price,
-  //         })
-  //     );
-  // };
+ const truncatedText =
+   name.length > 15 ? name.slice(0, 15) + "..." : name;
 
   const navigate = useNavigate();
 
@@ -31,7 +23,7 @@ const Product = ({ name, id, imgURL, price, product }) => {
       </div>
       <div className="product-list">
         <div className="product-list1">
-          <h2>{name}</h2>{" "}
+          <h2>{truncatedText}</h2>{" "}
           <svg
             width="25"
             height="25"

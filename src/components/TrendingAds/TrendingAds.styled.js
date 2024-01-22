@@ -165,4 +165,9 @@ export const ProductItem = styled.div`
       margin-top: 15px;
     }
   }
+
+  @media(max-width: 500px) {
+    flex-basis: calc(100% / 2.2);
+    height: fit-content;
+  }
 `;

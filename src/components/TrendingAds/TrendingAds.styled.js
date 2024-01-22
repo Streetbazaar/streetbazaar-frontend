@@ -42,6 +42,14 @@ export const ProductContainer = styled.div`
       width: 80px;
       height: 80px;
     }
+    h1 {
+      color: ${Colors.neutral_color.color900};
+      font-size: 20px;
+    }
+    p {
+      color: ${Colors.neutral_color.color900};
+      font-size: 16px;
+    }
   }
 
   @media screen and (max-width: 900px) {
@@ -167,7 +175,7 @@ export const ProductItem = styled.div`
   }
 
   @media(max-width: 500px) {
-    flex-basis: calc(100% / 2.2);
+    flex-basis: calc(100% / 2.15);
     height: fit-content;
   }
 `;

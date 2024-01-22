@@ -75,7 +75,7 @@ const FlexGroupContainer = styled.div`
     gap: 20px;
     padding-top: 150px;
     padding-left: 20px;
-    width: 80%;
+    width: 400px;
   }
 
   .categoriesList {
@@ -214,7 +214,7 @@ const FlexGroupContainer = styled.div`
     }
   }
 
-  @media (max-width: 780px) {
+  @media (max-width: 1000px) {
     .categoriesList {
       display: none;
     }
@@ -232,6 +232,7 @@ const ProductFlexGroup = styled.div`
   flex-direction: column;
   gap: 20px;
   padding: 20px;
+  width: 100%;
 
   .filterButton {
     display: none;
@@ -253,6 +254,30 @@ const ProductFlexGroup = styled.div`
     align-items: center;
     margin-left: auto;
     gap: 10px;
+  }
+
+  div.emptyAd {
+    display: flex;
+    width: 100%;
+    flex: 1;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    color: ${Colors.neutral_color.color700};
+
+    img {
+      width: 80px;
+      height: 80px;
+    }
+    h1 {
+      color: ${Colors.neutral_color.color900};
+      font-size: 20px;
+    }
+    p {
+      color: ${Colors.neutral_color.color900};
+      font-size: 16px;
+    }
   }
 
   @media (max-width: 780px) {
@@ -281,10 +306,8 @@ const ProductFlexGroup = styled.div`
       .SearchIconDiv {
         left: 80px;
       }
-
-      
     }
-    
+
     .selectGroup {
       display: none;
     }
@@ -491,9 +514,7 @@ const ProductContainer = styled.div`
   gap: 20px;
   flex-wrap: wrap;
 
-  @media (max-width: 780px) {
-    margin: 0 auto;
-  }
+ 
 `;
 
 const CustomSelect = styled.select`

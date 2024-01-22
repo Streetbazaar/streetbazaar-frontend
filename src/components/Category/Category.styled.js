@@ -4,23 +4,12 @@ import { Colors } from "../../utils/colors";
 export const CategoryContainer = styled.div`
   margin-top: 13px;
 `;
-export const CategoryItem = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  width: 100%;
-  height: 1000px;
-  gap: 10px;
-  overflow: auto;
+export const CategoryWrapper = styled.div`
+  display: flex;
+  gap: 20px;
   flex-wrap: wrap;
-
-  @media screen and (max-width: 900px) {
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-  }
-  @media screen and (max-width: 550px) {
-    height: 650px;
-  }
+  
+  justify-content: flex-start;
 `;
 
 export const GridItem1 = styled.div`

@@ -1,33 +1,93 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
+import "../../App.css";
+import { Colors } from "../../utils/colors";
 import {
+  CategoryContainer,
+
+  CategoryWrapper,
+
+  Flex1,
+  Flex1Item1,
+  Flex2,
+  Flex2Item,
+  Flex2Item2,
   GridItem1,
   GridItem2,
   GridItem3,
   GridItem4,
   GridItem5,
   GridItem6,
-  GridItem7,
-  CategoryItem,
-  CategoryContainer,
-  Flex1,
-  Flex2,
-  Flex1Item1,
-  Flex2Item,
-  Flex2Item2,
+  GridItem7
 } from "./Category.styled";
-import { Colors } from "../../utils/colors";
-import image1 from "./Category-images/phone mockup.png";
-import image2 from "./Category-images/Beep Beep Limo.png";
-import image3 from "./Category-images/Beep Beep Luggage.png";
-import image4 from "./Category-images/Shopaholics Medium Shot.png";
-import image5 from "./Category-images/Beep Beep Boxes.png";
-import image6 from "./Category-images/Beep Beep Papers.png";
-import image7 from "./Category-images/The Little Things Business Planning.png";
-import "../../App.css";
 import { Link } from "react-router-dom";
 
 
+const getRandomColor = () => {
+  const colorArray = [
+    Colors.primary_color.color100,
+    Colors.secondary_color.color100,
+    Colors.success_color.color100,
+    Colors.warning_color.color100,
+    Colors.error_color.color100,
+    Colors.neutral_color.color100,
+    Colors.white,
+    Colors.lightPeach,
+    Colors.darkPeach,
+    Colors.skyBlue,
+    Colors.gray,
+    Colors.unknown,
+    Colors.unknown2,
+    
+  ];
+
+  const randomIndex = Math.floor(Math.random() * colorArray.length);
+  return colorArray[randomIndex];
+};
+
+const CategoryItem = styled.div`
+  padding: 20px;
+  background: ${Colors.white};
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 200px;
+  border: 1px solid ${Colors.secondary_color.color100};
+  background: ${getRandomColor};
+  flex-basis: calc(30% - 0px);
+  
+  h2.catTitle {
+    color: ${Colors.neutral_color.color900};
+    font-size: 20px;
+  }
+
+  p {
+    color: ${Colors.neutral_color.color700};
+    font-size: 10px;
+  }
+
+  a {
+    text-decoration: none;
+    color: ${Colors.neutral_color.color700};
+    margin-top: auto;
+    border: 1px solid ${Colors.secondary_color.color100};
+    width: fit-content;
+    padding: 10px;
+    border-radius: 7px;
+  }
+
+  @media (max-width: 768px) {
+    height: fit-content;
+    flex-basis: calc(50% / 2.1);
+  }
+`;
+
+
 export default function Category() {
+  const {categoriesList} = useSelector(state=> state.adverts)
+  
   return (
     <CategoryContainer>
       <h2
@@ -40,138 +100,18 @@ export default function Category() {
       >
         Categories
       </h2>
-  
-      <CategoryItem>
-        <GridItem1 bgColor={Colors.success_color.color100}>
-          <Flex1>
-            <Flex1Item1>
-              <h4>Phones, Tablets, and Smart Watches</h4>
-              <p>203 Products</p>
-            </Flex1Item1>
-          </Flex1>
-          <Flex2>
-            <div>
-              <Link to="category-detail/Phones, Tablets, and Smart Watches 📲/1">
-                <Flex2Item>Buy Now</Flex2Item>
-              </Link>
-            </div>
-            <div>
-              <img src={image1} alt="" />
-            </div>
-          </Flex2>
-        </GridItem1>
 
-        <GridItem2 bgColor={Colors.primary_color.color100}>
-          <Flex1>
-            <Flex1Item1>
-              <h4>Automobile</h4>
-              <p>203 Products</p>
-            </Flex1Item1>
-          </Flex1>
-          <Flex2>
-            <div>
-              <Link to="category-detail/Automobile 🚗/2">
-                <Flex2Item2>Buy Now</Flex2Item2>
-              </Link>
-            </div>
-            <div>
-              <img src={image2} alt="" />
-            </div>
-          </Flex2>
-        </GridItem2>
-
-        <GridItem3 bgColor={Colors.lightPeach}>
-          <Flex1>
-            <Flex1Item1>
-              <h4>Property</h4>
-              <p>203 Products</p>
-            </Flex1Item1>
-          </Flex1>
-          <Flex2>
-            <div>
-              <Link to="category-detail/Property 🏔/3">
-                <Flex2Item2>Buy Now</Flex2Item2>
-              </Link>
-            </div>
-            <div>
-              <img src={image3} alt="" />
-            </div>
-          </Flex2>
-        </GridItem3>
-        <GridItem4 bgColor={Colors.darkPeach}>
-          <Flex1>
-            <Flex1Item1>
-              <h4>Health and Beauty</h4>
-              <p>203 Products</p>
-            </Flex1Item1>
-          </Flex1>
-          <Flex2>
-            <div>
-              <Link to="category-detail/Health and Beauty 🩺💋/4">
-                <Flex2Item2>Buy Now</Flex2Item2>
-              </Link>
-            </div>
-            <div>
-              <img src={image4} alt="" />
-            </div>
-          </Flex2>
-        </GridItem4>
-        <GridItem5 bgColor={Colors.warning_color.color100}>
-          <Flex1>
-            <Flex1Item1>
-              <h4>Services</h4>
-              <p>203 Products</p>
-            </Flex1Item1>
-          </Flex1>
-          <Flex2>
-            <div>
-              <Link to="category-detail/Services 👨‍🔧/6">
-                <Flex2Item2>Buy Now</Flex2Item2>
-              </Link>
-            </div>
-            <div>
-              <img src={image5} alt="" />
-            </div>
-          </Flex2>
-        </GridItem5>
-
-        <GridItem6 bgColor={Colors.skyBlue}>
-          <Flex1>
-            <Flex1Item1>
-              <h4>Others</h4>
-              <p>203 Products</p>
-            </Flex1Item1>
-          </Flex1>
-          <Flex2>
-            <div>
-              <Link to="category-detail/Others 🌄/7">
-                <Flex2Item>Buy Now</Flex2Item>
-              </Link>
-            </div>
-            <div>
-              <img src={image6} alt="" />
-            </div>
-          </Flex2>
-        </GridItem6>
-        <GridItem7 bgColor={Colors.warning_color.color90}>
-          <Flex1>
-            <Flex1Item1>
-              <h4>Business and Industry</h4>
-              <p>203 Products</p>
-            </Flex1Item1>
-          </Flex1>
-          <Flex2>
-            <div>
-              <Link to="category-detail/Business and Industry 🗄/8">
-                <Flex2Item>Buy Now</Flex2Item>
-              </Link>
-            </div>
-            <div>
-              <img src={image7} alt="" />
-            </div>
-          </Flex2>
-        </GridItem7>
-      </CategoryItem>
+      <CategoryWrapper>
+        {categoriesList.map((cat, i) => (
+          <CategoryItem key={cat.id}>
+            <h2 className="catTitle">{cat.title}</h2>
+            <p>206 Products</p>
+            <Link to={`category-detail/${cat.title}/${cat.id}`}>
+              Buy Now
+            </Link>
+          </CategoryItem>
+        ))}
+              </CategoryWrapper>
     </CategoryContainer>
   );
 }

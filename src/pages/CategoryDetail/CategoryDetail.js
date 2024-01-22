@@ -348,14 +348,13 @@ export default function CategoryDetail() {
               </CustomSelect>
             </div>
           </div>
-          <ProductContainer style={{width: "100%"}}>
+          <ProductContainer>
             {catDetail
               ?.filter((product) => product.status === "active")
-              ?.map((product, index) => { 
-                console.log(product)
-                return(
+              ?.map((product, index) => {
+                console.log(product);
+                return (
                   <ProductItem>
-
                     <Product
                       id={product?.id}
                       name={product?.title}
@@ -365,27 +364,17 @@ export default function CategoryDetail() {
                       index={index}
                     />
                   </ProductItem>
-              )})}
-            {advertStatus === "loading" && (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  
-                }}
-              >
-                <Spinner />
-              </div>
-            )}
+                );
+              })}
 
+          </ProductContainer>
             {advertStatus !== "loading" && catDetail.length === 0 ? (
               <div
                 style={{
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  flexDirection: "column"
+                  flexDirection: "column",
                 }}
                 className="emptyAd"
               >
@@ -404,7 +393,17 @@ export default function CategoryDetail() {
                 <p>There are no adverts here</p>
               </div>
             ) : null}
-          </ProductContainer>
+        {advertStatus === "loading" && (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Spinner />
+          </div>
+        )}
         </ProductFlexGroup>
       </FlexGroupContainer>
     </CategoryDetailContainer>

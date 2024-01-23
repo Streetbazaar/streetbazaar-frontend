@@ -78,16 +78,18 @@ const CategoryItem = styled.div`
     width: fit-content;
     padding: 10px;
     border-radius: 7px;
+    font-size: 12px;
   }
 
   @media (max-width: 768px) {
     flex-basis: calc(30% - 0px);
     flex-grow: 1;
     flex-shrink: 0;
+    height: 150px;
 
     h2.catTitle {
       color: ${Colors.neutral_color.color900};
-      font-size: 15px;
+      font-size: 12px;
     }
 
     p {

@@ -2,12 +2,24 @@ import { Skeleton } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TrashImg from "../../assets/images/CharcoDeleteTrash.png";
-import { fetchAdverts } from "../../features/advertSlice";
+import { fetchAdverts, loadMoreAdverts } from "../../features/advertSlice";
 import Product from "./Trending-Ads";
 import image1 from "./TrendingAds-images/image1.png";
 import image2 from "./TrendingAds-images/image2.png";
 import image3 from "./TrendingAds-images/image3.png";
 import { Div, ProductContainer, ProductItem } from "./TrendingAds.styled";
+import styled from "styled-components";
+import { Colors } from "../../utils/colors";
+
+const LoadMoreButton = styled.button`
+  outline: none;
+  border: none;
+  background: none;
+  font-weight: bold;
+  font-size: 20px;
+  color: ${Colors.primary_color.color400};
+  padding: 10px;
+`
 
 const DUMMY_PRODUCTS = [
   {
@@ -61,10 +73,16 @@ const DUMMY_PRODUCTS = [
 ];
 const TrendingProducts = () => {
   const dispatch = useDispatch();
-  const { advertsList, advertStatus } = useSelector((state) => state.adverts);
+  const { advertsList, advertStatus, advertsListNextLink } = useSelector(
+    (state) => state.adverts
+  );
   useEffect(() => {
     dispatch(fetchAdverts());
-  }, [dispatch]);
+  }, []);
+  useEffect(()=>{
+    let x 
+    x++
+  },[advertsList])
   return (
     <>
       {" "}
@@ -94,24 +112,26 @@ const TrendingProducts = () => {
         </svg>
       </Div>
       <ProductContainer>
-        {advertsList?.filter(product=>product.status === "active")?.map((product, index) => (
-          <ProductItem key={index}>
-            <Product
-              id={product?.id}
-              name={product?.title}
-              imgURL={product?.pictures[0]?.image_url}
-              price={product?.price}
-              product={product}
-              index={index}
-            />
-          </ProductItem>
-        ))}
+        {advertsList
+          ?.filter((product) => product.status === "active")
+          ?.map((product, index) => (
+            <ProductItem key={index}>
+              <Product
+                id={product?.id}
+                name={product?.title}
+                imgURL={product?.pictures[0]?.image_url}
+                price={product?.price}
+                product={product}
+                index={index}
+              />
+            </ProductItem>
+          ))}
         {advertStatus === "loading" &&
           DUMMY_PRODUCTS.map((_item, i) => (
             <ProductItem key={i}>
               <Skeleton variant="rounded" width={"100%"} height={200} />
-              <Skeleton  variant="rounded" width={"40%"} height={10} />
-              <Skeleton  variant="rounded" width={"20%"} height={10} />
+              <Skeleton variant="rounded" width={"40%"} height={10} />
+              <Skeleton variant="rounded" width={"20%"} height={10} />
               <Skeleton variant="rounded" width={"100%"} height={46} />
             </ProductItem>
           ))}
@@ -123,7 +143,10 @@ const TrendingProducts = () => {
             <p>There are no adverts here</p>
           </div>
         ) : null}
-        {advertStatus !== "loading" && advertsList.length != 0 && advertsList.filter(product=>product.status === "active").length === 0 ? (
+        {advertStatus !== "loading" &&
+        advertsList.length != 0 &&
+        advertsList.filter((product) => product.status === "active").length ===
+          0 ? (
           <div className="emptyAd">
             <img src={TrashImg} alt="error" />
             <h1>Oops!</h1>
@@ -131,6 +154,13 @@ const TrendingProducts = () => {
           </div>
         ) : null}
       </ProductContainer>
+      {advertsListNextLink && (
+        <LoadMoreButton
+          onClick={() => dispatch(loadMoreAdverts(advertsListNextLink))}
+        >
+          Load more
+        </LoadMoreButton>
+      )}
     </>
   );
 };

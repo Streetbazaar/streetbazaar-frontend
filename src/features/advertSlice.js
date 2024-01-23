@@ -21,6 +21,14 @@ export const fetchAdverts = createAsyncThunk(
     }
 )
 
+export const loadMoreAdverts = createAsyncThunk(
+    "adverts/loadMoreAdverts",
+    async (url) => {
+        const response = await axios.get(`${url}`)
+        return response.data
+    }
+)
+
 export const fetchCategories = createAsyncThunk(
     "categories/fetchCategories",
     async () => {
@@ -34,7 +42,6 @@ export const advertSlice = createSlice({
     name: "adverts",
     initialState,
     reducers: {
-       
     },
     extraReducers: (builder)=>{
         builder.addCase(fetchAdverts.pending, (state, action)=> {
@@ -49,6 +56,22 @@ export const advertSlice = createSlice({
         builder.addCase(fetchAdverts.rejected, (state, action)=> {
             state.advertStatus = "rejected"
         });
+
+        
+        builder.addCase(loadMoreAdverts.pending, (state, action)=> {
+            state.advertStatus = "loading"
+        });
+        builder.addCase(loadMoreAdverts.fulfilled, (state, action)=> {
+          state.advertStatus = "success";
+          // Append the new results to the existing advertsList array
+          state.advertsList = [...state.advertsList, ...action.payload.results];
+          state.advertsListNextLink = action.payload.next;
+        });
+        builder.addCase(loadMoreAdverts.rejected, (state, action)=> {
+            state.advertStatus = "rejected"
+        });
+
+
         builder.addCase(fetchCategories.pending, (state, action)=> {
             state.categoriesStatus = "loading"
         });

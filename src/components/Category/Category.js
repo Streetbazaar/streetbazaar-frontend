@@ -58,6 +58,7 @@ const CategoryItem = styled.div`
   background: ${getRandomColor};
   flex-basis: calc(30% - 0px);
   flex-grow: 1;
+  justify-content: center;
 
   h2.catTitle {
     color: ${Colors.neutral_color.color900};
@@ -80,11 +81,10 @@ const CategoryItem = styled.div`
   }
 
   @media (max-width: 768px) {
-    height: fit-content;
+   
     flex-basis: calc(30% / 0px);
     flex-grow: 1;
     flex-shrink: 0;
-
   }
 `;
 

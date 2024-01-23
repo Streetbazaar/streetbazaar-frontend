@@ -69,7 +69,7 @@ export const ProductItem = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  height: fit-content;
+  
   
   flex-basis: calc(40% / 0px);
     flex-grow: 1;
@@ -145,7 +145,7 @@ export const ProductItem = styled.div`
 
   @media (max-width: 768px) {
     flex-basis: calc(100% / 2.1);
-    height: fit-content;
+   
 
     & > div {
       display: flex;

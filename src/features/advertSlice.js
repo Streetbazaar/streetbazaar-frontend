@@ -5,6 +5,7 @@ import axios from "axios";
 const initialState = {
     advertStatus: "idle",
     advertsList: [],
+    advertsListNextLink: null,
     advertsError: "",
     categoriesList: [],
     categoriesError: "",
@@ -41,7 +42,9 @@ export const advertSlice = createSlice({
         });
         builder.addCase(fetchAdverts.fulfilled, (state, action)=> {
             state.advertStatus = "success"
-            state.advertsList = action.payload
+            state.advertsList = action.payload.results
+            state.advertsListNextLink = action.payload.next
+            
         });
         builder.addCase(fetchAdverts.rejected, (state, action)=> {
             state.advertStatus = "rejected"

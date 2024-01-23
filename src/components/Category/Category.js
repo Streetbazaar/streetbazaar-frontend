@@ -57,7 +57,8 @@ const CategoryItem = styled.div`
   border: 1px solid ${Colors.secondary_color.color100};
   background: ${getRandomColor};
   flex-basis: calc(30% - 0px);
-  
+  flex-grow: 1;
+
   h2.catTitle {
     color: ${Colors.neutral_color.color900};
     font-size: 20px;
@@ -80,7 +81,10 @@ const CategoryItem = styled.div`
 
   @media (max-width: 768px) {
     height: fit-content;
-    flex-basis: calc(50% / 2.1);
+    flex-basis: calc(30% / 0px);
+    flex-grow: 1;
+    flex-shrink: 0;
+
   }
 `;
 
@@ -105,7 +109,7 @@ export default function Category() {
         {categoriesList.map((cat, i) => (
           <CategoryItem key={cat.id}>
             <h2 className="catTitle">{cat.title}</h2>
-            <p>206 Products</p>
+            <p>{cat.adverts_count} Products</p>
             <Link to={`category-detail/${cat.title}/${cat.id}`}>
               Buy Now
             </Link>

@@ -70,7 +70,9 @@ export const ProductItem = styled.div`
   flex-direction: column;
   gap: 10px;
   height: fit-content;
-  flex-basis: calc(50% / 2.1);
+  
+  flex-basis: calc(40% / 0px);
+    flex-grow: 1;
 
   & > div {
     display: flex;

@@ -81,10 +81,19 @@ const CategoryItem = styled.div`
   }
 
   @media (max-width: 768px) {
-   
     flex-basis: calc(30% - 0px);
     flex-grow: 1;
     flex-shrink: 0;
+
+    h2.catTitle {
+      color: ${Colors.neutral_color.color900};
+      font-size: 15px;
+    }
+
+    p {
+      color: ${Colors.neutral_color.color700};
+      font-size: 7px;
+    }
   }
 `;
 

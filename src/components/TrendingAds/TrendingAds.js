@@ -94,7 +94,7 @@ const TrendingProducts = () => {
         </svg>
       </Div>
       <ProductContainer>
-        {advertsList?.slice(0, 20)?.filter(product=>product.status === "active")?.map((product, index) => (
+        {advertsList?.filter(product=>product.status === "active")?.map((product, index) => (
           <ProductItem key={index}>
             <Product
               id={product?.id}

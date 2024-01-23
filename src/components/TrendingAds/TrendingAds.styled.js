@@ -71,7 +71,7 @@ export const ProductItem = styled.div`
   gap: 10px;
   
   
-  flex-basis: calc(40% / 0px);
+  flex-basis: calc(20% - 0px);
     flex-grow: 1;
 
   & > div {
@@ -177,7 +177,6 @@ export const ProductItem = styled.div`
   }
 
   @media(max-width: 500px) {
-    flex-basis: calc(100% / 2.15);
-    height: fit-content;
+    flex-basis: calc(100% - 0px);
   }
 `;

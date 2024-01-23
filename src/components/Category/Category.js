@@ -82,7 +82,7 @@ const CategoryItem = styled.div`
 
   @media (max-width: 768px) {
    
-    flex-basis: calc(30% / 0px);
+    flex-basis: calc(30% - 0px);
     flex-grow: 1;
     flex-shrink: 0;
   }

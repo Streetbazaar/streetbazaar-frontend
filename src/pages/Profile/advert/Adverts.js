@@ -2,14 +2,16 @@ import { InlineIcon } from "@iconify/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../../../components/spinner/Spiner";
-import { fetchUserAdverts } from "../../../features/userAdvertSlice";
+import { fetchMoreUserAdverts, fetchUserAdverts } from "../../../features/userAdvertSlice";
 import AdvertItem from "./AdvertItem";
 import { AdvertContainer, AdvertSelect, ButtonFilter } from "./advert.styled";
 import TrashImg from "../../../assets/images/CharcoDeleteTrash.png";
+import { LoadMoreButton } from "../../../components/styles/styledComponents";
+import { loadMoreAdverts } from "../../../features/advertSlice";
 
 export default function Adverts() {
   const { userProfile, token } = useSelector((state) => state.user);
-  const { advertStatus, myAdvertsList } = useSelector(
+  const { advertStatus, myAdvertsList, myAdvertsNextLink } = useSelector(
     (state) => state.userAdverts
   );
   const dispatch = useDispatch();
@@ -58,6 +60,12 @@ export default function Adverts() {
   useEffect(() => {
     dispatch(fetchUserAdverts(token));
   }, []);
+
+  useEffect(() => {
+    let x;
+    x++;
+  }, [myAdvertsList]);
+
   return (
     <AdvertContainer>
       <h3 className="advertMainHeading">My Adverts</h3>
@@ -124,23 +132,29 @@ export default function Adverts() {
         </div>
 
         <div className="advertsList">
-          {advertStatus !== "loading" && myAdvertsList.filter((advert)=> advert.status === adFilters.adStatus).map((advert, index) => {
-            return <AdvertItem item={advert} key={index} />;
-          })}
-          {advertStatus !== "loading" && myAdvertsList.length != 0 && myAdvertsList.filter((advert)=> advert.status === adFilters.adStatus).length === 0 ? (
-          <div className="emptyAd">
-            <img src={TrashImg} alt="error" />
-            <h1>Oops!</h1>
-            <p>There are no adverts here</p>
-          </div>
-        ) : null}
+          {advertStatus !== "loading" &&
+            myAdvertsList
+              .filter((advert) => advert.status === adFilters.adStatus)
+              .map((advert, index) => {
+                return <AdvertItem item={advert} key={index} />;
+              })}
+          {advertStatus !== "loading" &&
+          myAdvertsList.length != 0 &&
+          myAdvertsList.filter((advert) => advert.status === adFilters.adStatus)
+            .length === 0 ? (
+            <div className="emptyAd">
+              <img src={TrashImg} alt="error" />
+              <h1>Oops!</h1>
+              <p>There are no adverts here</p>
+            </div>
+          ) : null}
           {myAdvertsList.length === 0 ? (
-          <div className="emptyAd">
-            <img src={TrashImg} alt="error" />
-            <h1>Oops!</h1>
-            <p>There are no adverts here</p>
-          </div>
-        ) : null}
+            <div className="emptyAd">
+              <img src={TrashImg} alt="error" />
+              <h1>Oops!</h1>
+              <p>There are no adverts here</p>
+            </div>
+          ) : null}
         </div>
 
         {advertStatus === "loading" && (
@@ -154,6 +168,17 @@ export default function Adverts() {
             <Spinner />
           </div>
         )}
+      {myAdvertsNextLink && advertStatus !== "loading"  ? (
+        <LoadMoreButton
+          onClick={() => {
+            dispatch(fetchMoreUserAdverts({myAdvertsNextLink, token}))
+            
+          }}
+        >
+          Load more...
+        </LoadMoreButton>
+      ): null}
+     
       </div>
     </AdvertContainer>
   );

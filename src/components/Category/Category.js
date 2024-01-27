@@ -1,28 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import "../../App.css";
 import { Colors } from "../../utils/colors";
-import {
-  CategoryContainer,
-
-  CategoryWrapper,
-
-  Flex1,
-  Flex1Item1,
-  Flex2,
-  Flex2Item,
-  Flex2Item2,
-  GridItem1,
-  GridItem2,
-  GridItem3,
-  GridItem4,
-  GridItem5,
-  GridItem6,
-  GridItem7
-} from "./Category.styled";
-import { Link } from "react-router-dom";
-
+import { CategoryContainer, CategoryWrapper } from "./Category.styled";
 
 const getRandomColor = () => {
   const colorArray = [
@@ -39,7 +21,6 @@ const getRandomColor = () => {
     Colors.gray,
     Colors.unknown,
     Colors.unknown2,
-    
   ];
 
   const randomIndex = Math.floor(Math.random() * colorArray.length);
@@ -53,21 +34,29 @@ const CategoryItem = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  height: 200px;
+  height: 270px;
   border: 1px solid ${Colors.secondary_color.color100};
-  background: ${getRandomColor};
+  background: ${Colors.white};
   flex-basis: calc(30% - 0px);
   flex-grow: 1;
   justify-content: center;
 
   h2.catTitle {
     color: ${Colors.neutral_color.color900};
-    font-size: 20px;
+    font-size: 16px;
+  }
+
+  img {
+    width: 90px;
+    height: 90px;
+    object-fit: center;
+    align-self: center;
+    
   }
 
   p {
     color: ${Colors.neutral_color.color700};
-    font-size: 10px;
+    font-size: 9px;
   }
 
   a {
@@ -85,24 +74,29 @@ const CategoryItem = styled.div`
     flex-basis: calc(30% - 0px);
     flex-grow: 1;
     flex-shrink: 0;
-    height: 150px;
+    height: 230px;
+
+    img {
+      width: 70px;
+      height: 70px;
+      object-fit: center;
+    }
 
     h2.catTitle {
       color: ${Colors.neutral_color.color900};
-      font-size: 12px;
+      font-size: 10px;
     }
 
     p {
       color: ${Colors.neutral_color.color700};
-      font-size: 7px;
+      font-size: 6px;
     }
   }
 `;
 
-
 export default function Category() {
-  const {categoriesList} = useSelector(state=> state.adverts)
-  
+  const { categoriesList } = useSelector((state) => state.adverts);
+
   return (
     <CategoryContainer>
       <h2
@@ -121,12 +115,11 @@ export default function Category() {
           <CategoryItem key={cat.id}>
             <h2 className="catTitle">{cat.title}</h2>
             <p>{cat.adverts_count} Products</p>
-            <Link to={`category-detail/${cat.title}/${cat.id}`}>
-              Buy Now
-            </Link>
+            {cat.icon_url && <img src={cat?.icon_url} alt={cat.title} />}
+            <Link to={`category-detail/${cat.title}/${cat.id}`}>Buy Now</Link>
           </CategoryItem>
         ))}
-              </CategoryWrapper>
+      </CategoryWrapper>
     </CategoryContainer>
   );
 }

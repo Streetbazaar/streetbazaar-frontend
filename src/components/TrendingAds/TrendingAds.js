@@ -8,18 +8,10 @@ import image1 from "./TrendingAds-images/image1.png";
 import image2 from "./TrendingAds-images/image2.png";
 import image3 from "./TrendingAds-images/image3.png";
 import { Div, ProductContainer, ProductItem } from "./TrendingAds.styled";
-import styled from "styled-components";
-import { Colors } from "../../utils/colors";
+import { LoadMoreButton } from "../styles/styledComponents";
 
-const LoadMoreButton = styled.button`
-  outline: none;
-  border: none;
-  background: none;
-  font-weight: bold;
-  font-size: 20px;
-  color: ${Colors.primary_color.color400};
-  padding: 10px;
-`
+
+
 
 const DUMMY_PRODUCTS = [
   {

@@ -421,7 +421,17 @@ const ProfileOutletDiv = styled.div`
   @media(max-width: 780px) {
     margin-left: 0;
   }
-`
+`;
+
+const LoadMoreButton = styled.button`
+  outline: none;
+  border: none;
+  background: none;
+  font-weight: bold;
+  font-size: 20px;
+  color: ${Colors.primary_color.color400};
+  padding: 10px;
+`;
 
 export {
   DeskNavDiv,
@@ -444,5 +454,6 @@ export {
   UserActionModal,
   closeAnimation,
   openAnimation,
-  ProfileOutletDiv
+  ProfileOutletDiv,
+  LoadMoreButton
 };

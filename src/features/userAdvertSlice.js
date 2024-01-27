@@ -26,18 +26,30 @@ export const fetchUserAdverts = createAsyncThunk(
   }
 );
 
+export const fetchMoreUserAdverts = createAsyncThunk(
+  "adverts/fetchMoreUserAdverts",
+  async (item) => {
+    console.log(item);
+    const response = await axios.get(item.myAdvertsNextLink, {
+      headers: {
+        Authorization: `Bearer ${item.token}`,
+      },
+    });
+    return response.data;
+  }
+);
+
 export const fetchSingleAdvert = createAsyncThunk(
   "adverts/fetchSingleAdvert",
   async (id) => {
-    const response = await FETCH_AD_DETAILS(id)
-    return response
+    const response = await FETCH_AD_DETAILS(id);
+    return response;
   }
-)
+);
 
 const userAdvertSlice = createSlice({
   name: "userAdverts",
   initialState: {
-    isLoading: false,
     adId: "",
     title: "",
     category: "",
@@ -57,10 +69,11 @@ const userAdvertSlice = createSlice({
     renewalPackageStatus: "idle",
     advertStatus: "idle",
     myAdvertsList: [],
+    myAdvertsNextLink: null,
     advertsError: "",
     singleAdvertDetail: {},
     singleAdvertStatus: "idle",
-    singleAdvertError: ""
+    singleAdvertError: "",
   },
   reducers: {
     editAdvertItem: (state, action) => {
@@ -100,6 +113,7 @@ const userAdvertSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    // fetch renewal packages
     builder.addCase(fetchRenewalPackages.pending, (state) => {
       state.renewalPackageStatus = "loading";
     });
@@ -110,43 +124,64 @@ const userAdvertSlice = createSlice({
     builder.addCase(fetchRenewalPackages.rejected, (state, action) => {
       state.renewalPackageStatus = "rejected";
     });
+    // fetch user adverts
     builder.addCase(fetchUserAdverts.pending, (state, action) => {
       state.advertStatus = "loading";
     });
     builder.addCase(fetchUserAdverts.fulfilled, (state, action) => {
       state.advertStatus = "success";
-      state.myAdvertsList = action.payload;
+      state.myAdvertsList = action.payload.results;
+      state.myAdvertsNextLink = action.payload.next;
     });
     builder.addCase(fetchUserAdverts.rejected, (state, action) => {
       state.advertStatus = "rejected";
     });
-    builder.addCase(fetchSingleAdvert.pending, (state)=> {
-      state.singleAdvertStatus = "loading"
-    })
-    builder.addCase(fetchSingleAdvert.fulfilled, (state, action)=> {
-      state.singleAdvertStatus = "success"
-      console.log(action.payload, "from redux")
-      state.adId = action.payload.id
-      state.address = action.payload.address
-      state.title = action.payload.title
-      state.state = action.payload.state
-      state.city = action.payload.city
-      state.category = action.payload.category_data.title
-      state.subCategory = action.payload.sub_category_data.title
-      state.categoryId = action.payload.category
-      state.subCategoryId = action.payload.sub_category
-      const imageUrls = action.payload.pictures.map(picture => picture.image_url);
-      state.imageURLs = imageUrls
-      state.priceType = action.payload.price_type
-      state.price = action.payload.price
-      state.quantity = action.payload.quantity
-      state.condition = action.payload.condition
-      state.description = action.payload.description
-    })
-    builder.addCase(fetchSingleAdvert.rejected, (state)=> {
-      state.singleAdvertStatus = "rejected"
-      state.singleAdvertError = "Oops there's an error please refresh the page!"
-    })
+
+    // fetch more user adverts with link
+    builder.addCase(fetchMoreUserAdverts.pending, (state, action) => {
+      state.advertStatus = "loading";
+    });
+    builder.addCase(fetchMoreUserAdverts.fulfilled, (state, action) => {
+      state.advertStatus = "success";
+      // Append the new results to the existing advertsList array
+      state.myAdvertsList = [...state.myAdvertsList, ...action.payload.results];
+      state.myAdvertsNextLink = action.payload.next;
+    });
+    builder.addCase(fetchMoreUserAdverts.rejected, (state, action) => {
+      state.advertStatus = "rejected";
+    });
+
+    // fetch single advert
+    builder.addCase(fetchSingleAdvert.pending, (state) => {
+      state.singleAdvertStatus = "loading";
+    });
+    builder.addCase(fetchSingleAdvert.fulfilled, (state, action) => {
+      state.singleAdvertStatus = "success";
+      console.log(action.payload, "from redux");
+      state.adId = action.payload.id;
+      state.address = action.payload.address;
+      state.title = action.payload.title;
+      state.state = action.payload.state;
+      state.city = action.payload.city;
+      state.category = action.payload.category_data.title;
+      state.subCategory = action.payload.sub_category_data.title;
+      state.categoryId = action.payload.category;
+      state.subCategoryId = action.payload.sub_category;
+      const imageUrls = action.payload.pictures.map(
+        (picture) => picture.image_url
+      );
+      state.imageURLs = imageUrls;
+      state.priceType = action.payload.price_type;
+      state.price = action.payload.price;
+      state.quantity = action.payload.quantity;
+      state.condition = action.payload.condition;
+      state.description = action.payload.description;
+    });
+    builder.addCase(fetchSingleAdvert.rejected, (state) => {
+      state.singleAdvertStatus = "rejected";
+      state.singleAdvertError =
+        "Oops there's an error please refresh the page!";
+    });
   },
 });
 

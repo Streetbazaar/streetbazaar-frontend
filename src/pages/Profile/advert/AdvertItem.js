@@ -10,6 +10,8 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { DELETE_ADVERT } from "../../../components/api";
 import { fetchUserAdverts } from "../../../features/userAdvertSlice";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const Modal = ({ isOpen, onClose, id }) => {
   const { token } = useSelector((state) => state.user);
@@ -65,7 +67,7 @@ export default function AdvertItem({ item }) {
   const navigate = useNavigate();
   return (
     <AdvertItemWrapper>
-      <img src={item.pictures[0].image_url} alt="advert" />
+      <LazyLoadImage effect="blur" src={item.pictures[0].image_url} alt="advert" />
 
       <div className="adCaptions">
         <h4>{item.title}</h4>

@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { addCommas } from "../../functions";
-// import { useDispatch } from "react-redux";
-// import { cartActions } from "../store/cart-slice";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const Product = ({ name, id, imgURL, price, product }) => {
  const truncatedText =

@@ -11,6 +11,7 @@ import {
   Form,
   Input,
 } from "./styles/Footer.styled";
+import { Link } from "react-router-dom";
 
 
 // import SocialIcons from "./SocialIcons.Js";
@@ -37,8 +38,16 @@ export default function Footer() {
             <h4>Information</h4>
             <li>Company & Contact info</li>
             <li>Blog</li>
-            <li>Terms of Services</li>
-            <li>Privacy Policy</li>
+            <li>
+
+            <Link to="/terms">Terms of Services</Link>
+            </li>
+            <li>
+
+            <a href="https://www.freeprivacypolicy.com/live/ebf279a9-8cba-4b87-bbdb-0240a56d0ea6" target="_blank" referrerPolicy="no-referrer">
+              Privacy Policy
+            </a>
+            </li>
           </ul>
           <ul>
             <h4>Help & Support</h4>
@@ -68,8 +77,8 @@ export default function Footer() {
                 </div>
               </div>
               <h6>
-                Hello, we are ABC. trying to make an effort to put the right
-                people for you to get the best results. Just insight
+                Hello, we are Streetbazaar. trying to make an effort to put the
+                right people for you to get the best results. Just insight
               </h6>
             </Form>
           </EmailSubscribe>

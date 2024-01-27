@@ -332,6 +332,53 @@ const MainContainer = styled.main`
   margin-top: 120px;
 `;
 
+const TermsContainer = styled.main`
+  padding: 20px;
+  max-width: 1440px;
+  margin: 0 auto;
+  margin-top: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  h1 {
+    color: ${Colors.neutral_color.color900};
+    font-size: 28px;
+  }
+
+  h2 {
+    color: ${Colors.neutral_color.color900};
+    font-size: 24px;
+  }
+
+  h3 {
+    color: ${Colors.neutral_color.color900};
+    font-size: 20px;
+  }
+
+  h4 {
+    color: ${Colors.neutral_color.color900};
+    font-size: 17px;
+  }
+
+  
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    li {
+      list-style: decimal;
+    }
+  }
+`;
+
 const LgCaCtaBtn = styled.button`
   outline: none;
   border: none;
@@ -455,5 +502,6 @@ export {
   closeAnimation,
   openAnimation,
   ProfileOutletDiv,
-  LoadMoreButton
+  LoadMoreButton,
+  TermsContainer
 };

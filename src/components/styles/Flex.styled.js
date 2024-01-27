@@ -10,6 +10,8 @@ export const Flex = styled.div`
   & > div,
   & > ul {
     flex: 1;
+    display: flex;
+    flex-direction: column;
 
     & > h4 {
       color: ${Colors.white};
@@ -29,8 +31,20 @@ export const Flex = styled.div`
       line-height: 17px;
       color: ${Colors.neutral_color.color100};
       opacity: 0.5;
-      min-width: 30px;
-      max-width: 160px;
+
+      &:hover {
+        opacity: 1;
+        cursor: pointer;
+      }
+    }
+    a {
+      font-style: normal;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 17px;
+      color: ${Colors.neutral_color.color100};
+      opacity: 0.5;
+      text-decoration: none;
 
       &:hover {
         opacity: 1;

@@ -30,6 +30,7 @@ import Settings from "./pages/Profile/site_settings/Settings";
 import MyCatalogue from "./pages/mycatalogue/MyCatalogue";
 import { setCookie } from "./setCookie";
 import EditAd from "./pages/Profile/advert/editAd/EditAd";
+import Terms from "./pages/terms/Terms";
 
 function App() {
   setCookie("cookieName", "cookieValue", 7, "None");
@@ -81,6 +82,7 @@ function App() {
               <Route path="product-detail/*" element={<ProductDetails />} />
               <Route path="about" element={<About />} />
               <Route path="contact" element={<Contact />} />
+              <Route path="terms" element={<Terms />}/>
               <Route
                 path="category-detail/:categoryName/:categoryId"
                 element={<CategoryDetail />}

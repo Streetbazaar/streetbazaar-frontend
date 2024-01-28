@@ -49,7 +49,7 @@ export const FETCH_CATALOGUE = async (business_id) => {
 export const FETCH_CATEGORY = async (id) => {
   try {
     const response = await axios.get(
-      `${API_ENDPOINT}/api/categories/${id}`
+      `${API_ENDPOINT}/api/category/details/?category_id=${id}`
     );
     return response.data;
   } catch (error) {

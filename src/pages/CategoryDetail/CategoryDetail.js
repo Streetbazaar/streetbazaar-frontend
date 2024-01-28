@@ -1,11 +1,29 @@
-import React, { useEffect } from "react";
+import CloseSharpIcon from "@mui/icons-material/CloseSharp";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowLeftSharpIcon from "@mui/icons-material/KeyboardArrowLeftSharp";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import KeyboardDoubleArrowRightSharpIcon from "@mui/icons-material/KeyboardDoubleArrowRightSharp";
+import Modal from "@mui/material/Modal";
+import Slide from "@mui/material/Slide";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import TrashImg from "../../assets/images/CharcoDeleteTrash.png";
+import filterIcon from "../../assets/images/filterIcon.png";
+import { SearchIconSvg } from "../../components/SvgComponents";
+import Product from "../../components/TrendingAds/Trending-Ads";
+import { ProductItem } from "../../components/TrendingAds/TrendingAds.styled";
+import Spinner from "../../components/spinner/Spiner";
 import {
-  MainContainer,
+  LoadMoreButton,
   SearchIconDiv,
   SearchInput,
   StyledInput,
 } from "../../components/styles/styledComponents";
-import { Link, useParams } from "react-router-dom";
+import { fetchAdverts } from "../../features/advertSlice";
+import { useGetCategoryDetail } from "../../hooks/useGetCategoryDetail";
 import {
   CategoryDetailContainer,
   ColoredDiv,
@@ -15,49 +33,42 @@ import {
   ProductContainer,
   ProductFlexGroup,
 } from "./CategoryDetail.styled";
-import laptopImg from "../../assets/images/laptop.png";
-import Product from "../../components/TrendingAds/Trending-Ads";
-import { SearchIconSvg } from "../../components/SvgComponents";
-import { Colors } from "../../utils/colors";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { useState } from "react";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import KeyboardDoubleArrowRightSharpIcon from "@mui/icons-material/KeyboardDoubleArrowRightSharp";
-import KeyboardArrowLeftSharpIcon from "@mui/icons-material/KeyboardArrowLeftSharp";
-import Backdrop from "@mui/material/Backdrop";
-import Modal from '@mui/material/Modal';
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import CloseSharpIcon from "@mui/icons-material/CloseSharp";
-import Slide from "@mui/material/Slide";
-import filterIcon from "../../assets/images/filterIcon.png";
-import { useGetCategoryDetail } from "../../hooks/useGetCategoryDetail";
-import { useDispatch, useSelector } from "react-redux";
-import { ProductItem } from "../../components/TrendingAds/TrendingAds.styled";
-import { Skeleton } from "@mui/material";
-import TrashImg from "../../assets/images/CharcoDeleteTrash.png"
-import Spinner from "../../components/spinner/Spiner";
-import { fetchAdverts } from "../../features/advertSlice";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
-
 
 export default function CategoryDetail() {
   const { categoryName, categoryId } = useParams();
   const [showCategories, setShowCategories] = useState(false);
   const [showPrice, setShowPrice] = useState(false);
   const [selectedValue, setSelectedValue] = useState("option1");
-  const {advertsList, advertStatus} = useSelector(state=> state.adverts);
-  const dispatch = useDispatch()
+  const { categoryDetails, nextPage, loading } =
+    useGetCategoryDetail(categoryId);
+  const [advertList, setAdvertList] = useState(categoryDetails);
+  const [nextLink, setNextLink] = useState(nextPage);
+  const [fetching, setFetching] = useState(loading);
 
-  const catDetail = advertsList.filter(ad=> ad.category === parseInt(categoryId))
+  const fetchNextLink = async () => {
+
+    if (nextLink === null) return;
+
+    try {
+      setFetching(true);
+      const res = await axios.get(nextLink);
+
+      if (res.data) {
+        setFetching(false);
+        setAdvertList(() => [...advertList, ...res.data.results.adverts]);
+        setNextLink(res.data.next);
+      }
+    } catch (err) {
+      setFetching(false);
+      toast.error(err.message);
+    }
+  };
+
+  
 
   const handleRadioChange = (event) => {
     setSelectedValue(event.target.value);
@@ -73,10 +84,13 @@ export default function CategoryDetail() {
     setOpen(false);
   };
 
-  useEffect(()=> {
-    dispatch(fetchAdverts())
-  },[])
+  useEffect(() => {
+    setAdvertList(categoryDetails);
+    setFetching(loading);
+    setNextLink(nextPage);
+  }, [loading, categoryDetails, nextPage]);
 
+  console.log(advertList, "line 81");
   return (
     <CategoryDetailContainer>
       <ColoredDiv>
@@ -349,10 +363,9 @@ export default function CategoryDetail() {
             </div>
           </div>
           <ProductContainer>
-            {catDetail
+            {advertList
               ?.filter((product) => product.status === "active")
               ?.map((product, index) => {
-                console.log(product);
                 return (
                   <ProductItem>
                     <Product
@@ -366,44 +379,52 @@ export default function CategoryDetail() {
                   </ProductItem>
                 );
               })}
-
           </ProductContainer>
-            {advertStatus !== "loading" && catDetail.length === 0 ? (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  flexDirection: "column",
-                }}
-                className="emptyAd"
-              >
-                <img src={TrashImg} alt="error" />
-                <h1>Oops!</h1>
-                <p>There are no adverts here</p>
-              </div>
-            ) : null}
-            {advertStatus !== "loading" &&
-            catDetail.length != 0 &&
-            catDetail.filter((product) => product.status === "active")
-              .length === 0 ? (
-              <div className="emptyAd">
-                <img src={TrashImg} alt="error" />
-                <h1>Oops!</h1>
-                <p>There are no adverts here</p>
-              </div>
-            ) : null}
-        {advertStatus === "loading" && (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Spinner />
-          </div>
-        )}
+          {!fetching && advertList?.length === 0 ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+              }}
+              className="emptyAd"
+            >
+              <img src={TrashImg} alt="error" />
+              <h1>Oops!</h1>
+              <p>There are no adverts here</p>
+            </div>
+          ) : null}
+          {fetching &&
+          advertList.length != 0 &&
+          advertList.filter((product) => product.status === "active").length ===
+            0 ? (
+            <div className="emptyAd">
+              <img src={TrashImg} alt="error" />
+              <h1>Oops!</h1>
+              <p>There are no adverts here</p>
+            </div>
+          ) : null}
+          {fetching && (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Spinner />
+            </div>
+          )}
+          {nextLink && !fetching ? (
+            <LoadMoreButton
+              onClick={() => {
+                fetchNextLink()
+              }}
+            >
+              Load more...
+            </LoadMoreButton>
+          ) : null}
         </ProductFlexGroup>
       </FlexGroupContainer>
     </CategoryDetailContainer>

@@ -19,7 +19,7 @@ const Product = ({ name, id, imgURL, price, product }) => {
       }
     >
       <div>
-        <img src={imgURL} alt={name} />
+        <img src={`${imgURL}?q_10`} alt={name} />
       </div>
       <div className="product-list">
         <div className="product-list1">

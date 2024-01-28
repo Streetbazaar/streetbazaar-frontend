@@ -3,7 +3,8 @@ import { toast } from "react-toastify";
 import {FETCH_CATEGORY } from "../components/api";
 
 export const useGetCategoryDetail = (id) => {
-  const [categoryDetails, setCategoryDetails] = useState({});
+  const [categoryDetails, setCategoryDetails] = useState([]);
+  const [nextPage, setNextPage] = useState(null)
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false)
 
@@ -15,8 +16,10 @@ export const useGetCategoryDetail = (id) => {
       if (response) {
         setLoading(false);
 
-        setCategoryDetails(response);
-        console.log(response);
+        setCategoryDetails(response?.results?.adverts);
+        setNextPage(response?.next)
+        console.log(response.next)
+        
       }
     } catch (err) {
       setLoading(false);
@@ -31,5 +34,5 @@ export const useGetCategoryDetail = (id) => {
     getCategoryDetail(id);
   }, []);
 
-  return { categoryDetails, loading };
+  return { categoryDetails, nextPage, loading };
 };

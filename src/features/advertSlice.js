@@ -3,13 +3,15 @@ import { API_ENDPOINT } from "../components/api";
 import axios from "axios";
 
 const initialState = {
-    advertStatus: "idle",
     advertsList: [],
+    investmentAdList: [],
+    categoriesList: [],
     advertsListNextLink: null,
     advertsError: "",
-    categoriesList: [],
     categoriesError: "",
-    categoriesStatus: "idle"
+    advertStatus: "idle",
+    investmentAdStatus: "idle",
+    categoriesStatus: "idle",
 }
 
 
@@ -17,6 +19,14 @@ export const fetchAdverts = createAsyncThunk(
     "adverts/fetchAdverts",
     async () => {
         const response = await axios.get(`${API_ENDPOINT}/api/adverts/`)
+        return response.data
+    }
+)
+
+export const fetchInvestmentAdverts = createAsyncThunk(
+    "adverts/fetchInvestmentAdverts",
+    async () => {
+        const response = await axios.get(`${API_ENDPOINT}/api/invest-ads/`);
         return response.data
     }
 )
@@ -44,6 +54,7 @@ export const advertSlice = createSlice({
     reducers: {
     },
     extraReducers: (builder)=>{
+        /* Advert reducers */ 
         builder.addCase(fetchAdverts.pending, (state, action)=> {
             state.advertStatus = "loading"
         });
@@ -55,6 +66,20 @@ export const advertSlice = createSlice({
         });
         builder.addCase(fetchAdverts.rejected, (state, action)=> {
             state.advertStatus = "rejected"
+        });
+
+        /* Investment Advert extra reducers */ 
+        builder.addCase(fetchInvestmentAdverts.pending, (state, action)=> {
+            state.investmentAdStatus = "loading"
+        });
+        builder.addCase(fetchInvestmentAdverts.fulfilled, (state, action)=> {
+            state.investmentAdStatus = "success"
+            state.investmentAdList = action.payload
+            // state.advertsListNextLink = action.payload.next
+            
+        });
+        builder.addCase(fetchInvestmentAdverts.rejected, (state, action)=> {
+            state.investmentAdStatus = "rejected"
         });
 
         

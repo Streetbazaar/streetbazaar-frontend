@@ -128,7 +128,7 @@ const TrendingProducts = () => {
             </ProductItem>
           ))}
 
-        {advertStatus !== "loading" && advertsList.length === 0 ? (
+        {advertStatus !== "loading" && advertsList?.length === 0 ? (
           <div className="emptyAd">
             <img src={TrashImg} alt="error" />
             <h1>Oops!</h1>
@@ -136,8 +136,8 @@ const TrendingProducts = () => {
           </div>
         ) : null}
         {advertStatus !== "loading" &&
-        advertsList.length != 0 &&
-        advertsList.filter((product) => product.status === "active").length ===
+        advertsList?.length != 0 &&
+        advertsList?.filter((product) => product.status === "active")?.length ===
           0 ? (
           <div className="emptyAd">
             <img src={TrashImg} alt="error" />

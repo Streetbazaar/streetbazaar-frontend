@@ -55,7 +55,7 @@ const Home = () => {
           style={{ width: "100%", aspectRatio: 2 / 1, marginBottom: 20 }}
         />
         <Category />
-        {/* <InvestmentAds /> */}
+        <InvestmentAds />
         <TrendingProducts />
         {/* <Testimonies /> */}
       </MainContainer>

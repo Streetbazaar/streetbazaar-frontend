@@ -1,5 +1,7 @@
 import axios from "axios";
-export const API_ENDPOINT = "https://street-bazr.onrender.com";
+const testUrl = "https://streetzbar-backend.onrender.com"
+const liveUrl = "https://street-bazr.onrender.com";
+export const API_ENDPOINT = testUrl;
 
 export const LOGIN_USER = async (email, password) => {
   try {

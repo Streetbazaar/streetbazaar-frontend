@@ -1,27 +1,26 @@
 import React from "react";
-// import { useDispatch } from "react-redux";
-// import { cartActions } from "../store/cart-slice";
+import { useNavigate } from "react-router-dom";
 
-const InvestmentProduct = ({ name, id, imgURL, price }) => {
-  // const dispatch = useDispatch();
-  // const addToCart = () => {
-  //     dispatch(
-  //         cartActions.addToCart({
-  //             name,
-  //             id,
-  //             price,
-  //         })
-  //     );
-  // };
+
+const InvestmentProduct = ({ name, id, imgURL, price, product, index }) => {
+  const truncatedText = name.length > 15 ? name.slice(0, 15) + "..." : name;
+
+  const navigate = useNavigate();
 
   return (
-    <div>
+    <div
+      onClick={() =>
+        navigate(`/investment-ad-detail/${name}?id=${id}`, {
+          state: { product },
+        })
+      }
+    >
       <div>
         <img src={imgURL} alt={name} />
       </div>
       <div className="product-list">
         <div className="product-list1">
-          <h2>{name}</h2>{" "}
+          <h2>{truncatedText}</h2>{" "}
           <svg
             width="25"
             height="25"

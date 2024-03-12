@@ -31,6 +31,7 @@ import MyCatalogue from "./pages/mycatalogue/MyCatalogue";
 import { setCookie } from "./setCookie";
 import EditAd from "./pages/Profile/advert/editAd/EditAd";
 import Terms from "./pages/terms/Terms";
+import InvestmentAdDetails from "./pages/InvestmentAds/InvestmentAdDetails/InvestmentAdDetails";
 
 function App() {
   setCookie("cookieName", "cookieValue", 7, "None");
@@ -80,6 +81,7 @@ function App() {
             <Route errorElement={<ErrorPage />} path="/" element={<Layout />}>
               <Route index element={<Home />} />
               <Route path="product-detail/*" element={<ProductDetails />} />
+              <Route path="investment-ad-detail/*" element={<InvestmentAdDetails />} />
               <Route path="about" element={<About />} />
               <Route path="contact" element={<Contact />} />
               <Route path="terms" element={<Terms />}/>

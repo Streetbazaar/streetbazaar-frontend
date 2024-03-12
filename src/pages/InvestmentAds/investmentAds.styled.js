@@ -60,15 +60,14 @@ export const ProductContainer = styled.div`
 `;
 
 export const ProductItem = styled.div`
-   padding: 11px;
+  padding: 11px;
   background: ${Colors.gray};
   border-radius: 2px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 
-  flex-basis: calc(20% - 0px);
-  flex-grow: 1;
+  flex-basis: calc(25% - 0px);
 
   & > div {
     display: flex;
@@ -185,7 +184,6 @@ export const ProductItem = styled.div`
       line-height: 24px;
       margin-top: auto;
       align-self: center;
-      
     }
   }
 `;

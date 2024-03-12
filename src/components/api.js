@@ -70,6 +70,17 @@ export const FETCH_AD_DETAILS = async (id,  options = {}) => {
   }
 };
 
+export const FETCH_INVESTMENT_AD_DETAILS = async (id,  options = {}) => {
+  try {
+    const response = await axios.get(`${API_ENDPOINT}/api/invest-ads/${id}/`, {
+      ...options
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const POST_ADVERT = async (
   title,
   categoryId,

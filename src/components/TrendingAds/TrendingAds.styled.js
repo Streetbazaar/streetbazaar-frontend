@@ -69,8 +69,8 @@ export const ProductItem = styled.div`
   flex-direction: column;
   gap: 10px;
 
-  flex-basis: calc(20% - 0px);
-  flex-grow: 1;
+  flex-basis: calc(25% - 0px);
+  
 
   & > div {
     display: flex;

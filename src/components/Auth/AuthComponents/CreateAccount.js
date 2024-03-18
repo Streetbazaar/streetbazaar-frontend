@@ -49,7 +49,7 @@ export default function CreateAccount(props) {
         // console.log(data);
         setLoading(false);
         dispatch(updateUserProfile(data?.user));
-        dispatch(updateToken(data?.access_token));
+        dispatch(updateToken(data?.access));
         props.onClose();
         toast("Account created successfully", {
           type: "success",

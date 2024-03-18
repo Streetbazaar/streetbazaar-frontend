@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { addCommas } from "../../functions";
 
 
 const InvestmentProduct = ({ name, id, imgURL, price, product, index }) => {
@@ -59,7 +60,7 @@ const InvestmentProduct = ({ name, id, imgURL, price, product, index }) => {
         </div>
       </div>
       <div className="product-list2">
-        <p>{price}</p>
+        <p>{addCommas(price)}</p>
       </div>
       <button>Buy to resell</button>
     </div>

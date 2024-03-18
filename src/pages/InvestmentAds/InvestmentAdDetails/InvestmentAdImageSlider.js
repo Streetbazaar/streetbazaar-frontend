@@ -1,29 +1,48 @@
 import { InlineIcon } from "@iconify/react";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  addCommas,
-  formatDateString,
-  formatRelativeTime,
-} from "../../../functions";
+import { INVEST_AD_PAY } from "../../../components/api";
+import { addCommas, formatDateString } from "../../../functions";
 import {
   ImageSliderContainer,
   MainImage,
   SingleImage,
 } from "./InvestmentAdDetails.styled";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
 
 export default function InvestmentAdImageSlider({ product }) {
   const { token } = useSelector((state) => state.user);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [translateSign, setTranslateSign] = useState(1); // Default to positive sign
+  const [loading, setLoading] = useState(false);
   const [isSwiping, setIsSwiping] = useState(false);
   const [showContact, setShowContact] = useState(false);
   const SWIPE_THRESHOLD = 10; // Adjust as needed
   let touchStartX = null;
   const navigate = useNavigate();
+
+  const investAdPayment = async () => {
+    try {
+      setLoading(true);
+      const res = await INVEST_AD_PAY(product.id, token);
+
+      if (res) {
+        setLoading(false);
+        console.log(res);
+      }
+    } catch (err) {
+      setLoading(false);
+      if(err?.response?.data?.detail) {
+
+        toast.error(err?.response?.data?.detail);
+      } else {
+
+        toast.error(err.message);
+      }
+    }
+  };
 
   const nextImage = () => {
     setActiveImageIndex(
@@ -74,7 +93,8 @@ export default function InvestmentAdImageSlider({ product }) {
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
-            src={product.pictures[activeImageIndex].image_url}
+            src={product?.advert_image_url}
+            // src={product?.pictures[activeImageIndex]?.advert_image_url}
             alt="product"
             // translateSign={translateSign}
             // activeIndex={activeImageIndex}
@@ -83,13 +103,19 @@ export default function InvestmentAdImageSlider({ product }) {
         </div>
 
         <div className="imagesList">
-          {product.pictures.map((image, i) => (
+          <SingleImage
+            onClick={() => setActiveImageIndex(0)}
+            src={product.advert_image_url}
+            // src={image?.advert_image_url}
+          />
+          {/* {product.pictures.map((image, i) => (
             <SingleImage
               key={i}
               onClick={() => setActiveImageIndex(i)}
-              src={image?.image_url}
+              src={product.advert_image_url}
+              // src={image?.advert_image_url}
             />
-          ))}
+          ))} */}
         </div>
       </div>
 
@@ -103,9 +129,7 @@ export default function InvestmentAdImageSlider({ product }) {
           <InlineIcon icon="ph:dot" />
           <div className="detailsWrapper">
             <span>Location: </span>
-            <span>
-              {product.city}, {product.state}
-            </span>
+            <span>{product.address}</span>
           </div>
         </div>
 
@@ -113,34 +137,28 @@ export default function InvestmentAdImageSlider({ product }) {
           <div className="ownerGroup">
             <h5>Current Price</h5>
             <div className="priceWrapper">
-              <h2>₦ {addCommas(product.price)}</h2>
+              <h2>₦ {addCommas(product.current_price)}</h2>
             </div>
           </div>
           <div className="ownerGroup">
             <h5>Return on Investement on this product will be</h5>
             <div className="priceWrapper">
-              <h2>₦ {addCommas(product.price)}</h2>
+              <h2>₦ {addCommas(product.return_price)}</h2>
             </div>
           </div>
           <div className="ownerGroup">
             <h5>Investment Duration</h5>
-            <p>{formatRelativeTime(product.owner_data.created_at)}</p>
+            <p>{product.investment_duration}</p>
           </div>
         </div>
 
         <div className="buttonsGroup">
           <button
-            onClick={() => setShowContact(!showContact)}
-            disabled={token ? false : true}
+            onClick={investAdPayment}
+            disabled={token && !loading ? false : true}
             className="showContactBtn"
           >
-            {showContact ? (
-              <a href={`tel:${product?.owner_data?.phone_number}`}>
-                {product?.owner_data?.phone_number}
-              </a>
-            ) : (
-              <p>Buy to Resell</p>
-            )}
+            <p>{loading ? "Buying...." : "Buy to Resell"}</p>
           </button>
         </div>
       </div>

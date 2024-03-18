@@ -86,7 +86,7 @@ const InvestmentAds = () => {
                 id={product?.id}
                 name={product?.title}
                 imgURL={product?.advert_image_url}
-                price={product?.price}
+                price={product?.current_price}
                 product={product}
                 index={index}
               />

@@ -283,3 +283,24 @@ export const DELETE_ADVERT = async (id, token) => {
     throw error
   }
 }
+
+export const INVEST_AD_PAY = async (id, token) => {
+  try {
+    const response = await axios.post(
+      `${API_ENDPOINT}/api/invest-ad-payment/`,
+      {
+        invest_ad: id,
+        payment_option: "wallet",
+
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.status
+  } catch(error) {
+    throw error
+  }
+}

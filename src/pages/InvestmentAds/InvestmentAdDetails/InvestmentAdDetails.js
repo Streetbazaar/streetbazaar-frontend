@@ -49,7 +49,7 @@ export default function InvestmentAdDetails() {
                   description={adDetails?.description}
                   name="Streetbazaar"
                   type="product detail"
-                  ogImage={adDetails?.pictures[0].image_url}
+                  ogImage={adDetails?.advert_image_url}
                 />
                 <InvestmentAdImageSlider product={adDetails} />
               </>

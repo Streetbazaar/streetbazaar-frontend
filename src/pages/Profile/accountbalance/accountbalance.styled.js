@@ -163,4 +163,87 @@ const AccountBalanceContainer = styled.div`
   }
 `;
 
-export { AccountBalanceContainer };
+const PaymentModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  z-index: 1000; /* Make sure it's above other content */
+`;
+
+const PaymentModalContent = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  width: 80%;
+  max-width: 500px;
+  z-index: 1001; /* Make sure it's above the overlay */
+  height: f200px;
+  border-radius: 10px;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 10px;
+  }
+
+  .closeButton {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    outline: none;
+    border: none;
+    background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid red;
+    color: red;
+    border-radius: 30px;
+  }
+
+  div {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+
+    button {
+      outline: none;
+      border: none;
+      background: noen;
+      display: flex;
+      padding: 20px;
+      border-radius: 7px;
+    }
+
+    button.deleteBtn {
+      color: ${Colors.white};
+      background-color: ${Colors.error_color.color500};
+
+      &:disabled {
+        opacity: 0.5;
+      }
+    }
+    button.exitBtn {
+      border: 1px solid ${Colors.neutral_color.color700};
+
+      &:disabled {
+        opacity: 0.5;
+      }
+    }
+  }
+`;
+
+export { AccountBalanceContainer, PaymentModalContent, PaymentModalOverlay };

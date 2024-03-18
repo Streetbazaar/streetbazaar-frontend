@@ -18,53 +18,41 @@ export default function Performance() {
       id: 1,
       title: "Impressions",
       months: [
-        "August 2023",
-        "September 2023",
-        "October 2023",
-        "November 2023",
-        "December 2023",
+        "Select month",
+        
       ],
-      numOfView: 5000,
-      percentage: "+50%",
+      numOfView: 0,
+      percentage: "0%",
     },
     {
       id: 2,
       title: "Visitors",
       months: [
-        "August 2023",
-        "September 2023",
-        "October 2023",
-        "November 2023",
-        "December 2023",
+        "Select month",
+       
       ],
-      numOfView: 5000,
-      percentage: "+50%",
+      numOfView: 0,
+      percentage: "0%",
     },
     {
       id: 3,
       title: "Phone View",
       months: [
-        "August 2023",
-        "September 2023",
-        "October 2023",
-        "November 2023",
-        "December 2023",
+        "Select month",
+        
       ],
-      numOfView: 5000,
-      percentage: "+50%",
+      numOfView: 0,
+      percentage: "0%",
     },
     {
       id: 4,
       title: "Chat Requests",
       months: [
-        "August 2023",
-        "September 2023",
-        "October 2023",
-        "November 2023",
-        "December 2023",
+        "Select month",
+        
       ],
-      numOfView: 5000,
-      percentage: "+50%",
+      numOfView: 0,
+      percentage: "0%",
     },
   ];
   return (

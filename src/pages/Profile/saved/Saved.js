@@ -2,6 +2,7 @@ import { InlineIcon } from "@iconify/react";
 import React from "react";
 import { useSelector } from "react-redux";
 import { SavedContainer, SavedItem } from "./saved.styled";
+import { Colors } from "../../../utils/colors";
 
 export default function Saved() {
   const { userProfile } = useSelector((state) => state.user);
@@ -100,7 +101,8 @@ export default function Saved() {
         </div>
 
         <div className="savedAdsContainer">
-          {savedAds.map((savedAd) => (
+          <h4 style={{ textAlign: "center", color: Colors.neutral_color.color600 }}>Coming soon 🚧</h4>
+          {/* {savedAds.map((savedAd) => (
             <SavedItem key={savedAd.id}>
               <img
                 className="productPhoto"
@@ -128,7 +130,7 @@ export default function Saved() {
                 <InlineIcon icon="ph:x-bold" />
               </button>
             </SavedItem>
-          ))}
+          ))} */}
         </div>
       </div>
     </SavedContainer>

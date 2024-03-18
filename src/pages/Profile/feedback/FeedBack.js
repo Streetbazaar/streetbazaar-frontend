@@ -124,7 +124,15 @@ export default function FeedBack() {
         </div>
 
         <div className="feedbackWrapper">
-          {feedbacks.map((feedback) => (
+          <h4
+            style={{
+              textAlign: "center",
+              color: Colors.neutral_color.color600,
+            }}
+          >
+            Coming soon 🚧
+          </h4>
+          {/* {feedbacks.map((feedback) => (
             <FeedBackItem key={feedback.id}>
               <img
                 className="userPhoto"
@@ -175,7 +183,7 @@ export default function FeedBack() {
                 <p className="ratingText">{feedback.rating} Rating</p>
               </div>
             </FeedBackItem>
-          ))}
+          ))} */}
         </div>
       </div>
     </FeedBackContainer>

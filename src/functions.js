@@ -141,3 +141,7 @@ export function formatRelativeTime(dateString) {
     return `${years} ${years === 1 ? 'year' : 'years'}`;
   }
 }
+
+export const formatNumberWithCommas = (number) => {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};

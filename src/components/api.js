@@ -1,5 +1,5 @@
 import axios from "axios";
-const testUrl = "https://streetzbar-backend.onrender.com"
+const testUrl = "https://streetzbar-backend.onrender.com";
 const liveUrl = "https://street-bazr.onrender.com";
 export const API_ENDPOINT = testUrl;
 
@@ -59,10 +59,10 @@ export const FETCH_CATEGORY = async (id) => {
   }
 };
 
-export const FETCH_AD_DETAILS = async (id,  options = {}) => {
+export const FETCH_AD_DETAILS = async (id, options = {}) => {
   try {
     const response = await axios.get(`${API_ENDPOINT}/api/adverts/${id}/`, {
-      ...options
+      ...options,
     });
     return response.data;
   } catch (error) {
@@ -70,10 +70,10 @@ export const FETCH_AD_DETAILS = async (id,  options = {}) => {
   }
 };
 
-export const FETCH_INVESTMENT_AD_DETAILS = async (id,  options = {}) => {
+export const FETCH_INVESTMENT_AD_DETAILS = async (id, options = {}) => {
   try {
     const response = await axios.get(`${API_ENDPOINT}/api/invest-ads/${id}/`, {
-      ...options
+      ...options,
     });
     return response.data;
   } catch (error) {
@@ -138,7 +138,7 @@ export const UPDATE_ADVERT = async (
   description,
   imageURLs,
   quantity,
-  token,
+  token
 ) => {
   try {
     const response = await axios.put(
@@ -272,17 +272,16 @@ export const UPDATE_BUSINESS_DETAILS = async (
 
 export const DELETE_ADVERT = async (id, token) => {
   try {
-    const response = await axios.delete(`${API_ENDPOINT}/api/adverts/${id}/`,
-    {
+    const response = await axios.delete(`${API_ENDPOINT}/api/adverts/${id}/`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    })
-    return response.status
-  } catch(error) {
-    throw error
+    });
+    return response.status;
+  } catch (error) {
+    throw error;
   }
-}
+};
 
 export const INVEST_AD_PAY = async (id, token) => {
   try {
@@ -291,7 +290,6 @@ export const INVEST_AD_PAY = async (id, token) => {
       {
         invest_ad: id,
         payment_option: "wallet",
-
       },
       {
         headers: {
@@ -299,8 +297,29 @@ export const INVEST_AD_PAY = async (id, token) => {
         },
       }
     );
-    return response.status
-  } catch(error) {
-    throw error
+    return response.status;
+  } catch (error) {
+    throw error;
   }
-}
+};
+
+export const WALLET_DEPOSIT = async (amount, ref, token) => {
+  console.log(amount, ref, token);
+  try {
+    const response = await axios.post(
+      `${API_ENDPOINT}/api/wallet/deposit/`,
+      {
+        amount,
+        reference: ref,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};

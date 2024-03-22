@@ -20,7 +20,7 @@ import {
 
 // you can call this function anything
 
-const Modal = ({ isOpen, onClose, url }) => {
+export const ConfirmationModal = ({ isOpen, onClose, url }) => {
   if (!isOpen) return null;
 
   return ReactDOM.createPortal(
@@ -143,7 +143,6 @@ export default function AdPageThree() {
       transition={{ duration: 10, type: "spring", stiffness: 100 }}
     >
       {" "}
-
       <AdPricesContainer>
         {packageStatus === "loading" ? (
           <div
@@ -223,7 +222,11 @@ export default function AdPageThree() {
             })}
           </>
         )}
-        <Modal isOpen={isModalOpen} onClose={closeModal} url={externalUrl} />
+        <ConfirmationModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          url={externalUrl}
+        />
       </AdPricesContainer>
     </motion.main>
   );

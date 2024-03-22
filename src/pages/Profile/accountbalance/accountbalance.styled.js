@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { Colors } from "../../../utils/colors";
 
 const AccountBalanceContainer = styled.div`
-
   max-width: 1440px;
   margin-top: 120px;
   display: flex;
@@ -179,71 +178,124 @@ const PaymentModalContent = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
-  padding: 20px;
   width: 80%;
   max-width: 500px;
   z-index: 1001; /* Make sure it's above the overlay */
-  height: f200px;
   border-radius: 10px;
   display: flex;
-  gap: 20px;
+  gap: 10px;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 
-  p {
-    text-align: center;
-    font-size: 20px;
-    margin-top: 10px;
-  }
-
-  .closeButton {
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    outline: none;
-    border: none;
-    background: none;
+  div.headingWrapper {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    width: 30px;
-    height: 30px;
-    border: 1px solid red;
-    color: red;
-    border-radius: 30px;
+    border-bottom: 1px solid ${Colors.neutral_color.color600};
+    padding: 20px;
+    color: ${Colors.neutral_color.color700};
+    
+       .closeButton {
+        outline: none;
+        border: none;
+        background: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+        font-weight: bold;
+        color: ${Colors.neutral_color.color700};
+      }
   }
 
-  div {
+  form.fundForm {
+    padding: 20px;
     display: flex;
-    gap: 10px;
-    justify-content: flex-end;
+    flex-direction: column;
+    gap: 20px;
+    
+    div.amountWrapper {
+        width: 100%;
+        gap: 10px;
+        display: flex;
+        flex-direction: column;
+    
+        div.inputWrapper {
+          border: 1px solid ${Colors.neutral_color.color500};
+          border-radius: 7px;
+          width: 100%;
+          display: flex;
+          align-items: center;
 
-    button {
-      outline: none;
-      border: none;
-      background: noen;
-      display: flex;
-      padding: 20px;
-      border-radius: 7px;
-    }
-
-    button.deleteBtn {
-      color: ${Colors.white};
-      background-color: ${Colors.error_color.color500};
-
-      &:disabled {
-        opacity: 0.5;
+          label {
+            font-size: 15px;
+            color: ${Colors.neutral_color.color700};
+          }
+    
+          p {
+            background-color: ${Colors.neutral_color.color400};
+            height: 100%;
+            padding: 20px;
+            border-radius: 7px 0px 0px 7px;
+            color: ${Colors.neutral_color.color600};
+          }
+    
+          input {
+            padding: 20px;
+            border: none;
+            outline: none;
+            width: 100%;
+            background: none;
+            font-size: 15px;
+          }
+        }
+    
       }
-    }
-    button.exitBtn {
-      border: 1px solid ${Colors.neutral_color.color700};
+    
+      div.buttonsGroup {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
 
-      &:disabled {
-        opacity: 0.5;
+        
+    
+        button {
+          outline: none;
+          border: none;
+          background: none;
+          padding: 20px;
+          border-radius: 6px;
+          font-size: 15px;
+          
+    
+          &:hover {
+            opacity: 0.5;
+          }
+    
+          &:disabled {
+            opacity: 0.5;
+          }
+        }
+    
+        button.payNowBtn {
+          background-color: ${Colors.primary_color.color500};
+          width: 100%;
+          color: ${Colors.white};
+        }
+    
+        button.payWBBtn {
+          width: 100%;
+          border: 2px solid ${Colors.neutral_color.color500};
+          color: ${Colors.neutral_color.color800};
+        }
       }
     }
   }
+
+
+
+ 
 `;
 
 export { AccountBalanceContainer, PaymentModalContent, PaymentModalOverlay };

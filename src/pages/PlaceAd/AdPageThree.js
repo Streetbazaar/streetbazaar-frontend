@@ -79,7 +79,7 @@ export default function AdPageThree() {
   const config = {
     email: userProfile?.email,
     amount: amountVal * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-    publicKey: process.env.REACT_APP_PAYSTACK_TEST_KEY,
+    publicKey: process.env.REACT_APP_PAYSTACK_LIVE_KEY,
   };
   const initializePayment = usePaystackPayment(config);
 

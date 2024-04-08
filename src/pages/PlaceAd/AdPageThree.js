@@ -156,70 +156,78 @@ export default function AdPageThree() {
           </div>
         ) : (
           <>
-            {packages?.map((item, i) => {
-              const isActive = item.title === "Standard Plan";
-              const currentPriceType = priceType[item.id] || "weekly"; // Default to weekly if not set
-              // Debugging: Log the raw content of item.description
-              // console.log("Raw item.description:", item.description);
-              const price =
-                currentPriceType === "weekly"
-                  ? item.weekly_amount
-                  : item.monthly_amount;
-              const descriptionArray = item.description.split("/\r?\n/");
-              // console.log(descriptionArray)
+            {packages && packages
+              ?.sort((a, b) => {
+                const priceTypeA = priceType[a.id] || "weekly";
+                const priceTypeB = priceType[b.id] || "weekly";
+                console.log(priceTypeA, priceTypeB, "from line 163", a, b)
+                
+                return Number(a?.weekly_amount) - Number(b.weekly_amount);
+              })
+              ?.map((item, i) => {
+                const isActive = item.title === "Standard Plan";
+                const currentPriceType = priceType[item.id] || "weekly"; // Default to weekly if not set
+                // Debugging: Log the raw content of item.description
+                // console.log("Raw item.description:", item.description);
+                const price =
+                  currentPriceType === "weekly"
+                    ? item.weekly_amount
+                    : item.monthly_amount;
+                const descriptionArray = item.description.split("/\r?\n/");
+                // console.log(descriptionArray)
 
-              return (
-                <AdItem isActive={isActive} key={item.id}>
-                  {isActive && <p className="recommendedItem">Recommended</p>}
-                  <h3 className="adTitle">{item.title}</h3>
-                  <div className="priceContainer">
-                    <h2 className="priceTitle">₦ {addCommas(price)}</h2>
-                    <div className="priceSelectors">
-                      <AdItemCustomPriceButton
-                        isActive={isActive}
-                        isSelected={currentPriceType === "weekly"}
-                        onClick={() => togglePriceType(item.id, "weekly")}
-                        className="priceSelector"
-                      >
-                        Weekly
-                      </AdItemCustomPriceButton>
-                      <AdItemCustomPriceButton
-                        isActive={isActive}
-                        isSelected={currentPriceType === "monthly"}
-                        onClick={() => togglePriceType(item.id, "monthly")}
-                        className="priceSelector"
-                      >
-                        Monthly
-                      </AdItemCustomPriceButton>
-                    </div>
-                  </div>
-                  <div className="featuresContainer">
-                    <h3 className="featuresHeading">Features</h3>
-                    <p className="featuresSubCaption">
-                      Everything in our basic plan plus
-                    </p>
-                    {descriptionArray.map((description, i) => (
-                      <div key={i} className="descriptionText">
-                        <InlineIcon icon="lucide:check-circle" />
-                        <p>{description}</p>
+                return (
+                  <AdItem isActive={isActive} key={item.id}>
+                    {isActive && <p className="recommendedItem">Recommended</p>}
+                    <h3 className="adTitle">{item.title}</h3>
+                    <div className="priceContainer">
+                      <h2 className="priceTitle">₦ {addCommas(price)}</h2>
+                      <div className="priceSelectors">
+                        <AdItemCustomPriceButton
+                          isActive={isActive}
+                          isSelected={currentPriceType === "weekly"}
+                          onClick={() => togglePriceType(item.id, "weekly")}
+                          className="priceSelector"
+                        >
+                          Weekly
+                        </AdItemCustomPriceButton>
+                        <AdItemCustomPriceButton
+                          isActive={isActive}
+                          isSelected={currentPriceType === "monthly"}
+                          onClick={() => togglePriceType(item.id, "monthly")}
+                          className="priceSelector"
+                        >
+                          Monthly
+                        </AdItemCustomPriceButton>
                       </div>
-                    ))}
-                  </div>
-                  <button
-                    className="paymentButton"
-                    onClick={() => {
-                      setAmountVal(price);
-                      setSelectedPackage(currentPriceType);
-                      setSelectedPackageId(item.id);
+                    </div>
+                    <div className="featuresContainer">
+                      <h3 className="featuresHeading">Features</h3>
+                      <p className="featuresSubCaption">
+                        Everything in our basic plan plus
+                      </p>
+                      {descriptionArray.map((description, i) => (
+                        <div key={i} className="descriptionText">
+                          <InlineIcon icon="lucide:check-circle" />
+                          <p>{description}</p>
+                        </div>
+                      ))}
+                    </div>
+                    <button
+                      className="paymentButton"
+                      onClick={() => {
+                        setAmountVal(price);
+                        setSelectedPackage(currentPriceType);
+                        setSelectedPackageId(item.id);
 
-                      // console.log(currentPriceType, item.id, price);
-                    }}
-                  >
-                    Proceed to payment
-                  </button>
-                </AdItem>
-              );
-            })}
+                        // console.log(currentPriceType, item.id, price);
+                      }}
+                    >
+                      Proceed to payment
+                    </button>
+                  </AdItem>
+                );
+              })}
           </>
         )}
         <ConfirmationModal

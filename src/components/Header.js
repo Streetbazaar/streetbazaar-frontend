@@ -142,7 +142,7 @@ export default function Header() {
           />
         </a>
         <DeskNavDiv>
-          <StyledLinks href="#">About</StyledLinks>
+          <StyledLinks href="/about">About</StyledLinks>
           <StyledLinks href="#">Blog</StyledLinks>
           <div style={{ display: "flex", gap: 20 }}>
             {token === "" ? (

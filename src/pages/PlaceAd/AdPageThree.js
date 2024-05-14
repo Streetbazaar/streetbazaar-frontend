@@ -156,14 +156,14 @@ export default function AdPageThree() {
           </div>
         ) : (
           <>
-            {packages && packages
-              ?.sort((a, b) => {
-                const priceTypeA = priceType[a.id] || "weekly";
-                const priceTypeB = priceType[b.id] || "weekly";
-                console.log(priceTypeA, priceTypeB, "from line 163", a, b)
-                
-                return Number(a?.weekly_amount) - Number(b.weekly_amount);
-              })
+        {packages && [...packages]  // Create a shallow copy of the packages array
+        .sort((a, b) => {
+          const priceTypeA = priceType[a.id] || "weekly";
+          const priceTypeB = priceType[b.id] || "weekly";
+          console.log(priceTypeA, priceTypeB, "from line 163", a, b)
+          
+          return Number(a?.weekly_amount) - Number(b.weekly_amount);
+        })
               ?.map((item, i) => {
                 const isActive = item.title === "Standard Plan";
                 const currentPriceType = priceType[item.id] || "weekly"; // Default to weekly if not set

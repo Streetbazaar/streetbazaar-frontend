@@ -1,5 +1,7 @@
 // Contact.js
 import React from 'react';
+import { useNavigate } from "react-router-dom";
+
 import { 
   ContactContainer,
   ContactContainerHeroOne,
@@ -11,18 +13,44 @@ import {
   ContactContainerHeroOneInnerLeftMoreMenuContainer,
   ContactContainerHeroOneInnerLeftMoreMenuRight,
   ContactContainerHeroOneInnerLeftMoreMenuLeft,
+  ContactContainerHeroTwo,
+  ContactContainerHeroTwoInnerLeft,
+  ContactContainerHeroTwoInnerRight,
+  ContactContainerHeroTwoInnerRightHeader,
+  ContactContainerHeroTwoInnerRightSmallHeader,
+  ContactContainerHeroTwoInnerRightParagraph,
+  ContactContainerHeroTwoInnerRightList,
   FormContainer,
   FormHeader, 
   StyledForm, 
   Input, 
   TextArea, 
   SubmitButton, 
+  ContactContainerHeroThree,
+  ContactContainerHeroThreeHeader,
+  PrimaryBtn
 } from '../components/styles/contact.styled';
+import MapComponent from '../components/map/map'; 
 
 const Contact = () => {
+
+  const navigate = useNavigate();
+
+
+  const checkUserProfile = () => {
+      navigate("/sell-your-product/post-advert");
+  };
+
+
+
   return (
     <ContactContainer>
    
+
+
+
+
+
     <ContactContainerHeroOne>
 
 
@@ -76,6 +104,54 @@ const Contact = () => {
 
 
     </ContactContainerHeroOne>
+
+ 
+
+
+   
+    <ContactContainerHeroTwo>
+
+
+    <ContactContainerHeroTwoInnerLeft> 
+      <MapComponent/>
+    </ContactContainerHeroTwoInnerLeft>
+
+
+
+    <ContactContainerHeroTwoInnerRight>   
+
+    <ContactContainerHeroTwoInnerRightSmallHeader>Our Location</ContactContainerHeroTwoInnerRightSmallHeader>
+    <ContactContainerHeroTwoInnerRightHeader>Connectings Near and Far</ContactContainerHeroTwoInnerRightHeader>
+    <ContactContainerHeroTwoInnerRightSmallHeader>HeadQuarters</ContactContainerHeroTwoInnerRightSmallHeader>
+    <ContactContainerHeroTwoInnerRightParagraph>Email, Call or Complete the Form to learn how we can sole your problem</ContactContainerHeroTwoInnerRightParagraph>
+    <ContactContainerHeroTwoInnerRightList>Sappy Inc</ContactContainerHeroTwoInnerRightList>
+    <ContactContainerHeroTwoInnerRightList>San Franscisco, USA</ContactContainerHeroTwoInnerRightList>
+    <ContactContainerHeroTwoInnerRightList>123 Tech Boulevard, Suite 456</ContactContainerHeroTwoInnerRightList>
+    <ContactContainerHeroTwoInnerRightList>San Franscisco, CA 12345</ContactContainerHeroTwoInnerRightList>
+    <ContactContainerHeroTwoInnerRightList>United States </ContactContainerHeroTwoInnerRightList>
+
+    </ContactContainerHeroTwoInnerRight>
+
+
+
+
+    </ContactContainerHeroTwo>
+
+  
+
+
+    <ContactContainerHeroThree>
+
+   <div> <ContactContainerHeroThreeHeader>Ready To Take Your Business To The Next Level</ContactContainerHeroThreeHeader>
+
+    <PrimaryBtn onClick={checkUserProfile}>
+          <p>Sell your product</p>
+        </PrimaryBtn>
+      </div>
+    </ContactContainerHeroThree>
+
+
+
    
 
     </ContactContainer>

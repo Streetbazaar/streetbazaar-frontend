@@ -5,10 +5,7 @@ import { ColorLens } from '@mui/icons-material';
 
 
 export const ContactContainer = styled.div` 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* padding: 20px; */
+  display: block;
   padding-bottom: 100px;
 `;
 
@@ -20,15 +17,30 @@ export const ContactContainerHeroOne = styled.div`
   height:fit-content;
   width:100%;
   display: flex;
-  align-items:start;
+  align-items:center;
+
+  @media (max-width:991px){
+    display: block;
+   padding: 0% 50px;
+   padding-bottom: 100px;
+    
+  }
+
 `;
 
 
 export const ContactContainerHeroOneInnerLeft = styled.div`
 
   width: 50%;
-  height: 100px;
+  height:fit-content;
 
+
+  @media (max-width:991px){
+   padding-top: 150px;
+    width: 100%;
+    display: block;
+    
+  }
 `;
 
 
@@ -48,6 +60,10 @@ export const ContactContainerHeroOneInnerLeftParagraph = styled.p`
   width: 50%;
   margin-top: 20px;
 
+
+  @media (max-width:991px){
+    width: 80%;
+  }
 `;
 
 
@@ -64,17 +80,21 @@ display: flex;
 margin-top: 70px;
 height: fit-content;
 align-items: start;
+
+
+@media (max-width:768px){
+    width: 100%;
+    display: block;
+    
+  }
 `;
 
 export const ContactContainerHeroOneInnerLeftMoreMenuLeft = styled.div`
-
 height: fit-content;
-
 
 & h5{
     font-size:20px;
   color: ${Colors.neutral_color.color700};
-
 }
 
 & p{
@@ -82,12 +102,10 @@ height: fit-content;
   width: 80%;
   margin-top: 15px;
 }
-
 `;
 
 
 export const ContactContainerHeroOneInnerLeftMoreMenuRight = styled.div`
-
 height: fit-content;
 
 & h5{
@@ -102,9 +120,10 @@ height: fit-content;
 }
 
 
+@media (max-width:768px){    
+  margin-top: 40px;
+  }
 `;
-
-
 
 
 
@@ -123,6 +142,11 @@ export const ContactContainerHeroOneInnerRight = styled.div`
 
   width: 50%;
   height: fit-content;
+
+  @media (max-width:991px) {
+    padding-top: 80px;
+    width: 100%;
+  }
 `;
 
 
@@ -186,5 +210,151 @@ export const SubmitButton = styled.button`
 
   &:hover {
     background-color: #0056b3;
+  }
+`;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const ContactContainerHeroTwo = styled.div`
+  padding: 12% 100px;
+  height:fit-content;
+  width:100%;
+  display: flex;
+  align-items:center;
+
+  @media (max-width:991px){
+    display: block;
+   padding: 0% 50px;
+   padding-bottom: 100px;
+    
+  }
+
+`;
+
+
+export const ContactContainerHeroTwoInnerRight = styled.div`
+
+  width: 50%;
+  height:fit-content;
+
+
+  @media (max-width:991px){
+   padding-top: 150px;
+    width: 100%;
+    display: block;
+    
+  }
+`;
+
+
+
+
+export const ContactContainerHeroTwoInnerRightHeader = styled.h3`
+
+  font-size: 40px;
+  color: ${Colors.neutral_color.color900};
+
+`;
+
+
+
+export const ContactContainerHeroTwoInnerRightParagraph = styled.p`
+  color: ${Colors.neutral_color.color600};
+  width: 50%;
+  margin-top: 20px;
+
+
+  @media (max-width:991px){
+    width: 80%;
+  }
+`;
+
+export const ContactContainerHeroTwoInnerRightSmallHeader = styled.h6`
+  color: ${Colors.neutral_color.color600};
+  width: 50%;
+  margin-top: 20px;
+  font-size: 20px;
+
+`;
+
+
+export const ContactContainerHeroTwoInnerRightList = styled.li`
+  color: ${Colors.neutral_color.color800};
+  list-style-type: none;
+  margin-top: 10px;
+`;
+
+
+
+
+
+
+export const ContactContainerHeroTwoInnerLeft = styled.div`
+
+  width: 50%;
+  height: fit-content;
+
+  @media (max-width:991px) {
+    padding-top: 80px;
+    width: 100%;
+  }
+`;
+
+
+
+
+export const ContactContainerHeroThree = styled.div`
+
+width: 100%;
+height: 700px;
+background-image: url('https://images.pexels.com/photos/439818/pexels-photo-439818.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+background-position: bottom;
+background-repeat: no-repeat;
+background-size: cover;
+display: flex;
+align-items: center;
+justify-content: center;
+`;
+
+export const ContactContainerHeroThreeHeader = styled.h2`
+
+font-size: 70px;
+color: ${Colors.primary_color.color200};
+
+`;
+
+export const PrimaryBtn = styled.a`
+  outline: none;
+  border: none;
+  background: none;
+  text-decoration: none;
+  background-color: ${Colors.primary_color.color500};
+  display: flex;
+  gap: 10px;
+  border-radius: 2px;
+  padding: 15px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  color: ${Colors.white};
+  justify-content: center;
+  width: fit-content;
+  font-size: 20px;
+  cursor: pointer;
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;

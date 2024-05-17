@@ -51,7 +51,7 @@ export default function Footer() {
           </ul>
           <ul>
             <h4>Help & Support</h4>
-            <li>Contact Us</li>
+            <li> <Link to="/contact">Contact Us</Link></li>
             <li>Live Chat</li>
             <li>FAQ</li>
           </ul>

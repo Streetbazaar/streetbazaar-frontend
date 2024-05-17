@@ -5,6 +5,7 @@ export const AboutContainer = styled.div`
   padding-top: 8%;
   min-height:70vh;  
   width:100%;
+  overflow-x: hidden;
   padding-bottom: 10%;
 `;
 
@@ -22,8 +23,6 @@ export const AboutUsContainerHeroOne = styled.div`
       display: block;
       height:fit-content;
   }
-
-  
 `;
 
 
@@ -38,8 +37,6 @@ export const AboutUsContainerHeroOneInnerLeft = styled.div`
     height: 350px;
     width: 100%;
   }
-
-
 `;
 
 
@@ -76,8 +73,6 @@ export const AboutUsContainerHeroTwo = styled.div`
       display: block;
       height:fit-content;
   }
-
-  
 `;
 
 
@@ -101,14 +96,13 @@ export const AboutUsContainerHeroTwoInnerRight = styled.div`
   width:50%;
   align-items: center;
   display: flex;
-  padding: 0 10%;
+  padding: 0 7%;
 
-  @media (max-width: 991px) { 
-    height: 350px;
+  @media (max-width: 1091px) { 
+    height: fit-content;
     width: 100%;
   }
 `;
-
 
 
 
@@ -117,15 +111,11 @@ export const AboutUsContainerHeroTwoInnerLeftImage  = styled.img`
 margin-left: auto;
 margin-right: auto;
 text-align: center;
+width: 100%;
 
 `;
 
- 
-
-
-
-
-
+  
 export const AboutUsContainerHeroThree = styled.div` 
   height:400px;
   display:flex;
@@ -140,9 +130,7 @@ export const AboutUsContainerHeroThree = styled.div`
   @media (max-width: 991px) { 
       display: block;
       height:fit-content;
-  }
-
-  
+  }  
 `;
 
 
@@ -154,11 +142,10 @@ export const AboutUsContainerHeroThreeInnerLeft = styled.div`
   padding: 0 7%;
 
   @media (max-width: 991px) { 
-    height: 350px;
+    height: fit-content;
     width: 100%;
+  padding: 2% 2%;
   }
-
-
 `;
 
 
@@ -168,23 +155,24 @@ export const AboutUsContainerHeroThreeInnerRight = styled.div`
   align-items: center;
   text-align: center;
 
-
   @media (max-width: 991px) { 
     width: 100%;
+    margin-top: 30px;
   }
 `;
 
 
 
-
-
-
-
-
 export const AboutUsHeader = styled.h2`
-font-size: 40px;
+font-size: 40px; 
 color: ${Colors.primary_color.color300};
 margin-bottom: 15px;
+
+
+@media (max-width: 991px) { 
+   font-size: 27px;
+   margin-top: 35px;
+  }
 `;
 
 

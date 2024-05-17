@@ -82,7 +82,7 @@ const MenuListItem = styled.li`
 
 const HeaderContainer = styled.header`
   padding: 15px;
-  width: 100%;
+  width: 100vw;
   position: fixed;
   top: 0;
   left: 0;
@@ -445,7 +445,6 @@ const SearchInput = styled.div`
       flex-direction: column;
       
     }
-  }}
 `;
 
 const SearchIconDiv = styled.div`

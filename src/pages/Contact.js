@@ -1,56 +1,83 @@
 // Contact.js
 import React from 'react';
-import { ContactContainer,ContactHeader, Wrapper, Form, FormRow, Input, TextArea, SubmitButton, InfoWrap } from '../components/styles/contact.styled';
+import { 
+  ContactContainer,
+  ContactContainerHeroOne,
+  ContactContainerHeroOneInnerRight,
+  ContactContainerHeroOneInnerLeft,
+  ContactContainerHeroOneInnerLeftHeader,
+  ContactContainerHeroOneInnerLeftParagraph,
+  ContactContainerHeroOneInnerLeftList,
+  ContactContainerHeroOneInnerLeftMoreMenuContainer,
+  ContactContainerHeroOneInnerLeftMoreMenuRight,
+  ContactContainerHeroOneInnerLeftMoreMenuLeft,
+  FormContainer,
+  FormHeader, 
+  StyledForm, 
+  Input, 
+  TextArea, 
+  SubmitButton, 
+} from '../components/styles/contact.styled';
 
 const Contact = () => {
   return (
     <ContactContainer>
-      <Wrapper>
-        <div className="row no-gutters">
-          <div className="col-lg-8 col-md-7 order-md-last d-flex align-items-stretch">
-            <div className="contact-wrap w-100 p-md-5 p-4">
-              <ContactHeader className="mb-4">Get in touch</ContactHeader>
-                    <div className="col-lg-4 col-md-5 d-flex align-items-stretch">
-            <InfoWrap>
-           <div id="form-message-warning" className="mb-3"></div>
-              <h3>Let's get in touch</h3>
-             
-              <p className="mb-4">We're open for any suggestion or just to have a chat</p>
-              {/* Content omitted for brevity */}
-            </InfoWrap>
-          </div>
-          <div id="form-message-warning" className="mb-4"></div>
-              
-              <Form method="POST" id="contactForm" name="contactForm" className="contactForm">
-                <FormRow>
-                  <div className="col-md-6">
-                    <Input type="text" name="name" id="name" placeholder="Full Name" />
-                  </div>
-                  <div className="col-md-6">
-                    <Input type="email" name="email" id="email" placeholder="Email Address" />
-                  </div>
-                </FormRow>
-                <FormRow>
-                  <div className="col-md-12">
-                    <Input type="text" name="subject" id="subject" placeholder="Subject" />
-                  </div>
-                </FormRow>
-                <FormRow>
-                  <div className="col-md-12">
-                    <TextArea name="message" id="message" cols="30" rows="4" placeholder="Message"></TextArea>
-                  </div>
-                </FormRow>
-                <FormRow>
-                  <div className="col-md-12">
-                    <SubmitButton type="submit" value="Send Message" />
-                  </div>
-                </FormRow>
-              </Form>
-            </div>
-          </div>
+   
+    <ContactContainerHeroOne>
+
+
+
+    <ContactContainerHeroOneInnerLeft>
+
+    <ContactContainerHeroOneInnerLeftHeader>Contact Us</ContactContainerHeroOneInnerLeftHeader>
+    <ContactContainerHeroOneInnerLeftParagraph>Email, Call or Complete the Form to learn how we can sole your problem</ContactContainerHeroOneInnerLeftParagraph>
+    <ContactContainerHeroOneInnerLeftList>support@streetzbazaar.net</ContactContainerHeroOneInnerLeftList>
+    <ContactContainerHeroOneInnerLeftList>+234 832-019-9334</ContactContainerHeroOneInnerLeftList>
+
+
+
+    <ContactContainerHeroOneInnerLeftMoreMenuContainer>
+  
+    <ContactContainerHeroOneInnerLeftMoreMenuLeft>
+      <h5>Customer Support</h5>  
+        <p>Our Support Team is Available Around The Clock To Address any Concerns or Queries you might have</p>
+    </ContactContainerHeroOneInnerLeftMoreMenuLeft>
     
-        </div>
-      </Wrapper>
+
+    <ContactContainerHeroOneInnerLeftMoreMenuRight>
+    <h5>FeedBack and Suggestion</h5>  
+        <p>Our Support Team is Available Around The Clock To Address any Concerns or Queries you might have</p>
+  </ContactContainerHeroOneInnerLeftMoreMenuRight>
+  
+  
+    </ContactContainerHeroOneInnerLeftMoreMenuContainer>
+
+    </ContactContainerHeroOneInnerLeft>
+
+
+
+    <ContactContainerHeroOneInnerRight>
+
+    <FormContainer>
+    <FormHeader>Get in Touch</FormHeader>
+      <StyledForm >
+        <Input type="text" placeholder="First name" required />
+        <Input type="text" placeholder="Last name" required />
+        <Input type="email" placeholder="Email" required />
+        <Input type="tel" placeholder="Number" required />
+        <TextArea placeholder="How we can help" required />
+        <SubmitButton type="submit">Submit</SubmitButton>
+      </StyledForm>
+    </FormContainer>
+
+    </ContactContainerHeroOneInnerRight>
+
+
+
+
+    </ContactContainerHeroOne>
+   
+
     </ContactContainer>
   )
 }

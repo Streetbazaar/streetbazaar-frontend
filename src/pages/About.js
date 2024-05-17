@@ -14,13 +14,14 @@ import {
     AboutUsContainerHeroThreeInnerRight,
     AboutUsHeader
 } from '../components/styles/about.styled'
-import CustomerReview from '../components/Auth/customerreview-carousel';
+import CustomerReview from '../components/about/customerreview-carousel';
 
 
 
 const About = () => {
     return (
         <AboutContainer> 
+
 
         <AboutUsContainerHeroOne>
           <AboutUsContainerHeroOneInnerLeft>
@@ -29,10 +30,9 @@ const About = () => {
                 </div>   
           </AboutUsContainerHeroOneInnerLeft>
             <AboutUsContainerHeroOneInnerRight>
-                <img src='https://www.hubspot.com/hs-fs/hubfs/Hubspotters.jpg?width=701&height=468&name=Hubspotters.jpg' alt=''/>
+                <AboutUsContainerHeroTwoInnerLeftImage src='https://www.hubspot.com/hs-fs/hubfs/Hubspotters.jpg?width=701&height=468&name=Hubspotters.jpg' alt=''/>
             </AboutUsContainerHeroOneInnerRight>
         </AboutUsContainerHeroOne>
-
 
 
 
@@ -52,8 +52,6 @@ const About = () => {
 
 
 
-
-
         <AboutUsContainerHeroThree>
           <AboutUsContainerHeroThreeInnerLeft>
              <div><AboutUsHeader>Our Story</AboutUsHeader>
@@ -62,7 +60,7 @@ const About = () => {
                 </div>   
           </AboutUsContainerHeroThreeInnerLeft>
             <AboutUsContainerHeroThreeInnerRight>
-                <img src='https://www.hubspot.com/hs-fs/hubfs/Rangan-Halligan.jpg?width=567&height=378&name=Rangan-Halligan.jpg' alt=''/>
+                <AboutUsContainerHeroTwoInnerLeftImage src='https://www.hubspot.com/hs-fs/hubfs/Rangan-Halligan.jpg?width=567&height=378&name=Rangan-Halligan.jpg' alt=''/>
             </AboutUsContainerHeroThreeInnerRight>
         </AboutUsContainerHeroThree>
 

@@ -5,28 +5,29 @@ import thunk from "redux-thunk";
 import chatReducer from "../features/chatSlice";
 import inputReducer from "../features/inputSlice";
 import userReducer from "../features/userSlice";
-import advertReducer from "../features/advertSlice"
+import advertReducer from "../features/advertSlice";
 import userAdvertReducer from "../features/userAdvertSlice";
-
+import feedbackReducer from "../features/feebackSlice";
 
 const persistConfig = {
-  key: "root",
-  storage,
+	key: "root",
+	storage,
 };
 
 const rootReducer = combineReducers({
-  user: userReducer,
-  chat: chatReducer,
-  input: inputReducer,
-  adverts: advertReducer,
-  userAdverts: userAdvertReducer 
+	user: userReducer,
+	chat: chatReducer,
+	input: inputReducer,
+	adverts: advertReducer,
+	userAdverts: userAdvertReducer,
+	feedback: feedbackReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: persistedReducer,
-  middleware: [thunk],
+	reducer: persistedReducer,
+	middleware: [thunk],
 });
 
 export const persistor = persistStore(store);

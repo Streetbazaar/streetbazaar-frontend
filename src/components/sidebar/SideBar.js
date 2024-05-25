@@ -25,7 +25,7 @@ export default function SideBar() {
 			href: "/profile/account-balance",
 		},
 		{
-			icon: "ic:credit-card",
+			icon: "eos-icons:activate-subscriptions",
 			label: "Subscription",
 			href: "/profile/subscription",
 		},

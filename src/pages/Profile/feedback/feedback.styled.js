@@ -169,9 +169,11 @@ export const FeedbackItem = styled.div`
 	border: 1px solid ${Colors.neutral_color.color100};
 	border-radius: 4px;
 	padding: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 
 	.user-detail {
-		margin-bottom: 10px;
 		img {
 			width: 40px;
 			height: 40px;
@@ -200,7 +202,6 @@ export const FeedbackItem = styled.div`
 		}
 	}
 	.content {
-		margin-bottom: 10px;
 		h4 {
 			font-weight: 700;
 			font-size: 0.8125rem;

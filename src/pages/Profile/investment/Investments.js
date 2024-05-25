@@ -19,7 +19,7 @@ export default function Investments() {
   ];
   return (
     <InvestmentContainer>
-    
+ 
       <h3 className="advertMainHeading">My Investments</h3>
       <div className="deskFilters">
         <div className="searchBar">
@@ -47,7 +47,7 @@ export default function Investments() {
                   ? userProfile?.profile_image_url
                   : "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
               }
-              alt="profile photo"
+              alt="user profile"
             />
           </div>
           <h3>{`${userProfile?.first_name} ${userProfile?.last_name}`}</h3>

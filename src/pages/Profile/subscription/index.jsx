@@ -6,17 +6,19 @@ import toast from "react-hot-toast";
 import { usePaystackPayment } from "react-paystack";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { PAY_FOR_ADVERT } from "../../components/api";
-import Spinner from "../../components/spinner/Spiner";
-import { clearFields, fetchPackages } from "../../features/inputSlice";
-import { addCommas } from "../../functions";
+import { PAY_FOR_ADVERT } from "../../../components/api";
+import Spinner from "../../../components/spinner/Spiner";
+import { clearFields, fetchPackages } from "../../../features/inputSlice";
+import { addCommas } from "../../../functions";
 import {
 	AdItem,
 	AdItemCustomPriceButton,
 	AdPricesContainer,
 	ModalContent,
 	ModalOverlay,
-} from "./PlaceAd.styled";
+	PaymentWrapper,
+} from "./subscription.styled";
+import PaymentHistory from "../../../components/subscription/PaymentHistory";
 
 // you can call this function anything
 
@@ -47,7 +49,10 @@ export default function AdPageThree() {
 	const [selectedPackageId, setSelectedPackageId] = useState("");
 	const navigate = useNavigate();
 
+	// console.log(packages);
+
 	const payForAd = async (adId, packageId, packageType, reference, token) => {
+		console.log({ adId, packageId, packageType, reference, token });
 		try {
 			const response = await PAY_FOR_ADVERT(
 				adId,
@@ -56,21 +61,24 @@ export default function AdPageThree() {
 				reference,
 				token
 			);
+
 			if (response.status === "successful") {
 				toast.success("Advert submitted for review");
 				closeModal();
 				dispatch(clearFields());
-				navigate("/");
+				navigate("/sell-your-product/post-advert");
 			} else if (response.status === "pending") {
 				toast.success("Your transaction is pending");
 				closeModal();
 				dispatch(clearFields());
-				navigate("/");
+				// navigate("/");
+				// navigate("/sell-your-product/post-advert");
 			} else {
 				toast.error(`Your transaction ${response.status}`);
 				closeModal();
 			}
 		} catch (err) {
+			console.log(err);
 			toast.error(err.message);
 			closeModal();
 		}
@@ -91,8 +99,6 @@ export default function AdPageThree() {
 	const closeModal = () => setModalOpen(false);
 
 	const onSuccess = (reference) => {
-
-    console.log("CALLED")
 		// Implementation for whatever you want to do with reference and after success call.
 
 		console.log(
@@ -101,7 +107,6 @@ export default function AdPageThree() {
 			selectedPackageId,
 			amountVal
 		);
-
 		payForAd(
 			adId,
 			selectedPackageId,
@@ -123,7 +128,9 @@ export default function AdPageThree() {
 	}, []);
 
 	useEffect(() => {
-		initializePayment(onSuccess, onClose);
+		if (amountVal && selectedPackage) {
+			initializePayment(onSuccess, onClose);
+		}
 	}, [amountVal, selectedPackage]);
 
 	const togglePriceType = (itemId, type) => {
@@ -133,21 +140,11 @@ export default function AdPageThree() {
 		}));
 	};
 
+	console.log(packages);
+
 	return (
-		<motion.main
-			className="main__container"
-			initial={{ opacity: 0 }}
-			animate={{
-				opacity: 1,
-				width: "100%",
-				display: "flex",
-				justifyContent: "center",
-				alignItems: "center",
-			}}
-			exit={{ x: "100%", opacity: 0 }}
-			transition={{ duration: 10, type: "spring", stiffness: 100 }}
-		>
-			{" "}
+		<PaymentWrapper>
+			<h3 className="paymentHeading">Subscription Payment</h3>
 			<AdPricesContainer>
 				{packageStatus === "loading" ? (
 					<div
@@ -163,13 +160,14 @@ export default function AdPageThree() {
 					<>
 						{packages &&
 							[...packages] // Create a shallow copy of the packages array
-								.sort((a, b) => {
-									const priceTypeA = priceType[a.id] || "weekly";
-									const priceTypeB = priceType[b.id] || "weekly";
-									// console.log(priceTypeA, priceTypeB, "from line 163", a, b);
+								// .sort((a, b) => {
+								// 	const priceTypeA = priceType[a.id] || "weekly";
+								// 	const priceTypeB = priceType[b.id] || "weekly";
 
-									return Number(a?.weekly_amount) - Number(b.weekly_amount);
-								})
+								// 	// console.log(priceTypeA, priceTypeB, "from line 164", a, b);
+
+								// 	return Number(a?.weekly_amount) - Number(b.weekly_amount);
+								// })
 								?.map((item, i) => {
 									const isActive = item.title === "Standard Plan";
 									const currentPriceType = priceType[item.id] || "weekly"; // Default to weekly if not set
@@ -179,7 +177,10 @@ export default function AdPageThree() {
 										currentPriceType === "weekly"
 											? item.weekly_amount
 											: item.monthly_amount;
-									const descriptionArray = item.description.split("/\r?\n/");
+									// const descriptionArray = item.description.split("/\r?\n/");
+									// const descriptionArray =
+									// 	item.description.split(/\s*(?:,|and)\s*/i);
+									const descriptionArray = item.description.split(/\\r\\n/);
 									// console.log(descriptionArray)
 
 									return (
@@ -221,18 +222,30 @@ export default function AdPageThree() {
 													</div>
 												))}
 											</div>
-											<button
-												className="paymentButton"
-												onClick={() => {
-													setAmountVal(price);
-													setSelectedPackage(currentPriceType);
-													setSelectedPackageId(item.id);
+											<div className="paymentButtonsWrapper">
+												<button
+													className="paymentButton"
+													// onClick={() => {
+													// 	setAmountVal(price);
+													// 	setSelectedPackage(currentPriceType);
+													// 	setSelectedPackageId(item.id);
 
-													// console.log(currentPriceType, item.id, price);
-												}}
-											>
-												Proceed to payment
-											</button>
+													// 	// console.log(currentPriceType, item.id, price);
+													// }}
+												>
+													Use Wallet
+												</button>
+												<button
+													className="paymentButton"
+													onClick={() => {
+														setAmountVal(price);
+														setSelectedPackage(currentPriceType);
+														setSelectedPackageId(item.id);
+													}}
+												>
+													Use Bank
+												</button>
+											</div>
 										</AdItem>
 									);
 								})}
@@ -244,6 +257,7 @@ export default function AdPageThree() {
 					url={externalUrl}
 				/>
 			</AdPricesContainer>
-		</motion.main>
+			<PaymentHistory />
+		</PaymentWrapper>
 	);
 }

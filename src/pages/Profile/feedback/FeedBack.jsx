@@ -1,16 +1,18 @@
 import { InlineIcon } from "@iconify/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { ButtonFilter } from "../advert/advert.styled";
 import { FeedBackContainer } from "./feedback.styled";
 import FeedbackCard from "../../../components/feedback/FeedbackCard";
 import EmptyFeedback from "../../../components/feedback/EmptyFeedback";
 import Pagination from "@mui/material/Pagination";
+import FeedbackCardLoader from "../../../components/feedback/FeedbackCardLoader";
 
 export default function FeedBack() {
 	const { userProfile } = useSelector((store) => store.user);
 	const { feedbacks } = useSelector((store) => store.feedback);
 	const [active, setActive] = useState("Sent");
+	const [isLoading, setIsLoading] = useState(false);
 	const [meta, setMeta] = useState({
 		currentPage: 1,
 		totalPage: 5,
@@ -63,7 +65,7 @@ export default function FeedBack() {
 					))}
 				</div>
 
-				{feedbacks.length > 0 ? (
+				{feedbacks.length > 0 && !isLoading && (
 					<div>
 						<div className="feedbackWrapper">
 							{feedbacks?.map((feedback) => {
@@ -89,9 +91,15 @@ export default function FeedBack() {
 							/>
 						</div>
 					</div>
-				) : (
-					<EmptyFeedback />
 				)}
+
+				{!isLoading && feedbacks.length < 1 && <EmptyFeedback />}
+				<div className="feedbackWrapper">
+					{isLoading &&
+						["", "", "", "", "", ""].map((_, i) => {
+							return <FeedbackCardLoader key={i} />;
+						})}
+				</div>
 			</div>
 		</FeedBackContainer>
 	);

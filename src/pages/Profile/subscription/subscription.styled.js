@@ -13,6 +13,8 @@ export const AdItem = styled.div`
 	border-radius: 8px;
 	position: relative;
 	overflow: hidden;
+	width: 300px;
+	// width: 100%;
 
 	p.recommendedItem {
 		background-color: ${Colors.primary_color.color500};
@@ -137,9 +139,12 @@ export const AdItemCustomPriceButton = styled.button`
 export const AdPricesContainer = styled.div`
 	gap: 20px;
 	padding: 0 20px;
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-	place-content: center;
+	margin-top: 20px;
+	justify-content: center;
+	// place-content: center;
+	display: flex;
+	flex-wrap: wrap;
+
 	@media (max-width: 780px) {
 		width: 100%;
 	}
@@ -236,3 +241,5 @@ export const PaymentWrapper = styled.div`
 		color: ${Colors.neutral_color.color900};
 	}
 `;
+
+

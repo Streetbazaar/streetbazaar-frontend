@@ -18,6 +18,7 @@ import {
 	ModalOverlay,
 	PaymentWrapper,
 } from "./subscription.styled";
+import PaymentHistory from "../../../components/subscription/PaymentHistory";
 
 // you can call this function anything
 
@@ -48,7 +49,10 @@ export default function AdPageThree() {
 	const [selectedPackageId, setSelectedPackageId] = useState("");
 	const navigate = useNavigate();
 
+	// console.log(packages);
+
 	const payForAd = async (adId, packageId, packageType, reference, token) => {
+		console.log({ adId, packageId, packageType, reference, token });
 		try {
 			const response = await PAY_FOR_ADVERT(
 				adId,
@@ -57,21 +61,24 @@ export default function AdPageThree() {
 				reference,
 				token
 			);
+
 			if (response.status === "successful") {
 				toast.success("Advert submitted for review");
 				closeModal();
 				dispatch(clearFields());
-				navigate("/");
+				navigate("/sell-your-product/post-advert");
 			} else if (response.status === "pending") {
 				toast.success("Your transaction is pending");
 				closeModal();
 				dispatch(clearFields());
-				navigate("/");
+				// navigate("/");
+				// navigate("/sell-your-product/post-advert");
 			} else {
 				toast.error(`Your transaction ${response.status}`);
 				closeModal();
 			}
 		} catch (err) {
+			console.log(err);
 			toast.error(err.message);
 			closeModal();
 		}
@@ -80,7 +87,8 @@ export default function AdPageThree() {
 	const config = {
 		email: userProfile?.email,
 		amount: amountVal * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-		publicKey: process.env.REACT_APP_PAYSTACK_LIVE_KEY,
+		// publicKey: process.env.REACT_APP_PAYSTACK_LIVE_KEY,
+		publicKey: process.env.REACT_APP_PAYSTACK_TEST_KEY,
 	};
 	const initializePayment = usePaystackPayment(config);
 
@@ -119,9 +127,11 @@ export default function AdPageThree() {
 		dispatch(fetchPackages(token));
 	}, []);
 
-	// useEffect(() => {
-	// 	initializePayment(onSuccess, onClose);
-	// }, [amountVal, selectedPackage]);
+	useEffect(() => {
+		if (amountVal && selectedPackage) {
+			initializePayment(onSuccess, onClose);
+		}
+	}, [amountVal, selectedPackage]);
 
 	const togglePriceType = (itemId, type) => {
 		setPriceType((prevState) => ({
@@ -129,6 +139,8 @@ export default function AdPageThree() {
 			[itemId]: type,
 		}));
 	};
+
+	console.log(packages);
 
 	return (
 		<PaymentWrapper>
@@ -148,13 +160,14 @@ export default function AdPageThree() {
 					<>
 						{packages &&
 							[...packages] // Create a shallow copy of the packages array
-								.sort((a, b) => {
-									const priceTypeA = priceType[a.id] || "weekly";
-									const priceTypeB = priceType[b.id] || "weekly";
-									// console.log(priceTypeA, priceTypeB, "from line 163", a, b);
+								// .sort((a, b) => {
+								// 	const priceTypeA = priceType[a.id] || "weekly";
+								// 	const priceTypeB = priceType[b.id] || "weekly";
 
-									return Number(a?.weekly_amount) - Number(b.weekly_amount);
-								})
+								// 	// console.log(priceTypeA, priceTypeB, "from line 164", a, b);
+
+								// 	return Number(a?.weekly_amount) - Number(b.weekly_amount);
+								// })
 								?.map((item, i) => {
 									const isActive = item.title === "Standard Plan";
 									const currentPriceType = priceType[item.id] || "weekly"; // Default to weekly if not set
@@ -165,8 +178,9 @@ export default function AdPageThree() {
 											? item.weekly_amount
 											: item.monthly_amount;
 									// const descriptionArray = item.description.split("/\r?\n/");
-									const descriptionArray =
-										item.description.split(/\s*(?:,|and)\s*/);
+									// const descriptionArray =
+									// 	item.description.split(/\s*(?:,|and)\s*/i);
+									const descriptionArray = item.description.split(/\\r\\n/);
 									// console.log(descriptionArray)
 
 									return (
@@ -227,8 +241,6 @@ export default function AdPageThree() {
 														setAmountVal(price);
 														setSelectedPackage(currentPriceType);
 														setSelectedPackageId(item.id);
-
-														// console.log(currentPriceType, item.id, price);
 													}}
 												>
 													Use Bank
@@ -245,6 +257,7 @@ export default function AdPageThree() {
 					url={externalUrl}
 				/>
 			</AdPricesContainer>
+			<PaymentHistory />
 		</PaymentWrapper>
 	);
 }

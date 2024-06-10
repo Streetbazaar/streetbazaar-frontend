@@ -13,7 +13,7 @@ export const AdItem = styled.div`
 	border-radius: 8px;
 	position: relative;
 	overflow: hidden;
-	width: 300px;
+	width: 290px;
 	// width: 100%;
 
 	p.recommendedItem {
@@ -241,5 +241,3 @@ export const PaymentWrapper = styled.div`
 		color: ${Colors.neutral_color.color900};
 	}
 `;
-
-

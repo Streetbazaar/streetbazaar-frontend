@@ -5,15 +5,15 @@ import SideBar from "./sidebar/SideBar";
 import { ProfileOutletDiv } from "./styles/styledComponents";
 
 export default function ProfileLayout() {
-  return (
-    <>
-      <Header />
-      <div style={{display: "flex"}}>
-        <SideBar />
-        <ProfileOutletDiv>
-          <Outlet />
-        </ProfileOutletDiv>
-      </div>
-    </>
-  );
+	return (
+		<>
+			<Header />
+			<div style={{ display: "flex" }}>
+				<SideBar />
+				<ProfileOutletDiv>
+					<Outlet />
+				</ProfileOutletDiv>
+			</div>
+		</>
+	);
 }

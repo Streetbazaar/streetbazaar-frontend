@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { usePaystackPayment } from "react-paystack";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { PAY_FOR_ADVERT } from "../../../components/api";
+import { PAY_FOR_SUBSCRIPTION } from "../../../components/api";
 import Spinner from "../../../components/spinner/Spiner";
 import { clearFields, fetchPackages } from "../../../features/inputSlice";
 import { addCommas } from "../../../functions";
@@ -39,41 +39,66 @@ export const ConfirmationModal = ({ isOpen, onClose, url }) => {
 	);
 };
 
-export default function AdPageThree() {
+export default function Subscription() {
 	const [priceType, setPriceType] = useState({});
-	const { packages, packageStatus, adId } = useSelector((state) => state.input);
+	const { packages, packageStatus } = useSelector((state) => state.input);
 	const { token, userProfile } = useSelector((state) => state.user);
 	const dispatch = useDispatch();
 	const [amountVal, setAmountVal] = useState(0);
 	const [selectedPackage, setSelectedPackage] = useState("");
 	const [selectedPackageId, setSelectedPackageId] = useState("");
+	const [isModalOpen, setModalOpen] = useState(false);
 	const navigate = useNavigate();
+
+	const [externalUrl, setExternalUrl] = ""; // Replace with your URL
+
+	const openModal = () => setModalOpen(true);
+	const closeModal = () => setModalOpen(false);
 
 	// console.log(packages);
 
-	const payForAd = async (adId, packageId, packageType, reference, token) => {
-		console.log({ adId, packageId, packageType, reference, token });
+	const config = {
+		email: userProfile?.email,
+		amount: amountVal * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
+		publicKey: process.env.REACT_APP_PAYSTACK_KEY,
+	};
+
+	const initializePayment = usePaystackPayment(config);
+
+	const payForSubscription = async ({
+		packageId,
+		packageType,
+		reference,
+		token,
+	}) => {
+		// console.log({ packageId, packageType, reference, token });
+
 		try {
-			const response = await PAY_FOR_ADVERT(
-				adId,
+			const response = await PAY_FOR_SUBSCRIPTION({
 				packageId,
 				packageType,
 				reference,
-				token
-			);
+				token,
+			});
 
 			if (response.status === "successful") {
-				toast.success("Advert submitted for review");
+				toast.success("Payment was successfull");
 				closeModal();
 				dispatch(clearFields());
+				setAmountVal("");
+				setSelectedPackage("");
+				setSelectedPackageId("");
 				navigate("/sell-your-product/post-advert");
 			} else if (response.status === "pending") {
 				toast.success("Your transaction is pending");
 				closeModal();
 				dispatch(clearFields());
-				// navigate("/");
-				// navigate("/sell-your-product/post-advert");
+				setAmountVal("");
+				setSelectedPackage("");
+				setSelectedPackageId("");
+				navigate("/");
 			} else {
+				// console.log(response);
 				toast.error(`Your transaction ${response.status}`);
 				closeModal();
 			}
@@ -84,36 +109,21 @@ export default function AdPageThree() {
 		}
 	};
 
-	const config = {
-		email: userProfile?.email,
-		amount: amountVal * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-		// publicKey: process.env.REACT_APP_PAYSTACK_LIVE_KEY,
-		publicKey: process.env.REACT_APP_PAYSTACK_TEST_KEY,
-	};
-	const initializePayment = usePaystackPayment(config);
-
-	const [isModalOpen, setModalOpen] = useState(false);
-	const [externalUrl, setExternalUrl] = ""; // Replace with your URL
-
-	const openModal = () => setModalOpen(true);
-	const closeModal = () => setModalOpen(false);
-
 	const onSuccess = (reference) => {
 		// Implementation for whatever you want to do with reference and after success call.
-
-		console.log(
-			reference?.reference,
-			selectedPackage,
-			selectedPackageId,
-			amountVal
-		);
-		payForAd(
-			adId,
-			selectedPackageId,
-			selectedPackage,
-			reference?.reference,
-			token
-		);
+		// console.log(
+		// 	reference?.reference,
+		// 	selectedPackage,
+		// 	selectedPackageId,
+		// 	amountVal
+		// );
+		// packageId, packageType, reference, token;
+		payForSubscription({
+			packageId: selectedPackageId,
+			packageType: selectedPackage,
+			reference: reference?.reference,
+			token,
+		});
 		openModal();
 	};
 
@@ -140,24 +150,22 @@ export default function AdPageThree() {
 		}));
 	};
 
-	console.log(packages);
-
 	return (
 		<PaymentWrapper>
 			<h3 className="paymentHeading">Subscription Payment</h3>
-			<AdPricesContainer>
-				{packageStatus === "loading" ? (
-					<div
-						style={{
-							display: "flex",
-							justifyContent: "center",
-							alignItems: "center",
-						}}
-					>
-						<Spinner />
-					</div>
-				) : (
-					<>
+			{packageStatus === "loading" ? (
+				<div
+					style={{
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+					}}
+				>
+					<Spinner />
+				</div>
+			) : (
+				<>
+					<AdPricesContainer>
 						{packages &&
 							[...packages] // Create a shallow copy of the packages array
 								// .sort((a, b) => {
@@ -179,8 +187,9 @@ export default function AdPageThree() {
 											: item.monthly_amount;
 									// const descriptionArray = item.description.split("/\r?\n/");
 									// const descriptionArray =
-									// 	item.description.split(/\s*(?:,|and)\s*/i);
-									const descriptionArray = item.description.split(/\\r\\n/);
+									const descriptionArray =
+										item.description.split(/\s*(?:,|and)\s*/i);
+									// const descriptionArray = item.description.split(/\\r\\n/);
 									// console.log(descriptionArray)
 
 									return (
@@ -249,15 +258,15 @@ export default function AdPageThree() {
 										</AdItem>
 									);
 								})}
-					</>
-				)}
-				<ConfirmationModal
-					isOpen={isModalOpen}
-					onClose={closeModal}
-					url={externalUrl}
-				/>
-			</AdPricesContainer>
-			<PaymentHistory />
+						<ConfirmationModal
+							isOpen={isModalOpen}
+							onClose={closeModal}
+							url={externalUrl}
+						/>
+					</AdPricesContainer>
+					<PaymentHistory token={token} />
+				</>
+			)}
 		</PaymentWrapper>
 	);
 }

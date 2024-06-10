@@ -212,6 +212,7 @@ export default function AdPageOne({ onNextPage }) {
       );
     }
   }, [state, category]);
+
   return (
     <motion.main
       className="main__container"
@@ -408,7 +409,7 @@ export default function AdPageOne({ onNextPage }) {
                     <img
                       src={url}
                       style={{ width: 50, height: 50 }}
-                      alt={`Image ${index}`}
+                      alt={`Product ${index}`}
                       className="image-thumbnail"
                     />
                     <p className="numberCaption">{index + 1}</p>

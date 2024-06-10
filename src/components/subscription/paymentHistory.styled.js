@@ -14,4 +14,13 @@ export const PaymentHistoryWrapper = styled.div`
 		text-align: center;
 		padding-top: 20px;
 	}
+	div.paymentTable {
+		padding: 20px;
+		// background: red;
+		overflow: hidden;
+
+		@media (max-width: 600px) {
+			padding: 20px 10px;
+		}
+	}
 `;

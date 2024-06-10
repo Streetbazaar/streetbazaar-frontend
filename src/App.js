@@ -21,7 +21,7 @@ import Notifications from "./pages/Notifications/Notifications";
 import PlaceAd from "./pages/PlaceAd/PlaceAd";
 import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import AccountBalance from "./pages/Profile/accountbalance/AccountBalance";
-import Subscription from "./pages/Profile/subscription";
+import Subscription from "./pages/Profile/subscription/Subscription";
 import Adverts from "./pages/Profile/advert/Adverts";
 import FeedBack from "./pages/Profile/feedback/FeedBack";
 import Investments from "./pages/Profile/investment/Investments";

@@ -2,8 +2,6 @@ import axios from "axios";
 
 export const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
-
-
 export const LOGIN_USER = async (email, password) => {
 	try {
 		const response = await axios.post(`${API_ENDPOINT}/api/auth/login/`, {
@@ -325,12 +323,12 @@ export const WALLET_DEPOSIT = async (amount, ref, token) => {
 	}
 };
 
-export const PAY_FOR_SUBSCRIPTION = async (
+export const PAY_FOR_SUBSCRIPTION = async ({
 	packageId,
 	packageType,
 	reference,
-	token
-) => {
+	token,
+}) => {
 	try {
 		const response = await axios.post(
 			`${API_ENDPOINT}/api/package-subscriptionV1/`,
@@ -345,6 +343,24 @@ export const PAY_FOR_SUBSCRIPTION = async (
 				},
 			}
 		);
+		return response.data;
+	} catch (error) {
+		throw error;
+	}
+};
+
+export const TRANSACTION_LIST = async (token) => {
+	try {
+		const response = await axios.get(
+			`${API_ENDPOINT}/api/transactions/`,
+
+			{
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			}
+		);
+		// console.log(response);
 		return response.data;
 	} catch (error) {
 		throw error;

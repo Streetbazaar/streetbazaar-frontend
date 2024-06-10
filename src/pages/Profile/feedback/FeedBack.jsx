@@ -38,6 +38,7 @@ export default function FeedBack() {
 	return (
 		<FeedBackContainer>
 			<h3 className="feedbackMainHeading">Feedback</h3>
+
 			<div className="contentContainer">
 				<div className="userProfile">
 					<div className="imageWrapper">
@@ -64,8 +65,9 @@ export default function FeedBack() {
 						</ButtonFilter>
 					))}
 				</div>
+				<h3 style={{ color: "#8e97a1" }}>Coming soon 🚧 </h3>
 
-				{feedbacks.length > 0 && !isLoading && (
+				{/* {feedbacks.length > 0 && !isLoading && (
 					<div>
 						<div className="feedbackWrapper">
 							{feedbacks?.map((feedback) => {
@@ -91,7 +93,7 @@ export default function FeedBack() {
 							/>
 						</div>
 					</div>
-				)}
+				)} */}
 
 				{!isLoading && feedbacks.length < 1 && <EmptyFeedback />}
 				<div className="feedbackWrapper">

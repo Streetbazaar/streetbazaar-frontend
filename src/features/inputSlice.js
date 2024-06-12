@@ -11,7 +11,7 @@ export const fetchPackages = createAsyncThunk(
 				Authorization: `Bearer ${token}`,
 			},
 		});
-		// console.log(response);
+		// console.log(response.data);
 		return response.data;
 	}
 );

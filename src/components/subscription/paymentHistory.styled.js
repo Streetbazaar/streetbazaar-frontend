@@ -16,8 +16,9 @@ export const PaymentHistoryWrapper = styled.div`
 	}
 	div.paymentTable {
 		padding: 20px;
-		// background: red;
 		overflow: hidden;
+		width: 100%;
+		position: relative;
 
 		@media (max-width: 600px) {
 			padding: 20px 10px;

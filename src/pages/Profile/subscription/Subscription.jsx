@@ -6,7 +6,10 @@ import toast from "react-hot-toast";
 import { usePaystackPayment } from "react-paystack";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { PAY_FOR_SUBSCRIPTION } from "../../../components/api";
+import {
+	PAY_FOR_SUBSCRIPTION,
+	TRANSACTION_LIST,
+} from "../../../components/api";
 import Spinner from "../../../components/spinner/Spiner";
 import { clearFields, fetchPackages } from "../../../features/inputSlice";
 import { addCommas } from "../../../functions";
@@ -48,6 +51,7 @@ export default function Subscription() {
 	const [selectedPackage, setSelectedPackage] = useState("");
 	const [selectedPackageId, setSelectedPackageId] = useState("");
 	const [isModalOpen, setModalOpen] = useState(false);
+	const [transactions, setTransactions] = useState();
 	const navigate = useNavigate();
 
 	const [externalUrl, setExternalUrl] = ""; // Replace with your URL
@@ -66,6 +70,7 @@ export default function Subscription() {
 	const initializePayment = usePaystackPayment(config);
 
 	const payForSubscription = async ({
+		email,
 		packageId,
 		packageType,
 		reference,
@@ -79,16 +84,18 @@ export default function Subscription() {
 				packageType,
 				reference,
 				token,
+				email,
 			});
 
 			if (response.status === "successful") {
-				toast.success("Payment was successfull");
+				toast.success("Payment was successfull  🎉");
 				closeModal();
 				dispatch(clearFields());
 				setAmountVal("");
 				setSelectedPackage("");
 				setSelectedPackageId("");
-				navigate("/sell-your-product/post-advert");
+				getTransactions();
+				// navigate("/sell-your-product/post-advert");
 			} else if (response.status === "pending") {
 				toast.success("Your transaction is pending");
 				closeModal();
@@ -123,6 +130,7 @@ export default function Subscription() {
 			packageType: selectedPackage,
 			reference: reference?.reference,
 			token,
+			email: userProfile?.email,
 		});
 		openModal();
 	};
@@ -133,9 +141,19 @@ export default function Subscription() {
 		console.log("closed", reference);
 	};
 
+	const getTransactions = async () => {
+		const transactionsList = await TRANSACTION_LIST(token);
+		// console.log(transactionsList);
+		if (transactionsList) {
+			setTransactions(transactionsList);
+		}
+		// console.log(transactionsList)
+	};
+
 	useEffect(() => {
 		dispatch(fetchPackages(token));
-	}, []);
+		getTransactions();
+	}, [userProfile, token]);
 
 	useEffect(() => {
 		if (amountVal && selectedPackage) {
@@ -264,7 +282,7 @@ export default function Subscription() {
 							url={externalUrl}
 						/>
 					</AdPricesContainer>
-					<PaymentHistory token={token} />
+					<PaymentHistory transactions={transactions} />
 				</>
 			)}
 		</PaymentWrapper>

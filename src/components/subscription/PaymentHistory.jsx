@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import { PaymentHistoryWrapper } from "./paymentHistory.styled";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -11,25 +11,7 @@ import { TablePagination, createTheme, ThemeProvider } from "@mui/material";
 import { useState } from "react";
 import trashImg from "../../assets/images/CharcoDeleteTrash.png";
 import { addCommas } from "../../functions";
-import { TRANSACTION_LIST } from "../api";
 
-function createData(
-	packageAmount,
-	plan,
-	packageType,
-	paymentStatus,
-	subStatus,
-	expired
-) {
-	return {
-		packageAmount,
-		plan,
-		packageType,
-		paymentStatus,
-		subStatus,
-		expired,
-	};
-}
 
 const headRow = [
 	"Amount(₦)",
@@ -40,18 +22,13 @@ const headRow = [
 	"Expired Date",
 ];
 
-const rows = [
-	createData(200, "Promo", "Weekly", "success", "bank", "20/06/2024"),
-	createData(500, "Standard", "Monthly", "failed", "wallet", "cancelled"),
-	createData(500, "Standard", "Weekly", "pending", "bank", "..."),
-	createData(2000, "Premium", "Weekly", "success", "bank", "20/04/2024"),
-	createData(1000, "Premium", "Monthly", "success", "bank", "20/03/2024"),
-];
-
-const PaymentHistory = ({ token }) => {
+const PaymentHistory = ({ transactions }) => {
 	const [page, setPage] = useState(0);
-	const [rowsPerPage, setRowsPerPage] = useState(2);
-	const [transactions, setTransactions] = useState([]);
+	const [rowsPerPage, setRowsPerPage] = useState(10);
+
+	useEffect(() => {
+		setPage(0);
+	}, [rowsPerPage]);
 
 	const handleChangePage = (event, newPage) => {
 		setPage(newPage);
@@ -77,24 +54,10 @@ const PaymentHistory = ({ token }) => {
 		},
 	});
 
-	useEffect(() => {
-		const getTransactions = async () => {
-			const transactionsList = await TRANSACTION_LIST(token);
-			// console.log(transactionsList);
-			if (transactionsList) {
-				setTransactions(transactionsList);
-			}
-		};
-
-		getTransactions();
-	}, [token]);
-
-	console.log(transactions);
-
 	return (
 		<PaymentHistoryWrapper>
 			<h3 className="paymentHeading">Payment history</h3>
-			{rows.length > 0 ? (
+			{transactions && transactions?.length > 0 ? (
 				<ThemeProvider theme={theme}>
 					<div className="paymentTable">
 						<TableContainer
@@ -102,13 +65,20 @@ const PaymentHistory = ({ token }) => {
 							sx={{
 								maxWidth: {
 									xs: "300px",
+									sm: "100%",
 									custom375: "355px",
 									custom425: "405px",
-									sm: "100%",
 								},
+								// maxHeight: 200,
+
+								margin: "0 auto",
 							}}
 						>
-							<Table size="small" aria-label="Payment history table">
+							<Table
+								// stickyHeader
+								size="small"
+								aria-label="Payment history table"
+							>
 								<TableHead>
 									<TableRow>
 										{headRow.map((row, index) => {
@@ -131,18 +101,19 @@ const PaymentHistory = ({ token }) => {
 										})}
 									</TableRow>
 								</TableHead>
+
 								<TableBody>
-									{rows
+									{transactions
 										.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-										.map((row) => (
+										.map((transaction, index) => (
 											<TableRow
-												// key={row.name}
+												key={index}
 												sx={{
 													"&:last-child td, &:last-child th": { border: 0 },
 													background: `${
-														row.paymentStatus === "failed"
+														transaction.status === "failed"
 															? "#f87171"
-															: row.paymentStatus === "pending"
+															: transaction.status === "pending"
 															? "#fbbf24"
 															: "#22c55e"
 													}`,
@@ -154,13 +125,13 @@ const PaymentHistory = ({ token }) => {
 													component="th"
 													scope="row"
 												>
-													₦ {addCommas(row.packageAmount)}
+													₦ {addCommas(transaction.value)}
 												</TableCell>
 												<TableCell style={{ color: "white" }} align="left">
-													{row.plan}
+													{transaction?.plan || "Null"}
 												</TableCell>
 												<TableCell style={{ color: "white" }} align="left">
-													{row.packageType}
+													{transaction?.packageType || "Null"}
 												</TableCell>
 												<TableCell
 													style={{
@@ -170,7 +141,7 @@ const PaymentHistory = ({ token }) => {
 													}}
 													align="left"
 												>
-													{row.paymentStatus}
+													{transaction.status}
 												</TableCell>
 												<TableCell
 													style={{
@@ -179,7 +150,7 @@ const PaymentHistory = ({ token }) => {
 													}}
 													align="left"
 												>
-													{row.subStatus}
+													{transaction.payment_type}
 												</TableCell>
 												<TableCell
 													style={{
@@ -188,22 +159,24 @@ const PaymentHistory = ({ token }) => {
 													}}
 													align="left"
 												>
-													{row.expired}
+													{transaction?.expired || "Null"}
 												</TableCell>
 											</TableRow>
 										))}
 								</TableBody>
 							</Table>
-							<TablePagination
-								size="small"
-								rowsPerPageOptions={[2, 5, 10, 25, 100]}
-								component="div"
-								count={rows.length}
-								rowsPerPage={rowsPerPage}
-								page={page}
-								onPageChange={handleChangePage}
-								onRowsPerPageChange={handleChangeRowsPerPage}
-							/>
+							{transactions.length > rowsPerPage && (
+								<TablePagination
+									size="small"
+									rowsPerPageOptions={[2, 5, 10, 25, 100]}
+									component="div"
+									count={transactions.length}
+									rowsPerPage={rowsPerPage}
+									page={page}
+									onPageChange={handleChangePage}
+									onRowsPerPageChange={handleChangeRowsPerPage}
+								/>
+							)}
 						</TableContainer>
 					</div>
 				</ThemeProvider>

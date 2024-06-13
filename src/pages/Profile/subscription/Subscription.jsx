@@ -60,7 +60,7 @@ export default function Subscription() {
 	const openModal = () => setModalOpen(true);
 	const closeModal = () => setModalOpen(false);
 
-	// console.log(packages);
+
 
 	const config = {
 		email: userProfile?.email,
@@ -68,7 +68,6 @@ export default function Subscription() {
 		publicKey: process.env.REACT_APP_PAYSTACK_KEY,
 	};
 
-	console.log(transactions)
 
 	const initializePayment = usePaystackPayment(config);
 

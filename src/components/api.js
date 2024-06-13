@@ -328,9 +328,9 @@ export const PAY_FOR_SUBSCRIPTION = async ({
 	packageType,
 	reference,
 	token,
-	email
+	email,
 }) => {
-	console.log(email)
+	console.log(email);
 	try {
 		const response = await axios.post(
 			`${API_ENDPOINT}/api/package-subscriptionV1/`,
@@ -338,7 +338,7 @@ export const PAY_FOR_SUBSCRIPTION = async ({
 				package_id: packageId,
 				package_type: packageType,
 				reference,
-				email
+				email,
 			},
 			{
 				headers: {
@@ -363,7 +363,7 @@ export const TRANSACTION_LIST = async (token) => {
 				},
 			}
 		);
-		// console.log(response);
+
 		return response.data;
 	} catch (error) {
 		throw error;

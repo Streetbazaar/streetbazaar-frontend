@@ -11,9 +11,10 @@ import { TablePagination, createTheme, ThemeProvider } from "@mui/material";
 import { useState } from "react";
 import trashImg from "../../assets/images/CharcoDeleteTrash.png";
 import { addCommas } from "../../functions";
-
+import { Colors } from "../../utils/colors";
 
 const headRow = [
+	"No",
 	"Amount(₦)",
 	"Plan",
 	"Duration",
@@ -24,7 +25,7 @@ const headRow = [
 
 const PaymentHistory = ({ transactions }) => {
 	const [page, setPage] = useState(0);
-	const [rowsPerPage, setRowsPerPage] = useState(10);
+	const [rowsPerPage, setRowsPerPage] = useState(5);
 
 	useEffect(() => {
 		setPage(0);
@@ -43,7 +44,7 @@ const PaymentHistory = ({ transactions }) => {
 		breakpoints: {
 			values: {
 				xs: 0,
-				sm: 600,
+				sm: 500,
 				md: 900,
 				lg: 1200,
 				xl: 1536,
@@ -65,20 +66,14 @@ const PaymentHistory = ({ transactions }) => {
 							sx={{
 								maxWidth: {
 									xs: "300px",
-									sm: "100%",
 									custom375: "355px",
 									custom425: "405px",
+									sm: "100%",
+									md: "700px",
 								},
-								// maxHeight: 200,
-
-								margin: "0 auto",
 							}}
 						>
-							<Table
-								// stickyHeader
-								size="small"
-								aria-label="Payment history table"
-							>
+							<Table size="small" aria-label="Payment history table">
 								<TableHead>
 									<TableRow>
 										{headRow.map((row, index) => {
@@ -87,11 +82,12 @@ const PaymentHistory = ({ transactions }) => {
 													key={index}
 													sx={{
 														fontWeight: "600",
-														color: "#5D6B79",
+														color: Colors.neutral_color.color900,
+														textWrap: "nowrap",
 														fontSize: {
 															xs: "0.75rem",
 															sm: "0.875rem",
-															md: "1rem",
+															md: "0.9rem",
 														},
 													}}
 												>
@@ -105,64 +101,119 @@ const PaymentHistory = ({ transactions }) => {
 								<TableBody>
 									{transactions
 										.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-										.map((transaction, index) => (
-											<TableRow
-												key={index}
-												sx={{
-													"&:last-child td, &:last-child th": { border: 0 },
-													background: `${
-														transaction.status === "failed"
-															? "#f87171"
-															: transaction.status === "pending"
-															? "#fbbf24"
-															: "#22c55e"
-													}`,
-													color: "white",
-												}}
-											>
-												<TableCell
-													style={{ color: "white" }}
-													component="th"
-													scope="row"
-												>
-													₦ {addCommas(transaction.value)}
-												</TableCell>
-												<TableCell style={{ color: "white" }} align="left">
-													{transaction?.plan || "Null"}
-												</TableCell>
-												<TableCell style={{ color: "white" }} align="left">
-													{transaction?.packageType || "Null"}
-												</TableCell>
-												<TableCell
-													style={{
-														color: "white",
-														textTransform: "capitalize",
-														fontWeight: "500",
+										.map((transaction, index) => {
+											const { payment_type, value, status } = transaction;
+											return (
+												<TableRow
+													key={index}
+													sx={{
+														"&:last-child td, &:last-child th": { border: 0 },
 													}}
-													align="left"
 												>
-													{transaction.status}
-												</TableCell>
-												<TableCell
-													style={{
-														color: "white",
-														textTransform: "capitalize",
-													}}
-													align="left"
-												>
-													{transaction.payment_type}
-												</TableCell>
-												<TableCell
-													style={{
-														color: "white",
-														textTransform: "capitalize",
-													}}
-													align="left"
-												>
-													{transaction?.expired || "Null"}
-												</TableCell>
-											</TableRow>
-										))}
+													<TableCell
+														sx={{
+															color: Colors.neutral_color.color500,
+															textWrap: "nowrap",
+															fontSize: {
+																xs: "0.75rem",
+																sm: "0.875rem",
+															},
+														}}
+													>
+														{index + 1}
+													</TableCell>
+													<TableCell
+														sx={{
+															color: Colors.neutral_color.color500,
+															textWrap: "nowrap",
+															fontSize: {
+																xs: "0.75rem",
+																sm: "0.875rem",
+															},
+														}}
+													>
+														₦ {addCommas(value)}
+													</TableCell>
+													<TableCell
+														sx={{
+															color: Colors.neutral_color.color500,
+															textWrap: "nowrap",
+															fontSize: {
+																xs: "0.75rem",
+																sm: "0.875rem",
+															},
+														}}
+														align="left"
+													>
+														{transaction?.plan || "Null"}
+													</TableCell>
+													<TableCell
+														sx={{
+															color: Colors.neutral_color.color500,
+															textWrap: "nowrap",
+															fontSize: {
+																xs: "0.75rem",
+																sm: "0.875rem",
+															},
+														}}
+														align="left"
+													>
+														{transaction?.packageType || "Null"}
+													</TableCell>
+													<TableCell
+														sx={{
+															fontSize: {
+																xs: "0.75rem",
+																sm: "0.875rem",
+															},
+															color:
+																status === "failed"
+																	? Colors.error_color.color500
+																	: status === "pending"
+																	? Colors.warning_color.color500
+																	: Colors.success_color.color500,
+															background:
+																status === "failed"
+																	? Colors.error_color.color100
+																	: status === "pending"
+																	? Colors.warning_color.color100
+																	: Colors.success_color.color100,
+															textTransform: "capitalize",
+															fontWeight: "500",
+														}}
+														align="center"
+													>
+														{status}
+													</TableCell>
+													<TableCell
+														sx={{
+															color: Colors.neutral_color.color500,
+															textWrap: "nowrap",
+															fontSize: {
+																xs: "0.75rem",
+																sm: "0.875rem",
+															},
+														}}
+														align="left"
+													>
+														{payment_type}
+													</TableCell>
+													<TableCell
+														sx={{
+															color: Colors.neutral_color.color500,
+															textWrap: "nowrap",
+															fontSize: {
+																xs: "0.75rem",
+																sm: "0.875rem",
+															},
+														}}
+														align="left"
+													>
+														{transaction?.expired || "Null"}
+													</TableCell>
+												</TableRow>
+											);
+										})}
 								</TableBody>
 							</Table>
 							{transactions.length > rowsPerPage && (

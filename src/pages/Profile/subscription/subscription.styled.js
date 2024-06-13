@@ -13,7 +13,7 @@ export const AdItem = styled.div`
 	border-radius: 8px;
 	position: relative;
 	overflow: hidden;
-	width: 290px;
+	min-width: 300px;
 	// width: 100%;
 
 	p.recommendedItem {
@@ -113,7 +113,7 @@ export const AdItem = styled.div`
 		border-radius: 7px;
 	}
 
-	@media (max-width: 780px) {
+	@media (max-width: 760px) {
 		width: 100%;
 	}
 `;
@@ -145,8 +145,11 @@ export const AdPricesContainer = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 
-	@media (max-width: 780px) {
+
+
+	@media (max-width: 760px) {
 		width: 100%;
+		
 	}
 `;
 

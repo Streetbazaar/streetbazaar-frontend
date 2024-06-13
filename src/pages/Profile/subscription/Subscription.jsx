@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { InlineIcon } from "@iconify/react";
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
@@ -66,6 +67,8 @@ export default function Subscription() {
 		amount: amountVal * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
 		publicKey: process.env.REACT_APP_PAYSTACK_KEY,
 	};
+
+	console.log(transactions)
 
 	const initializePayment = usePaystackPayment(config);
 

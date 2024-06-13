@@ -120,7 +120,7 @@ const PaymentHistory = ({ transactions }) => {
 															},
 														}}
 													>
-														{index + 1}
+														{transactions.indexOf(transaction) + 1}
 													</TableCell>
 													<TableCell
 														sx={{

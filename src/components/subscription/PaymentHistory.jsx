@@ -214,6 +214,7 @@ const PaymentHistory = ({ transactions }) => {
 														{payment_type}
 													</TableCell>
 													<Tooltip
+														arrow
 														title={
 															<span>{moment(created_at)?.format("LLL")}</span>
 														}
@@ -233,6 +234,7 @@ const PaymentHistory = ({ transactions }) => {
 														</TableCell>
 													</Tooltip>
 													<Tooltip
+														arrow
 														title={
 															<span>{moment(expiry_date)?.format("LLL")}</span>
 														}

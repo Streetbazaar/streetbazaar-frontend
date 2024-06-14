@@ -7,11 +7,17 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { TablePagination, createTheme, ThemeProvider } from "@mui/material";
+import {
+	TablePagination,
+	createTheme,
+	ThemeProvider,
+	Tooltip,
+} from "@mui/material";
 import { useState } from "react";
 import trashImg from "../../assets/images/CharcoDeleteTrash.png";
 import { addCommas } from "../../functions";
 import { Colors } from "../../utils/colors";
+import moment from "moment";
 
 const headRow = [
 	"No",
@@ -20,6 +26,7 @@ const headRow = [
 	"Duration",
 	"Status",
 	"Method",
+	"Start day",
 	"Expired Date",
 ];
 
@@ -45,7 +52,7 @@ const PaymentHistory = ({ transactions }) => {
 			values: {
 				xs: 0,
 				sm: 500,
-				md: 900,
+				md: 740,
 				lg: 1200,
 				xl: 1536,
 				custom320: 320,
@@ -68,8 +75,8 @@ const PaymentHistory = ({ transactions }) => {
 									xs: "300px",
 									custom375: "355px",
 									custom425: "405px",
-									sm: "100%",
-									md: "700px",
+									sm: "500px",
+									md: "800px",
 								},
 							}}
 						>
@@ -102,7 +109,15 @@ const PaymentHistory = ({ transactions }) => {
 									{transactions
 										.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 										.map((transaction, index) => {
-											const { payment_type, value, status } = transaction;
+											console.log(transaction);
+											const {
+												created_at,
+												payment_type,
+												value,
+												status,
+												duration,
+												expiry_date,
+											} = transaction;
 											return (
 												<TableRow
 													key={index}
@@ -158,7 +173,7 @@ const PaymentHistory = ({ transactions }) => {
 														}}
 														align="left"
 													>
-														{transaction?.packageType || "Null"}
+														{duration}
 													</TableCell>
 													<TableCell
 														sx={{
@@ -198,19 +213,47 @@ const PaymentHistory = ({ transactions }) => {
 													>
 														{payment_type}
 													</TableCell>
-													<TableCell
-														sx={{
-															color: Colors.neutral_color.color500,
-															textWrap: "nowrap",
-															fontSize: {
-																xs: "0.75rem",
-																sm: "0.875rem",
-															},
-														}}
-														align="left"
+													<Tooltip
+														arrow
+														title={
+															<span>{moment(created_at)?.format("LLL")}</span>
+														}
 													>
-														{transaction?.expired || "Null"}
-													</TableCell>
+														<TableCell
+															sx={{
+																color: Colors.neutral_color.color500,
+																textWrap: "nowrap",
+																fontSize: {
+																	xs: "0.75rem",
+																	sm: "0.875rem",
+																},
+															}}
+															align="left"
+														>
+															{moment(created_at)?.format("L")}
+														</TableCell>
+													</Tooltip>
+													<Tooltip
+														arrow
+														title={
+															<span>{moment(expiry_date)?.format("LLL")}</span>
+														}
+													>
+														<TableCell
+															title={<span>Hello</span>}
+															sx={{
+																color: Colors.neutral_color.color500,
+																textWrap: "nowrap",
+																fontSize: {
+																	xs: "0.75rem",
+																	sm: "0.875rem",
+																},
+															}}
+															align="left"
+														>
+															{moment(expiry_date)?.format("L")}
+														</TableCell>
+													</Tooltip>
 												</TableRow>
 											);
 										})}

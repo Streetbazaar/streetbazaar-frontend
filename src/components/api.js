@@ -118,8 +118,10 @@ export const POST_ADVERT = async (
 				},
 			}
 		);
+		console.log("POST ADVERT RESPONSE: ", response);
 		return response.data;
 	} catch (error) {
+		console.log("POST ADVERT RESPONSE: ", error);
 		throw error;
 	}
 };
@@ -162,8 +164,10 @@ export const UPDATE_ADVERT = async (
 				},
 			}
 		);
+		console.log("Advert Response: ", response);
 		return response.data;
 	} catch (error) {
+		console.log("ADVERT ERROR: ", error);
 		throw error;
 	}
 };
@@ -328,9 +332,13 @@ export const PAY_FOR_SUBSCRIPTION = async ({
 	packageType,
 	reference,
 	token,
-	email,
 }) => {
-	console.log(email);
+	console.log({
+		packageId,
+		packageType,
+		reference,
+		token,
+	});
 	try {
 		const response = await axios.post(
 			`${API_ENDPOINT}/api/package-subscriptionV1/`,
@@ -338,7 +346,6 @@ export const PAY_FOR_SUBSCRIPTION = async ({
 				package_id: packageId,
 				package_type: packageType,
 				reference,
-				email,
 			},
 			{
 				headers: {
@@ -346,8 +353,10 @@ export const PAY_FOR_SUBSCRIPTION = async ({
 				},
 			}
 		);
+		console.log("SUBSCRIPTION PAYMENT RESPONSE", response);
 		return response.data;
 	} catch (error) {
+		console.log("SUBSCRIPTION PAYMENT RESPONSE", error);
 		throw error;
 	}
 };
@@ -363,7 +372,7 @@ export const TRANSACTION_LIST = async (token) => {
 				},
 			}
 		);
-
+		console.log("TRANSACTION LIST RESPONSE: ", response.data);
 		return response.data;
 	} catch (error) {
 		throw error;
